@@ -57,17 +57,13 @@ class LoginScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(bottom: 20.0),
-              child: EmailField(emailController),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 20.0),
-              child: PasswordField(passwordController),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 20.0),
+              padding: EdgeInsets.all(20.0),
               child: RaisedButton(
-                onPressed: () => _login(context),
+                onPressed: () {
+                  emailController.text = "emailisemail@email.com";
+                  passwordController.text = "superStrongP@assword";
+                  _login(context);
+                },
                 child: Text("Login"),
               ),
             ),
