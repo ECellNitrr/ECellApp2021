@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PhoneNumber extends StatelessWidget {
-  const PhoneNumber(this.controller);
+class MobileNumber extends StatelessWidget {
+  const MobileNumber(this.controller);
   final TextEditingController controller;
 
   @override
