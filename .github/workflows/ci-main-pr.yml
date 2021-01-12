@@ -25,4 +25,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: pr-${{github.event.number}}.apk
-          artifacts: "build/app/outputs/apk/release/app-release.apk"
+          path: "build/app/outputs/apk/release/app-release.apk"
