@@ -31,7 +31,6 @@ class SignupScreen extends StatelessWidget {
             return _buildLoading();
           } else if (state is SignupSuccess) {
             // TODO add on success logic
-            return _buildSuccess();
           } else {
             return _buildInitial(context);
           }

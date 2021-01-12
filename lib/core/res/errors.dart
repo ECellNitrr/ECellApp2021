@@ -1,2 +1,2 @@
 // Common Errors
-class NetworkException extends Error {}
+class NetworkException implements Exception {}
