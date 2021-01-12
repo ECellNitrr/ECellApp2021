@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LastName extends StatelessWidget {
-  const LastName(this.controller);
+class NameField extends StatelessWidget {
+  const NameField(this.controller);
   final TextEditingController controller;
 
   @override
@@ -13,8 +13,7 @@ class LastName extends StatelessWidget {
         suffixText: '*',
         suffixStyle: TextStyle(color: Colors.red, fontSize: 20),
         border: OutlineInputBorder(),
-        hintText: "Enter your last name",
-        labelText: "Last Name",
+        labelText: "Full Name",
       ),
     );
   }

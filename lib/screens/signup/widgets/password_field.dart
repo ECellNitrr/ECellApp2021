@@ -26,13 +26,10 @@ class _PasswordFieldState extends State<PasswordField> {
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.lock),
           suffixIcon: IconButton(
-            icon: _passwordVisible
-                ? Icon(Icons.visibility)
-                : Icon(Icons.visibility_off),
+            icon: _passwordVisible ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
             onPressed: _togglePasswordVisibility,
           ),
           border: OutlineInputBorder(),
-          hintText: "p@ssw0rd",
           labelText: "Password",
         ),
       ),
@@ -44,6 +41,5 @@ class _PasswordFieldState extends State<PasswordField> {
     return null;
   }
 
-  void _togglePasswordVisibility() =>
-      setState(() => _passwordVisible = !_passwordVisible);
+  void _togglePasswordVisibility() => setState(() => _passwordVisible = !_passwordVisible);
 }

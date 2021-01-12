@@ -1,7 +1,6 @@
 import 'package:ecellapp/screens/signup/cubit/signup_cubit.dart';
 import 'package:ecellapp/screens/signup/widgets/email_field.dart';
-import 'package:ecellapp/screens/signup/widgets/first_name_field.dart';
-import 'package:ecellapp/screens/signup/widgets/last_name_field.dart';
+import 'package:ecellapp/screens/signup/widgets/name_field.dart';
 import 'package:ecellapp/screens/signup/widgets/password_field.dart';
 import 'package:ecellapp/screens/signup/widgets/mobile_number_field.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignupScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController mobileController = TextEditingController();
@@ -22,9 +20,7 @@ class SignupScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is SignupError) {
             Scaffold.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-              ),
+              SnackBar(content: Text(state.message)),
             );
           }
         },
@@ -34,6 +30,7 @@ class SignupScreen extends StatelessWidget {
           } else if (state is SignupLoading) {
             return _buildLoading();
           } else if (state is SignupSuccess) {
+            // TODO add on success logic
             return _buildSuccess();
           } else {
             return _buildInitial(context);
@@ -54,11 +51,7 @@ class SignupScreen extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(bottom: 20.0),
-              child: FirstName(firstNameController),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 20.0),
-              child: LastName(lastNameController),
+              child: NameField(nameController),
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 20.0),
@@ -70,7 +63,7 @@ class SignupScreen extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 20.0),
-              child: MobileNumber(mobileController),
+              child: MobileNumberField(mobileController),
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 20.0),
@@ -109,11 +102,7 @@ class SignupScreen extends StatelessWidget {
   void _signup(BuildContext context) {
     final cubit = context.read<SignupCubit>();
     if (_formKey.currentState.validate())
-      cubit.signup(
-          firstNameController.text,
-          lastNameController.text,
-          emailController.text,
-          passwordController.text,
-          mobileController.hashCode);
+      cubit.signup(nameController.text, emailController.text, passwordController.text,
+          int.parse(mobileController.text));
   }
 }

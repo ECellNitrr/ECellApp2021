@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(Ecell());
+  runApp(ECellApp());
 }
 
-class Ecell extends StatelessWidget {
+class ECellApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Ecell",
+      title: "ECellApp",
       home: BlocProvider(
         create: (context) => SignupCubit(FakeSignupRepository()),
         child: SignupScreen(),

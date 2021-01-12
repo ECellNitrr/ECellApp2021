@@ -24,8 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
     
-  # Http Client generator
-  http: ^0.12.1
+  
   # BLoC (Business Logic Component) for Flutter State Management
   bloc: ^6.1.0
   flutter_bloc: ^6.1.0
