@@ -20,7 +20,6 @@ jobs:
       - run: flutter pub get
       - run: flutter format --line-length 100 --set-exit-if-changed .
       - run: flutter analyze .
-      - run: flutter test
       - run: flutter build apk --release
       - name: Create a Release APK
         uses: ncipollo/release-action@v1
