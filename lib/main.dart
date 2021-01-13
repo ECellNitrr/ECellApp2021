@@ -14,7 +14,7 @@ class ECellApp extends StatelessWidget {
     return MaterialApp(
       title: "ECellApp",
       home: BlocProvider(
-        create: (context) => LoginCubit(FakeRepository()),
+        create: (context) => LoginCubit(),
         child: LoginScreen(),
       ),
     );
