@@ -1,3 +1,6 @@
+import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
+import 'package:ecellapp/screens/login/login.dart';
+import 'package:ecellapp/screens/login/login_repository.dart';
 import 'package:ecellapp/screens/signup/cubit/signup_cubit.dart';
 import 'package:ecellapp/screens/signup/signup.dart';
 import 'package:ecellapp/screens/signup/signup_repository.dart';
@@ -14,8 +17,8 @@ class ECellApp extends StatelessWidget {
     return MaterialApp(
       title: "ECellApp",
       home: BlocProvider(
-        create: (context) => SignupCubit(FakeSignupRepository()),
-        child: SignupScreen(),
+        create: (context) => LoginCubit(FakeRepository()),
+        child: LoginScreen(),
       ),
     );
   }
