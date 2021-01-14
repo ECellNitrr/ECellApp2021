@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget {
             // ignore: todo
             //TODO: Navigator->Home()
           } else if (state is LoginError) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+            Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         builder: (context, state) {
