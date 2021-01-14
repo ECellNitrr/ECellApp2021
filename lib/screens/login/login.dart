@@ -1,7 +1,6 @@
 import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
 import 'package:ecellapp/screens/login/widgets/email_field.dart';
 import 'package:ecellapp/screens/login/widgets/password_field.dart';
-import 'package:ecellapp/screens/signup/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,9 +16,10 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) async {
           if (state is LoginSuccess) {
             await Future.delayed(Duration(seconds: 1));
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text("Login Sucess")));
+            // ignore: todo
+            //TODO: Navigator->Home()
           } else if (state is LoginError) {
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         builder: (context, state) {
@@ -29,10 +29,6 @@ class LoginScreen extends StatelessWidget {
             return _buildLoading();
           } else if (state is LoginSuccess) {
             return _buildSuccess();
-          } else if (state is SignUpRedirect) {
-            return SignupScreen();
-          } else if (state is ForgotPasswordRedirect) {
-            return Text("Replace With Screen when build!");
           } else {
             return _buildInitial(context);
           }

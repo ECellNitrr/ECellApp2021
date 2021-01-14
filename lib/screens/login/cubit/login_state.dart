@@ -20,7 +20,11 @@ class LoginLoading extends LoginState {
 
 //3.Success
 class LoginSuccess extends LoginState {
-  const LoginSuccess();
+  final String token;
+
+  const LoginSuccess(this.token);
+  @override
+  List<Object> get props => [token];
 }
 
 //4.Error
@@ -29,14 +33,4 @@ class LoginError extends LoginState {
   const LoginError(this.message);
   @override
   List<Object> get props => [message];
-}
-
-//5.onSignUpClick
-class SignUpRedirect extends LoginState {
-  const SignUpRedirect();
-}
-
-//6.onForgotPasswordClick
-class ForgotPasswordRedirect extends LoginState {
-  const ForgotPasswordRedirect();
 }

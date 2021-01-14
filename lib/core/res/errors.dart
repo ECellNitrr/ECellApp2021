@@ -1,7 +1,7 @@
 // Common Errors
 class NetworkException implements Exception {}
 
-class ValidationException extends Error {
+class ValidationException implements Exception {
   final String description;
 
   ValidationException(this.description);
