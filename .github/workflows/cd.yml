@@ -17,14 +17,14 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 12.x
-      - name: Decrypt Android keys
-        run: sh ./android/decrypt_android_keys.sh
-        env:
-          ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.ANDROID_KEYS_SECRET_PASSPHRASE }}
       - name: Setup Flutter
         uses: subosito/flutter-action@v1
         with:
           flutter-version: 1.22.5
+      - name: Decrypt Android keys
+        run: sh ./decrypt_android_keys.sh
+        env:
+          ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.ANDROID_KEYS_SECRET_PASSPHRASE }}
       - name: Install Flutter dependencies
         run: flutter pub get
         # Add build runner commands here if you have any
@@ -52,14 +52,14 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 12.x
-      - name: Decrypt Android keys
-        run: sh ./android/decrypt_android_keys.sh
-        env:
-          ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.ANDROID_KEYS_SECRET_PASSPHRASE }}
       - name: Setup Flutter
         uses: subosito/flutter-action@v1
         with:
           flutter-version: 1.22.5
+      - name: Decrypt Android keys
+        run: sh ./decrypt_android_keys.sh
+        env:
+          ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.ANDROID_KEYS_SECRET_PASSPHRASE }}
       - name: Install Flutter dependencies
         run: flutter pub get
       - name: Build the APK
