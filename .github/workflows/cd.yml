@@ -22,7 +22,7 @@ jobs:
         with:
           flutter-version: 1.22.5
       - name: Decrypt Android keys
-        run: sh ./decrypt_android_keys.sh
+        run: pwd && ls && sh ./decrypt_android_keys.sh
         env:
           ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.ANDROID_KEYS_SECRET_PASSPHRASE }}
       - name: Install Flutter dependencies
