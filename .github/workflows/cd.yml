@@ -18,7 +18,7 @@ jobs:
         with:
           java-version: 12.x
       - name: Decrypt Android keys
-        run: sh ./.github/scripts/decrypt_android_keys.sh
+        run: sh /home/runner/work/ECellApp2021/ECellApp2021/.github/scripts/decrypt_android_keys.sh
         env:
           ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.ANDROID_KEYS_SECRET_PASSPHRASE }}
       - name: Setup Flutter
@@ -53,7 +53,7 @@ jobs:
         with:
           java-version: 12.x
       - name: Decrypt Android keys
-        run: sh ./.github/scripts/decrypt_android_keys.sh
+        run: sh sh /home/runner/work/ECellApp2021/ECellApp2021/.github/scripts/decrypt_android_keys.sh
         env:
           ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.ANDROID_KEYS_SECRET_PASSPHRASE }}
       - name: Setup Flutter
