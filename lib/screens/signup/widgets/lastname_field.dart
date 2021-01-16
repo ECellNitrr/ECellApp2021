@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class NameField extends StatelessWidget {
-  const NameField(this.controller);
+class LastNameField extends StatelessWidget {
+  const LastNameField(this.controller);
   final TextEditingController controller;
 
   @override

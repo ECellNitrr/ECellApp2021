@@ -17,6 +17,10 @@ dependencies:
   flutter_bloc: ^6.1.0
   # Equating two dart objects
   equatable: ^1.2.5
+  # Http Client generator
+  http: ^0.12.1
+  # Logging library
+  logger: ^0.8.3
 
   cupertino_icons: ^0.1.3
 

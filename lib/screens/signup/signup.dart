@@ -1,6 +1,7 @@
 import 'package:ecellapp/screens/signup/cubit/signup_cubit.dart';
 import 'package:ecellapp/screens/signup/widgets/email_field.dart';
-import 'package:ecellapp/screens/signup/widgets/name_field.dart';
+import 'package:ecellapp/screens/signup/widgets/firstname_field.dart';
+import 'package:ecellapp/screens/signup/widgets/lastname_field.dart';
 import 'package:ecellapp/screens/signup/widgets/password_field.dart';
 import 'package:ecellapp/screens/signup/widgets/mobile_number_field.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignupScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController nameController = TextEditingController();
+  final TextEditingController firstnameController = TextEditingController();
+  final TextEditingController lastnameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController mobileController = TextEditingController();
@@ -50,7 +52,11 @@ class SignupScreen extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(bottom: 20.0),
-              child: NameField(nameController),
+              child: FirstNameField(firstnameController),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 20.0),
+              child: LastNameField(lastnameController),
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 20.0),
@@ -101,7 +107,7 @@ class SignupScreen extends StatelessWidget {
   void _signup(BuildContext context) {
     final cubit = context.read<SignupCubit>();
     if (_formKey.currentState.validate())
-      cubit.signup(nameController.text, emailController.text, passwordController.text,
-          int.parse(mobileController.text));
+      cubit.signup(firstnameController.text, lastnameController.text, emailController.text,
+          passwordController.text, int.parse(mobileController.text));
   }
 }
