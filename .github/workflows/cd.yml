@@ -36,11 +36,13 @@ jobs:
       #   run: flutter test
       - name: Build the APK
         run: flutter build apk --release
-      - name: Upload artifact to Github
-        uses: actions/upload-artifact@v1
+      - name: Create a Github Release APK
+        uses: ncipollo/release-action@v1
         with:
-          name: release-apk
-          path: build/app/outputs/apk/release/app-release.apk
+          tag: v0.0.1 # TODO change this to get the version from tags
+          artifacts: "build/app/outputs/apk/release/app-release.apk"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
   # CD
   deploy_android:
     runs-on: ubuntu-latest
@@ -62,15 +64,14 @@ jobs:
           ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.ANDROID_KEYS_SECRET_PASSPHRASE }}
       - name: Install Flutter dependencies
         run: flutter pub get
-      - name: Build the APK
-        run: flutter build apk --release
-      - name: Create a Github Release APK
-        uses: ncipollo/release-action@v1
+      - name: Build the App Bundle
+        run: flutter build appbundle --target-platform android-arm,android-arm64,android-x64
+      - name: Install Ruby
+        uses: actions/setup-ruby@v1
         with:
-          artifacts: "build/app/outputs/apk/release/app-release.apk"
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Run Fastlane
-        uses: maierj/fastlane-action@v1.4.0
+          ruby-version: '>= 3.0.0'
+      - name: Run Fastlane - closed_beta lane
+        uses: maierj/fastlane-action@v2.0.0
         with:
           lane: closed_beta
           subdirectory: android
