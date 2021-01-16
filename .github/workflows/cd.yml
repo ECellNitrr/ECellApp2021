@@ -22,7 +22,7 @@ jobs:
         with:
           flutter-version: 1.22.5
       - name: Decrypt Android keys
-        run: pwd && ls && sh ./decrypt_android_keys.sh
+        run: gpg --quiet --batch --yes --decrypt --passphrase="$ANDROID_KEYS_SECRET_PASSPHRASE" --output android/android_keys.zip android/android_keys.zip.gpg && cd android && jar xvf android_keys.zip && cd -
         env:
           ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.ANDROID_KEYS_SECRET_PASSPHRASE }}
       - name: Install Flutter dependencies
@@ -57,7 +57,7 @@ jobs:
         with:
           flutter-version: 1.22.5
       - name: Decrypt Android keys
-        run: sh ./decrypt_android_keys.sh
+        run: gpg --quiet --batch --yes --decrypt --passphrase="$ANDROID_KEYS_SECRET_PASSPHRASE" --output android/android_keys.zip android/android_keys.zip.gpg && cd android && jar xvf android_keys.zip && cd -
         env:
           ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.ANDROID_KEYS_SECRET_PASSPHRASE }}
       - name: Install Flutter dependencies
