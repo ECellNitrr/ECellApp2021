@@ -2,5 +2,4 @@ source "https://rubygems.org"
 
 gem "fastlane"
 
-# Add this plugin
-gem "fastlane-plugin-flutter_version", git: "https://github.com/tianhaoz95/fastlane-plugin-flutter-version"
+gem "rexml"
