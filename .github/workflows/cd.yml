@@ -36,12 +36,12 @@ jobs:
       #   run: flutter test
       - name: Build the APK
         run: flutter build apk --release
-      - name: Create a Github Release APK
-        uses: ncipollo/release-action@v1
-        with:
-          tag: v0.0.1 # TODO change this to get the version from tags
-          artifacts: "build/app/outputs/apk/release/app-release.apk"
-          token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Create a Github Release APK
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     tag: v0.0.1 # TODO change this to get the version from tags
+      #     artifacts: "build/app/outputs/apk/release/app-release.apk"
+      #     token: ${{ secrets.GITHUB_TOKEN }}
 
   # CD
   deploy_android:
