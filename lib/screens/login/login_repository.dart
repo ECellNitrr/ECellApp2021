@@ -42,25 +42,5 @@ class APILoginRepository implements LoginRepository {
       print("NetworkError:" + e);
       throw NetworkException();
     }
-
-    if (response.statusCode == 202) {
-      try {
-        String token = json.decode(response.body)[S.tokenKey];
-        Log.d(tag: tag, message: "Login Successful with token: " + token);
-        return token;
-      } catch (e) {
-        Log.e(tag: tag, message: "Error while decoding response json to get token: $e");
-        throw UnknownError();
-      }
-    } else if (response.statusCode == 400) {
-      throw ValidationError(response.body);
-    } else if (response.statusCode == 401 || response.statusCode == 404) {
-      throw ResponseException(jsonDecode(response.body)['detail']);
-    } else {
-      Log.e(
-          tag: tag,
-          message: "Unknown response code -> ${response.statusCode}, message ->" + response.body);
-      throw UnknownError();
-    }
   }
 }
