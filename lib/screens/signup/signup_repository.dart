@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:ecellapp/core/res/errors.dart';
 import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/core/util/log_wrapper.dart';
-import 'package:ecellapp/injection_container.dart';
+import 'package:ecellapp/core/utils/injection.dart';
+import 'package:ecellapp/core/utils/logger.dart';
 import 'package:http/http.dart' as http;
 
 abstract class SignupRepository {

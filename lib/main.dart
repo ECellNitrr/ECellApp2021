@@ -1,10 +1,10 @@
+import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/screens/signup/signup.dart';
 import 'package:ecellapp/screens/signup/signup_repository.dart';
-import 'package:ecellapp/core/util/log_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'injection_container.dart';
+import 'core/utils/injection.dart';
 import 'screens/signup/cubit/signup_cubit.dart';
 
 void main() async {
