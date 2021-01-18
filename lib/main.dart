@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/res/strings.dart';
+
 void main() {
   runApp(ECellApp());
   init();
@@ -12,6 +14,8 @@ void main() {
 
 void init() async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  var stored = (sharedPreferences.get(S.auth));
+  print("FakeAPIToke ${stored ?? 'NEW Session'}");
 }
 
 class ECellApp extends StatelessWidget {
