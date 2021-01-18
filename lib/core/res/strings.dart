@@ -2,7 +2,7 @@ class S {
   S._();
 
   // urls
-  static const String baseUrl = "http://159.65.158.103:3000/api/";
+  static const String baseUrl = "http://159.65.158.103:3000/";
   static const String registerUrl = baseUrl + "users/register/";
 
   // api keys

@@ -108,6 +108,6 @@ class SignupScreen extends StatelessWidget {
     final cubit = context.read<SignupCubit>();
     if (_formKey.currentState.validate())
       cubit.signup(firstnameController.text, lastnameController.text, emailController.text,
-          passwordController.text, int.parse(mobileController.text));
+          mobileController.text, passwordController.text);
   }
 }

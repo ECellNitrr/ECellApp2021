@@ -12,10 +12,10 @@ class SignupCubit extends Cubit<SignupState> {
   SignupCubit(this._signupRepository) : super(SignupInitial());
 
   Future<void> signup(
-      String firstName, String lastName, String email, String password, int mobileNumber) async {
+      String firstName, String lastName, String email, String mobileNumber, String password) async {
     try {
       emit(SignupLoading());
-      await _signupRepository.signup(firstName, lastName, email, password, mobileNumber);
+      await _signupRepository.signup(firstName, lastName, email, mobileNumber, password);
       emit(SignupSuccess());
     } on NetworkException {
       emit(SignupError(S.networkException));
