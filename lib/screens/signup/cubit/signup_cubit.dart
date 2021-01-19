@@ -4,7 +4,6 @@ import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/screens/signup/signup_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
