@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:ecellapp/core/res/errors.dart';
 import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/screens/signup/signup_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -23,6 +24,8 @@ class SignupCubit extends Cubit<SignupState> {
       emit(SignupError(e.description));
     } on UnknownException {
       emit(SignupError(S.unknownException));
+    } catch (e) {
+      Log.s(tag: "Weird exception", message: "Weird response message ->" + e);
     }
   }
 }
