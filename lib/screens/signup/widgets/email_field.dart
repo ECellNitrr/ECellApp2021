@@ -1,0 +1,32 @@
+import 'package:flutter/material.dart';
+
+class EmailField extends StatelessWidget {
+  const EmailField(this.controller);
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      keyboardType: TextInputType.emailAddress,
+      validator: _validateEmail,
+      decoration: InputDecoration(
+        suffixText: '*',
+        suffixStyle: TextStyle(color: Colors.red, fontSize: 20),
+        prefixIcon: Icon(Icons.email),
+        border: OutlineInputBorder(),
+        labelText: "Email",
+      ),
+    );
+  }
+
+  String _validateEmail(String email) {
+    RegExp emailRegx =
+        RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+    if (email.isEmpty || !emailRegx.hasMatch(email)) {
+      return "Please enter a valid email";
+    }
+    return null;
+  }
+}

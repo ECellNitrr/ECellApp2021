@@ -1,4 +1,4 @@
-package com.nitrr.ecell.esummit.ecellapp.ecellapp;
+package com.nitrr.ecell.esummit.ecellapp;
 
 import io.flutter.embedding.android.FlutterActivity;
 
