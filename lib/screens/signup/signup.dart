@@ -1,7 +1,7 @@
 import 'package:ecellapp/screens/signup/cubit/signup_cubit.dart';
-import 'package:ecellapp/screens/signup/widgets/email_field.dart';
-import 'package:ecellapp/screens/signup/widgets/name_field.dart';
-import 'package:ecellapp/screens/signup/widgets/password_field.dart';
+import 'package:ecellapp/widgets/name_field.dart';
+import 'package:ecellapp/widgets/email_field.dart';
+import 'package:ecellapp/widgets/password_field.dart';
 import 'package:ecellapp/screens/signup/widgets/mobile_number_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +50,7 @@ class SignupScreen extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(bottom: 20.0),
-              child: NameField(nameController),
+              child: NameField(nameController, "Full Name"),
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 20.0),

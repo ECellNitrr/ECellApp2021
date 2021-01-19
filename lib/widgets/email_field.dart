@@ -23,8 +23,8 @@ class EmailField extends StatelessWidget {
   }
 
   String _validateEmail(String email) {
-    RegExp emailRegx = RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    RegExp emailRegx =
+        RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
     if (email.isEmpty || !emailRegx.hasMatch(email)) {
       return "Please enter a valid email";
     }

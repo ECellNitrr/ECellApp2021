@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
-
 // This would return a field which would be used to accept a password as an input
 class PasswordField extends StatefulWidget {
   const PasswordField(this.controller);
@@ -19,7 +17,7 @@ class _PasswordFieldState extends State<PasswordField> {
   @override
   void initState() {
     super.initState();
-    _passwordVisible = false;
+    _passwordVisible = true;
   }
 
   @override
@@ -32,9 +30,7 @@ class _PasswordFieldState extends State<PasswordField> {
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.lock),
           suffixIcon: IconButton(
-            icon: _passwordVisible
-                ? Icon(Icons.visibility)
-                : Icon(Icons.visibility_off),
+            icon: _passwordVisible ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
             onPressed: _togglePasswordVisibility,
           ),
           border: OutlineInputBorder(),
@@ -49,6 +45,5 @@ class _PasswordFieldState extends State<PasswordField> {
     return null;
   }
 
-  void _togglePasswordVisibility() =>
-      setState(() => _passwordVisible = !_passwordVisible);
+  void _togglePasswordVisibility() => setState(() => _passwordVisible = !_passwordVisible);
 }
