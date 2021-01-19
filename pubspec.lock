@@ -8,8 +8,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.5.0-nullsafety.1"
-<<<<<<< HEAD
-=======
   bloc:
     dependency: "direct main"
     description:
@@ -17,7 +15,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.1"
->>>>>>> 64f5c689ad538eb7cb69ba68d92ffd4cd16e004f
   boolean_selector:
     dependency: transitive
     description:
@@ -126,8 +123,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0-nullsafety.3"
-<<<<<<< HEAD
-=======
   nested:
     dependency: transitive
     description:
@@ -135,7 +130,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.4"
->>>>>>> 64f5c689ad538eb7cb69ba68d92ffd4cd16e004f
   path:
     dependency: transitive
     description:
@@ -143,8 +137,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0-nullsafety.1"
-<<<<<<< HEAD
-=======
   provider:
     dependency: transitive
     description:
@@ -152,7 +144,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.3.2+3"
->>>>>>> 64f5c689ad538eb7cb69ba68d92ffd4cd16e004f
   sky_engine:
     dependency: transitive
     description: flutter
@@ -216,7 +207,4 @@ packages:
     version: "2.1.0-nullsafety.3"
 sdks:
   dart: ">=2.10.0-110 <2.11.0"
-<<<<<<< HEAD
-=======
   flutter: ">=1.16.0"
->>>>>>> 64f5c689ad538eb7cb69ba68d92ffd4cd16e004f
