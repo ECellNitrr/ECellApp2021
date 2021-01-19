@@ -1,4 +1,3 @@
-import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/screens/signup/signup.dart';
 import 'package:ecellapp/screens/signup/signup_repository.dart';
 import 'package:flutter/material.dart';
