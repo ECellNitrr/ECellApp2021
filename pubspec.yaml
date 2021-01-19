@@ -11,15 +11,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # BLoC (Business Logic Component) for Flutter State Management
-  bloc: ^6.1.0
+  bloc: ^6.1.0 # BLoC (Business Logic Component) for Flutter State Management
   flutter_bloc: ^6.1.0
-  # Http Client generator
-  http: ^0.12.1
-  # Equating two dart objects
-  equatable: ^1.2.5
-  # Dependency Injection
-  get_it: ^5.0.2
+  http: ^0.12.1 # Http Client generator
+  equatable: ^1.2.5 # Equating two dart objects
+  get_it: ^5.0.2   # Dependency Injection
   logger: ^0.9.4
   data_connection_checker: ^0.3.4
   cupertino_icons: ^0.1.3

@@ -11,11 +11,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await init();
 
-  Log.i(
-    tag: "main()",
-    message: "Getit Initialization Done!\nRunning Application...",
-  );
-
   runApp(ECellApp());
 }
 

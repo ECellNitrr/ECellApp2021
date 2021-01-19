@@ -19,6 +19,10 @@ class SignupCubit extends Cubit<SignupState> {
       emit(SignupSuccess());
     } on NetworkException {
       emit(SignupError(S.networkException));
+    } on ValidationException catch (e) {
+      emit(SignupError(e.description));
+    } on UnknownException {
+      emit(SignupError(S.unknownException));
     }
   }
 }
