@@ -1,6 +1,8 @@
 // Common Errors
 class NetworkException implements Exception {}
 
+class UnknownException implements Exception {}
+
 class ValidationException implements Exception {
   final String description;
 
