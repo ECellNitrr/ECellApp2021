@@ -14,38 +14,45 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _children = [ProfileScreen(), MenuScreen(), ContactusScreen()];
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: _children[_currentIndex],
-      bottomNavigationBar: _buildBottomNavBar(),
-    );
-  }
-
-  Widget _buildBottomNavBar() {
-    return ClipRRect(
-      borderRadius: BorderRadius.only({
-        Radius topLeft = 60,
-        Radius topRight = 60,
-        Radius bottomLeft = Radius.zero,
-        Radius bottomRight = Radius.zero,
-      }),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: onTabTapped,
-        selectedIconTheme: selectedIconTheme(),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.home_outlined),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.phone_outlined),
-            label: 'Contact Us',
+      body: Stack(
+        children: <Widget>[
+          _children[_currentIndex],
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: _buildBottomNavBar(height),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildBottomNavBar(height) {
+    return ClipRRect(
+      borderRadius: BorderRadius.only(topRight: Radius.circular(40), topLeft: Radius.circular(40)),
+      child: Container(
+          height: height / 10,
+          child: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: onTabTapped,
+            selectedIconTheme: selectedIconTheme(), //TODO :Add Theme in the file under widgets
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            items: [
+              BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
+              BottomNavigationBarItem(
+                icon: new Icon(Icons.home_outlined),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: new Icon(Icons.phone_outlined),
+                label: 'Contact Us',
+              ),
+            ],
+          )),
     );
   }
 
