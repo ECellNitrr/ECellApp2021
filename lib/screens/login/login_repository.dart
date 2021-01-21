@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:ecellapp/core/res/errors.dart';
 import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/core/utils/injection.dart';
+import 'package:ecellapp/core/utils/logger.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LoginRepository {
   //Takes in login credentials (here id and password)
@@ -15,7 +16,6 @@ class FakeLoginRepository implements LoginRepository {
   @override
   Future<String> login(String email, String password) async {
     // Simulate network delay
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     await Future.delayed(Duration(seconds: 1));
 
@@ -24,41 +24,45 @@ class FakeLoginRepository implements LoginRepository {
       throw NetworkException();
     } else {
       // fake successful login
-      sharedPreferences.setString(S.auth, "Token 9935a8b04f2de7f5dec8f9e92a1893822b034dc7");
       return "Token 9935a8b04f2de7f5dec8f9e92a1893822b034dc7";
     }
   }
 }
 
 class APILoginRepository implements LoginRepository {
+  final String classTag = "APILoginRepository";
   @override
   Future<String> login(String email, String password) async {
+    final String tag = classTag + "login";
     http.Response response;
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     try {
-      response = await http.post(
+      response = await sl.get<http.Client>().post(
         S.loginUrl,
         body: <String, dynamic>{S.emailKey: email, S.passwordKey: password},
       );
-      sharedPreferences.setString(S.auth, json.encode(response));
     } catch (e) {
+      Log.e(tag: tag, message: "NetworkError:" + e.toString());
       throw NetworkException();
     }
 
     if (response.statusCode == 202) {
       try {
         String token = json.decode(response.body)[S.tokenKey];
-        print("Login Successful with token: " + token);
+        Log.d(tag: tag, message: "Login Successful with token: " + token);
         return token;
       } catch (e) {
-        print("Error while decoding response json to get token: $e");
+        Log.e(tag: tag, message: "Error while decoding response json to get token: $e");
+        throw UnknownException();
       }
     } else if (response.statusCode == 400) {
       throw ValidationException(response.body);
     } else if (response.statusCode == 401 || response.statusCode == 404) {
       throw ResponseException(jsonDecode(response.body)['detail']);
     } else {
-      print("Unknown response code -> ${response.statusCode}, message ->" + response.body);
+      Log.e(
+          tag: tag,
+          message: "Unknown response code -> ${response.statusCode}, message ->" + response.body);
+      throw UnknownException();
     }
   }
 }
