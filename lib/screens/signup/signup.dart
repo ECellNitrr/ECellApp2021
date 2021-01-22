@@ -1,8 +1,8 @@
 import 'package:ecellapp/screens/signup/cubit/signup_cubit.dart';
-import 'package:ecellapp/screens/signup/widgets/email_field.dart';
+import 'package:ecellapp/widgets/email_field.dart';
 import 'package:ecellapp/screens/signup/widgets/firstname_field.dart';
 import 'package:ecellapp/screens/signup/widgets/lastname_field.dart';
-import 'package:ecellapp/screens/signup/widgets/password_field.dart';
+import 'package:ecellapp/widgets/password_field.dart';
 import 'package:ecellapp/screens/signup/widgets/mobile_number_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
