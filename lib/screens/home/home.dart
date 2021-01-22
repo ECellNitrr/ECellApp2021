@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildBottomNavBar(height) {
     return ClipRRect(
-      borderRadius: BorderRadius.only(topRight: Radius.circular(40), topLeft: Radius.circular(40)),
+      borderRadius: BorderRadius.all(Radius.circular(height / 20)),
       child: Container(
           height: height / 10,
           child: BottomNavigationBar(
