@@ -1,5 +1,5 @@
 import 'package:ecellapp/core/utils/themes/selected_icon_theme.dart';
-import 'package:ecellapp/screens/home/tabs/contact_us_screen/contactusScreen.dart';
+import 'package:ecellapp/screens/home/tabs/contact_us_screen/contact_us_screen.dart';
 import 'package:ecellapp/screens/home/tabs/menu_screen/menu_screen.dart';
 import 'package:ecellapp/screens/home/tabs/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +35,11 @@ class _HomeScreenState extends State<HomeScreen> {
           height: height / 10,
           child: BottomNavigationBar(
             currentIndex: _currentIndex,
-            onTap: _onTabTapped,
+            onTap: (int index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
             selectedIconTheme: selectedIconTheme(),
             showSelectedLabels: false,
             showUnselectedLabels: false,
@@ -52,11 +56,5 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           )),
     );
-  }
-
-  void _onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
   }
 }
