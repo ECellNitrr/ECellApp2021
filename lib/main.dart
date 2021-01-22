@@ -1,11 +1,11 @@
-import 'package:ecellapp/screens/signup/cubit/signup_cubit.dart';
-import 'package:ecellapp/screens/signup/signup.dart';
-import 'package:ecellapp/screens/signup/signup_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/themes/app_theme.dart';
 import 'core/utils/injection.dart';
+import 'screens/signup/cubit/signup_cubit.dart';
+import 'screens/signup/signup.dart';
+import 'screens/signup/signup_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

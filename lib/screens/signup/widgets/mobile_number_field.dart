@@ -1,6 +1,7 @@
-import 'package:ecellapp/core/res/colors.dart';
-import 'package:ecellapp/core/res/dimens.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/res/colors.dart';
+import '../../../core/res/dimens.dart';
 
 class MobileNumberField extends StatelessWidget {
   const MobileNumberField(this.controller);
