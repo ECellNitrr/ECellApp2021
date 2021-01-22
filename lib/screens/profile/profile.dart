@@ -31,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _profile();
             return _buildLoading();
           } else {
-            Log.s(tag: "ProfileState", message: "State now is ProfileError reached");
+            Log.e(tag: "ProfileState", message: "State now is ProfileError reached");
             return Container(); // TODO link the homeScreen here
           }
         },
