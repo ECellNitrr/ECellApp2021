@@ -1,16 +1,15 @@
-import 'package:ecellapp/core/utils/logger.dart';
-import 'package:ecellapp/screens/signup/widgets/name_field.dart';
-import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/res/colors.dart';
 import '../../core/res/strings.dart';
+import '../../widgets/email_field.dart';
+import '../../widgets/password_field.dart';
+import '../../widgets/screen_background.dart';
 import 'cubit/signup_cubit.dart';
-import 'widgets/email_field.dart';
 import 'widgets/mobile_number_field.dart';
-import 'widgets/password_field.dart';
+import 'widgets/name_field.dart';
 
 class SignupScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
