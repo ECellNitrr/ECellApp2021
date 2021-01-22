@@ -41,23 +41,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildSuccess(context) {
+    //TODO On success UI
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Icon(Icons.check_circle_outline),
-          Text(
-            json["email"],
-            textAlign: TextAlign.center,
-          ),
-          Text(
-            json["email"],
-            textAlign: TextAlign.center,
-          ),
-          Text(
-            json["email"],
-            textAlign: TextAlign.center,
-          ),
           Text(
             json["email"],
             textAlign: TextAlign.center,
