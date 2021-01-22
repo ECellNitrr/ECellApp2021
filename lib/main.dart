@@ -2,7 +2,7 @@ import 'package:ecellapp/screens/signup/signup.dart';
 import 'package:ecellapp/screens/signup/signup_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ecellapp/screens/home/home.dart';
+
 import 'core/utils/injection.dart';
 import 'screens/signup/cubit/signup_cubit.dart';
 
@@ -18,7 +18,10 @@ class ECellApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "ECellApp",
-      home: HomeScreen(),
+      home: BlocProvider(
+        create: (context) => SignupCubit(APISignupRepository()),
+        child: SignupScreen(),
+      ),
     );
   }
 }
