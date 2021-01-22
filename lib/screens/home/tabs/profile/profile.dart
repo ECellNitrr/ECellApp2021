@@ -32,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             return _buildLoading();
           } else {
             Log.e(tag: "ProfileState", message: "State now is ProfileError reached");
-            return Container(); // TODO link the homeScreen here
+            return Container(); // TODO the user should be shown the error on screen instead of a snackbar, and a retry button.
           }
         },
       ),

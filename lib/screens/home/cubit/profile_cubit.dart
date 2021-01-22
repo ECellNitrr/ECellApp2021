@@ -24,7 +24,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     } on UnknownException {
       emit(ProfileError(S.unknownException));
     } catch (e) {
-      Log.s(tag: "Weird exception", message: "Weird response message ->" + e);
+      Log.s(tag: "FakeProfileRepository WeirdResponse", message: "Weird response message ->" + e);
     }
   }
 }
