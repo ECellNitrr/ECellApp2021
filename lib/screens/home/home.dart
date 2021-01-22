@@ -1,8 +1,8 @@
+import 'package:ecellapp/core/utils/themes/selected_icon_theme.dart';
+import 'package:ecellapp/screens/home/tabs/contact_us_screen/contactusScreen.dart';
+import 'package:ecellapp/screens/home/tabs/menu_screen/menu_screen.dart';
+import 'package:ecellapp/screens/home/tabs/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:ecellapp/screens/home/tabs/contactusScreen/contactusScreen.dart';
-import 'package:ecellapp/screens/home/tabs/menuScreen/menuScreen.dart';
-import 'package:ecellapp/screens/home/tabs/profileScreen/profileScreen.dart';
-import 'package:ecellapp/screens/home/widgets/selectedIconTheme.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,34 +11,32 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 1;
-  final List<Widget> _children = [ProfileScreen(), MenuScreen(), ContactusScreen()];
+  final List<Widget> _children = [ProfileScreen(), MenuScreen(), ContactUsScreen()];
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
         children: <Widget>[
           _children[_currentIndex],
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: _buildBottomNavBar(height),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: _buildBottomNavBar(context),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildBottomNavBar(height) {
+  Widget _buildBottomNavBar(context) {
+    double height = MediaQuery.of(context).size.height;
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(height / 20)),
       child: Container(
           height: height / 10,
           child: BottomNavigationBar(
             currentIndex: _currentIndex,
-            onTap: onTabTapped,
-            selectedIconTheme: selectedIconTheme(), //TODO :Add Theme in the file under widgets
+            onTap: _onTabTapped,
+            selectedIconTheme: selectedIconTheme(),
             showSelectedLabels: false,
             showUnselectedLabels: false,
             items: [
@@ -56,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void onTabTapped(int index) {
+  void _onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
