@@ -21,7 +21,6 @@ class ECellApp extends StatelessWidget {
     String token = sl.get<SharedPreferences>().getString(S.tokenKey);
     return MaterialApp(
       title: "ECellApp",
-      // ignore: todo
       //TODO: Redirect after token is not null to Home()
       home: BlocProvider(
         create: (context) => LoginCubit(APILoginRepository()),
