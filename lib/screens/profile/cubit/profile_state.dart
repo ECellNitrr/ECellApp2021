@@ -12,10 +12,10 @@ class ProfileLoading extends ProfileState {
 }
 
 class ProfileSuccess extends ProfileState {
-  final Map<String, dynamic> json;
-  const ProfileSuccess(this.json);
+  final User user;
+  const ProfileSuccess(this.user);
   @override
-  List<Object> get props => [json];
+  List<Object> get props => [user];
 }
 
 class ProfileError extends ProfileState {

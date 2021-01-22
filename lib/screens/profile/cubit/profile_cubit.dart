@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:ecellapp/core/res/errors.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/core/utils/logger.dart';
+import 'package:ecellapp/models/user.dart';
 import 'package:ecellapp/screens/profile/profile_repository.dart';
 import 'package:equatable/equatable.dart';
 
@@ -14,8 +15,8 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> profile(String token) async {
     try {
       emit(ProfileLoading());
-      Map<String, dynamic> json = await _profileRepository.profile("token");
-      emit(ProfileSuccess(json));
+      User user = await _profileRepository.profile(token);
+      emit(ProfileSuccess(user));
     } on NetworkException {
       emit(ProfileError(S.networkException));
     } on ValidationException catch (e) {

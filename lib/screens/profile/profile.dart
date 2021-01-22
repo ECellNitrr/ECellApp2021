@@ -1,3 +1,5 @@
+import 'package:ecellapp/core/utils/logger.dart';
+import 'package:ecellapp/models/user.dart';
 import 'package:ecellapp/screens/profile/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +10,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  Map<String, dynamic> json;
+  User user;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +25,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         },
         builder: (context, state) {
           if (state is ProfileSuccess) {
-            json = state.json;
+            user = state.user;
             return _buildSuccess(context);
-          } else {
+          } else if (state is ProfileLoading) {
             _profile();
             return _buildLoading();
+          } else {
+            Log.s(tag: "ProfileState", message: "State now is ProfileError reached");
+            return Container(); // TODO link the homeScreen here
           }
         },
       ),
@@ -48,7 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: <Widget>[
           Icon(Icons.check_circle_outline),
           Text(
-            json["email"],
+            user.email,
             textAlign: TextAlign.center,
           ),
         ],
