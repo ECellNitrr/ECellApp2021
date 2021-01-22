@@ -1,7 +1,7 @@
 name: ecellapp
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 0.0.1+1
 
@@ -11,19 +11,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  bloc: ^6.1.0 # BLoC (Business Logic Component) for Flutter State Management
-  flutter_bloc: ^6.1.0
-  http: ^0.12.1 # Http Client generator
-  equatable: ^1.2.5 # Equating two dart objects
-  get_it: ^5.0.2   # Dependency Injection
-  logger: ^0.9.4
-  data_connection_checker: ^0.3.4
+  bloc: ^6.1.0
   cupertino_icons: ^0.1.3
+  data_connection_checker: ^0.3.4
+  equatable: ^1.2.5
+  flutter_bloc: ^6.1.0
+  get_it: ^5.0.2
+  google_fonts: ^1.1.1
+  http: ^0.12.1
+  logger: ^0.9.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 flutter:
+  assets:
+    - assets/
+    - assets/basic/
+    - assets/colorful/
 
   uses-material-design: true

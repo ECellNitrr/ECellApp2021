@@ -1,3 +1,5 @@
+import 'package:ecellapp/core/res/colors.dart';
+import 'package:ecellapp/core/res/dimens.dart';
 import 'package:flutter/material.dart';
 
 class EmailField extends StatelessWidget {
@@ -9,24 +11,17 @@ class EmailField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       keyboardType: TextInputType.emailAddress,
-      validator: _validateEmail,
+      style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: 20),
+      onEditingComplete: () => FocusScope.of(context).nextFocus(),
+      textInputAction: TextInputAction.next,
+      validator: _validator,
       decoration: InputDecoration(
-        suffixText: '*',
-        suffixStyle: TextStyle(color: Colors.red, fontSize: 20),
-        prefixIcon: Icon(Icons.email),
-        border: OutlineInputBorder(),
+        errorStyle: TextStyle(fontSize: 0.1),
+        prefixIcon: Icon(Icons.email_outlined, size: D.iconSize, color: C.primaryHighlightedColor),
         labelText: "Email",
       ),
     );
   }
 
-  String _validateEmail(String email) {
-    RegExp emailRegx =
-        RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-
-    if (email.isEmpty || !emailRegx.hasMatch(email)) {
-      return "Please enter a valid email";
-    }
-    return null;
-  }
+  String _validator(String email) => email.isEmpty ? "" : null;
 }
