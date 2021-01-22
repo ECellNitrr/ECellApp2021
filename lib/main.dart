@@ -18,8 +18,7 @@ class ECellApp extends StatelessWidget {
   final SharedPreferences sharedPreferences = sl.get<SharedPreferences>();
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    String token = sharedPreferences.getString(S.tokenKey);
+    String token = sl.get<SharedPreferences>().getString(S.tokenKey);
     return MaterialApp(
       title: "ECellApp",
       // ignore: todo
