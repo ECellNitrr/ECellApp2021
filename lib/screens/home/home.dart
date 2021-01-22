@@ -1,7 +1,7 @@
 import 'package:ecellapp/core/utils/themes/selected_icon_theme.dart';
-import 'package:ecellapp/screens/home/tabs/contact_us_screen/contact_us_screen.dart';
-import 'package:ecellapp/screens/home/tabs/menu_screen/menu_screen.dart';
-import 'package:ecellapp/screens/home/tabs/profile_screen/profile_screen.dart';
+import 'package:ecellapp/screens/home/tabs/contact_us/contact_us.dart';
+import 'package:ecellapp/screens/home/tabs/menu/menu.dart';
+import 'package:ecellapp/screens/home/tabs/profile/profile.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {

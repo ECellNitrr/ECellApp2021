@@ -3,7 +3,7 @@ import 'package:ecellapp/core/res/errors.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/user.dart';
-import 'package:ecellapp/screens/profile/profile_repository.dart';
+import 'package:ecellapp/screens/home/tabs/profile/profile_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'profile_state.dart';

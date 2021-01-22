@@ -1,6 +1,6 @@
 import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/user.dart';
-import 'package:ecellapp/screens/profile/cubit/profile_cubit.dart';
+import 'package:ecellapp/screens/home/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
