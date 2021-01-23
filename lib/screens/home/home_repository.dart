@@ -26,10 +26,10 @@ class FakeHomeRepository implements HomeRepository {
       throw NetworkException();
     } else {
       var json = {
-        "first_name": "Sahil",
-        "last_name": "Silare",
-        "email": "sahil@gmail.com",
-        "contact": "",
+        S.firstnameKey: "Sahil",
+        S.lastnameKey: "Silare",
+        S.emailKey: "sahil@gmail.com",
+        S.phoneKey: "",
       };
       User user = User.fromJson(json);
       // fake successful response (the data entered here same as in the API Doc example)
@@ -62,10 +62,10 @@ class APIHomeRepository implements HomeRepository {
     if (response.statusCode == 200) {
       Log.i(tag: tag, message: "Signup Successful ");
       var json = {
-        "first_name": response.body[5],
-        "last_name": response.body[7],
-        "email": response.body[3],
-        "contact": response.body[2],
+        S.firstnameKey: response.body[5],
+        S.lastnameKey: response.body[7],
+        S.emailKey: response.body[3],
+        S.phoneKey: response.body[2],
       };
       User user = User.fromJson(json);
       return user;
