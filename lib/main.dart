@@ -1,14 +1,15 @@
+import 'package:ecellapp/screens/home/cubit/profile_cubit.dart';
+import 'package:ecellapp/screens/home/tabs/profile/profile.dart';
+import 'package:ecellapp/screens/home/tabs/profile/profile_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/utils/injection.dart';
-import 'screens/login/cubit/login_cubit.dart';
-import 'screens/login/login.dart';
-import 'screens/login/login_repository.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await init();
+
   runApp(ECellApp());
 }
 
@@ -18,8 +19,8 @@ class ECellApp extends StatelessWidget {
     return MaterialApp(
       title: "ECellApp",
       home: BlocProvider(
-        create: (context) => LoginCubit(FakeLoginRepository()),
-        child: LoginScreen(),
+        create: (context) => ProfileCubit(FakeProfileRepository()),
+        child: ProfileScreen(),
       ),
     );
   }
