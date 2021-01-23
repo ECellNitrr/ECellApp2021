@@ -1,6 +1,6 @@
 import 'package:ecellapp/screens/home/cubit/profile_cubit.dart';
 import 'package:ecellapp/screens/home/tabs/profile/profile.dart';
-import 'package:ecellapp/screens/home/tabs/profile/profile_repository.dart';
+import 'package:ecellapp/screens/home/tabs/profile/home_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +19,7 @@ class ECellApp extends StatelessWidget {
     return MaterialApp(
       title: "ECellApp",
       home: BlocProvider(
-        create: (context) => ProfileCubit(FakeProfileRepository()),
+        create: (context) => ProfileCubit(FakeHomeRepository()),
         child: ProfileScreen(),
       ),
     );

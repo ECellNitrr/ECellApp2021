@@ -5,12 +5,12 @@ import 'package:ecellapp/models/user.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-abstract class ProfileRepository {
+abstract class HomeRepository {
   /// Takes in `token` , gives the user details and throws a suitable exception if something goes wrong.
   Future<User> profile(String token);
 }
 
-class FakeProfileRepository implements ProfileRepository {
+class FakeHomeRepository implements HomeRepository {
   @override
   Future<User> profile(String token) async {
     // Simulate network delay
