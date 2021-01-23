@@ -13,8 +13,7 @@ class MobileNumberField extends StatelessWidget {
       controller: controller,
       validator: _validator,
       keyboardType: TextInputType.number,
-      style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: 20),
-      onEditingComplete: () => FocusScope.of(context).nextFocus(),
+      style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: D.inputFieldFontSize),
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
         errorStyle: TextStyle(fontSize: 0.1),

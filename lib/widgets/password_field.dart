@@ -5,9 +5,7 @@ import '../core/res/dimens.dart';
 
 class PasswordField extends StatefulWidget {
   const PasswordField(this.controller);
-
   final TextEditingController controller;
-
   @override
   _PasswordFieldState createState() => _PasswordFieldState();
 }
@@ -20,9 +18,9 @@ class _PasswordFieldState extends State<PasswordField> {
     return TextFormField(
       controller: widget.controller,
       validator: _validator,
-      style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: 20),
-      onEditingComplete: () => FocusScope.of(context).nextFocus(),
+      style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: D.inputFieldFontSize),
       textInputAction: TextInputAction.next,
+      onEditingComplete: () => FocusScope.of(context)..nextFocus()..nextFocus(),
       obscureText: !_passwordVisible,
       decoration: InputDecoration(
         errorStyle: TextStyle(fontSize: 0.1),
@@ -30,7 +28,7 @@ class _PasswordFieldState extends State<PasswordField> {
         suffixIcon: IconButton(
           icon: IconTheme(
             child: _passwordVisible ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
-            data: IconThemeData(color: C.primaryUnHighlightedColor, size: D.iconSize),
+            data: IconThemeData(color: C.primaryHighlightedColor, size: D.iconSize),
           ),
           onPressed: _togglePasswordVisibility,
         ),

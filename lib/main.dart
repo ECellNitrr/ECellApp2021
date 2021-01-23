@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'core/utils/themes/app_theme.dart';
+import 'core/themes/app_theme.dart';
 import 'core/utils/injection.dart';
 import 'screens/signup/cubit/signup_cubit.dart';
 import 'screens/signup/signup.dart';

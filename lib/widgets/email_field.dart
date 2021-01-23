@@ -13,8 +13,7 @@ class EmailField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       keyboardType: TextInputType.emailAddress,
-      style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: 20),
-      onEditingComplete: () => FocusScope.of(context).nextFocus(),
+      style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: D.inputFieldFontSize),
       textInputAction: TextInputAction.next,
       validator: _validator,
       decoration: InputDecoration(

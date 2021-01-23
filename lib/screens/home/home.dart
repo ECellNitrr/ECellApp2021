@@ -1,4 +1,4 @@
-import 'package:ecellapp/core/utils/themes/selected_icon_theme.dart';
+import 'package:ecellapp/core/themes/selected_icon_theme.dart';
 import 'package:ecellapp/screens/home/tabs/contact_us/contact_us.dart';
 import 'package:ecellapp/screens/home/tabs/menu/menu.dart';
 import 'package:ecellapp/screens/home/tabs/profile/profile.dart';

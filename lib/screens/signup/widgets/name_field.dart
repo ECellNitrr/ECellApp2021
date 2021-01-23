@@ -14,9 +14,8 @@ class NameField extends StatelessWidget {
       controller: controller,
       validator: _validator,
       keyboardType: TextInputType.name,
-      style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: 20),
+      style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: D.inputFieldFontSize),
       textCapitalization: TextCapitalization.words,
-      onEditingComplete: () => FocusScope.of(context).nextFocus(),
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         errorStyle: TextStyle(fontSize: 0.1),
