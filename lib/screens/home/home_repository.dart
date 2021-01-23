@@ -43,8 +43,7 @@ class APIHomeRepository implements HomeRepository {
   final String classTag = "APIHomeRepository";
   @override
   Future<User> profile(String token) async {
-    final SharedPreferences sharedPreferences = sl.get<SharedPreferences>();
-    String token = sharedPreferences.getString(S.tokenKey);
+    String token = sl.get<SharedPreferences>().getString(S.tokenKey);
     final String tag = classTag + "getUserDetails";
     http.Response response;
     try {
