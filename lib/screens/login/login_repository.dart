@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:ecellapp/core/res/errors.dart';
+import '../../core/res/errors.dart';
 
 abstract class LoginRepository {
   //Takes in login credentials (here id and password)

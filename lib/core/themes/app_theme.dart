@@ -1,5 +1,6 @@
-import 'package:ecellapp/core/res/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../res/colors.dart';
 
 class AppTheme {
   static ThemeData themeData(BuildContext context) => Theme.of(context).copyWith(

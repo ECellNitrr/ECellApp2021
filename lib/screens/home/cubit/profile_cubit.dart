@@ -1,10 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:ecellapp/core/res/errors.dart';
-import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/core/utils/logger.dart';
-import 'package:ecellapp/models/user.dart';
-import 'package:ecellapp/screens/home/tabs/profile/profile_repository.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../../core/res/errors.dart';
+import '../../../core/res/strings.dart';
+import '../../../core/utils/logger.dart';
+import '../../../models/user.dart';
+import '../tabs/profile/profile_repository.dart';
 
 part 'profile_state.dart';
 

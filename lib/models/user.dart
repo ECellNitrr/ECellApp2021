@@ -1,5 +1,6 @@
-import 'package:ecellapp/core/res/strings.dart';
 import 'package:equatable/equatable.dart';
+
+import '../core/res/strings.dart';
 
 class User extends Equatable {
   final String firstName;
