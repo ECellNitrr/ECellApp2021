@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:ecellapp/core/res/errors.dart';
@@ -51,7 +52,7 @@ class APIHomeRepository implements HomeRepository {
         S.getUserDetailsUrl,
         headers: <String, String>{
           'accept': 'application/json',
-          S.tokenKey: token,
+          "Authorization": "$token",
         },
       );
     } catch (e) {
@@ -60,14 +61,8 @@ class APIHomeRepository implements HomeRepository {
     }
 
     if (response.statusCode == 200) {
-      Log.i(tag: tag, message: "Signup Successful ");
-      var json = {
-        S.firstnameKey: response.body[5],
-        S.lastnameKey: response.body[7],
-        S.emailKey: response.body[3],
-        S.phoneKey: response.body[2],
-      };
-      User user = User.fromJson(json);
+      Log.i(tag: tag, message: "Request Successful");
+      User user = User.fromJson(jsonDecode(response.body));
       return user;
     } else if (response.statusCode == 401) {
       throw ValidationException(response.body);
