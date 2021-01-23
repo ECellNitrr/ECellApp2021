@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 abstract class LoginRepository {
   /// Takes in login credentials (here id and password)
-  //Use by implementing this class
+  /// Use by implementing this class
   Future<String> login(String email, String password);
 }
 
