@@ -2,27 +2,36 @@ import 'package:ecellapp/core/res/strings.dart';
 import 'package:equatable/equatable.dart';
 
 class Events extends Equatable {
-  final String firstName;
-  final String lastName;
-  final String email;
-  final int phoneNumber;
+  final String name;
+  final String date;
+  final String time;
+  final String venue;
+  final String iconUrl;
+  final int id;
+  final String details;
 
   Events({
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.phoneNumber,
+    this.name,
+    this.date,
+    this.time,
+    this.venue,
+    this.iconUrl,
+    this.id,
+    this.details,
   });
 
   factory Events.fromJson(Map<String, dynamic> json) {
     return Events(
-      firstName: json[S.firstnameKey] as String,
-      lastName: json[S.lastnameKey] as String,
-      email: json[S.emailKey] as String,
-      phoneNumber: json[S.passwordKey] as int,
+      name: json[S.eventnameKey] as String,
+      date: json[S.eventdateKey] as String,
+      time: json[S.eventtimeKey] as String,
+      venue: json[S.eventvenueKey] as String,
+      iconUrl: json[S.eventiconurlKey] as String,
+      id: json[S.eventidKey] as int,
+      details: json[S.eventdetailsKey] as String,
     );
   }
 
   @override
-  List<Object> get props => [email];
+  List<Object> get props => [];
 }

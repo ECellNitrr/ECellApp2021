@@ -7,4 +7,20 @@ abstract class EventsState extends Equatable {
   List<Object> get props => [];
 }
 
-class EventsInitial extends EventsState {}
+class EventsLoading extends EventsState {
+  const EventsLoading();
+}
+
+class EventsSuccess extends EventsState {
+  final Map<String, Object> json;
+  const EventsSuccess(this.json);
+  @override
+  List<Object> get props => [json];
+}
+
+class EventsError extends EventsState {
+  final String message;
+  const EventsError(this.message);
+  @override
+  List<Object> get props => [message];
+}
