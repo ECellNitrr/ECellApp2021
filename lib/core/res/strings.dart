@@ -14,6 +14,13 @@ class S {
   static const String firstnameKey = "first_name";
   static const String lastnameKey = "last_name";
   static const String phoneKey = "contact";
+  static const String eventnameKey = "name";
+  static const String eventdateKey = "date";
+  static const String eventtimeKey = "time";
+  static const String eventvenueKey = "venue";
+  static const String eventidKey = "id";
+  static const String eventdetailsKey = "details";
+  static const String eventiconurlKey = "icon";
 
   // error strings
   static const String networkException =
