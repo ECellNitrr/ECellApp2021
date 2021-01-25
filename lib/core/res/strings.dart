@@ -3,10 +3,12 @@ class S {
 
   // urls
   static const String baseUrl = "http://159.65.158.103:3000/";
+  static const String loginUrl = baseUrl + "users/login/";
   static const String registerUrl = baseUrl + "users/register/";
   static const String getUserDetailsUrl = baseUrl + "users/get_user_details/";
 
   // api keys
+  static const String tokenKey = "token";
   static const String passwordKey = "password";
   static const String emailKey = "email";
   static const String firstnameKey = "first_name";
@@ -19,7 +21,6 @@ class S {
   static const String eventidKey = "id";
   static const String eventdetailsKey = "details";
   static const String eventiconurlKey = "icon";
-  static const String tokenKey = "token";
 
   // error strings
   static const String networkException =
