@@ -14,7 +14,6 @@ class S {
   static const String firstnameKey = "first_name";
   static const String lastnameKey = "last_name";
   static const String phoneKey = "contact";
-  static const String tokenKey = "token";
 
   // error strings
   static const String networkException =
