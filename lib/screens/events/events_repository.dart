@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 @immutable
 abstract class EventsRepository {
   /// Takes in nothing, gives the events,their details and throws a suitable exception if something goes wrong.
-  Future<Map<String, Object>> events();
+  Future<List<Map<String, Object>>> events();
 }
 
 class FakeEventsRepository implements EventsRepository {
   @override
-  Future<Map<String, Object>> events() async {
+  Future<List<Map<String, Object>>> events() async {
     // Simulate network delay
     await Future.delayed(Duration(seconds: 1));
 

@@ -1,18 +1,16 @@
-import 'dart:convert';
-
 import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/events.dart';
 import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProfileScreen extends StatefulWidget {
+class EventsScreen extends StatefulWidget {
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _EventsScreenState createState() => _EventsScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
-  Map<String, Object> json;
+class _EventsScreenState extends State<EventsScreen> {
+  List<Map<String, Object>> json;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _events();
             return _buildLoading();
           } else {
-            Log.e(tag: "ProfileState", message: "State now is ProfileError reached");
+            Log.e(tag: "EventsState", message: "State now is EventsError reached");
             return Container(); // TODO the user should be shown the error on screen instead of a snackbar, and a retry button.
           }
         },
@@ -48,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildSuccess(context) {
-    Events event = Events.fromJson(jsonDecode(json[0]));
+    Events event = Events.fromJson(json[0]);
     //TODO On success UI
     return Center(
       child: Column(

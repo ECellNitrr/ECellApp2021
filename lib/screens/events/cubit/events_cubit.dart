@@ -13,7 +13,7 @@ class EventsCubit extends Cubit<EventsState> {
   Future<void> events() async {
     try {
       emit(EventsLoading());
-      Map<String, Object> json = await _eventsRepository.events();
+      List<Map<String, Object>> json = await _eventsRepository.events();
       emit(EventsSuccess(json));
     } on NetworkException {
       emit(EventsError(S.networkException));
