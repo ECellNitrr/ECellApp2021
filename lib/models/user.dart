@@ -5,7 +5,7 @@ class User extends Equatable {
   final String firstName;
   final String lastName;
   final String email;
-  final int phoneNumber;
+  final String phoneNumber;
 
   User({
     this.firstName,
@@ -19,7 +19,7 @@ class User extends Equatable {
       firstName: json[S.firstnameKey] as String,
       lastName: json[S.lastnameKey] as String,
       email: json[S.emailKey] as String,
-      phoneNumber: json[S.passwordKey] as int,
+      phoneNumber: json[S.phoneKey] as String,
     );
   }
 
