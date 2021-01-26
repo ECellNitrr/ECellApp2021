@@ -14,7 +14,7 @@ class FakeSpeakerRepository implements SpeakerRepository {
   @override
   Future<List<Map<String, Object>>> speakers() async {
     //Network delay here
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(seconds: 2));
 
     //Fake Response and Network Delay
     if (Random().nextBool()) {
