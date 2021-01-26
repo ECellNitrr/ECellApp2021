@@ -12,7 +12,7 @@ class SpeakerScreen extends StatefulWidget {
 }
 
 class _SpeakerScreenState extends State<SpeakerScreen> {
-  List<Map<String, Object>> speakerResponse;
+  List<dynamic> speakerResponse;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -13,7 +13,7 @@ class SpeakerCubit extends Cubit<SpeakerState> {
   Future<void> speaker() async {
     try {
       emit(SpeakerLoading());
-      List<Map<String, Object>> json = await _speakerRepository.speakers();
+      List<dynamic> json = await _speakerRepository.speakers();
       emit(SpeakerSuccess(json));
     } on NetworkException {
       emit(SpeakerError(S.networkException));

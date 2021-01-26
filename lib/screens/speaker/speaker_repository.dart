@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 @immutable
 abstract class SpeakerRepository {
   /// All subfunctions are final No arguments required returns json
-  Future<List<Map<String, Object>>> speakers();
+  Future<List<dynamic>> speakers();
 }
 
 class FakeSpeakerRepository implements SpeakerRepository {
   @override
-  Future<List<Map<String, Object>>> speakers() async {
+  Future<List<dynamic>> speakers() async {
     //Network delay here
     await Future.delayed(Duration(seconds: 2));
 

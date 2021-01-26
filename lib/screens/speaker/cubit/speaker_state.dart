@@ -12,7 +12,7 @@ class SpeakerLoading extends SpeakerState {
 }
 
 class SpeakerSuccess extends SpeakerState {
-  final List<Map<String, Object>> json;
+  final List<dynamic> json;
   const SpeakerSuccess(this.json);
   @override
   List<Object> get props => [json];
