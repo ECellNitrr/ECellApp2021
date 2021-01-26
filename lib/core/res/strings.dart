@@ -6,6 +6,7 @@ class S {
   static const String loginUrl = baseUrl + "users/login/";
   static const String registerUrl = baseUrl + "users/register/";
   static const String getUserDetailsUrl = baseUrl + "users/get_user_details/";
+  static const String speakerListUrl = baseUrl + "speakers/full_list/";
 
   // api keys
   static const String tokenKey = "token";
@@ -21,6 +22,19 @@ class S {
   static const String eventidKey = "id";
   static const String eventdetailsKey = "details";
   static const String eventiconurlKey = "icon";
+  static const String speakerCompany = "company";
+  static const String speakerContact = "contact";
+  static const String speakerCreatedAt = "created_at";
+  static const String speakerDescription = "description";
+  static const String speakerEmail = "email";
+  static const String speakerExperience = "experience";
+  static const String speakerFlag = "flag";
+  static const String speakerId = "id";
+  static const String speakerModifiedAt = "modified_at";
+  static const String speakerName = "name";
+  static const String speakerProfilePic = "profile_pic";
+  static const String speakerSocialMedia = "social_media";
+  static const String speakerYear = "year";
 
   // error strings
   static const String networkException =
