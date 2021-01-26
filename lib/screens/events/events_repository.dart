@@ -1,12 +1,17 @@
 import 'dart:math';
+import 'dart:convert';
 
 import 'package:ecellapp/core/res/errors.dart';
+import 'package:ecellapp/core/utils/logger.dart';
+import 'package:http/http.dart' as http;
+import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/core/utils/injection.dart';
 import 'package:flutter/material.dart';
 
 @immutable
 abstract class EventsRepository {
   /// Takes in nothing, gives the events,their details and throws a suitable exception if something goes wrong.
-  Future<List<Map<String, Object>>> events();
+  Future<List<dynamic>> events();
 }
 
 class FakeEventsRepository implements EventsRepository {
@@ -49,6 +54,39 @@ class FakeEventsRepository implements EventsRepository {
 
       // fake successful response (the data entered here same as in the API Doc example)
       return json["data"];
+    }
+  }
+}
+
+class APIEventsRepository implements EventsRepository {
+  final String classTag = "APIEventsRepository";
+  @override
+  Future<List<dynamic>> events() async {
+    final String tag = classTag + "getEvents";
+    http.Response response;
+    try {
+      response = await sl.get<http.Client>().get(
+        S.getEventsUrl,
+        headers: <String, String>{
+          'accept': 'application/json',
+        },
+      );
+    } catch (e) {
+      Log.e(tag: tag, message: "NetworkError:" + e.toString());
+      throw NetworkException();
+    }
+
+    if (response.statusCode == 200) {
+      Log.i(tag: tag, message: "Request Successful");
+      var json = jsonDecode(response.body);
+      return json["data"];
+    } else if (response.statusCode == 404) {
+      throw ValidationException(response.body);
+    } else {
+      Log.s(
+          tag: tag,
+          message: "Unknown response code -> ${response.statusCode}, message ->" + response.body);
+      throw UnknownException();
     }
   }
 }

@@ -6,6 +6,7 @@ class S {
   static const String loginUrl = baseUrl + "users/login/";
   static const String registerUrl = baseUrl + "users/register/";
   static const String getUserDetailsUrl = baseUrl + "users/get_user_details/";
+  static const String getEventsUrl = baseUrl + "events/list/2019/";
 
   // api keys
   static const String tokenKey = "token";
