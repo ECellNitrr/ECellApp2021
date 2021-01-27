@@ -3,14 +3,14 @@ import 'dart:math';
 import 'package:ecellapp/core/res/errors.dart';
 
 abstract class ChangeNumberRepository {
-  Future<int> getOtp(String number);
+  Future<void> getOtp(String number);
 }
 
 class FakeChangeNumberRepository extends ChangeNumberRepository {
   String generated;
 
   @override
-  Future<int> getOtp(String number) async {
+  Future<void> getOtp(String number) async {
     await Future.delayed(Duration(seconds: 1));
     if (Random().nextBool()) {
       //print("Fail");
@@ -19,7 +19,6 @@ class FakeChangeNumberRepository extends ChangeNumberRepository {
     } else {
       generated = '1234';
       // returns a dummy otp
-      return 1234;
     }
   }
 

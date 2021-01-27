@@ -1,19 +1,11 @@
 part of 'change_number_cubit.dart';
 
 @immutable
-abstract class ChangeNumberState {}
-
-class ChangeNumberInitial extends ChangeNumberState {
-  String phone;
-
-  void setPhone(String s) {
-    phone = s;
-  }
-
-  String getPhone() {
-    return phone;
-  }
+abstract class ChangeNumberState {
+  const ChangeNumberState();
 }
+
+class ChangeNumberInitial extends ChangeNumberState {}
 
 class ChangeNumberOTP extends ChangeNumberState {}
 

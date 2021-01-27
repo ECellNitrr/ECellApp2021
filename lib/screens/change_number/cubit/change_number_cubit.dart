@@ -13,6 +13,7 @@ class ChangeNumberCubit extends Cubit<ChangeNumberState> {
 
   Future<void> getOtp(String number) async {
     try {
+      await _changeNumberRepository.getOtp(number);
       emit(ChangeNumberOTP());
     } on NetworkException {
       emit(ChangeNumberError(S.unknownException));
