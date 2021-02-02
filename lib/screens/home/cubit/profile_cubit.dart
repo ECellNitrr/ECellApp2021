@@ -5,18 +5,18 @@ import '../../../core/res/errors.dart';
 import '../../../core/res/strings.dart';
 import '../../../core/utils/logger.dart';
 import '../../../models/user.dart';
-import '../tabs/profile/profile_repository.dart';
+import '../home_repository.dart';
 
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  final ProfileRepository _profileRepository;
-  ProfileCubit(this._profileRepository) : super(ProfileLoading());
+  final HomeRepository _homeRepository;
+  ProfileCubit(this._homeRepository) : super(ProfileLoading());
 
   Future<void> profile(String token) async {
     try {
       emit(ProfileLoading());
-      User user = await _profileRepository.profile(token);
+      User user = await _homeRepository.profile(token);
       emit(ProfileSuccess(user));
     } on NetworkException {
       emit(ProfileError(S.networkException));
