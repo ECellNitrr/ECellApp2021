@@ -9,11 +9,16 @@ class MobileNumberField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double heightFactor = height >= 1000 ? 1 : height / 1000;
     return TextFormField(
       controller: controller,
       validator: _validator,
       keyboardType: TextInputType.number,
-      style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: D.inputFieldFontSize),
+      style: TextStyle(
+        color: C.primaryUnHighlightedColor,
+        fontSize: D.inputFieldFontSize * heightFactor,
+      ),
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
         errorStyle: TextStyle(fontSize: 0.1),

@@ -53,6 +53,7 @@ class SignupScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double bottom = MediaQuery.of(context).viewInsets.bottom;
+    double heightFactor = height / 1000;
     if (_scrollController.hasClients) {
       if (bottom > height * 0.25) {
         _scrollController.animateTo(
@@ -78,21 +79,25 @@ class SignupScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Expanded(flex: 2, child: Container()),
-                  Expanded(
+                  Flexible(
                     flex: 7,
                     child: Column(
                       children: [
                         Container(
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.only(left: D.horizontalPadding + 1),
-                          child: Image.asset(S.assetEcellLogoWhite, width: width * 0.25),
+                          child: Image.asset(
+                            S.assetEcellLogoWhite,
+                            width: width * 0.25 * heightFactor,
+                          ),
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.only(left: D.horizontalPadding, top: 20),
                           child: Text(
                             "Hello!",
-                            style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),
+                            style:
+                                TextStyle(fontSize: 35 * heightFactor, fontWeight: FontWeight.w600),
                           ),
                         ),
                         Container(
@@ -106,7 +111,7 @@ class SignupScreen extends StatelessWidget {
                                     text: "Account",
                                     style: TextStyle(color: C.primaryHighlightedColor))
                               ],
-                              style: TextStyle(fontSize: 25),
+                              style: TextStyle(fontSize: 25 * heightFactor),
                             ),
                           ),
                         ),
@@ -125,11 +130,11 @@ class SignupScreen extends StatelessWidget {
                                     Expanded(child: NameField(lastnameController, "Last Name")),
                                   ],
                                 ),
-                                SizedBox(height: 20),
+                                SizedBox(height: 20 * heightFactor),
                                 EmailField(emailController),
-                                SizedBox(height: 20),
+                                SizedBox(height: 20 * heightFactor),
                                 PasswordField(passwordController),
-                                SizedBox(height: 20),
+                                SizedBox(height: 20 * heightFactor),
                                 MobileNumberField(mobileController),
                               ],
                             ),
@@ -166,7 +171,8 @@ class SignupScreen extends StatelessWidget {
                             alignment: Alignment.center,
                             child: Text(
                               "Sign Up!",
-                              style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: 20),
+                              style: TextStyle(
+                                  color: C.primaryUnHighlightedColor, fontSize: 20 * heightFactor),
                             ),
                           ),
                         ),
@@ -184,13 +190,14 @@ class SignupScreen extends StatelessWidget {
                         children: [
                           Text(
                             "have an account?",
-                            style: TextStyle(fontSize: 18, color: C.secondaryColor),
+                            style: TextStyle(fontSize: 18 * heightFactor, color: C.secondaryColor),
                           ),
                           SizedBox(height: 10),
                           GestureDetector(
                             child: Text(
                               "Login now",
-                              style: TextStyle(fontSize: 20, color: C.primaryHighlightedColor),
+                              style: TextStyle(
+                                  fontSize: 20 * heightFactor, color: C.primaryHighlightedColor),
                             ),
                             onTap: () {
                               // TODO

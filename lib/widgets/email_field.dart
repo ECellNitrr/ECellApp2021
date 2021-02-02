@@ -10,10 +10,15 @@ class EmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double heightFactor = height >= 1000 ? 1 : height / 1000;
     return TextFormField(
       controller: controller,
       keyboardType: TextInputType.emailAddress,
-      style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: D.inputFieldFontSize),
+      style: TextStyle(
+        color: C.primaryUnHighlightedColor,
+        fontSize: D.inputFieldFontSize * heightFactor,
+      ),
       textInputAction: TextInputAction.next,
       validator: _validator,
       decoration: InputDecoration(

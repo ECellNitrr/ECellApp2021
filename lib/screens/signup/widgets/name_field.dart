@@ -10,11 +10,16 @@ class NameField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double heightFactor = height >= 1000 ? 1 : height / 1000;
     return TextFormField(
       controller: controller,
       validator: _validator,
       keyboardType: TextInputType.name,
-      style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: D.inputFieldFontSize),
+      style: TextStyle(
+        color: C.primaryUnHighlightedColor,
+        fontSize: D.inputFieldFontSize * heightFactor,
+      ),
       textCapitalization: TextCapitalization.words,
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
