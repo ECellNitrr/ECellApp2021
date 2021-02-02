@@ -9,14 +9,14 @@ import 'package:ecellapp/core/utils/injection.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-abstract class EventsRepository {
+abstract class GetAllEventsRepository {
   /// Takes in nothing, gives the events,their details and throws a suitable exception if something goes wrong.
-  Future<List<dynamic>> events();
+  Future<List<dynamic>> getAllEvents();
 }
 
-class FakeEventsRepository implements EventsRepository {
+class FakegetAllEventsRepository implements GetAllEventsRepository {
   @override
-  Future<List<Map<String, Object>>> events() async {
+  Future<List<Map<String, Object>>> getAllEvents() async {
     // Simulate network delay
     await Future.delayed(Duration(seconds: 1));
 
@@ -58,11 +58,11 @@ class FakeEventsRepository implements EventsRepository {
   }
 }
 
-class APIEventsRepository implements EventsRepository {
-  final String classTag = "APIEventsRepository";
+class APIgetAllEventsRepository implements GetAllEventsRepository {
+  final String classTag = "APIgetAllEventsRepository";
   @override
-  Future<List<dynamic>> events() async {
-    final String tag = classTag + "getEvents";
+  Future<List<dynamic>> getAllEvents() async {
+    final String tag = classTag + "getAllEvents";
     http.Response response;
     try {
       response = await sl.get<http.Client>().get(

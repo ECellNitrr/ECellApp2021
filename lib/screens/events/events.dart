@@ -28,7 +28,7 @@ class _EventsScreenState extends State<EventsScreen> {
             json = state.json;
             return _buildSuccess(context);
           } else if (state is EventsLoading) {
-            _events();
+            _getAllEvents();
             return _buildLoading();
           } else {
             Log.e(tag: "EventsState", message: "State now is EventsError reached");
@@ -62,7 +62,7 @@ class _EventsScreenState extends State<EventsScreen> {
     );
   }
 
-  void _events() {
+  void _getAllEvents() {
     final cubit = context.read<EventsCubit>();
     cubit.events();
   }

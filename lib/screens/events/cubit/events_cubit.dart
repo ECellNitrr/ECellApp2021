@@ -8,12 +8,12 @@ import 'package:equatable/equatable.dart';
 part 'events_state.dart';
 
 class EventsCubit extends Cubit<EventsState> {
-  final EventsRepository _eventsRepository;
-  EventsCubit(this._eventsRepository) : super(EventsLoading());
+  final APIgetAllEventsRepository _getAllEventsRepository;
+  EventsCubit(this._getAllEventsRepository) : super(EventsLoading());
   Future<void> events() async {
     try {
       emit(EventsLoading());
-      List<dynamic> json = await _eventsRepository.events();
+      List<dynamic> json = await _getAllEventsRepository.getAllEvents();
       emit(EventsSuccess(json));
     } on NetworkException {
       emit(EventsError(S.networkException));
