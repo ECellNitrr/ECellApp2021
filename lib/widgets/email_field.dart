@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../core/res/colors.dart';
+import '../core/res/dimens.dart';
+
 class EmailField extends StatelessWidget {
   const EmailField(this.controller);
 
@@ -7,27 +10,24 @@ class EmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double heightFactor = height >= 1000 ? 1 : height / 1000;
     return TextFormField(
       controller: controller,
       keyboardType: TextInputType.emailAddress,
-      validator: _validateEmail,
+      style: TextStyle(
+        color: C.primaryUnHighlightedColor,
+        fontSize: D.inputFieldFontSize * heightFactor,
+      ),
+      textInputAction: TextInputAction.next,
+      validator: _validator,
       decoration: InputDecoration(
-        suffixText: '*',
-        suffixStyle: TextStyle(color: Colors.red, fontSize: 20),
-        prefixIcon: Icon(Icons.email),
-        border: OutlineInputBorder(),
+        errorStyle: TextStyle(fontSize: 0.1),
+        prefixIcon: Icon(Icons.email_outlined, size: D.iconSize, color: C.primaryHighlightedColor),
         labelText: "Email",
       ),
     );
   }
 
-  String _validateEmail(String email) {
-    RegExp emailRegx =
-        RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-
-    if (email.isEmpty || !emailRegx.hasMatch(email)) {
-      return "Please enter a valid email";
-    }
-    return null;
-  }
+  String _validator(String email) => email.isEmpty ? "" : null;
 }
