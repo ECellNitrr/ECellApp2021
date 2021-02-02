@@ -1,4 +1,3 @@
-import 'package:ecellapp/core/utils/logger.dart';
 import 'package:flutter/material.dart';
 
 import '../core/res/colors.dart';
