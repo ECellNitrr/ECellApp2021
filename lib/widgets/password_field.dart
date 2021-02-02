@@ -18,7 +18,6 @@ class _PasswordFieldState extends State<PasswordField> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double heightFactor = height >= 1000 ? 1 : height / 1000;
-    Log.d(tag: "PasswordField", message: "Height: $height, factor: $heightFactor");
     return TextFormField(
       controller: widget.controller,
       validator: _validator,

@@ -161,18 +161,20 @@ class SignupScreen extends StatelessWidget {
                         ),
                         child: RaisedButton(
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
                           ),
                           color: C.authButtonColor,
                           onPressed: () => _signup(context),
                           child: Container(
-                            height: 50,
-                            width: 90,
+                            height: 60,
+                            width: 120,
                             alignment: Alignment.center,
                             child: Text(
                               "Sign Up!",
                               style: TextStyle(
-                                  color: C.primaryUnHighlightedColor, fontSize: 20 * heightFactor),
+                                color: C.primaryUnHighlightedColor,
+                                fontSize: 20 * heightFactor,
+                              ),
                             ),
                           ),
                         ),
@@ -197,7 +199,9 @@ class SignupScreen extends StatelessWidget {
                             child: Text(
                               "Login now",
                               style: TextStyle(
-                                  fontSize: 20 * heightFactor, color: C.primaryHighlightedColor),
+                                fontSize: 20 * heightFactor,
+                                color: C.primaryHighlightedColor,
+                              ),
                             ),
                             onTap: () {
                               // TODO
