@@ -1,8 +1,9 @@
-import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
-import 'package:ecellapp/widgets/email_field.dart';
-import 'package:ecellapp/widgets/password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../widgets/email_field.dart';
+import '../../widgets/password_field.dart';
+import 'cubit/login_cubit.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();

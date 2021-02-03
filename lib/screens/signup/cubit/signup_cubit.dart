@@ -1,10 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:ecellapp/core/res/errors.dart';
-import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/core/utils/logger.dart';
-import 'package:ecellapp/screens/signup/signup_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+
+import '../../../core/res/errors.dart';
+import '../../../core/res/strings.dart';
+import '../../../core/utils/logger.dart';
+import '../signup_repository.dart';
 
 part 'signup_state.dart';
 
