@@ -1,10 +1,11 @@
 import 'dart:math';
 
-import 'package:ecellapp/core/res/errors.dart';
-import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/core/utils/injection.dart';
-import 'package:ecellapp/core/utils/logger.dart';
 import 'package:http/http.dart' as http;
+
+import '../../core/res/errors.dart';
+import '../../core/res/strings.dart';
+import '../../core/utils/injection.dart';
+import '../../core/utils/logger.dart';
 
 abstract class SignupRepository {
   /// Takes in `firstName`, `lastName`, `email`, `mobileNumber` and `password` , registers the user and throws a suitable exception if something goes wrong.
