@@ -46,17 +46,12 @@ class _EventsScreenState extends State<EventsScreen> {
   }
 
   Widget _buildSuccess(context) {
-    Events event = Events.fromJson(json[0]);
     //TODO On success UI
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Icon(Icons.check_circle_outline),
-          Text(
-            event.details,
-            textAlign: TextAlign.center,
-          ),
         ],
       ),
     );
