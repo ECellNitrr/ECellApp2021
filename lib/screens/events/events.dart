@@ -10,7 +10,7 @@ class EventsScreen extends StatefulWidget {
 }
 
 class _EventsScreenState extends State<EventsScreen> {
-  List<Events> json;
+  var json;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,6 @@ class _EventsScreenState extends State<EventsScreen> {
         },
         builder: (context, state) {
           if (state is EventsInitial) {
-            _getAllEvents();
             return _buildInitial();
           } else if (state is EventsSuccess) {
             json = state.json;
@@ -42,6 +41,7 @@ class _EventsScreenState extends State<EventsScreen> {
   }
 
   Widget _buildInitial() {
+    _getAllEvents();
     return Container();
   }
 
@@ -56,9 +56,7 @@ class _EventsScreenState extends State<EventsScreen> {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Icon(Icons.check_circle_outline),
-        ],
+        children: <Widget>[Icon(Icons.check_circle_outline), Text(json.toString())],
       ),
     );
   }

@@ -9,7 +9,7 @@ import 'package:ecellapp/models/events.dart';
 part 'events_state.dart';
 
 class EventsCubit extends Cubit<EventsState> {
-  final APIgetAllEventsRepository _getAllEventsRepository;
+  final GetAllEventsRepository _getAllEventsRepository;
   EventsCubit(this._getAllEventsRepository) : super(EventsInitial());
   Future<void> events() async {
     try {
