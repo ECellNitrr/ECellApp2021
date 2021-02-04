@@ -24,11 +24,13 @@ class _EventsScreenState extends State<EventsScreen> {
           }
         },
         builder: (context, state) {
-          if (state is EventsSuccess) {
+          if (state is EventsInitial) {
+            _getAllEvents();
+            return _buildInitial();
+          } else if (state is EventsSuccess) {
             json = state.json;
             return _buildSuccess(context);
           } else if (state is EventsLoading) {
-            _getAllEvents();
             return _buildLoading();
           } else {
             Log.e(tag: "EventsState", message: "State now is EventsError reached");
@@ -37,6 +39,10 @@ class _EventsScreenState extends State<EventsScreen> {
         },
       ),
     );
+  }
+
+  Widget _buildInitial() {
+    return Container();
   }
 
   Widget _buildLoading() {
