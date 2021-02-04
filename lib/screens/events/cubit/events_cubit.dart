@@ -4,6 +4,7 @@ import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/screens/events/events_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:ecellapp/models/events.dart';
 
 part 'events_state.dart';
 
@@ -13,7 +14,7 @@ class EventsCubit extends Cubit<EventsState> {
   Future<void> events() async {
     try {
       emit(EventsLoading());
-      List<dynamic> json = await _getAllEventsRepository.getAllEvents();
+      List<Events> json = await _getAllEventsRepository.getAllEvents();
       emit(EventsSuccess(json));
     } on NetworkException {
       emit(EventsError(S.networkException));

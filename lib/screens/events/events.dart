@@ -10,7 +10,7 @@ class EventsScreen extends StatefulWidget {
 }
 
 class _EventsScreenState extends State<EventsScreen> {
-  List<dynamic> json;
+  List<Events> json;
 
   @override
   Widget build(BuildContext context) {

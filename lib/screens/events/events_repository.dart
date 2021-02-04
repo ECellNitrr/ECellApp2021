@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:ecellapp/core/res/errors.dart';
 import 'package:ecellapp/core/utils/logger.dart';
+import 'package:ecellapp/models/events.dart';
 import 'package:http/http.dart' as http;
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/core/utils/injection.dart';
@@ -11,12 +12,12 @@ import 'package:flutter/material.dart';
 @immutable
 abstract class GetAllEventsRepository {
   /// Takes in nothing, gives the events,their details and throws a suitable exception if something goes wrong.
-  Future<List<dynamic>> getAllEvents();
+  Future<List<Events>> getAllEvents();
 }
 
 class FakegetAllEventsRepository implements GetAllEventsRepository {
   @override
-  Future<List<Map<String, Object>>> getAllEvents() async {
+  Future<List<Events>> getAllEvents() async {
     // Simulate network delay
     await Future.delayed(Duration(seconds: 1));
 
@@ -51,9 +52,10 @@ class FakegetAllEventsRepository implements GetAllEventsRepository {
           }
         ]
       };
-
+      List<Events> events;
+      (json["data"] as List).map((e) => events.add(Events.fromJson(e)));
       // fake successful response (the data entered here same as in the API Doc example)
-      return json["data"];
+      return events;
     }
   }
 }
@@ -61,7 +63,7 @@ class FakegetAllEventsRepository implements GetAllEventsRepository {
 class APIgetAllEventsRepository implements GetAllEventsRepository {
   final String classTag = "APIgetAllEventsRepository";
   @override
-  Future<List<dynamic>> getAllEvents() async {
+  Future<List<Events>> getAllEvents() async {
     final String tag = classTag + "getAllEvents";
     http.Response response;
     try {
