@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/res/colors.dart';
-import '../../../core/res/dimens.dart';
+import '../core/res/colors.dart';
+import '../core/res/dimens.dart';
 
-class MobileNumberField extends StatelessWidget {
-  const MobileNumberField(this.controller);
+class EmailField extends StatelessWidget {
+  const EmailField(this.controller);
+
   final TextEditingController controller;
 
   @override
@@ -13,20 +14,20 @@ class MobileNumberField extends StatelessWidget {
     double heightFactor = height >= 1000 ? 1 : height / 1000;
     return TextFormField(
       controller: controller,
-      validator: _validator,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.emailAddress,
       style: TextStyle(
         color: C.primaryUnHighlightedColor,
         fontSize: D.inputFieldFontSize * heightFactor,
       ),
-      textInputAction: TextInputAction.done,
+      textInputAction: TextInputAction.next,
+      validator: _validator,
       decoration: InputDecoration(
         errorStyle: TextStyle(fontSize: 0.1),
-        prefixIcon: Icon(Icons.phone_outlined, size: D.iconSize, color: C.primaryHighlightedColor),
-        labelText: "Mobile Number",
+        prefixIcon: Icon(Icons.email_outlined, size: D.iconSize, color: C.primaryHighlightedColor),
+        labelText: "Email",
       ),
     );
   }
 
-  String _validator(String number) => number.isEmpty ? "" : null;
+  String _validator(String email) => email.isEmpty ? "" : null;
 }
