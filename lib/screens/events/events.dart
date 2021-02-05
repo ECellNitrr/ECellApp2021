@@ -25,9 +25,7 @@ class _EventsScreenState extends State<EventsScreen> {
           }
         },
         builder: (context, state) {
-          if (state is EventsInitial) {
-            return _buildInitial();
-          } else if (state is EventsSuccess) {
+          if (state is EventsSuccess) {
             json = state.json;
             return _buildSuccess(context);
           } else if (state is EventsLoading) {
@@ -39,10 +37,6 @@ class _EventsScreenState extends State<EventsScreen> {
         },
       ),
     );
-  }
-
-  Widget _buildInitial() {
-    return Container();
   }
 
   Widget _buildLoading() {
