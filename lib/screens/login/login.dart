@@ -201,7 +201,7 @@ class LoginScreen extends StatelessWidget {
                     flex: 2,
                     child: Container(
                       alignment: Alignment.centerRight,
-                      padding: EdgeInsets.only(right: width / 8, top: 5),
+                      padding: EdgeInsets.only(right: (width / 13), top: 10),
                       child: RichText(
                         text: TextSpan(
                           text: "New here? ",
