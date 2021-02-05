@@ -16,7 +16,9 @@ class _EventsScreenState extends State<EventsScreen> {
     return Scaffold(
       body: BlocConsumer<EventsCubit, EventsState>(
         listener: (context, state) {
-          if (state is EventsError) {
+          if (state is EventsInitial) {
+            _getAllEvents();
+          } else if (state is EventsError) {
             Scaffold.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
             );
@@ -40,7 +42,6 @@ class _EventsScreenState extends State<EventsScreen> {
   }
 
   Widget _buildInitial() {
-    _getAllEvents();
     return Container();
   }
 
