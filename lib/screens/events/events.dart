@@ -26,8 +26,7 @@ class _EventsScreenState extends State<EventsScreen> {
         },
         builder: (context, state) {
           if (state is EventsSuccess) {
-            json = state.json;
-            return _buildSuccess(context);
+            return _buildSuccess(context, state.json);
           } else if (state is EventsLoading) {
             return _buildLoading();
           } else {
@@ -45,12 +44,12 @@ class _EventsScreenState extends State<EventsScreen> {
     );
   }
 
-  Widget _buildSuccess(context) {
+  Widget _buildSuccess(context, json) {
     //TODO On success UI
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: <Widget>[Icon(Icons.check_circle_outline), Text(json.toString())],
+        children: <Widget>[Icon(Icons.check_circle_outline), Text(json[0])],
       ),
     );
   }
