@@ -10,14 +10,14 @@ import 'package:ecellapp/core/utils/injection.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-abstract class GetAllEventsRepository {
+abstract class EventsRepository {
   /// Takes in nothing, gives the events,their details and throws a suitable exception if something goes wrong.
-  Future<List<Events>> getAllEvents();
+  Future<List<Event>> getAllEvents();
 }
 
-class FakegetAllEventsRepository implements GetAllEventsRepository {
+class FakeEventsRepository implements EventsRepository {
   @override
-  Future<List<Events>> getAllEvents() async {
+  Future<List<Event>> getAllEvents() async {
     // Simulate network delay
     await Future.delayed(Duration(seconds: 1));
 
@@ -47,18 +47,18 @@ class FakegetAllEventsRepository implements GetAllEventsRepository {
           }
         ]
       };
-      List<Events> events;
-      (json["data"] as List).map((e) => events.add((Events.fromJson(e))));
+      List<Event> events;
+      (json["data"] as List).map((e) => (events.add(Event.fromJson(e))));
       // fake successful response (the data entered here is same as in the API Doc example)
       return events;
     }
   }
 }
 
-class APIgetAllEventsRepository implements GetAllEventsRepository {
+class APIEventsRepository implements EventsRepository {
   final String classTag = "APIgetAllEventsRepository";
   @override
-  Future<List<Events>> getAllEvents() async {
+  Future<List<Event>> getAllEvents() async {
     final String tag = classTag + "getAllEvents";
     http.Response response;
     try {
@@ -73,8 +73,8 @@ class APIgetAllEventsRepository implements GetAllEventsRepository {
     if (response.statusCode == 200) {
       Log.i(tag: tag, message: "Request Successful");
       var json = jsonDecode(response.body);
-      List<Events> events;
-      (json["data"] as List).map((e) => events.add((Events.fromJson(e))));
+      List<Event> events;
+      (json["data"] as List).map((e) => events.add((Event.fromJson(e))));
       return events;
     } else if (response.statusCode == 404) {
       throw ValidationException(response.body);

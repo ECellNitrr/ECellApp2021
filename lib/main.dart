@@ -20,7 +20,7 @@ class ECellApp extends StatelessWidget {
       title: "ECellApp",
       theme: AppTheme.themeData(context),
       home: BlocProvider(
-        create: (context) => EventsCubit(FakegetAllEventsRepository()),
+        create: (context) => EventsCubit(FakeEventsRepository()),
         child: EventsScreen(),
       ),
     );

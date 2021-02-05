@@ -1,4 +1,5 @@
 import 'package:ecellapp/core/utils/logger.dart';
+import 'package:ecellapp/models/event.dart';
 import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,8 +10,6 @@ class EventsScreen extends StatefulWidget {
 }
 
 class _EventsScreenState extends State<EventsScreen> {
-  var json;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +24,9 @@ class _EventsScreenState extends State<EventsScreen> {
           }
         },
         builder: (context, state) {
-          if (state is EventsSuccess) {
+          if (state is EventsInitial) {
+            return _buildInitial();
+          } else if (state is EventsSuccess) {
             return _buildSuccess(context, state.json);
           } else if (state is EventsLoading) {
             return _buildLoading();
@@ -44,18 +45,23 @@ class _EventsScreenState extends State<EventsScreen> {
     );
   }
 
-  Widget _buildSuccess(context, json) {
+  Widget _buildSuccess(BuildContext context, List<Event> json) {
     //TODO On success UI
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: <Widget>[Icon(Icons.check_circle_outline), Text(json[0])],
+        children: <Widget>[Icon(Icons.check_circle_outline), Text(json[0].name)],
       ),
     );
   }
 
+  Widget _buildInitial() {
+    _getAllEvents();
+    return Container();
+  }
+
   void _getAllEvents() {
     final cubit = context.read<EventsCubit>();
-    cubit.events();
+    cubit.getAllEvents();
   }
 }

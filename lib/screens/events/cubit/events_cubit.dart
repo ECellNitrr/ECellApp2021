@@ -9,12 +9,12 @@ import 'package:ecellapp/models/event.dart';
 part 'events_state.dart';
 
 class EventsCubit extends Cubit<EventsState> {
-  final GetAllEventsRepository _getAllEventsRepository;
-  EventsCubit(this._getAllEventsRepository) : super(EventsInitial());
-  Future<void> events() async {
+  final EventsRepository _eventsRepository;
+  EventsCubit(this._eventsRepository) : super(EventsInitial());
+  Future<void> getAllEvents() async {
     try {
       emit(EventsLoading());
-      List<Events> json = await _getAllEventsRepository.getAllEvents();
+      List<Event> json = await _eventsRepository.getAllEvents();
       emit(EventsSuccess(json));
     } on NetworkException {
       emit(EventsError(S.networkException));

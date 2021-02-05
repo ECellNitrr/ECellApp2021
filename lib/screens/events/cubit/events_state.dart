@@ -16,7 +16,7 @@ class EventsLoading extends EventsState {
 }
 
 class EventsSuccess extends EventsState {
-  final List<Events> json;
+  final List<Event> json;
   const EventsSuccess(this.json);
   @override
   List<Object> get props => [json];
