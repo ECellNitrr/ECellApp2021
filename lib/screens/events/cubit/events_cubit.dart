@@ -4,7 +4,7 @@ import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/screens/events/events_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:ecellapp/models/events.dart';
+import 'package:ecellapp/models/event.dart';
 
 part 'events_state.dart';
 

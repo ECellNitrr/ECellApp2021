@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:ecellapp/core/res/errors.dart';
 import 'package:ecellapp/core/utils/logger.dart';
-import 'package:ecellapp/models/events.dart';
+import 'package:ecellapp/models/event.dart';
 import 'package:http/http.dart' as http;
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/core/utils/injection.dart';
@@ -48,7 +48,7 @@ class FakegetAllEventsRepository implements GetAllEventsRepository {
         ]
       };
       List<Events> events;
-      (jsonDecode(json["data"]) as List).map((e) => events.add((Events.fromJson(e))));
+      (json["data"] as List).map((e) => events.add((Events.fromJson(e))));
       // fake successful response (the data entered here is same as in the API Doc example)
       return events;
     }

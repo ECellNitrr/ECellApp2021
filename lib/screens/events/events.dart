@@ -1,5 +1,4 @@
 import 'package:ecellapp/core/utils/logger.dart';
-import 'package:ecellapp/models/events.dart';
 import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
