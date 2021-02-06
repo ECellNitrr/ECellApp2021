@@ -66,7 +66,7 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
   }
 
   void _giveResponseDetails(Speaker speaker) {
-    Log.d(tag: "Speaker", message: speaker.comapny);
+    Log.d(tag: "Speaker", message: speaker.comapany);
     Log.d(tag: "Speaker", message: speaker.description);
     Log.d(tag: "Speaker", message: speaker.createdAt);
     Log.d(tag: "Speaker", message: speaker.email);

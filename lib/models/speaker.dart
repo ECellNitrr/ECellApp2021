@@ -2,7 +2,7 @@ import 'package:ecellapp/core/res/strings.dart';
 import 'package:equatable/equatable.dart';
 
 class Speaker extends Equatable {
-  final String comapny;
+  final String comapany;
   final String contact;
   final String createdAt;
   final String description;
@@ -17,7 +17,7 @@ class Speaker extends Equatable {
   final int year;
 
   Speaker({
-    this.comapny,
+    this.comapany,
     this.contact,
     this.createdAt,
     this.description,
@@ -34,7 +34,7 @@ class Speaker extends Equatable {
 
   factory Speaker.fromJson(Map<String, dynamic> json) {
     return Speaker(
-      comapny: json[S.speakerCompany] as String,
+      comapany: json[S.speakerCompany] as String,
       contact: json[S.speakerContact] as String,
       createdAt: json[S.speakerCreatedAt] as String,
       description: json[S.speakerDescription] as String,
