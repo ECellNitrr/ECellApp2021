@@ -6,7 +6,7 @@ class S {
   static const String loginUrl = baseUrl + "users/login/";
   static const String registerUrl = baseUrl + "users/register/";
   static const String getUserDetailsUrl = baseUrl + "users/get_user_details/";
-  static const String speakerListUrl = baseUrl + "speakers/full_list/";
+  static const String getEventsUrl = baseUrl + "events/list/2019/";
 
   // api keys
   static const String tokenKey = "token";
@@ -40,4 +40,13 @@ class S {
   static const String networkException =
       "Request couldn't be completed. Make sure the device is online";
   static const String unknownException = "Something went wrong. Please try again later.";
+
+  // asset paths
+  static const String assetTopRightBasic = "assets/basic/top-right.png";
+  static const String assetBottomLeftBasic = "assets/basic/bottom-left.png";
+  static const String assetTopRightColorful = "assets/colorful/top-right.png";
+  static const String assetTopLeftColorful = "assets/colorful/top-left.png";
+  static const String assetBottomRightColorful = "assets/colorful/bottom-right.png";
+  static const String assetBottomLeftColorful = "assets/colorful/bottom-left.png";
+  static const String assetEcellLogoWhite = "assets/ecell-logo.png";
 }
