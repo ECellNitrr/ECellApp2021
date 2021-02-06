@@ -1,8 +1,9 @@
-import 'package:ecellapp/core/utils/themes/selected_icon_theme.dart';
-import 'package:ecellapp/screens/home/tabs/contact_us/contact_us.dart';
-import 'package:ecellapp/screens/home/tabs/menu/menu.dart';
-import 'package:ecellapp/screens/home/tabs/profile/profile.dart';
 import 'package:flutter/material.dart';
+
+import '../../core/themes/selected_icon_theme.dart';
+import 'tabs/contact_us/contact_us.dart';
+import 'tabs/menu/menu.dart';
+import 'tabs/profile/profile.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:ecellapp/core/res/errors.dart';
-import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/screens/login/login_repository.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../../core/res/errors.dart';
+import '../../../core/res/strings.dart';
+import '../login_repository.dart';
 
 part 'login_state.dart';
 
