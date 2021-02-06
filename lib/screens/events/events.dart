@@ -56,7 +56,6 @@ class _EventsScreenState extends State<EventsScreen> {
   }
 
   Widget _buildInitial() {
-    _getAllEvents();
     return Container();
   }
 
