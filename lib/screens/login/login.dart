@@ -1,9 +1,16 @@
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/screens/home/cubit/profile_cubit.dart';
+import 'package:ecellapp/screens/home/home.dart';
+import 'package:ecellapp/screens/home/home_repository.dart';
+import 'package:ecellapp/screens/signup/cubit/signup_cubit.dart';
+import 'package:ecellapp/screens/signup/signup.dart';
+import 'package:ecellapp/screens/signup/signup_repository.dart';
 import 'package:ecellapp/widgets/email_field.dart';
 import 'package:ecellapp/widgets/password_field.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,8 +31,12 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) async {
           if (state is LoginSuccess) {
             await Future.delayed(Duration(seconds: 1));
-            // ignore: todo
-            //TODO: Navigator->Home()
+            // Redirect to Home
+            //Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            BlocProvider(
+              create: (context) => ProfileCubit(FakeHomeRepository()),
+              child: HomeScreen(),
+            );
           } else if (state is LoginError) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
@@ -66,22 +77,17 @@ class LoginScreen extends StatelessWidget {
       child: Stack(
         children: [
           //Handles background elements
-          ScreenBackground(
-            elementId: 1,
-          ),
+          ScreenBackground(elementId: 1),
           SingleChildScrollView(
             physics: NeverScrollableScrollPhysics(),
             controller: _scrollController,
             child: Container(
-              height: height,
+              height: height * 1.25,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   //Space for clouds
-                  Expanded(
-                    child: Container(),
-                    flex: 2,
-                  ),
+                  Expanded(flex: 2, child: Container()),
                   //Contains all fields
                   Flexible(
                       child: Column(
@@ -123,28 +129,26 @@ class LoginScreen extends StatelessWidget {
                               ),
                             ),
                           ),
+
+                          //Fields
+                          Form(
+                              key: _formKey,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: D.horizontalPadding),
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 10 * heightFactor),
+                                    EmailField(emailController),
+                                    SizedBox(height: 30 * heightFactor),
+                                    PasswordField(passwordController),
+                                    SizedBox(height: 10 * heightFactor),
+                                  ],
+                                ),
+                              )),
                         ],
                       ),
-                      flex: 4),
-                  //Form
+                      flex: 5),
 
-                  Flexible(
-                    child: Form(
-                        key: _formKey,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: D.horizontalPadding),
-                          child: Column(
-                            children: [
-                              SizedBox(height: 10 * heightFactor),
-                              EmailField(emailController),
-                              SizedBox(height: 30 * heightFactor),
-                              PasswordField(passwordController),
-                              SizedBox(height: 10 * heightFactor),
-                            ],
-                          ),
-                        )),
-                    flex: 4,
-                  ),
                   //Redirect to Forgot Password
 
                   Expanded(
@@ -152,8 +156,11 @@ class LoginScreen extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.only(right: D.horizontalPadding),
                         alignment: Alignment.topRight,
-                        child: RichText(
-                          text: TextSpan(text: "Forgot Password?"),
+                        child: GestureDetector(
+                          child: Text("Forgot Password?"),
+                          onTap: () {
+                            //TODO: Forgot Password Route
+                          },
                         ),
                       )),
 
@@ -200,20 +207,30 @@ class LoginScreen extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Container(
-                      alignment: Alignment.centerRight,
-                      padding: EdgeInsets.only(right: (width / 13), top: 10),
-                      child: RichText(
-                        text: TextSpan(
-                          text: "New here? ",
+                        alignment: Alignment.centerRight,
+                        padding: EdgeInsets.only(right: (width / 8), top: 5),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            TextSpan(
-                                text: "Sign Up",
-                                style: TextStyle(color: C.primaryHighlightedColor)),
+                            Text('New here? ', style: TextStyle(fontSize: 20 * heightFactor)),
+                            GestureDetector(
+                                child: Text(
+                                  'Sign Up',
+                                  style: TextStyle(
+                                      color: C.primaryHighlightedColor,
+                                      fontSize: 20 * heightFactor),
+                                ),
+                                onTap: () {
+                                  print('Task:');
+                                  BlocProvider(
+                                    lazy: false,
+                                    create: (context) => SignupCubit(FakeSignupRepository()),
+                                    child: SignupScreen(),
+                                  );
+                                }),
                           ],
-                          style: TextStyle(fontSize: 25 * heightFactor),
-                        ),
-                      ),
-                    ),
+                        )),
                   ),
                   //To flex background
                   Expanded(flex: 3, child: Container()),
