@@ -33,10 +33,13 @@ class LoginScreen extends StatelessWidget {
             await Future.delayed(Duration(seconds: 1));
             // Redirect to Home
             //Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-            BlocProvider(
-              create: (context) => ProfileCubit(FakeHomeRepository()),
-              child: HomeScreen(),
-            );
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => BlocProvider(
+                          create: (_) => ProfileCubit(FakeHomeRepository()),
+                          child: HomeScreen(),
+                        )));
           } else if (state is LoginError) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
@@ -90,80 +93,80 @@ class LoginScreen extends StatelessWidget {
                   Expanded(flex: 2, child: Container()),
                   //Contains all fields
                   Flexible(
-                      child: Column(
-                        children: [
-                          // Logo
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: EdgeInsets.only(left: D.horizontalPadding + 1),
-                            child: Image.asset(
-                              S.assetEcellLogoWhite,
-                              width: width * 0.25 * heightFactor,
-                            ),
+                    flex: 7,
+                    child: Column(
+                      children: [
+                        // Logo
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: D.horizontalPadding + 1),
+                          child: Image.asset(
+                            S.assetEcellLogoWhite,
+                            width: width * 0.25 * heightFactor,
                           ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: EdgeInsets.only(left: D.horizontalPadding, top: 20),
-                            child: Text(
-                              "Welcome",
-                              style: TextStyle(
-                                  fontSize: 35 * heightFactor, fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                          //Text Greeting
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: EdgeInsets.only(left: D.horizontalPadding, top: 5),
-                            child: RichText(
-                              text: TextSpan(
-                                text: "Let's ",
-                                children: [
-                                  TextSpan(
-                                      text: "Sign ",
-                                      style: TextStyle(color: C.primaryHighlightedColor)),
-                                  TextSpan(
-                                      text: "you in",
-                                      style: TextStyle(color: C.primaryUnHighlightedColor)),
-                                ],
-                                style: TextStyle(fontSize: 25 * heightFactor),
-                              ),
-                            ),
-                          ),
-
-                          //Fields
-                          Form(
-                              key: _formKey,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: D.horizontalPadding),
-                                child: Column(
-                                  children: [
-                                    SizedBox(height: 10 * heightFactor),
-                                    EmailField(emailController),
-                                    SizedBox(height: 30 * heightFactor),
-                                    PasswordField(passwordController),
-                                    SizedBox(height: 10 * heightFactor),
-                                  ],
-                                ),
-                              )),
-                        ],
-                      ),
-                      flex: 5),
-
-                  //Redirect to Forgot Password
-
-                  Expanded(
-                      flex: 1,
-                      child: Container(
-                        padding: EdgeInsets.only(right: D.horizontalPadding),
-                        alignment: Alignment.topRight,
-                        child: GestureDetector(
-                          child: Text("Forgot Password?"),
-                          onTap: () {
-                            //TODO: Forgot Password Route
-                          },
                         ),
-                      )),
-
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: D.horizontalPadding, top: 20),
+                          child: Text(
+                            "Welcome",
+                            style:
+                                TextStyle(fontSize: 35 * heightFactor, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        //Text Greeting
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: D.horizontalPadding, top: 5),
+                          child: RichText(
+                            text: TextSpan(
+                              text: "Let's ",
+                              children: [
+                                TextSpan(
+                                    text: "Sign ",
+                                    style: TextStyle(color: C.primaryHighlightedColor)),
+                                TextSpan(
+                                    text: "you in",
+                                    style: TextStyle(color: C.primaryUnHighlightedColor)),
+                              ],
+                              style: TextStyle(fontSize: 25 * heightFactor),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 23 * heightFactor),
+                        //Fields
+                        Form(
+                            key: _formKey,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: D.horizontalPadding),
+                              child: Column(
+                                children: [
+                                  EmailField(emailController),
+                                  SizedBox(height: 20 * heightFactor),
+                                  PasswordField(passwordController),
+                                  SizedBox(height: 10 * heightFactor),
+                                ],
+                              ),
+                            )),
+                        SizedBox(height: 20 * heightFactor),
+                        //Redirect to Forgot Password
+                        Container(
+                          padding: EdgeInsets.only(right: D.horizontalPadding),
+                          alignment: Alignment.topRight,
+                          child: GestureDetector(
+                            child: Text(
+                              "Forgot Password?",
+                              style:
+                                  TextStyle(fontSize: 20 * heightFactor, color: C.secondaryColor),
+                            ),
+                            onTap: () {
+                              //TODO: Forgot Password Route
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                   //LoginButton
                   Expanded(
                     child: Container(
@@ -194,9 +197,7 @@ class LoginScreen extends StatelessWidget {
                             child: Text(
                               "Log In",
                               style: TextStyle(
-                                color: C.primaryUnHighlightedColor,
-                                fontSize: 20 * heightFactor,
-                              ),
+                                  color: C.primaryUnHighlightedColor, fontSize: 20 * heightFactor),
                             ),
                           ),
                         ),
@@ -208,26 +209,30 @@ class LoginScreen extends StatelessWidget {
                     flex: 2,
                     child: Container(
                         alignment: Alignment.centerRight,
-                        padding: EdgeInsets.only(right: (width / 8), top: 5),
+                        padding: EdgeInsets.only(right: (width / 10), top: 5),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('New here? ', style: TextStyle(fontSize: 20 * heightFactor)),
+                            Text('New here? ',
+                                style: TextStyle(
+                                    fontSize: 20 * heightFactor, color: C.secondaryColor)),
                             GestureDetector(
                                 child: Text(
                                   'Sign Up',
                                   style: TextStyle(
+                                      fontWeight: FontWeight.w600,
                                       color: C.primaryHighlightedColor,
                                       fontSize: 20 * heightFactor),
                                 ),
                                 onTap: () {
-                                  print('Task:');
-                                  BlocProvider(
-                                    lazy: false,
-                                    create: (context) => SignupCubit(FakeSignupRepository()),
-                                    child: SignupScreen(),
-                                  );
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => BlocProvider(
+                                                create: (_) => SignupCubit(FakeSignupRepository()),
+                                                child: SignupScreen(),
+                                              )));
                                 }),
                           ],
                         )),
