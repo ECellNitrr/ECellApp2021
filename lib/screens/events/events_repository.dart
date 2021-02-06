@@ -74,7 +74,7 @@ class APIEventsRepository implements EventsRepository {
       Log.i(tag: tag, message: "Request Successful");
       var json = jsonDecode(response.body);
       List<Event> events;
-      (json["data"] as List).map((e) => events.add((Event.fromJson(e))));
+      (json["data"] as List).map((e) => events.add(Event.fromJson(e)));
       return events;
     } else if (response.statusCode == 404) {
       throw ValidationException(response.body);
