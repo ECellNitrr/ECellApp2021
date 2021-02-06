@@ -3,18 +3,20 @@ part of 'forgot_password_cubit.dart';
 @immutable
 abstract class ForgotPasswordState {}
 
-class ForgotPasswordInitial extends ForgotPasswordState {}
+class ForgotInitial extends ForgotPasswordState {}
 
-class ForgotPasswordLoading extends ForgotPasswordState {}
+class ForgotLoading extends ForgotPasswordState {}
 
-class ForgotPasswordEnterOTP extends ForgotPasswordState {}
+class ForgotEnterOTP extends ForgotPasswordState {}
 
-class ForgotPasswordCorrectOTP extends ForgotPasswordState {}
+class ForgotPasswordSuccess extends ForgotPasswordState {}
 
-class ForgotPasswordWrongOTP extends ForgotPasswordState {}
+class ForgotWrongOTP extends ForgotPasswordState {}
 
 class ForgotPasswordError extends ForgotPasswordState {
   final String error;
 
   ForgotPasswordError(this.error);
 }
+
+class ForgotPasswordCreateNewPassword extends ForgotPasswordState {}

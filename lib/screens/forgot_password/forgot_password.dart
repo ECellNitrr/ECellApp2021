@@ -1,6 +1,7 @@
 import 'package:ecellapp/screens/forgot_password/cubit/forgot_password_cubit.dart';
 import 'package:ecellapp/screens/forgot_password/widgets/otp_field.dart';
 import 'package:ecellapp/widgets/email_field.dart';
+import 'package:ecellapp/widgets/password_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ForgotPasswordScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController otpController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,38 +21,34 @@ class ForgotPasswordScreen extends StatelessWidget {
             Scaffold.of(context).showSnackBar(
               SnackBar(content: Text(state.error)),
             );
-          } else if (state is ForgotPasswordCorrectOTP) {
-            Scaffold.of(context).showSnackBar(
-              SnackBar(content: Text("Correct OTP")),
-            );
-          } else if (state is ForgotPasswordWrongOTP) {
+          } else if (state is ForgotWrongOTP) {
             Scaffold.of(context).showSnackBar(
               SnackBar(content: Text("Wrong OTP")),
             );
           }
         },
         builder: (context, state) {
-          if (state is ForgotPasswordInitial) {
-            return _initialForgotPasswrod(context);
-          } else if (state is ForgotPasswordLoading) {
+          if (state is ForgotInitial) {
+            return _initialForgotPassword(context);
+          } else if (state is ForgotLoading) {
             return _buildLoading();
-          } else if (state is ForgotPasswordEnterOTP) {
+          } else if (state is ForgotEnterOTP) {
             return _enterOTP(context);
-          } else if (state is ForgotPasswordWrongOTP) {
+          } else if (state is ForgotWrongOTP) {
             return _enterOTP(context);
-          } else if (state is ForgotPasswordCorrectOTP) {
-            return _correctOTP();
-
-            /// TODO redirect to next screen
+          } else if (state is ForgotPasswordCreateNewPassword) {
+            return _resetPassword(context);
+          } else if (state is ForgotPasswordSuccess) {
+            return _passwordResetSuccess();
           } else {
-            return _initialForgotPasswrod(context);
+            return _initialForgotPassword(context);
           }
         },
       ),
     );
   }
 
-  Widget _initialForgotPasswrod(BuildContext context) {
+  Widget _initialForgotPassword(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(40.0),
       child: Column(
@@ -58,7 +57,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           EmailField(emailController),
           FlatButton(
               onPressed: () {
-                _generatOTP(context);
+                _sendOTP(context);
               },
               child: Text("Press me")),
         ],
@@ -89,20 +88,47 @@ class ForgotPasswordScreen extends StatelessWidget {
     );
   }
 
-  Widget _correctOTP() {
+  Widget _passwordResetSuccess() {
     return Padding(
       padding: const EdgeInsets.all(40.0),
-      child: Text("correct OTP"),
+      child: Text("success"),
     );
   }
 
-  void _generatOTP(BuildContext context) {
+  Widget _resetPassword(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(40.0),
+      child: Column(
+        children: [
+          PasswordField(passwordController),
+          PasswordField(confirmPasswordController),
+          FlatButton(
+              onPressed: () {
+                if (passwordController.text == confirmPasswordController.text) {
+                  _changePassword(context);
+                } else {
+                  Scaffold.of(context)
+                      .showSnackBar(SnackBar(content: Text("Missmatch in passwords")));
+                }
+              },
+              child: Text("change password")),
+        ],
+      ),
+    );
+  }
+
+  void _sendOTP(BuildContext context) {
     final cubit = context.read<ForgotPasswordCubit>();
-    cubit.generateOTPInCubit(emailController.text);
+    cubit.sendOTP(emailController.text);
   }
 
   void _verifyOtp(BuildContext context) {
     final cubit = context.read<ForgotPasswordCubit>();
     cubit.verifyOTP(otpController.text);
+  }
+
+  void _changePassword(BuildContext context) {
+    final cubit = context.read<ForgotPasswordCubit>();
+    cubit.changePassword(emailController.text, otpController.text, passwordController.text);
   }
 }
