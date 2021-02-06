@@ -48,7 +48,7 @@ class FakeEventsRepository implements EventsRepository {
         ]
       };
       List<Event> events;
-      (json["data"] as List).map((e) => (events.add(Event.fromJson(e))));
+      (json["data"] as List).map((e) => events.add(Event.fromJson(e)));
       // fake successful response (the data entered here is same as in the API Doc example)
       return events;
     }
