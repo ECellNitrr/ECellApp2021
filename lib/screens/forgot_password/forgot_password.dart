@@ -89,13 +89,6 @@ class ForgotPasswordScreen extends StatelessWidget {
     );
   }
 
-  Widget _wrongOTP() {
-    return Padding(
-      padding: const EdgeInsets.all(40.0),
-      child: Text("Wrong OTP"),
-    );
-  }
-
   Widget _correctOTP() {
     return Padding(
       padding: const EdgeInsets.all(40.0),

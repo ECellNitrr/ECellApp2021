@@ -1,4 +1,3 @@
-import 'package:ecellapp/core/res/strings.dart';
 import 'package:flutter/material.dart';
 
 class OTPField extends StatelessWidget {

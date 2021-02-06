@@ -14,7 +14,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   void generateOTPInCubit(String email) async {
     try {
       emit(ForgotPasswordLoading());
-      int x = await _forgotPasswordRepository.generateOTP(email);
+      await _forgotPasswordRepository.generateOTP(email);
       emit(ForgotPasswordEnterOTP());
     } on NetworkException {
       emit(ForgotPasswordError(S.networkException));
