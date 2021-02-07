@@ -1,9 +1,6 @@
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/screens/home/cubit/profile_cubit.dart';
-import 'package:ecellapp/screens/home/home.dart';
-import 'package:ecellapp/screens/home/home_repository.dart';
 import 'package:ecellapp/screens/signup/cubit/signup_cubit.dart';
 import 'package:ecellapp/screens/signup/signup.dart';
 import 'package:ecellapp/screens/signup/signup_repository.dart';
