@@ -12,7 +12,7 @@ class SpeakerScreen extends StatefulWidget {
 }
 
 class _SpeakerScreenState extends State<SpeakerScreen> {
-  List<dynamic> speakerResponse;
+  List<Speaker> speakerResponse;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +38,7 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
   }
 
   Widget _buildSuccess(BuildContext context) {
-    Speaker speaker = Speaker.fromJson(speakerResponse[0]);
-    _giveResponseDetails(speaker);
+    Speaker speaker = speakerResponse[];
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -65,16 +64,8 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
     return Container();
   }
 
-  void _giveResponseDetails(Speaker speaker) {
-    Log.d(tag: "Speaker", message: speaker.comapany);
-    Log.d(tag: "Speaker", message: speaker.description);
-    Log.d(tag: "Speaker", message: speaker.createdAt);
-    Log.d(tag: "Speaker", message: speaker.email);
-    // Log.d(tag: "Speaker", message: speaker.id.toString());
-  }
-
   void _speaker() {
     final cubit = context.read<SpeakerCubit>();
-    cubit.speaker();
+    cubit.getSpeakerList();
   }
 }

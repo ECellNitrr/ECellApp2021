@@ -10,7 +10,7 @@ part 'speaker_state.dart';
 class SpeakerCubit extends Cubit<SpeakerState> {
   final SpeakerRepository _speakerRepository;
   SpeakerCubit(this._speakerRepository) : super(SpeakerLoading());
-  Future<void> speaker() async {
+  Future<void> getSpeakerList() async {
     try {
       emit(SpeakerLoading());
       List<dynamic> json = await _speakerRepository.speakers();

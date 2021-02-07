@@ -15,6 +15,7 @@ class S {
   static const String firstnameKey = "first_name";
   static const String lastnameKey = "last_name";
   static const String phoneKey = "contact";
+  //event
   static const String eventnameKey = "name";
   static const String eventdateKey = "date";
   static const String eventtimeKey = "time";
@@ -22,15 +23,13 @@ class S {
   static const String eventidKey = "id";
   static const String eventdetailsKey = "details";
   static const String eventiconurlKey = "icon";
+  //speaker
   static const String speakerCompany = "company";
   static const String speakerContact = "contact";
-  static const String speakerCreatedAt = "created_at";
   static const String speakerDescription = "description";
   static const String speakerEmail = "email";
   static const String speakerExperience = "experience";
-  static const String speakerFlag = "flag";
   static const String speakerId = "id";
-  static const String speakerModifiedAt = "modified_at";
   static const String speakerName = "name";
   static const String speakerProfilePic = "profile_pic";
   static const String speakerSocialMedia = "social_media";

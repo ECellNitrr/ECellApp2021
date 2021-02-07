@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:ecellapp/core/res/errors.dart';
+import 'package:ecellapp/models/speaker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ abstract class SpeakerRepository {
 
 class FakeSpeakerRepository implements SpeakerRepository {
   @override
-  Future<List<dynamic>> speakers() async {
+  Future<List<Speaker>> speakers() async {
     //Network delay here
     await Future.delayed(Duration(seconds: 2));
 
