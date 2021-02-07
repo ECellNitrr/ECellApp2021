@@ -1,11 +1,11 @@
+import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
+import 'package:ecellapp/screens/login/login.dart';
+import 'package:ecellapp/screens/login/login_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:flutter/services.dart';
 import 'core/themes/app_theme.dart';
 import 'core/utils/injection.dart';
-import 'screens/signup/cubit/signup_cubit.dart';
-import 'screens/signup/signup.dart';
-import 'screens/signup/signup_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,12 +16,13 @@ void main() async {
 class ECellApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
       title: "ECellApp",
       theme: AppTheme.themeData(context),
       home: BlocProvider(
-        create: (context) => SignupCubit(FakeSignupRepository()),
-        child: SignupScreen(),
+        create: (context) => LoginCubit(APILoginRepository()),
+        child: LoginScreen(),
       ),
     );
   }
