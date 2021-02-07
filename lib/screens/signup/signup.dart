@@ -211,7 +211,7 @@ class SignupScreen extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) => BlocProvider(
-                                            create: (_) => LoginCubit(FakeLoginRepository()),
+                                            create: (_) => LoginCubit(APILoginRepository()),
                                             child: LoginScreen(),
                                           )));
                             },

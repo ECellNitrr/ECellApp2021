@@ -31,15 +31,7 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) async {
           if (state is LoginSuccess) {
             await Future.delayed(Duration(seconds: 1));
-            // Redirect to Home
-            //Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (_) => BlocProvider(
-                          create: (_) => ProfileCubit(FakeHomeRepository()),
-                          child: HomeScreen(),
-                        )));
+            //TODO: Redirect to Home
           } else if (state is LoginError) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
@@ -230,7 +222,7 @@ class LoginScreen extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                           builder: (_) => BlocProvider(
-                                                create: (_) => SignupCubit(FakeSignupRepository()),
+                                                create: (_) => SignupCubit(APISignupRepository()),
                                                 child: SignupScreen(),
                                               )));
                                 }),
