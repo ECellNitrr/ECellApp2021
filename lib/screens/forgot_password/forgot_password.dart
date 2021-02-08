@@ -17,7 +17,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     return Scaffold(
       body: BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
         listener: (context, state) {
-          if (state is ForgotPasswordError) {
+          if (state is ForgotNetworkError) {
             Scaffold.of(context).showSnackBar(
               SnackBar(content: Text(state.error)),
             );
@@ -36,7 +36,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             return _enterOTP(context);
           } else if (state is ForgotWrongOTP) {
             return _enterOTP(context);
-          } else if (state is ForgotPasswordCreateNewPassword) {
+          } else if (state is ForgotCreateNewPassword) {
             return _resetPassword(context);
           } else if (state is ForgotPasswordSuccess) {
             return _passwordResetSuccess();

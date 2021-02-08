@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:ecellapp/core/res/errors.dart';
 import 'package:ecellapp/screens/forgot_password/forgot_password_repository.dart';
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:ecellapp/core/res/strings.dart';
 
@@ -17,7 +18,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       await _forgotPasswordRepository.sendOTP(email);
       emit(ForgotEnterOTP());
     } on NetworkException {
-      emit(ForgotPasswordError(S.networkException));
+      emit(ForgotNetworkError(S.networkException));
     }
   }
 
@@ -26,12 +27,12 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     try {
       bool b = await _forgotPasswordRepository.verifyOTP(a);
       if (b) {
-        emit(ForgotPasswordCreateNewPassword());
+        emit(ForgotCreateNewPassword());
       } else {
         emit(ForgotWrongOTP());
       }
     } on NetworkException {
-      emit(ForgotPasswordError(S.networkException));
+      emit(ForgotNetworkError(S.networkException));
     }
   }
 
@@ -41,7 +42,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       await _forgotPasswordRepository.changePassword(email, otp, password);
       emit(ForgotPasswordSuccess());
     } on NetworkException {
-      emit(ForgotPasswordError(S.networkException));
+      emit(ForgotNetworkError(S.networkException));
     }
   }
 }
