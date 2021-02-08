@@ -3,7 +3,6 @@ import 'package:ecellapp/core/res/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/res/colors.dart';
-import '../../widgets/screen_background.dart';
 
 class ESummit extends StatelessWidget {
   @override
@@ -18,7 +17,6 @@ class ESummit extends StatelessWidget {
 Widget _buildScreen(BuildContext context) {
   double width = MediaQuery.of(context).size.width;
   double height = MediaQuery.of(context).size.height;
-  double bottom = MediaQuery.of(context).viewInsets.bottom;
   double heightFactor = height / 1000;
   return DefaultTextStyle(
     style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
@@ -57,29 +55,42 @@ Widget _buildScreen(BuildContext context) {
                     Container(
                       alignment: Alignment.centerLeft,
                       padding: EdgeInsets.only(left: D.horizontalPadding, top: 18),
-                      child: Text(
-                        "E-Summit '21",
-                        style: TextStyle(fontSize: 45 * heightFactor, fontWeight: FontWeight.bold),
+                      child: RichText(
+                        text: TextSpan(
+                          text: "E-Summit '21",
+                          style:
+                              TextStyle(fontSize: 45 * heightFactor, fontWeight: FontWeight.w900),
+                        ),
                       ),
                     ),
                     Container(
                       alignment: Alignment.centerLeft,
                       padding: EdgeInsets.only(left: D.horizontalPadding, top: 30),
-                      child: Text(
-                        "The Genesis of Innovation",
+                      child: RichText(
+                          text: TextSpan(
+                        text: "The Genesis of Innovation",
                         style: TextStyle(fontSize: 30 * heightFactor, fontWeight: FontWeight.bold),
-                      ),
+                      )),
                     ),
                     Container(
                       alignment: Alignment.centerLeft,
                       padding: EdgeInsets.only(
                           left: D.horizontalPadding, top: 30, right: D.horizontalPadding),
-                      child: Text(
-                        S.esummitPara,
-                        style: TextStyle(
-                            fontSize: 20 * heightFactor,
-                            fontWeight: FontWeight.w100,
-                            wordSpacing: 4),
+                      child: RichText(
+                        text: TextSpan(
+                          text: "At ",
+                          style: TextStyle(
+                              fontSize: 20 * heightFactor,
+                              fontWeight: FontWeight.w300,
+                              wordSpacing: 4),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: "E-Summit ", style: TextStyle(color: C.speakerButtonColor)),
+                            TextSpan(
+                              text: S.esummitPara,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Container(
@@ -101,7 +112,7 @@ Widget _buildScreen(BuildContext context) {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                           ),
-                          color: C.authButtonColor,
+                          color: C.speakerButtonColor,
                           onPressed: () {}, //TODO
                           child: Container(
                             height: 50,
@@ -124,8 +135,8 @@ Widget _buildScreen(BuildContext context) {
                                 ),
                                 Icon(
                                   Icons.arrow_forward_ios,
-                                  color: Colors.white,
-                                  size: 10,
+                                  color: C.primaryUnHighlightedColor,
+                                  size: 15,
                                 )
                               ],
                             ),
