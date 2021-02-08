@@ -14,25 +14,26 @@ class SpeakerScreen extends StatefulWidget {
 class _SpeakerScreenState extends State<SpeakerScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) {
-        //Unexecuted listner
-        if (state is SpeakerInitial) {
-        } else if (state is SpeakerError) {
-          Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-        }
-      }, builder: (context, state) {
-        if (state is SpeakerInitial) {
-          //StatefulWrapper Used
-          return StatefulWrapper(onInit: _getAllSpeakers, child: _buildInitial());
-        } else if (state is SpeakerSuccess) {
-          return _buildSuccess(context, state.speakerList);
-        } else if (state is SpeakerLoading) {
-          return _buildLoading();
-        } else {
-          return _buildAskReload();
-        }
-      }),
+    return StatefulWrapper(
+      onInit: _getAllSpeakers,
+      child: Scaffold(
+        body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) {
+          //Unexecuted listner
+          if (state is SpeakerError) {
+            Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+          }
+        }, builder: (context, state) {
+          if (state is SpeakerInitial) {
+            return _buildInitial();
+          } else if (state is SpeakerSuccess) {
+            return _buildSuccess(context, state.speakerList);
+          } else if (state is SpeakerLoading) {
+            return _buildLoading();
+          } else {
+            return _buildAskReload();
+          }
+        }),
+      ),
     );
   }
 
@@ -46,7 +47,7 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(speakerList.toString(), textAlign: TextAlign.center),
+          Text(speakerList[0].email, textAlign: TextAlign.center),
         ],
       ),
     );
