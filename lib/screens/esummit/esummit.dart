@@ -25,11 +25,9 @@ Widget _buildScreen(BuildContext context) {
         _screenBackground(context),
         AppBar(
             leading: GestureDetector(
-          child: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
-            ),
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
           ),
           onTap: () {
             //TODO
@@ -113,7 +111,9 @@ Widget _buildScreen(BuildContext context) {
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                           ),
                           color: C.speakerButtonColor,
-                          onPressed: () {}, //TODO
+                          onPressed: () {
+                            //TODO
+                          },
                           child: Container(
                             height: 50,
                             width: 120,
@@ -128,7 +128,7 @@ Widget _buildScreen(BuildContext context) {
                                   style: TextStyle(
                                       color: C.primaryUnHighlightedColor,
                                       fontSize: 20 * heightFactor,
-                                      fontWeight: FontWeight.w100),
+                                      fontWeight: FontWeight.w300),
                                 ),
                                 SizedBox(
                                   width: 10,
