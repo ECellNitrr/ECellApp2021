@@ -8,14 +8,14 @@ import 'package:flutter/material.dart';
 @immutable
 abstract class SpeakerRepository {
   /// All subfunctions are final No arguments required returns json
-  Future<List<dynamic>> speakers();
+  Future<List<Speaker>> getAllSpeakers();
 }
 
 class FakeSpeakerRepository implements SpeakerRepository {
   @override
-  Future<List<Speaker>> speakers() async {
+  Future<List<Speaker>> getAllSpeakers() async {
     //Network delay here
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
 
     //Fake Response and Network Delay
     if (Random().nextBool()) {
@@ -41,7 +41,10 @@ class FakeSpeakerRepository implements SpeakerRepository {
         ],
         "message": "Speakers Fetched Successfully"
       };
-      return response["data"];
+
+      List<Speaker> speakerList;
+      (response["data"] as List).map((e) => speakerList.add(Speaker.fromJson(e)));
+      return speakerList;
     }
   }
 }

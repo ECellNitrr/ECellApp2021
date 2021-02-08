@@ -1,11 +1,14 @@
+import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
+import 'package:ecellapp/screens/events/events.dart';
+import 'package:ecellapp/screens/events/events_repository.dart';
+import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
+import 'package:ecellapp/screens/speaker/speaker.dart';
+import 'package:ecellapp/screens/speaker/speaker_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/themes/app_theme.dart';
 import 'core/utils/injection.dart';
-import 'screens/signup/cubit/signup_cubit.dart';
-import 'screens/signup/signup.dart';
-import 'screens/signup/signup_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,8 +23,8 @@ class ECellApp extends StatelessWidget {
       title: "ECellApp",
       theme: AppTheme.themeData(context),
       home: BlocProvider(
-        create: (context) => SignupCubit(FakeSignupRepository()),
-        child: SignupScreen(),
+        create: (context) => SpeakerCubit(FakeSpeakerRepository()),
+        child: SpeakerScreen(),
       ),
     );
   }

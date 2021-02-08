@@ -17,19 +17,25 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) async {
-        if (state is SpeakerSuccess) {
-          await Future.delayed(Duration(seconds: 1));
+        if (state is SpeakerInitial) {
+          //await Future.delayed(Duration(seconds: 1));
+          Log.d(tag: "listner", message: "executed _getAllSpeaker");
+          _getAllSpeakers();
         } else if (state is SpeakerError) {
           Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
         }
       }, builder: (context, state) {
-        if (state is SpeakerSuccess) {
-          speakerResponse = state.json;
-          return _buildSuccess(context);
+        if (state is SpeakerInitial) {
+          Log.d(tag: "state", message: "Initial");
+          return _buildInitial();
+        } else if (state is SpeakerSuccess) {
+          Log.d(tag: "state", message: "Success");
+          return _buildSuccess(context, state.speakerList);
         } else if (state is SpeakerLoading) {
-          _speaker();
+          Log.d(tag: "state", message: "Loading");
           return _buildLoading();
         } else {
+          Log.d(tag: "state", message: "ElseAllOther");
           Log.e(tag: "SpeakerState:", message: "SpeakerError state");
           return _buildAskReload();
         }
@@ -37,16 +43,18 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
     );
   }
 
-  Widget _buildSuccess(BuildContext context) {
-    Speaker speaker = speakerResponse[];
+  Widget _buildInitial() {
+    return Container();
+  }
+
+  Widget _buildSuccess(BuildContext context, List<Speaker> speakerList) {
+    Log.d(tag: "Response", message: speakerList[0].name);
+    //TODO: UI
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(
-            "Speaker: ${speaker.name}",
-            textAlign: TextAlign.center,
-          ),
+          Text(speakerList[0].name, textAlign: TextAlign.center),
         ],
       ),
     );
@@ -64,7 +72,7 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
     return Container();
   }
 
-  void _speaker() {
+  void _getAllSpeakers() {
     final cubit = context.read<SpeakerCubit>();
     cubit.getSpeakerList();
   }

@@ -7,15 +7,19 @@ abstract class SpeakerState extends Equatable {
   List<Object> get props => [];
 }
 
+class SpeakerInitial extends SpeakerState {
+  const SpeakerInitial();
+}
+
 class SpeakerLoading extends SpeakerState {
   const SpeakerLoading();
 }
 
 class SpeakerSuccess extends SpeakerState {
-  final List<dynamic> json;
-  const SpeakerSuccess(this.json);
+  final List<Speaker> speakerList;
+  const SpeakerSuccess(this.speakerList);
   @override
-  List<Object> get props => [json];
+  List<Object> get props => [speakerList];
 }
 
 class SpeakerError extends SpeakerState {
