@@ -7,6 +7,10 @@ class C {
   static final Color backgroundTop = HexColor("#4F3FA0");
   static final Color backgroundBottom = HexColor("#180C58");
 
+  /// esummit + speakers background color gradient
+  static final Color backgroundTop1 = HexColor("#b67dfd");
+  static final Color backgroundBottom1 = HexColor("#e641ec");
+
   /// theme colors
   static final Color primaryHighlightedColor = HexColor("#EF9BFF");
   static final Color primaryUnHighlightedColor = HexColor("#FFFFFF");
