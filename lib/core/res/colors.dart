@@ -8,8 +8,8 @@ class C {
   static final Color backgroundBottom = HexColor("#180C58");
 
   /// esummit + speakers background color gradient
-  static final Color backgroundTop1 = HexColor("#b67efe");
-  static final Color backgroundBottom1 = HexColor("#fb28e6");
+  static final Color backgroundTop1 = HexColor("#B67EFE");
+  static final Color backgroundBottom1 = HexColor("#FB28E6");
 
   /// theme colors
   static final Color primaryHighlightedColor = HexColor("#EF9BFF");
@@ -18,7 +18,7 @@ class C {
 
   /// button colors
   static final Color authButtonColor = HexColor("#A955F7");
-  static final Color speakerButtonColor = HexColor('#8e31d5');
+  static final Color speakerButtonColor = HexColor('#8E31D5');
 }
 
 class HexColor extends Color {
