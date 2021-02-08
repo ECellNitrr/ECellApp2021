@@ -1,6 +1,3 @@
-import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
-import 'package:ecellapp/screens/events/events.dart';
-import 'package:ecellapp/screens/events/events_repository.dart';
 import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
 import 'package:ecellapp/screens/speaker/speaker.dart';
 import 'package:ecellapp/screens/speaker/speaker_repository.dart';
