@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:ecellapp/core/res/errors.dart';
-import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/speaker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
