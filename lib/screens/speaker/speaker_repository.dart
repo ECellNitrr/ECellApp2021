@@ -45,10 +45,7 @@ class FakeSpeakerRepository implements SpeakerRepository {
 
       List<Speaker> speakerList = List();
 
-      (response["data"] as List).map((e) {
-        Log.d(tag: "eVal:", message: e.toString());
-        speakerList.add(Speaker.fromJson(e));
-      });
+      (response["data"] as List).map((e) => speakerList.add(Speaker.fromJson(e))).toList();
 
       return speakerList;
     }
