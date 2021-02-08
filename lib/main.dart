@@ -1,3 +1,6 @@
+import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
+import 'package:ecellapp/screens/login/login.dart';
+import 'package:ecellapp/screens/login/login_repository.dart';
 import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
 import 'package:ecellapp/screens/speaker/speaker.dart';
 import 'package:ecellapp/screens/speaker/speaker_repository.dart';
@@ -21,8 +24,8 @@ class ECellApp extends StatelessWidget {
       title: "ECellApp",
       theme: AppTheme.themeData(context),
       home: BlocProvider(
-        create: (context) => SpeakerCubit(FakeSpeakerRepository()),
-        child: SpeakerScreen(),
+        create: (context) => LoginCubit(APILoginRepository()),
+        child: LoginScreen(),
       ),
     );
   }
