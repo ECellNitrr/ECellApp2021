@@ -1,4 +1,3 @@
-import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/speaker.dart';
 import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
@@ -16,25 +15,21 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) async {
+      body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) {
+        //Unexecuted listner
         if (state is SpeakerInitial) {
-          Log.d(tag: "listner", message: "executed _getAllSpeaker");
         } else if (state is SpeakerError) {
           Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
         }
       }, builder: (context, state) {
         if (state is SpeakerInitial) {
-          Log.d(tag: "state", message: "Initial");
           //StatefulWrapper Used
           return StatefulWrapper(onInit: _getAllSpeakers, child: _buildInitial());
         } else if (state is SpeakerSuccess) {
-          Log.d(tag: "state", message: "Success");
           return _buildSuccess(context, state.speakerList);
         } else if (state is SpeakerLoading) {
-          Log.d(tag: "state", message: "Loading");
           return _buildLoading();
         } else {
-          Log.e(tag: "SpeakerState:", message: "SpeakerError state");
           return _buildAskReload();
         }
       }),
@@ -51,7 +46,7 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(speakerList[0].email, textAlign: TextAlign.center),
+          Text(speakerList.toString(), textAlign: TextAlign.center),
         ],
       ),
     );

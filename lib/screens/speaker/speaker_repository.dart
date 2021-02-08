@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:ecellapp/core/res/errors.dart';
+import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/speaker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +44,13 @@ class FakeSpeakerRepository implements SpeakerRepository {
         "message": "Speakers Fetched Successfully"
       };
 
-      List<Speaker> speakerList;
-      (response["data"] as List).map((e) => speakerList.add(Speaker.fromJson(e)));
+      List<Speaker> speakerList = List();
+
+      (response["data"] as List).map((e) {
+        Log.d(tag: "eVal:", message: e.toString());
+        speakerList.add(Speaker.fromJson(e));
+      });
+
       return speakerList;
     }
   }
