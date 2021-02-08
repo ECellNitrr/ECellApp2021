@@ -26,7 +26,7 @@ class Speaker extends Equatable {
     this.year,
   });
 
-  factory Speaker.fromJson(var json) {
+  factory Speaker.fromJson(Map<String, dynamic> json) {
     return Speaker(
       id: json[S.speakerId] as int,
       year: json[S.speakerYear] as int,
