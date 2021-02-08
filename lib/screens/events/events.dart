@@ -1,5 +1,5 @@
 import 'package:ecellapp/core/utils/logger.dart';
-import 'package:ecellapp/models/events.dart';
+import 'package:ecellapp/models/event.dart';
 import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,25 +10,25 @@ class EventsScreen extends StatefulWidget {
 }
 
 class _EventsScreenState extends State<EventsScreen> {
-  List<Map<String, Object>> json;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<EventsCubit, EventsState>(
         listener: (context, state) {
-          if (state is EventsError) {
+          if (state is EventsInitial) {
+            _getAllEvents();
+          } else if (state is EventsError) {
             Scaffold.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
             );
           }
         },
         builder: (context, state) {
-          if (state is EventsSuccess) {
-            json = state.json;
-            return _buildSuccess(context);
+          if (state is EventsInitial) {
+            return _buildInitial();
+          } else if (state is EventsSuccess) {
+            return _buildSuccess(context, state.json);
           } else if (state is EventsLoading) {
-            _events();
             return _buildLoading();
           } else {
             Log.e(tag: "EventsState", message: "State now is EventsError reached");
@@ -45,25 +45,22 @@ class _EventsScreenState extends State<EventsScreen> {
     );
   }
 
-  Widget _buildSuccess(context) {
-    Events event = Events.fromJson(json[0]);
+  Widget _buildSuccess(BuildContext context, List<Event> json) {
     //TODO On success UI
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Icon(Icons.check_circle_outline),
-          Text(
-            event.details,
-            textAlign: TextAlign.center,
-          ),
-        ],
+        children: <Widget>[Icon(Icons.check_circle_outline), Text(json[0].name)],
       ),
     );
   }
 
-  void _events() {
+  Widget _buildInitial() {
+    return Container();
+  }
+
+  void _getAllEvents() {
     final cubit = context.read<EventsCubit>();
-    cubit.events();
+    cubit.getAllEvents();
   }
 }

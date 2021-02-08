@@ -1,7 +1,7 @@
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:equatable/equatable.dart';
 
-class Events extends Equatable {
+class Event extends Equatable {
   final String name;
   final String date;
   final String time;
@@ -10,7 +10,7 @@ class Events extends Equatable {
   final int id;
   final String details;
 
-  Events({
+  Event({
     this.name,
     this.date,
     this.time,
@@ -20,8 +20,8 @@ class Events extends Equatable {
     this.details,
   });
 
-  factory Events.fromJson(Map<String, dynamic> json) {
-    return Events(
+  factory Event.fromJson(Map<String, dynamic> json) {
+    return Event(
       name: json[S.eventnameKey] as String,
       date: json[S.eventdateKey] as String,
       time: json[S.eventtimeKey] as String,
