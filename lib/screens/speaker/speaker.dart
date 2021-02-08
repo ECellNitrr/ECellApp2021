@@ -47,12 +47,11 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
 
   Widget _buildSuccess(BuildContext context, List<Speaker> speakerList) {
     //TODO: UI
-    List<Speaker> speaker = speakerList;
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(speaker[0].email, textAlign: TextAlign.center),
+          Text(speakerList[0].email, textAlign: TextAlign.center),
         ],
       ),
     );
