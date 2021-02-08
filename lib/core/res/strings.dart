@@ -25,9 +25,7 @@ class S {
   static const String eventiconurlKey = "icon";
   //speaker
   static const String speakerCompany = "company";
-  static const String speakerContact = "contact";
   static const String speakerDescription = "description";
-  static const String speakerEmail = "email";
   static const String speakerExperience = "experience";
   static const String speakerId = "id";
   static const String speakerName = "name";

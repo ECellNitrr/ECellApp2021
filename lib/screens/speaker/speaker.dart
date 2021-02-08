@@ -47,7 +47,7 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(speakerList[0].email, textAlign: TextAlign.center),
+          Text(speakerList[0].name, textAlign: TextAlign.center),
         ],
       ),
     );
