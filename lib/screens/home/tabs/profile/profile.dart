@@ -1,4 +1,3 @@
-import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/user.dart';
 import 'package:ecellapp/screens/home/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +30,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _profile();
             return _buildLoading();
           } else {
-            Log.e(tag: "ProfileState", message: "State now is ProfileError reached");
             return Container(); // TODO the user should be shown the error on screen instead of a snackbar, and a retry button.
           }
         },
@@ -63,6 +61,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _profile() {
     final cubit = context.read<ProfileCubit>();
-    cubit.profile("token");
+    cubit.getProfile();
   }
 }
