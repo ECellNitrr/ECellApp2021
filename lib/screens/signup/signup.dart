@@ -1,3 +1,6 @@
+import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
+import 'package:ecellapp/screens/login/login.dart';
+import 'package:ecellapp/screens/login/login_repository.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -204,7 +207,13 @@ class SignupScreen extends StatelessWidget {
                               ),
                             ),
                             onTap: () {
-                              // TODO
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => BlocProvider(
+                                            create: (_) => LoginCubit(APILoginRepository()),
+                                            child: LoginScreen(),
+                                          )));
                             },
                           ),
                         ],
