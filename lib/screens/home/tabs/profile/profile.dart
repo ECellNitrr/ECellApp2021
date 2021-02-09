@@ -23,9 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state is ProfileError) {
-            Scaffold.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
+            Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         builder: (context, state) {
@@ -45,9 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildLoading() {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
+    return Center(child: CircularProgressIndicator());
   }
 
   Widget _buildSuccess(BuildContext context) {
@@ -55,38 +51,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
     double height = MediaQuery.of(context).size.height;
     double heightFactor = height / 1000;
     return DefaultTextStyle(
-      style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
-      child: Stack(
-        children: [
+        style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+        child: Stack(children: [
           ScreenBackground(elementId: 0),
-          SingleChildScrollView(
-            physics: NeverScrollableScrollPhysics(),
-            child: Container(
-              height: height * 1.25,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(
-                    height: height / 6,
-                  ),
-                  Flexible(
-                    flex: 4,
-                    child: Column(
-                      children: [
-                        Container(
-                          child: Image.asset(
-                            S.assetEcellLogoWhite,
-                            width: width * 0.35 * heightFactor,
-                          ),
-                        ),
-                        SizedBox(height: height / 20),
-                        Form(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                left: D.horizontalPadding, right: D.horizontalPadding),
-                            child: Column(
+          Container(
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
+            SizedBox(height: height / 6),
+            Flexible(
+                flex: 4,
+                child: Column(children: [
+                  Container(
+                      child: Image.asset(
+                    S.assetEcellLogoWhite,
+                    width: width * 0.35 * heightFactor,
+                  )),
+                  SizedBox(height: height / 20),
+                  Form(
+                      child: Padding(
+                          padding: EdgeInsets.only(
+                              left: D.horizontalPadding, right: D.horizontalPadding),
+                          child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
                                 _label("First Name", heightFactor),
                                 _labelValue(width, height, user.firstName),
@@ -101,32 +86,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 _labelValue(width, height, user.phoneNumber),
                                 SizedBox(height: height / 15),
                                 Container(
-                                  alignment: Alignment.topRight,
-                                  child: GestureDetector(
-                                    onTap: () {}, //TODO
-                                    child: Text(
-                                      "Change Number?",
-                                      style: TextStyle(
-                                        color: C.primaryHighlightedColor,
-                                        fontSize: 20 * heightFactor,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+                                    alignment: Alignment.topRight,
+                                    child: GestureDetector(
+                                        onTap: () {}, //TODO
+                                        child: Text("Change Number?",
+                                            style: TextStyle(
+                                              color: C.primaryHighlightedColor,
+                                              fontSize: 20 * heightFactor,
+                                            ))))
+                              ])))
+                ]))
+          ]))
+        ]));
   }
 
   void _profile() {
@@ -145,12 +116,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _labelValue(double width, double height, String value) {
     return Container(
-      width: width,
-      padding: EdgeInsets.only(top: height / 100, bottom: 5),
-      child: Text(value,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, letterSpacing: 1.2)),
-      decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(width: 1, color: C.primaryUnHighlightedColor))),
-    );
+        width: width,
+        padding: EdgeInsets.only(top: height / 100, bottom: 5),
+        child: Text(value,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, letterSpacing: 1.2)),
+        decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(width: 1, color: C.primaryUnHighlightedColor))));
   }
 }

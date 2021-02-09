@@ -22,7 +22,7 @@ class FakeHomeRepository implements HomeRepository {
     // Simulate network delay
     await Future.delayed(Duration(seconds: 1));
 
-    if (Random().nextBool()) {
+    if (false) {
       // random network error
       throw NetworkException();
     } else {
@@ -30,7 +30,7 @@ class FakeHomeRepository implements HomeRepository {
         S.firstnameKey: "Sahil",
         S.lastnameKey: "Silare",
         S.emailKey: "sahil@gmail.com",
-        S.phoneKey: "",
+        S.phoneKey: "9999999999",
       };
       User user = User.fromJson(json);
       // fake successful response (the data entered here same as in the API Doc example)
