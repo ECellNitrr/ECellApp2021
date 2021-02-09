@@ -7,7 +7,7 @@ class S {
   static const String registerUrl = baseUrl + "users/register/";
   static const String getUserDetailsUrl = baseUrl + "users/get_user_details/";
   static const String getEventsUrl = baseUrl + "events/list/2019/";
-
+  static const String getSponsorsUrl = baseUrl + "/sponsors/sorted_list/$sponsorYear/";
   // api keys
   static const String tokenKey = "token";
   static const String passwordKey = "password";
@@ -22,7 +22,8 @@ class S {
   static const String eventidKey = "id";
   static const String eventdetailsKey = "details";
   static const String eventiconurlKey = "icon";
-
+  //sponsors
+  static const int sponsorYear = 2021;
   // error strings
   static const String networkException =
       "Request couldn't be completed. Make sure the device is online";
