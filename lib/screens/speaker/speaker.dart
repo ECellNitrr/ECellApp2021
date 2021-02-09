@@ -13,9 +13,7 @@ class SpeakerScreen extends StatelessWidget {
       onInit: () => _getAllSpeakers(context),
       child: Scaffold(
         body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) {
-          if (state is SpeakerInitial) {
-            //_getAllSpeakers(context);
-          } else if (state is SpeakerError) {
+          if (state is SpeakerError) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
         }, builder: (context, state) {
