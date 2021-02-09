@@ -37,8 +37,8 @@ Widget _buildScreen(BuildContext context) {
           child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
                   colors: [C.backgroundTop1, C.backgroundBottom1],
                 ),
               ),
