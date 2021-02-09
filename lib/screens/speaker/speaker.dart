@@ -1,5 +1,6 @@
 import 'package:ecellapp/models/speaker.dart';
 import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
+import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,11 +9,12 @@ class SpeakerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return StatefulWrapper(
+      onInit: () => _getAllSpeakers(context),
       child: Scaffold(
         body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) {
           if (state is SpeakerInitial) {
-            _getAllSpeakers(context);
+            //_getAllSpeakers(context);
           } else if (state is SpeakerError) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
