@@ -1,25 +1,19 @@
 import 'package:ecellapp/models/speaker.dart';
 import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
-import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SpeakerScreen extends StatefulWidget {
-  SpeakerScreen({Key key}) : super(key: key);
+class SpeakerScreen extends StatelessWidget {
+  const SpeakerScreen({Key key}) : super(key: key);
 
-  @override
-  _SpeakerScreenState createState() => _SpeakerScreenState();
-}
-
-class _SpeakerScreenState extends State<SpeakerScreen> {
   @override
   Widget build(BuildContext context) {
-    return StatefulWrapper(
-      onInit: _getAllSpeakers,
+    return Container(
       child: Scaffold(
         body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) {
-          //Unexecuted listner
-          if (state is SpeakerError) {
+          if (state is SpeakerInitial) {
+            _getAllSpeakers(context);
+          } else if (state is SpeakerError) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
         }, builder: (context, state) {
@@ -65,7 +59,7 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
     return Container();
   }
 
-  void _getAllSpeakers() {
+  void _getAllSpeakers(BuildContext context) {
     final cubit = context.read<SpeakerCubit>();
     cubit.getSpeakerList();
   }
