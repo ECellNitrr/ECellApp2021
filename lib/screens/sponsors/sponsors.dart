@@ -36,16 +36,16 @@ class SponsorsScreen extends StatelessWidget {
     return Container();
   }
 
-  Widget _buildSuccess(BuildContext context, List<Sponsors> sponsorsList) {
+  Widget _buildSuccess(BuildContext context, List<Sponsor> sponsorsList) {
     //TODO: UI
-    List<Widget> _sL = [];
-    sponsorsList.forEach((element) {
-      _sL.add(Text(element.name, textAlign: TextAlign.center));
-    });
+
+    //!Notes SponsorList->list(response), .data(map), .elements(list),.elements(value)
+    //sponsorsList[0].data.title[0].name) -> To access sponsor Name
+
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: _sL,
+        children: [Text(sponsorsList[0].data.title[0].name)],
       ),
     );
   }

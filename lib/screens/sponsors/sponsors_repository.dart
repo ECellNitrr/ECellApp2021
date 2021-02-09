@@ -1,20 +1,17 @@
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:ecellapp/core/res/errors.dart';
-import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/sponsors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
 abstract class SponsorsRepository {
   /// All subfunctions are final No arguments required returns json
-  Future<List<Sponsors>> getAllSponsors();
+  Future<List<Sponsor>> getAllSponsors();
 }
 
 class FakeSponsorsRepository implements SponsorsRepository {
   @override
-  Future<List<Sponsors>> getAllSponsors() async {
+  Future<List<Sponsor>> getAllSponsors() async {
     //Network delay here
     await Future.delayed(Duration(seconds: 1));
 
@@ -63,15 +60,11 @@ class FakeSponsorsRepository implements SponsorsRepository {
         "message": "fetched successfully",
         "spons_categories": ["Title", "Partner"]
       };
-
-      List<Sponsors> sponsorList = List();
       //response["data"] -> _InternalLinkedHashMap<String, List<Map<String, Object>>>
 
-      for (var item in response["data"]) {
-        (item as Map).forEach((key, value) {
-          sponsorList.add(Sponsors.fromJson(value));
-        });
-      }
+      List<Sponsor> sponsorList = List();
+
+      sponsorList.add(Sponsor.fromJson(response));
 
       return sponsorList;
     }

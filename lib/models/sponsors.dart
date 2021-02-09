@@ -1,53 +1,25 @@
-import 'package:ecellapp/core/res/strings.dart';
-import 'package:equatable/equatable.dart';
+import 'package:ecellapp/screens/sponsors/models/data.dart';
 
-class Sponsors extends Equatable {
-  //int
-  final int contact;
-  final int importance;
-  final int categoryImportance;
-  final int year;
-  final int id;
-  //string
-  final String name;
-  final String details;
-  final String pic;
-  final String picUrl;
-  final String website;
-  final String sponsType;
+class Sponsor {
+  Data data;
+  String message;
+  List<String> sponsCategories;
 
-  Sponsors(
-      {this.contact,
-      this.importance,
-      this.categoryImportance,
-      this.year,
-      this.id,
-      this.name,
-      this.details,
-      this.pic,
-      this.picUrl,
-      this.website,
-      this.sponsType});
+  Sponsor({this.data, this.message, this.sponsCategories});
 
-  factory Sponsors.fromJson(Map<String, dynamic> json) {
-    return Sponsors(
-      //int
-      id: json[S.sponsorId] as int,
-      year: json[S.sponsorYear] as int,
-      contact: json[S.sponsorContact] as int,
-      categoryImportance: json[S.sponsorCategoryImportance] as int,
-      importance: json[S.sponsorImportance] as int,
-      //String
-      name: json[S.speakerName] as String,
-      details: json[S.sponsorDetails] as String,
-      pic: json[S.sponsorPic] as String,
-      picUrl: json[S.sponsorPicUrl] as String,
-      website: json[S.sponsorWebsite] as String,
-      sponsType: json[S.sponsorSponsType] as String,
-    );
+  Sponsor.fromJson(Map<String, dynamic> json) {
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    message = json['message'];
+    sponsCategories = json['spons_categories'].cast<String>();
   }
 
-  @override
-  // TODO: implement props
-  List<Object> get props => [id];
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.data != null) {
+      data['data'] = this.data.toJson();
+    }
+    data['message'] = this.message;
+    data['spons_categories'] = this.sponsCategories;
+    return data;
+  }
 }

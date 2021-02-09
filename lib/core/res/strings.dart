@@ -36,6 +36,7 @@ class S {
   static const String sponsorCategoryImportance = "category_importance";
   static const String sponsorYear = "year";
   static const String sponsorId = "id";
+  static const String sponsCategoryObj = "spons_categories";
   //speaker
   static const String speakerCompany = "company";
   static const String speakerDescription = "description";

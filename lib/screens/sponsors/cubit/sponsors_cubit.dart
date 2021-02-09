@@ -14,7 +14,7 @@ class SponsorsCubit extends Cubit<SponsorsState> {
   Future<void> getSponsorsList() async {
     try {
       emit(SponsorsLoading());
-      List<Sponsors> speakerList = await _sponsorsRepository.getAllSponsors();
+      List<Sponsor> speakerList = await _sponsorsRepository.getAllSponsors();
       emit(SponsorsSuccess(speakerList));
     } on NetworkException {
       emit(SponsorsError(S.networkException));
