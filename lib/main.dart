@@ -1,6 +1,9 @@
 import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
 import 'package:ecellapp/screens/login/login.dart';
 import 'package:ecellapp/screens/login/login_repository.dart';
+import 'package:ecellapp/screens/sponsors/cubit/sponsors_cubit.dart';
+import 'package:ecellapp/screens/sponsors/sponsors.dart';
+import 'package:ecellapp/screens/sponsors/sponsors_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
@@ -21,8 +24,8 @@ class ECellApp extends StatelessWidget {
       title: "ECellApp",
       theme: AppTheme.themeData(context),
       home: BlocProvider(
-        create: (context) => LoginCubit(APILoginRepository()),
-        child: LoginScreen(),
+        create: (context) => SponsorsCubit(FakeSponsorsRepository()),
+        child: SponsorsScreen(),
       ),
     );
   }

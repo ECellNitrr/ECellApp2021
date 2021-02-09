@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:ecellapp/core/res/errors.dart';
+import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/sponsors.dart';
 import 'package:flutter/material.dart';
 
@@ -17,18 +19,59 @@ class FakeSponsorsRepository implements SponsorsRepository {
     await Future.delayed(Duration(seconds: 1));
 
     //Fake Response and Network Delay
-    if (Random().nextBool()) {
+    //Random().nextBool()
+    if (false) {
       throw NetworkException();
     } else {
       var response = {
-        "data": {},
+        "data": {
+          "Title": [
+            {
+              "id": 3,
+              "name": "Anopchand Tilokchand Jewellers",
+              "details": "Title Sponsors",
+              "pic": "/media/static/uploads/sponsors/download.jpeg",
+              "pic_url": "\"*\"/media/static/uploads/sponsors/download.jpeg",
+              "contact": "",
+              "website": "https://atjewel.com/",
+              "spons_type": "Title",
+              "importance": 200,
+              "category_importance": 10,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
+            }
+          ],
+          "Partner": [
+            {
+              "id": 2,
+              "name": "Happy Chases",
+              "details": "Digital Media Partner",
+              "pic": "/media/static/uploads/sponsors/happychases.png",
+              "pic_url": "\"*\"/media/static/uploads/sponsors/happychases.png",
+              "contact": "",
+              "website": "https://www.happychases.com/",
+              "spons_type": "Partner",
+              "importance": 83,
+              "category_importance": 6,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
+            }
+          ]
+        },
         "message": "fetched successfully",
-        "spons_categories": [],
+        "spons_categories": ["Title", "Partner"]
       };
 
       List<Sponsors> sponsorList = List();
+      //response["data"] -> _InternalLinkedHashMap<String, List<Map<String, Object>>>
 
-      (response["data"] as List).map((e) => sponsorList.add(Sponsors.fromJson(e))).toList();
+      for (var item in response["data"]) {
+        (item as Map).forEach((key, value) {
+          sponsorList.add(Sponsors.fromJson(value));
+        });
+      }
 
       return sponsorList;
     }

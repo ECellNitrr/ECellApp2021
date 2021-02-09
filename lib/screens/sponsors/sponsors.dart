@@ -36,14 +36,16 @@ class SponsorsScreen extends StatelessWidget {
     return Container();
   }
 
-  Widget _buildSuccess(BuildContext context, List<Sponsors> SponsorsList) {
+  Widget _buildSuccess(BuildContext context, List<Sponsors> sponsorsList) {
     //TODO: UI
+    List<Widget> _sL = [];
+    sponsorsList.forEach((element) {
+      _sL.add(Text(element.name, textAlign: TextAlign.center));
+    });
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text("sponsorsList[0].name", textAlign: TextAlign.center),
-        ],
+        children: _sL,
       ),
     );
   }

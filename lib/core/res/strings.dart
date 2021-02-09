@@ -7,7 +7,7 @@ class S {
   static const String registerUrl = baseUrl + "users/register/";
   static const String getUserDetailsUrl = baseUrl + "users/get_user_details/";
   static const String getEventsUrl = baseUrl + "events/list/2019/";
-  static const String getSponsorsUrl = baseUrl + "/sponsors/sorted_list/$sponsorYear/";
+  static const String getSponsorsUrl = baseUrl + "/sponsors/sorted_list/$sponsorApiYear/";
   // api keys
   static const String tokenKey = "token";
   static const String passwordKey = "password";
@@ -24,7 +24,18 @@ class S {
   static const String eventdetailsKey = "details";
   static const String eventiconurlKey = "icon";
   //sponsors
-  static const int sponsorYear = 2021;
+  static const int sponsorApiYear = 2021;
+  static const String sponsorName = "name";
+  static const String sponsorDetails = "details";
+  static const String sponsorPic = "pic";
+  static const String sponsorPicUrl = "pic_url";
+  static const String sponsorWebsite = "website";
+  static const String sponsorSponsType = "spons_type";
+  static const String sponsorContact = "contact";
+  static const String sponsorImportance = "importance";
+  static const String sponsorCategoryImportance = "category_importance";
+  static const String sponsorYear = "year";
+  static const String sponsorId = "id";
   //speaker
   static const String speakerCompany = "company";
   static const String speakerDescription = "description";
