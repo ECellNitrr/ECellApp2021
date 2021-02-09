@@ -8,27 +8,39 @@ abstract class ForgotPasswordState extends Equatable {
   List<Object> get props => [];
 }
 
-// state where we enter email
-class ForgotInitial extends ForgotPasswordState {}
-
-// loading state
+/// loading state
 class ForgotLoading extends ForgotPasswordState {}
 
-//state where we enter the otp for verification
-class ForgotEnterOTP extends ForgotPasswordState {}
+/// state where we enter email
+class ForgotEmailInitial extends ForgotPasswordState {}
 
-//state where all things are done
-class ForgotPasswordSuccess extends ForgotPasswordState {}
+/// Success state for email
+class ForgotEmailSuccess extends ForgotPasswordState {}
 
-//state where wrong otp is entered
-class ForgotWrongOTP extends ForgotPasswordState {}
+///failure for email
+class ForgotEmailFailure extends ForgotPasswordState {}
 
-//network error for forgot password
+/// state where we enter the otp for verification
+class ForgotOTPInitial extends ForgotPasswordState {}
+
+/// state where wrong otp is entered
+class ForgotOTPFailure extends ForgotPasswordState {}
+
+///state where otp is successful
+class ForgotOTPSuccess extends ForgotPasswordState {}
+
+/// state where we enter new password
+class ForgotResetInitial extends ForgotPasswordState {}
+
+/// state where the password is successfully reset are done
+class ForgotResetSuccess extends ForgotPasswordState {}
+
+/// state where the password reset fails
+class ForgotResetFailure extends ForgotPasswordState {}
+
+/// network error for forgot password
 class ForgotNetworkError extends ForgotPasswordState {
   final String error;
 
   ForgotNetworkError(this.error);
 }
-
-// state where we enter new password
-class ForgotCreateNewPassword extends ForgotPasswordState {}

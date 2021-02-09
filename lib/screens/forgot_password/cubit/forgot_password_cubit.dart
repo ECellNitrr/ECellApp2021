@@ -10,13 +10,13 @@ part 'forgot_password_state.dart';
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   final ForgotPasswordRepository _forgotPasswordRepository;
 
-  ForgotPasswordCubit(this._forgotPasswordRepository) : super(ForgotInitial());
+  ForgotPasswordCubit(this._forgotPasswordRepository) : super(ForgotEmailInitial());
 
   void sendOTP(String email) async {
     try {
       emit(ForgotLoading());
       await _forgotPasswordRepository.sendOTP(email);
-      emit(ForgotEnterOTP());
+      emit(ForgotOTPInitial());
     } on NetworkException {
       emit(ForgotNetworkError(S.networkException));
     }
@@ -27,9 +27,9 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     try {
       bool b = await _forgotPasswordRepository.verifyOTP(a);
       if (b) {
-        emit(ForgotCreateNewPassword());
+        emit(ForgotResetInitial());
       } else {
-        emit(ForgotWrongOTP());
+        emit(ForgotOTPFailure());
       }
     } on NetworkException {
       emit(ForgotNetworkError(S.networkException));
@@ -40,7 +40,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     emit(ForgotLoading());
     try {
       await _forgotPasswordRepository.changePassword(email, otp, password);
-      emit(ForgotPasswordSuccess());
+      emit(ForgotResetSuccess());
     } on NetworkException {
       emit(ForgotNetworkError(S.networkException));
     }

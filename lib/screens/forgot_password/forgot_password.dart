@@ -21,24 +21,36 @@ class ForgotPasswordScreen extends StatelessWidget {
             Scaffold.of(context).showSnackBar(
               SnackBar(content: Text(state.error)),
             );
-          } else if (state is ForgotWrongOTP) {
+          } else if (state is ForgotOTPFailure) {
             Scaffold.of(context).showSnackBar(
               SnackBar(content: Text("Wrong OTP")),
+            );
+          } else if (state is ForgotEmailFailure) {
+            Scaffold.of(context).showSnackBar(
+              SnackBar(content: Text("Please check email")),
+            );
+          } else if (state is ForgotResetFailure) {
+            Scaffold.of(context).showSnackBar(
+              SnackBar(content: Text("Failed to reset password")),
             );
           }
         },
         builder: (context, state) {
-          if (state is ForgotInitial) {
+          if (state is ForgotEmailInitial) {
             return _initialForgotPassword(context);
           } else if (state is ForgotLoading) {
             return _buildLoading();
-          } else if (state is ForgotEnterOTP) {
+          } else if (state is ForgotEmailFailure) {
+            return _initialForgotPassword(context);
+          } else if (state is ForgotOTPInitial) {
             return _enterOTP(context);
-          } else if (state is ForgotWrongOTP) {
+          } else if (state is ForgotOTPFailure) {
             return _enterOTP(context);
-          } else if (state is ForgotCreateNewPassword) {
+          } else if (state is ForgotResetInitial) {
             return _resetPassword(context);
-          } else if (state is ForgotPasswordSuccess) {
+          } else if (state is ForgotResetFailure) {
+            return _resetPassword(context);
+          } else if (state is ForgotResetSuccess) {
             return _passwordResetSuccess();
           } else {
             return _initialForgotPassword(context);
