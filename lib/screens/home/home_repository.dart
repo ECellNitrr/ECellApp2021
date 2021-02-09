@@ -30,7 +30,7 @@ class FakeHomeRepository extends HomeRepository {
         S.firstnameKey: "Sahil",
         S.lastnameKey: "Silare",
         S.emailKey: "sahil@gmail.com",
-        S.phoneKey: "",
+        S.phoneKey: "9999999999",
       };
 
       // fake successful response (the data entered here same as in the API Doc example)
