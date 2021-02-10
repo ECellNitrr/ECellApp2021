@@ -1,28 +1,57 @@
+import 'dart:math';
+
+import 'package:ecellapp/core/res/errors.dart';
+
 abstract class OurTeamRepository {
-  void getFaculties();
+  Future<void> getFaculties();
 
-  void getOverallCoordinators();
+  Future<void> getOverallCoordinators();
 
-  void getHeadCoordinators();
+  Future<void> getHeadCoordinators();
 
-  void getManagers();
+  Future<void> getManagers();
 
-  void getExecutives();
+  Future<void> getExecutives();
 }
 
 class OurTeamRepositoryFake implements OurTeamRepository {
   @override
-  void getFaculties() {}
+  Future<void> getFaculties() async {
+    await Future.delayed(Duration(seconds: 2));
+    if (Random().nextBool()) {
+      throw NetworkException();
+    }
+  }
 
   @override
-  void getOverallCoordinators() {}
+  Future<void> getOverallCoordinators() async {
+    await Future.delayed(Duration(seconds: 2));
+    if (Random().nextBool()) {
+      throw NetworkException();
+    }
+  }
 
   @override
-  void getHeadCoordinators() {}
+  Future<void> getHeadCoordinators() async {
+    await Future.delayed(Duration(seconds: 2));
+    if (Random().nextBool()) {
+      throw NetworkException();
+    }
+  }
 
   @override
-  void getManagers() {}
+  Future<void> getManagers() async {
+    await Future.delayed(Duration(seconds: 2));
+    if (Random().nextBool()) {
+      throw NetworkException();
+    }
+  }
 
   @override
-  void getExecutives() {}
+  Future<void> getExecutives() async {
+    await Future.delayed(Duration(seconds: 2));
+    if (Random().nextBool()) {
+      throw NetworkException();
+    }
+  }
 }

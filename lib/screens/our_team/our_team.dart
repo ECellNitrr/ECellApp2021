@@ -4,26 +4,52 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OurTeamScreen extends StatelessWidget {
+  Widget _prevState;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<OurTeamCubit, OurTeamState>(
-          builder: (context, state) {
-            if (state is OurTeamInitial) {
-              return _initial(context);
-            } else if (state is OurTeamOC) {
-              return _overallCoordinators(context);
-            } else if (state is OurTeamHC) {
-              return _headCoordinator(context);
-            } else if (state is OurTeamManager) {
-              return _managers(context);
-            } else if (state is OurTeamExecutives) {
-              return _executives(context);
-            } else {
-              return _initial(context);
-            }
-          },
-          listener: (context, state) {}),
+      body: BlocConsumer<OurTeamCubit, OurTeamState>(builder: (context, state) {
+        if (state is OurTeamFaculties) {
+          _prevState=_initial(context);
+          return _initial(context);
+        } else if (state is OurFacultiesError) {
+          return _prevState;
+        } else if (state is OurTeamOC) {
+          _prevState=_overallCoordinators(context);
+          return _overallCoordinators(context);
+        } else if (state is OurOCError) {
+          return _prevState;
+        } else if (state is OurTeamHC) {
+          _prevState=_headCoordinator(context);
+          return _headCoordinator(context);
+        } else if (state is OurHCError) {
+          return _prevState;
+        } else if (state is OurTeamManager) {
+          _prevState=_managers(context);
+          return _managers(context);
+        } else if (state is OurManagerError) {
+          return _prevState;
+        } else if (state is OurTeamExecutives) {
+          _prevState=_executives(context);
+          return _executives(context);
+        } else if (state is OurExecutivesError) {
+          return _prevState;
+        } else {
+          return _initial(context);
+        }
+      }, listener: (context, state) {
+        if (state is OurFacultiesError) {
+          Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+        } else if (state is OurOCError) {
+          Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+        } else if (state is OurHCError) {
+          Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+        } else if (state is OurManagerError) {
+          Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+        } else if (state is OurExecutivesError) {
+          Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+        }
+      }),
     );
   }
 
