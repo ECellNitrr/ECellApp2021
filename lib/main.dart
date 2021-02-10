@@ -18,9 +18,14 @@ class ECellApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
-        title: "ECellApp",
-        theme: AppTheme.themeData(context),
-        home: BlocProvider(
-            create: (context) => LoginCubit(APILoginRepository()), child: LoginScreen()));
+      title: "ECellApp",
+      theme: AppTheme.themeData(context),
+      home: BlocProvider(
+        create: (context) => LoginCubit(
+          APILoginRepository(),
+        ),
+        child: LoginScreen(),
+      ),
+    );
   }
 }
