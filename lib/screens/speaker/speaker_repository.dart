@@ -62,17 +62,17 @@ class APISpeakerRepository extends SpeakerRepository {
     final String tag = classTag + "getAllSpeakers()";
     http.Response response;
     try {
-      response = await sl.get<http.Client>().get(S.getSpeakerUrl);
+      response = await sl.get<http.Client>().get(S.getSpeakerUrl, headers: <String, String>{
+        "Authorization": "b3c098bcf06f5b7595bffe542caea7ff41ee3587",
+      });
     } catch (e) {
-      Log.e(tag: tag, message: "Network Error" + e.toString());
       throw NetworkException();
     }
 
     if (response.statusCode == 200) {
-      Log.i(tag: tag, message: "Request Successful");
       var speakerResponse = jsonDecode(response.body);
       List<Speaker> speakerList;
-      (speakerResponse["data"] as List).map((e) => speakerList.add(Speaker.fromJson(e)));
+      (speakerResponse["data"] as List).forEach((e) => speakerList.add(Speaker.fromJson(e)));
       return speakerList;
     } else if (response.statusCode == 404) {
       throw ValidationException(response.body);
