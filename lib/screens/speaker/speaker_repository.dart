@@ -1,5 +1,9 @@
+import 'dart:convert';
 import 'dart:math';
-
+import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/core/utils/injection.dart';
+import 'package:ecellapp/core/utils/logger.dart';
+import 'package:http/http.dart' as http;
 import 'package:ecellapp/core/res/errors.dart';
 import 'package:ecellapp/models/speaker.dart';
 import 'package:flutter/foundation.dart';
@@ -11,7 +15,7 @@ abstract class SpeakerRepository {
   Future<List<Speaker>> getAllSpeakers();
 }
 
-class FakeSpeakerRepository implements SpeakerRepository {
+class FakeSpeakerRepository extends SpeakerRepository {
   @override
   Future<List<Speaker>> getAllSpeakers() async {
     //Network delay here
@@ -47,6 +51,36 @@ class FakeSpeakerRepository implements SpeakerRepository {
       (response["data"] as List).map((e) => speakerList.add(Speaker.fromJson(e))).toList();
 
       return speakerList;
+    }
+  }
+}
+
+class APISpeakerRepository extends SpeakerRepository {
+  final String classTag = "APIgetSpeakerRepository";
+  @override
+  Future<List<Speaker>> getAllSpeakers() async {
+    final String tag = classTag + "getAllSpeakers()";
+    http.Response response;
+    try {
+      response = await sl.get<http.Client>().get(S.getSpeakerUrl);
+    } catch (e) {
+      Log.e(tag: tag, message: "Network Error" + e.toString());
+      throw NetworkException();
+    }
+
+    if (response.statusCode == 200) {
+      Log.i(tag: tag, message: "Request Successful");
+      var speakerResponse = jsonDecode(response.body);
+      List<Speaker> speakerList;
+      (speakerResponse["data"] as List).map((e) => speakerList.add(Speaker.fromJson(e)));
+      return speakerList;
+    } else if (response.statusCode == 404) {
+      throw ValidationException(response.body);
+    } else {
+      Log.s(
+          tag: tag,
+          message: "Unknown response code -> ${response.statusCode}, message ->" + response.body);
+      throw UnknownException();
     }
   }
 }
