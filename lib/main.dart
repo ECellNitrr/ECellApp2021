@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
 import 'core/themes/app_theme.dart';
 import 'core/utils/injection.dart';
-import 'screens/esummit/esummit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +20,10 @@ class ECellApp extends StatelessWidget {
     return MaterialApp(
       title: "ECellApp",
       theme: AppTheme.themeData(context),
-      home: ESummitScreen(),
+      home: BlocProvider(
+        create: (context) => LoginCubit(APILoginRepository()),
+        child: LoginScreen(),
+      ),
     );
   }
 }
