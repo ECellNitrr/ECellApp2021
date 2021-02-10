@@ -7,6 +7,7 @@ class S {
   static const String registerUrl = baseUrl + "users/register/";
   static const String getUserDetailsUrl = baseUrl + "users/get_user_details/";
   static const String getEventsUrl = baseUrl + "events/list/2019/";
+  static const String getSpeakerUrl = baseUrl + "speakers/full_list/";
   // shared preferences keys
   static const String tokenKeySharedPreferences = "token";
   // api keys
