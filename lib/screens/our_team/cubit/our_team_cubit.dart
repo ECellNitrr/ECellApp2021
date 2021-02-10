@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import '../../../core/res/errors.dart';
 import '../../../core/res/strings.dart';
+
 part 'our_team_state.dart';
 
 class OurTeamCubit extends Cubit<OurTeamState> {
