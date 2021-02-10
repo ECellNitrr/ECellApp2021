@@ -1,6 +1,10 @@
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/core/utils/injection.dart';
+import 'package:ecellapp/screens/home/cubit/profile_cubit.dart';
+import 'package:ecellapp/screens/home/home.dart';
+import 'package:ecellapp/screens/home/home_repository.dart';
 import 'package:ecellapp/screens/signup/cubit/signup_cubit.dart';
 import 'package:ecellapp/screens/signup/signup.dart';
 import 'package:ecellapp/screens/signup/signup_repository.dart';
@@ -11,6 +15,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'cubit/login_cubit.dart';
 
@@ -22,13 +27,21 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SharedPreferences sharedPreferences = sl.get<SharedPreferences>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) async {
           if (state is LoginSuccess) {
+            await sharedPreferences.setString(S.tokenKeySharedPreferences, state.token);
             await Future.delayed(Duration(seconds: 1));
-            //TODO: Redirect to Home
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => BlocProvider(
+                          create: (_) => ProfileCubit(APIHomeRepository()),
+                          child: HomeScreen(),
+                        )));
           } else if (state is LoginError) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }

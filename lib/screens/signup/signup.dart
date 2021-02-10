@@ -34,7 +34,15 @@ class SignupScreen extends StatelessWidget {
           if (state is SignupError) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           } else if (state is SignupSuccess) {
-            // TODO
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => BlocProvider(
+                  create: (_) => LoginCubit(APILoginRepository()),
+                  child: LoginScreen(),
+                ),
+              ),
+            );
           }
         },
         builder: (context, state) {
