@@ -3,7 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class OurTeamScreen extends StatelessWidget {
+class OurTeamScreen extends StatefulWidget {
+  @override
+  _OurTeamScreenState createState() => _OurTeamScreenState();
+}
+
+class _OurTeamScreenState extends State<OurTeamScreen> {
   Widget _prevState;
 
   @override
