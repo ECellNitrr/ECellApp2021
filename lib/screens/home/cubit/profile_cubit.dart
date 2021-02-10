@@ -13,10 +13,10 @@ class ProfileCubit extends Cubit<ProfileState> {
   final HomeRepository _homeRepository;
   ProfileCubit(this._homeRepository) : super(ProfileLoading());
 
-  Future<void> profile(String token) async {
+  Future<void> getProfile() async {
     try {
       emit(ProfileLoading());
-      User user = await _homeRepository.profile(token);
+      User user = await _homeRepository.getProfile();
       emit(ProfileSuccess(user));
     } on NetworkException {
       emit(ProfileError(S.networkException));

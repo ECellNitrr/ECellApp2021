@@ -12,13 +12,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 @immutable
 abstract class HomeRepository {
-  /// Takes in `token` , gives the user details and throws a suitable exception if something goes wrong.
-  Future<User> profile(String token);
+  /// Fetches `Token` from Shared Preferences , gives the user details and throws a suitable exception if something goes wrong.
+  Future<User> getProfile();
 }
 
-class FakeHomeRepository implements HomeRepository {
+class FakeHomeRepository extends HomeRepository {
   @override
-  Future<User> profile(String token) async {
+  Future<User> getProfile() async {
     // Simulate network delay
     await Future.delayed(Duration(seconds: 1));
 
@@ -26,43 +26,36 @@ class FakeHomeRepository implements HomeRepository {
       // random network error
       throw NetworkException();
     } else {
-      var json = {
+      var response = {
         S.firstnameKey: "Sahil",
         S.lastnameKey: "Silare",
         S.emailKey: "sahil@gmail.com",
         S.phoneKey: "",
       };
-      User user = User.fromJson(json);
+
       // fake successful response (the data entered here same as in the API Doc example)
-      return user;
+      return User.fromJson(response);
     }
   }
 }
 
-class APIHomeRepository implements HomeRepository {
+class APIHomeRepository extends HomeRepository {
   final String classTag = "APIHomeRepository";
   @override
-  Future<User> profile(String token) async {
-    String token = sl.get<SharedPreferences>().getString(S.tokenKey);
+  Future<User> getProfile() async {
+    String token = sl.get<SharedPreferences>().getString(S.tokenKeySharedPreferences);
     final String tag = classTag + "getUserDetails";
     http.Response response;
     try {
-      response = await sl.get<http.Client>().get(
-        S.getUserDetailsUrl,
-        headers: <String, String>{
-          'accept': 'application/json',
-          "Authorization": "$token",
-        },
-      );
+      response = await sl.get<http.Client>().get(S.getUserDetailsUrl, headers: <String, String>{
+        "Authorization": "$token",
+      });
     } catch (e) {
-      Log.e(tag: tag, message: "NetworkError:" + e.toString());
       throw NetworkException();
     }
 
     if (response.statusCode == 200) {
-      Log.i(tag: tag, message: "Request Successful");
-      User user = User.fromJson(jsonDecode(response.body));
-      return user;
+      return User.fromJson(jsonDecode(response.body));
     } else if (response.statusCode == 401) {
       throw ValidationException(response.body);
     } else {

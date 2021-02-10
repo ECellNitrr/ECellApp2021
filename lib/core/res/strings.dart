@@ -7,7 +7,8 @@ class S {
   static const String registerUrl = baseUrl + "users/register/";
   static const String getUserDetailsUrl = baseUrl + "users/get_user_details/";
   static const String getEventsUrl = baseUrl + "events/list/2019/";
-
+  // shared preferences keys
+  static const String tokenKeySharedPreferences = "token";
   // api keys
   static const String tokenKey = "token";
   static const String passwordKey = "password";
@@ -15,6 +16,7 @@ class S {
   static const String firstnameKey = "first_name";
   static const String lastnameKey = "last_name";
   static const String phoneKey = "contact";
+  //event
   static const String eventnameKey = "name";
   static const String eventdateKey = "date";
   static const String eventtimeKey = "time";
@@ -22,6 +24,15 @@ class S {
   static const String eventidKey = "id";
   static const String eventdetailsKey = "details";
   static const String eventiconurlKey = "icon";
+  //speaker
+  static const String speakerCompany = "company";
+  static const String speakerDescription = "description";
+  static const String speakerExperience = "experience";
+  static const String speakerId = "id";
+  static const String speakerName = "name";
+  static const String speakerProfilePic = "profile_pic";
+  static const String speakerSocialMedia = "social_media";
+  static const String speakerYear = "year";
 
   // error strings
   static const String networkException =
