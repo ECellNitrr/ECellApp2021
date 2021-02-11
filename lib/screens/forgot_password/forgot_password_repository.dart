@@ -10,8 +10,7 @@ abstract class ForgotPasswordRepository {
   Future<void> changePassword(String email, String otp, String password);
 }
 
-// To emulate a fake process for forgot password
-class FakeForgotPasswordRepository implements ForgotPasswordRepository {
+class FakeForgotPasswordRepository extends ForgotPasswordRepository {
   @override
   // this is to simulate a delay for getting otp
   Future<void> sendOTP(String email) async {

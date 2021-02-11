@@ -19,7 +19,7 @@ class ForgotPasswordScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is ForgotNetworkError) {
             Scaffold.of(context).showSnackBar(
-              SnackBar(content: Text(state.error)),
+              SnackBar(content: Text(state.message)),
             );
           } else if (state is ForgotOTPFailure) {
             Scaffold.of(context).showSnackBar(
