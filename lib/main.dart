@@ -1,5 +1,3 @@
-import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/screens/home/home.dart';
 import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
 import 'package:ecellapp/screens/login/login.dart';
 import 'package:ecellapp/screens/login/login_repository.dart';
