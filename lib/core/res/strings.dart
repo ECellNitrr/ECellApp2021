@@ -48,4 +48,9 @@ class S {
   static const String assetBottomRightColorful = "assets/colorful/bottom-right.png";
   static const String assetBottomLeftColorful = "assets/colorful/bottom-left.png";
   static const String assetEcellLogoWhite = "assets/ecell-logo.png";
+  static const String assetEsummitLogoWhite = "assets/esummit-logo.png";
+
+  // paragraphs
+  static const String esummitPara =
+      "we aspire to create a melange of eminent speakers who have proved themselves in diverse fields and are at the zenith of glory. E-Summit'21 will not just be a conclave of innovative minds and epistemic elocutionists, but it will be the place where ideas not only thrive but become the greatest revelations of the century.";
 }
