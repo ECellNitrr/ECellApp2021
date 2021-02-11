@@ -27,14 +27,12 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SharedPreferences sharedPreferences = sl.get<SharedPreferences>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) async {
           if (state is LoginSuccess) {
-            await sharedPreferences.setString(S.tokenKeySharedPreferences, state.token);
-            await Future.delayed(Duration(seconds: 1));
+            Scaffold.of(context).showSnackBar(SnackBar(content: Text("Login Successful")));
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -51,8 +49,6 @@ class LoginScreen extends StatelessWidget {
             return _buildInitial(context);
           } else if (state is LoginLoading) {
             return _buildLoading();
-          } else if (state is LoginSuccess) {
-            return _buildSuccess();
           } else {
             return _buildInitial(context);
           }
@@ -253,21 +249,6 @@ class LoginScreen extends StatelessWidget {
   Widget _buildLoading() {
     return Center(
       child: CircularProgressIndicator(),
-    );
-  }
-
-  Widget _buildSuccess() {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Icon(Icons.check_circle_outline),
-          Text(
-            "User Login Successful!",
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
     );
   }
 
