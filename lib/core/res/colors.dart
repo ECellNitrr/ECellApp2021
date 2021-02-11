@@ -7,6 +7,12 @@ class C {
   static final Color backgroundTop = HexColor("#4F3FA0");
   static final Color backgroundBottom = HexColor("#180C58");
 
+  /// animated rings colors (1->4 increasingsize)
+  static final Color ring1 = HexColor("#2DFFF9");
+  static final Color ring2 = HexColor("#FB28E6");
+  static final Color ring3 = HexColor("#F8F010");
+  static final Color ring4 = HexColor("#AE82FF");
+
   /// theme colors
   static final Color primaryHighlightedColor = HexColor("#EF9BFF");
   static final Color primaryUnHighlightedColor = HexColor("#FFFFFF");

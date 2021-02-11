@@ -1,4 +1,8 @@
+import 'dart:ui';
+
+import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -43,29 +47,38 @@ class _ECellAnimationsState extends State<ECellAnimations> with TickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Polygons'),
-      ),
-      body: SafeArea(
+      body: Center(
         child: Container(
-          height: 500,
-          width: 500,
-          child: AnimatedBuilder(
-            animation: animation,
-            builder: (context, snapshot) {
-              return CustomPaint(
-                painter: CurvePainter(animation.value),
-                child: Center(
-                    child: CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  radius: 50,
-                  child: Image.asset(
-                    S.assetEcellLogoWhite,
-                    width: 100,
-                  ),
-                )),
-              );
-            },
+          child: Stack(
+            children: [
+              ScreenBackground(
+                elementId: 0,
+              ),
+              Center(
+                  child: AnimatedBuilder(
+                animation: animation,
+                builder: (context, snapshot) {
+                  return CustomPaint(
+                    painter: SolidRingsPainter(animation.value),
+                  );
+                },
+              )),
+              Center(
+                  child: AnimatedBuilder(
+                animation: animation,
+                builder: (context, snapshot) {
+                  return CustomPaint(
+                    painter: BlurredRingsPainter(animation.value),
+                  );
+                },
+              )),
+              Center(
+                child: Image.asset(
+                  S.assetEcellLogoWhite,
+                  width: 120,
+                ),
+              )
+            ],
           ),
         ),
       ),
@@ -73,39 +86,84 @@ class _ECellAnimationsState extends State<ECellAnimations> with TickerProviderSt
   }
 }
 
-class CurvePainter extends CustomPainter {
+class SolidRingsPainter extends CustomPainter {
   final double radians;
-  CurvePainter(this.radians);
+  SolidRingsPainter(this.radians);
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-      ..color = Colors.blue
+      ..color = C.ring4
       ..strokeWidth = 5
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
-    canvas.drawArc(Offset(size.width / 3, size.height / 2 - 55) & Size(150, 150), 0 + radians,
-        math.pi, false, paint);
+    canvas.drawArc(
+        Offset(size.width / 2, size.height / 2) & Size(180, 180), 0, 2 * math.pi, false, paint);
     var paint1 = Paint()
-      ..color = Colors.red
+      ..color = C.ring3
       ..strokeWidth = 5
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
-    canvas.drawArc(Offset(size.width / 3 + 5, size.height / 2 + 5 - 55) & Size(140, 140), 0,
-        2 * math.pi, false, paint1);
+    canvas.drawArc(Offset(size.width / 2 + 10, size.height / 2 + 10) & Size(160, 160), 0 + radians,
+        math.pi, false, paint1);
     var paint2 = Paint()
-      ..color = Colors.yellow
+      ..color = C.ring2
       ..strokeWidth = 5
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
-    canvas.drawArc(Offset(size.width / 3 + 10, size.height / 2 + 10 - 55) & Size(130, 130),
-        0 + radians, 2 * math.pi, false, paint2);
+    canvas.drawArc(Offset(size.width / 2 + 20, size.height / 2 + 20) & Size(140, 140), 0,
+        2 * math.pi, false, paint2);
     var paint3 = Paint()
-      ..color = Colors.green
+      ..color = C.ring1
       ..strokeWidth = 5
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
-    canvas.drawArc(Offset(size.width / 3 + 15, size.height / 2 + 15 - 55) & Size(120, 120), 0,
-        2 * math.pi, false, paint3);
+    canvas.drawArc(Offset(size.width / 2 + 30, size.height / 2 + 30) & Size(120, 120), 0 - radians,
+        math.pi, false, paint3);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+class BlurredRingsPainter extends CustomPainter {
+  final double radians;
+  BlurredRingsPainter(this.radians);
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint()
+      ..color = C.ring4
+      ..strokeWidth = 5
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..imageFilter = ImageFilter.blur(sigmaX: 5, sigmaY: 5);
+    canvas.drawArc(
+        Offset(size.width / 2, size.height / 2) & Size(180, 180), 0, 2 * math.pi, false, paint);
+    var paint1 = Paint()
+      ..color = C.ring3
+      ..strokeWidth = 5
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..imageFilter = ImageFilter.blur(sigmaX: 5, sigmaY: 5);
+    canvas.drawArc(Offset(size.width / 2 + 10, size.height / 2 + 10) & Size(160, 160), 0 + radians,
+        math.pi, false, paint1);
+    var paint2 = Paint()
+      ..color = C.ring2
+      ..strokeWidth = 5
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..imageFilter = ImageFilter.blur(sigmaX: 5, sigmaY: 5);
+    canvas.drawArc(Offset(size.width / 2 + 20, size.height / 2 + 20) & Size(140, 140), 0,
+        2 * math.pi, false, paint2);
+    var paint3 = Paint()
+      ..color = C.ring1
+      ..strokeWidth = 5
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..imageFilter = ImageFilter.blur(sigmaX: 5, sigmaY: 5);
+    canvas.drawArc(Offset(size.width / 2 + 30, size.height / 2 + 30) & Size(120, 120), 0 - radians,
+        math.pi, false, paint3);
   }
 
   @override
