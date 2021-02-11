@@ -1,6 +1,7 @@
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/core/utils/injection.dart';
 import 'package:ecellapp/screens/home/cubit/profile_cubit.dart';
 import 'package:ecellapp/screens/home/home.dart';
 import 'package:ecellapp/screens/home/home_repository.dart';
@@ -14,6 +15,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'cubit/login_cubit.dart';
 
@@ -30,6 +32,8 @@ class LoginScreen extends StatelessWidget {
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) async {
           if (state is LoginSuccess) {
+            SharedPreferences sharedPreferences = sl.get<SharedPreferences>();
+            await sharedPreferences.setString(S.tokenKeySharedPreferences, state.token);
             Scaffold.of(context).showSnackBar(SnackBar(content: Text("Login Successful")));
             Navigator.pushReplacement(
                 context,
