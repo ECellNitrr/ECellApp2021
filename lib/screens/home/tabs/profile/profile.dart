@@ -47,6 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _buildSuccess(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    double top = MediaQuery.of(context).viewPadding.top;
     double heightFactor = height / 1000;
     return DefaultTextStyle(
       style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
@@ -54,60 +55,63 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           ScreenBackground(elementId: 0),
           Container(
+            padding: EdgeInsets.only(top: 56 + top + 20 * heightFactor),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: height / 6),
-                Flexible(
-                  flex: 4,
-                  child: Column(
-                    children: [
-                      Container(
-                        child: Image.asset(
-                          S.assetEcellLogoWhite,
-                          width: width * 0.35 * heightFactor,
-                        ),
-                      ),
-                      SizedBox(height: height / 20),
-                      Form(
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              left: D.horizontalPadding, right: D.horizontalPadding),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              _label("First Name", heightFactor),
-                              _labelValue(width, height, user.firstName),
-                              SizedBox(height: height / 30),
-                              _label("Last Name", heightFactor),
-                              _labelValue(width, height, user.lastName),
-                              SizedBox(height: height / 30),
-                              _label("Email Address", heightFactor),
-                              _labelValue(width, height, user.email),
-                              SizedBox(height: height / 30),
-                              _label("Phone Number", heightFactor),
-                              _labelValue(width, height, user.phoneNumber),
-                              SizedBox(height: height / 15),
-                              Container(
-                                alignment: Alignment.topRight,
-                                child: GestureDetector(
-                                  onTap: () {}, //TODO
-                                  child: Text(
-                                    "Change Password?",
-                                    style: TextStyle(
-                                      color: C.primaryHighlightedColor,
-                                      fontSize: 20 * heightFactor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                Container(
+                  child: Image.asset(
+                    S.assetEcellLogoWhite,
+                    width: width * 0.3 * heightFactor,
                   ),
                 ),
+                Expanded(
+                  flex: 1,
+                  child: Container(),
+                ),
+                Expanded(
+                  flex: 10,
+                  child: Form(
+                    child: Padding(
+                      padding:
+                          EdgeInsets.only(left: D.horizontalPadding, right: D.horizontalPadding),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          _label("First Name", heightFactor),
+                          _labelValue(width, height, user.firstName),
+                          Expanded(flex: 1, child: Container()),
+                          _label("Last Name", heightFactor),
+                          _labelValue(width, height, user.lastName),
+                          Expanded(flex: 1, child: Container()),
+                          _label("Email Address", heightFactor),
+                          _labelValue(width, height, user.email),
+                          Expanded(flex: 1, child: Container()),
+                          _label("Phone Number", heightFactor),
+                          _labelValue(width, height, user.phoneNumber),
+                          Expanded(flex: 1, child: Container()),
+                          Container(
+                            alignment: Alignment.topRight,
+                            child: GestureDetector(
+                              onTap: () {}, //TODO
+                              child: Text(
+                                "Change Password?",
+                                style: TextStyle(
+                                  color: C.primaryHighlightedColor,
+                                  fontSize: 20 * heightFactor,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 5,
+                  child: Container(),
+                )
               ],
             ),
           ),
