@@ -1,10 +1,15 @@
+import 'dart:convert';
 import 'dart:math';
 import 'package:ecellapp/core/res/errors.dart';
+import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/core/utils/injection.dart';
+import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/sponsors_data.dart';
 import 'package:ecellapp/models/sponsor.dart';
 import 'package:ecellapp/models/spons_category.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 @immutable
 abstract class SponsorsRepository {
@@ -67,6 +72,36 @@ class FakeSponsorsRepository extends SponsorsRepository {
       category = SponsCategoryList.fromJson(response).sponsCategories;
       sponsorList = SponsorData.fromJsonWithList(response, category).categoryList;
       return sponsorList;
+    }
+  }
+}
+
+class APISponsorRepository extends SponsorsRepository {
+  final String classTag = "APISponsorRepository";
+  @override
+  Future<List<Sponsor>> getAllSponsors() async {
+    final String tag = classTag + "getAllSponsors()";
+    http.Response response;
+    try {
+      response = await sl.get<http.Client>().get(S.getSponsorsUrl);
+    } catch (e) {
+      throw NetworkException();
+    }
+
+    if (response.statusCode == 200) {
+      var sponsorResponse = jsonDecode(response.body);
+      List<Sponsor> sponsorList = List();
+      List<String> category = List();
+      category = SponsCategoryList.fromJson(sponsorResponse).sponsCategories;
+      sponsorList = SponsorData.fromJsonWithList(sponsorResponse, category).categoryList;
+      return sponsorList;
+    } else if (response.statusCode == 404) {
+      throw ValidationException(response.body);
+    } else {
+      Log.s(
+          tag: tag,
+          message: "Unknown response code -> ${response.statusCode}, message ->" + response.body);
+      throw UnknownException();
     }
   }
 }
