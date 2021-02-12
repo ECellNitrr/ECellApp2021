@@ -1,5 +1,7 @@
 import 'package:ecellapp/core/res/errors.dart';
-import 'package:ecellapp/models/sponsors.dart';
+import 'package:ecellapp/models/sponsors_data.dart';
+import 'package:ecellapp/screens/sponsors/models/sponsor.dart';
+import 'package:ecellapp/screens/sponsors/models/spons_category.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -63,9 +65,10 @@ class FakeSponsorsRepository implements SponsorsRepository {
       //response["data"] -> _InternalLinkedHashMap<String, List<Map<String, Object>>>
 
       List<Sponsor> sponsorList = List();
-
-      sponsorList.add(Sponsor.fromJson(response));
-
+      List<String> category = List();
+      category = SponsCategoryList.fromJson(response).sponsCategories;
+      sponsorList = SponsorData.fromJsonWithList(response, category).categoryList;
+      print(sponsorList[0].name);
       return sponsorList;
     }
   }

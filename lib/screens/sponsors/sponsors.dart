@@ -1,9 +1,10 @@
-import 'package:ecellapp/models/sponsors.dart';
+import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cubit/sponsors_cubit.dart';
+import 'models/sponsor.dart';
 
 class SponsorsScreen extends StatelessWidget {
   const SponsorsScreen({Key key}) : super(key: key);
@@ -38,14 +39,16 @@ class SponsorsScreen extends StatelessWidget {
 
   Widget _buildSuccess(BuildContext context, List<Sponsor> sponsorsList) {
     //TODO: UI
+    Log.d(tag: 'sL', message: sponsorsList[0].name);
 
-    //!Notes SponsorList->list(response), .data(map), .elements(list),.elements(value)
-    //sponsorsList[0].data.title[0].name) -> To access sponsor Name
-
+    List<Widget> sL = [];
+    for (var item in sponsorsList) {
+      sL.add(Text(item.name, textAlign: TextAlign.center));
+    }
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [Text(sponsorsList[0].data.title[0].name)],
+        children: sL,
       ),
     );
   }

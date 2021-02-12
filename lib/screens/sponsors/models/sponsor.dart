@@ -1,4 +1,4 @@
-class Category {
+class Sponsor {
   int id;
   String name;
   String details;
@@ -13,7 +13,7 @@ class Category {
   bool flag;
   Null ecellUser;
 
-  Category(
+  Sponsor(
       {this.id,
       this.name,
       this.details,
@@ -28,7 +28,7 @@ class Category {
       this.flag,
       this.ecellUser});
 
-  Category.fromJson(Map<String, dynamic> json) {
+  Sponsor.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     details = json['details'];
@@ -42,23 +42,5 @@ class Category {
     year = json['year'];
     flag = json['flag'];
     ecellUser = json['ecell_user'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['details'] = this.details;
-    data['pic'] = this.pic;
-    data['pic_url'] = this.picUrl;
-    data['contact'] = this.contact;
-    data['website'] = this.website;
-    data['spons_type'] = this.sponsType;
-    data['importance'] = this.importance;
-    data['category_importance'] = this.categoryImportance;
-    data['year'] = this.year;
-    data['flag'] = this.flag;
-    data['ecell_user'] = this.ecellUser;
-    return data;
   }
 }
