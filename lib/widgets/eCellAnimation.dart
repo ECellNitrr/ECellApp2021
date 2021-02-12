@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:ecellapp/core/res/colors.dart';
+import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
@@ -38,7 +39,7 @@ class _ECellLogoAnimationState extends State<ECellLogoAnimation> with TickerProv
       children: [
         Container(
             alignment: Alignment.center,
-            margin: EdgeInsets.only(right: 180, bottom: 180),
+            margin: EdgeInsets.only(right: D.ringSize, bottom: D.ringSize),
             child: AnimatedBuilder(
               animation: animation,
               builder: (context, snapshot) {
@@ -49,7 +50,7 @@ class _ECellLogoAnimationState extends State<ECellLogoAnimation> with TickerProv
             )),
         Container(
             alignment: Alignment.center,
-            margin: EdgeInsets.only(right: 180, bottom: 180),
+            margin: EdgeInsets.only(right: D.ringSize, bottom: D.ringSize),
             child: AnimatedBuilder(
               animation: animation,
               builder: (context, snapshot) {
@@ -59,7 +60,7 @@ class _ECellLogoAnimationState extends State<ECellLogoAnimation> with TickerProv
               },
             )),
         Center(
-          child: Image.asset(S.assetEcellLogoWhite, width: 100),
+          child: Image.asset(S.assetEcellLogoWhite, width: D.ringSize - 80),
         )
       ],
     );
@@ -76,29 +77,41 @@ class SolidRingsPainter extends CustomPainter {
       ..strokeWidth = 4
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
-    canvas.drawArc(
-        Offset(size.width / 2, size.height / 2) & Size(180, 180), 0, 2 * math.pi, false, paint);
+    canvas.drawArc(Offset(size.width / 2, size.height / 2) & Size(D.ringSize, D.ringSize), 0,
+        2 * math.pi, false, paint);
     var paint1 = Paint()
       ..color = C.ring3
       ..strokeWidth = 4
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
-    canvas.drawArc(Offset(size.width / 2 + 10, size.height / 2 + 10) & Size(160, 160), 0 + radians,
-        math.pi, false, paint1);
+    canvas.drawArc(
+        Offset(size.width / 2 + 10, size.height / 2 + 10) & Size(D.ringSize - 20, D.ringSize - 20),
+        0 + radians,
+        math.pi,
+        false,
+        paint1);
     var paint2 = Paint()
       ..color = C.ring2
       ..strokeWidth = 4
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
-    canvas.drawArc(Offset(size.width / 2 + 20, size.height / 2 + 20) & Size(140, 140), 0,
-        2 * math.pi, false, paint2);
+    canvas.drawArc(
+        Offset(size.width / 2 + 20, size.height / 2 + 20) & Size(D.ringSize - 40, D.ringSize - 40),
+        0,
+        2 * math.pi,
+        false,
+        paint2);
     var paint3 = Paint()
       ..color = C.ring1
       ..strokeWidth = 4
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
-    canvas.drawArc(Offset(size.width / 2 + 30, size.height / 2 + 30) & Size(120, 120), 0 - radians,
-        math.pi, false, paint3);
+    canvas.drawArc(
+        Offset(size.width / 2 + 30, size.height / 2 + 30) & Size(D.ringSize - 60, D.ringSize - 60),
+        0 - radians,
+        math.pi,
+        false,
+        paint3);
   }
 
   @override
@@ -116,32 +129,44 @@ class BlurredRingsPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..imageFilter = ImageFilter.blur(sigmaX: 4, sigmaY: 4);
-    canvas.drawArc(
-        Offset(size.width / 2, size.height / 2) & Size(180, 180), 0, 2 * math.pi, false, paint);
+    canvas.drawArc(Offset(size.width / 2, size.height / 2) & Size(D.ringSize, D.ringSize), 0,
+        2 * math.pi, false, paint);
     var paint1 = Paint()
       ..color = C.ring3
       ..strokeWidth = 5
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..imageFilter = ImageFilter.blur(sigmaX: 4, sigmaY: 4);
-    canvas.drawArc(Offset(size.width / 2 + 10, size.height / 2 + 10) & Size(160, 160), 0 + radians,
-        math.pi, false, paint1);
+    canvas.drawArc(
+        Offset(size.width / 2 + 10, size.height / 2 + 10) & Size(D.ringSize - 20, D.ringSize - 20),
+        0 + radians,
+        math.pi,
+        false,
+        paint1);
     var paint2 = Paint()
       ..color = C.ring2
       ..strokeWidth = 5
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..imageFilter = ImageFilter.blur(sigmaX: 4, sigmaY: 4);
-    canvas.drawArc(Offset(size.width / 2 + 20, size.height / 2 + 20) & Size(140, 140), 0,
-        2 * math.pi, false, paint2);
+    canvas.drawArc(
+        Offset(size.width / 2 + 20, size.height / 2 + 20) & Size(D.ringSize - 40, D.ringSize - 40),
+        0,
+        2 * math.pi,
+        false,
+        paint2);
     var paint3 = Paint()
       ..color = C.ring1
       ..strokeWidth = 5
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..imageFilter = ImageFilter.blur(sigmaX: 4, sigmaY: 4);
-    canvas.drawArc(Offset(size.width / 2 + 30, size.height / 2 + 30) & Size(120, 120), 0 - radians,
-        math.pi, false, paint3);
+    canvas.drawArc(
+        Offset(size.width / 2 + 30, size.height / 2 + 30) & Size(D.ringSize - 60, D.ringSize - 60),
+        0 - radians,
+        math.pi,
+        false,
+        paint3);
   }
 
   @override
