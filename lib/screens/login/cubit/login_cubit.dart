@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:ecellapp/core/utils/injection.dart';
 import 'package:equatable/equatable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/res/errors.dart';
 import '../../../core/res/strings.dart';
@@ -15,6 +17,8 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       emit(LoginLoading());
       String token = await _loginRepository.login(email, password);
+      SharedPreferences sharedPreferences = sl.get<SharedPreferences>();
+      await sharedPreferences.setString(S.tokenKeySharedPreferences, token);
       emit(LoginSuccess(token));
     } on NetworkException {
       emit(LoginError(S.networkException));

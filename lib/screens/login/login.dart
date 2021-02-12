@@ -32,8 +32,6 @@ class LoginScreen extends StatelessWidget {
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) async {
           if (state is LoginSuccess) {
-            SharedPreferences sharedPreferences = sl.get<SharedPreferences>();
-            await sharedPreferences.setString(S.tokenKeySharedPreferences, state.token);
             Scaffold.of(context).showSnackBar(SnackBar(content: Text("Login Successful")));
             Navigator.pushReplacement(
                 context,
