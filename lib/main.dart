@@ -21,7 +21,9 @@ class ECellApp extends StatelessWidget {
       title: "ECellApp",
       theme: AppTheme.themeData(context),
       home: BlocProvider(
-        create: (context) => LoginCubit(APILoginRepository()),
+        create: (context) => LoginCubit(
+          APILoginRepository(),
+        ),
         child: LoginScreen(),
       ),
     );
