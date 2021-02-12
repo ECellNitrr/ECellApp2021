@@ -1,11 +1,11 @@
-import 'package:ecellapp/screens/sponsors/cubit/sponsors_cubit.dart';
-import 'package:ecellapp/screens/sponsors/sponsors.dart';
-import 'package:ecellapp/screens/sponsors/sponsors_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
 import 'core/themes/app_theme.dart';
 import 'core/utils/injection.dart';
+import 'screens/login/cubit/login_cubit.dart';
+import 'screens/login/login.dart';
+import 'screens/login/login_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,8 +21,8 @@ class ECellApp extends StatelessWidget {
       title: "ECellApp",
       theme: AppTheme.themeData(context),
       home: BlocProvider(
-        create: (context) => SponsorsCubit(FakeSponsorsRepository()),
-        child: SponsorsScreen(),
+        create: (context) => LoginCubit(APILoginRepository()),
+        child: LoginScreen(),
       ),
     );
   }
