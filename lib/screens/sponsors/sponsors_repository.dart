@@ -12,7 +12,7 @@ abstract class SponsorsRepository {
   Future<List<Sponsor>> getAllSponsors();
 }
 
-class FakeSponsorsRepository implements SponsorsRepository {
+class FakeSponsorsRepository extends SponsorsRepository {
   @override
   Future<List<Sponsor>> getAllSponsors() async {
     //Network delay here
