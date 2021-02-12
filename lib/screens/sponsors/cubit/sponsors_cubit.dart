@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:ecellapp/core/res/errors.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/core/utils/logger.dart';
-import 'package:ecellapp/screens/sponsors/models/sponsor.dart';
+import 'package:ecellapp/models/sponsor.dart';
 import 'package:ecellapp/screens/sponsors/sponsors_repository.dart';
 import 'package:equatable/equatable.dart';
 

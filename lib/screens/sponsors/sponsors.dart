@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cubit/sponsors_cubit.dart';
-import 'models/sponsor.dart';
+import '../../models/sponsor.dart';
 
 class SponsorsScreen extends StatelessWidget {
   const SponsorsScreen({Key key}) : super(key: key);

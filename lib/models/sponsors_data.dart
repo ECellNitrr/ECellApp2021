@@ -1,4 +1,4 @@
-import 'package:ecellapp/screens/sponsors/models/sponsor.dart';
+import 'package:ecellapp/models/sponsor.dart';
 
 class SponsorData {
   List<Sponsor> categoryList;

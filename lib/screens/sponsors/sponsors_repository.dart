@@ -1,7 +1,7 @@
 import 'package:ecellapp/core/res/errors.dart';
 import 'package:ecellapp/models/sponsors_data.dart';
-import 'package:ecellapp/screens/sponsors/models/sponsor.dart';
-import 'package:ecellapp/screens/sponsors/models/spons_category.dart';
+import 'package:ecellapp/models/sponsor.dart';
+import 'package:ecellapp/models/spons_category.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
