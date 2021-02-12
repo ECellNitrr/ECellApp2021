@@ -62,13 +62,10 @@ class FakeSponsorsRepository implements SponsorsRepository {
         "message": "fetched successfully",
         "spons_categories": ["Title", "Partner"]
       };
-      //response["data"] -> _InternalLinkedHashMap<String, List<Map<String, Object>>>
-
       List<Sponsor> sponsorList = List();
       List<String> category = List();
       category = SponsCategoryList.fromJson(response).sponsCategories;
       sponsorList = SponsorData.fromJsonWithList(response, category).categoryList;
-      print(sponsorList[0].name);
       return sponsorList;
     }
   }

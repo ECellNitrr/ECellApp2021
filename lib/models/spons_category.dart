@@ -1,3 +1,4 @@
+/// Essential Model to process and get categories to process Response.
 class SponsCategoryList {
   List<String> sponsCategories;
   SponsCategoryList({this.sponsCategories});

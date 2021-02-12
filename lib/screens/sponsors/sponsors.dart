@@ -1,4 +1,3 @@
-import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,8 +38,6 @@ class SponsorsScreen extends StatelessWidget {
 
   Widget _buildSuccess(BuildContext context, List<Sponsor> sponsorsList) {
     //TODO: UI
-    Log.d(tag: 'sL', message: sponsorsList[0].name);
-
     List<Widget> sL = [];
     for (var item in sponsorsList) {
       sL.add(Text(item.name, textAlign: TextAlign.center));
