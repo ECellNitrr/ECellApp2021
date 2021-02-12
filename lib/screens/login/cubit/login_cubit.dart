@@ -17,8 +17,7 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       emit(LoginLoading());
       String token = await _loginRepository.login(email, password);
-      SharedPreferences sharedPreferences = sl.get<SharedPreferences>();
-      await sharedPreferences.setString(S.tokenKeySharedPreferences, token);
+      await sl.get<SharedPreferences>().setString(S.tokenKeySharedPreferences, token);
       emit(LoginSuccess(token));
     } on NetworkException {
       emit(LoginError(S.networkException));
