@@ -34,7 +34,16 @@ class SignupScreen extends StatelessWidget {
           if (state is SignupError) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           } else if (state is SignupSuccess) {
-            // TODO
+            Scaffold.of(context).showSnackBar(SnackBar(content: Text("SignUp Successful")));
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => BlocProvider(
+                  create: (_) => LoginCubit(APILoginRepository()),
+                  child: LoginScreen(),
+                ),
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -42,8 +51,6 @@ class SignupScreen extends StatelessWidget {
             return _buildInitial(context);
           } else if (state is SignupLoading) {
             return _buildLoading();
-          } else if (state is SignupSuccess) {
-            return _buildSuccess();
           } else {
             return _buildInitial(context);
           }
@@ -231,16 +238,6 @@ class SignupScreen extends StatelessWidget {
   }
 
   Widget _buildLoading() => Center(child: CircularProgressIndicator());
-
-  Widget _buildSuccess() => Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Icon(Icons.check_circle_outline),
-            Text("User Signup Successful!", textAlign: TextAlign.center),
-          ],
-        ),
-      );
 
   void _signup(BuildContext context) {
     final cubit = context.read<SignupCubit>();
