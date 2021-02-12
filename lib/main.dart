@@ -1,3 +1,4 @@
+import 'package:ecellapp/screens/home/tabs/menu/menu.dart';
 import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
 import 'package:ecellapp/screens/login/login.dart';
 import 'package:ecellapp/screens/login/login_repository.dart';
@@ -20,12 +21,7 @@ class ECellApp extends StatelessWidget {
     return MaterialApp(
       title: "ECellApp",
       theme: AppTheme.themeData(context),
-      home: BlocProvider(
-        create: (context) => LoginCubit(
-          APILoginRepository(),
-        ),
-        child: LoginScreen(),
-      ),
+      home: MenuScreen(),
     );
   }
 }
