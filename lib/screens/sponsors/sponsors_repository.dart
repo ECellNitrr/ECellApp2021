@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:ecellapp/core/res/errors.dart';
 import 'package:ecellapp/models/sponsors_data.dart';
 import 'package:ecellapp/models/sponsor.dart';
@@ -18,8 +19,7 @@ class FakeSponsorsRepository implements SponsorsRepository {
     await Future.delayed(Duration(seconds: 1));
 
     //Fake Response and Network Delay
-    //Random().nextBool()
-    if (false) {
+    if (Random().nextBool()) {
       throw NetworkException();
     } else {
       var response = {
