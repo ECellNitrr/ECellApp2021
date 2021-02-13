@@ -14,7 +14,12 @@ class ForgotEmailInitial extends ForgotPasswordState {}
 
 class ForgotOTPInitial extends ForgotPasswordState {}
 
-class ForgotOTPFailure extends ForgotPasswordState {}
+class ForgotOTPFailure extends ForgotPasswordState {
+  final String message;
+  final ForgotPasswordState state;
+
+  ForgotOTPFailure(this.message, this.state);
+}
 
 class ForgotResetInitial extends ForgotPasswordState {}
 

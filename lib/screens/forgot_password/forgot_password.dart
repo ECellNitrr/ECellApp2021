@@ -23,7 +23,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             );
           } else if (state is ForgotOTPFailure) {
             Scaffold.of(context).showSnackBar(
-              SnackBar(content: Text("Wrong OTP")),
+              SnackBar(content: Text(state.message)),
             );
           }
         },
@@ -35,7 +35,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           } else if (state is ForgotOTPInitial) {
             return _enterOTP(context, state);
           } else if (state is ForgotOTPFailure) {
-            return _enterOTP(context, state);
+            return _uiUpdateForNetworkError(context, state.state);
           } else if (state is ForgotResetInitial) {
             return _resetPassword(context, state);
           } else if (state is ForgotResetSuccess) {
