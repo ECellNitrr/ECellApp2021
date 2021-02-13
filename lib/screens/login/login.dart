@@ -1,6 +1,9 @@
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/screens/home/cubit/profile_cubit.dart';
+import 'package:ecellapp/screens/home/home.dart';
+import 'package:ecellapp/screens/home/home_repository.dart';
 import 'package:ecellapp/screens/signup/cubit/signup_cubit.dart';
 import 'package:ecellapp/screens/signup/signup.dart';
 import 'package:ecellapp/screens/signup/signup_repository.dart';
@@ -27,8 +30,14 @@ class LoginScreen extends StatelessWidget {
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) async {
           if (state is LoginSuccess) {
-            await Future.delayed(Duration(seconds: 1));
-            //TODO: Redirect to Home
+            Scaffold.of(context).showSnackBar(SnackBar(content: Text("Login Successful")));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => BlocProvider(
+                          create: (_) => ProfileCubit(APIHomeRepository()),
+                          child: HomeScreen(),
+                        )));
           } else if (state is LoginError) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
@@ -38,8 +47,6 @@ class LoginScreen extends StatelessWidget {
             return _buildInitial(context);
           } else if (state is LoginLoading) {
             return _buildLoading();
-          } else if (state is LoginSuccess) {
-            return _buildSuccess();
           } else {
             return _buildInitial(context);
           }
@@ -240,21 +247,6 @@ class LoginScreen extends StatelessWidget {
   Widget _buildLoading() {
     return Center(
       child: CircularProgressIndicator(),
-    );
-  }
-
-  Widget _buildSuccess() {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Icon(Icons.check_circle_outline),
-          Text(
-            "User Login Successful!",
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
     );
   }
 
