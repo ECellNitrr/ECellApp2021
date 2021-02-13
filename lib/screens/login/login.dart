@@ -1,24 +1,43 @@
+import 'package:ecellapp/core/res/colors.dart';
+import 'package:ecellapp/core/res/dimens.dart';
+import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/screens/home/cubit/profile_cubit.dart';
+import 'package:ecellapp/screens/home/home.dart';
+import 'package:ecellapp/screens/home/home_repository.dart';
+import 'package:ecellapp/screens/signup/cubit/signup_cubit.dart';
+import 'package:ecellapp/screens/signup/signup.dart';
+import 'package:ecellapp/screens/signup/signup_repository.dart';
+import 'package:ecellapp/widgets/email_field.dart';
+import 'package:ecellapp/widgets/password_field.dart';
+import 'package:ecellapp/widgets/screen_background.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import '../../widgets/email_field.dart';
-import '../../widgets/password_field.dart';
 import 'cubit/login_cubit.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) async {
           if (state is LoginSuccess) {
-            await Future.delayed(Duration(seconds: 1));
-            // ignore: todo
-            //TODO: Navigator->Home()
+            Scaffold.of(context).showSnackBar(SnackBar(content: Text("Login Successful")));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => BlocProvider(
+                          create: (_) => ProfileCubit(APIHomeRepository()),
+                          child: HomeScreen(),
+                        )));
           } else if (state is LoginError) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
@@ -28,8 +47,6 @@ class LoginScreen extends StatelessWidget {
             return _buildInitial(context);
           } else if (state is LoginLoading) {
             return _buildLoading();
-          } else if (state is LoginSuccess) {
-            return _buildSuccess();
           } else {
             return _buildInitial(context);
           }
@@ -39,40 +56,190 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget _buildInitial(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(bottom: 20.0),
-              child: EmailField(emailController),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 20.0),
-              child: PasswordField(passwordController),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 20.0),
-              child: RaisedButton(
-                onPressed: () => _login(context),
-                child: Text("Login"),
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    double bottom = MediaQuery.of(context).viewInsets.bottom;
+    double heightFactor = height / 1000;
+    if (_scrollController.hasClients) {
+      if (bottom > height * 0.25) {
+        _scrollController.animateTo(
+          bottom - height * 0.25,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.ease,
+        );
+      } else {
+        _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.ease);
+      }
+    }
+    return DefaultTextStyle(
+      style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+      child: Stack(
+        children: [
+          //Handles background elements
+          ScreenBackground(elementId: 1),
+          SingleChildScrollView(
+            physics: NeverScrollableScrollPhysics(),
+            controller: _scrollController,
+            child: Container(
+              height: height * 1.25,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  //Space for clouds
+                  Expanded(flex: 2, child: Container()),
+                  //Contains all fields
+                  Flexible(
+                    flex: 7,
+                    child: Column(
+                      children: [
+                        // Logo
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: D.horizontalPadding + 1),
+                          child: Image.asset(
+                            S.assetEcellLogoWhite,
+                            width: width * 0.25 * heightFactor,
+                          ),
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: D.horizontalPadding, top: 20),
+                          child: Text(
+                            "Welcome",
+                            style:
+                                TextStyle(fontSize: 35 * heightFactor, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        //Text Greeting
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: D.horizontalPadding, top: 5),
+                          child: RichText(
+                            text: TextSpan(
+                              text: "Let's ",
+                              children: [
+                                TextSpan(
+                                    text: "Sign ",
+                                    style: TextStyle(color: C.primaryHighlightedColor)),
+                                TextSpan(
+                                    text: "you in",
+                                    style: TextStyle(color: C.primaryUnHighlightedColor)),
+                              ],
+                              style: TextStyle(fontSize: 25 * heightFactor),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 23 * heightFactor),
+                        //Fields
+                        Form(
+                            key: _formKey,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: D.horizontalPadding),
+                              child: Column(
+                                children: [
+                                  EmailField(emailController),
+                                  SizedBox(height: 20 * heightFactor),
+                                  PasswordField(passwordController),
+                                  SizedBox(height: 10 * heightFactor),
+                                ],
+                              ),
+                            )),
+                        SizedBox(height: 20 * heightFactor),
+                        //Redirect to Forgot Password
+                        Container(
+                          padding: EdgeInsets.only(right: D.horizontalPadding),
+                          alignment: Alignment.topRight,
+                          child: GestureDetector(
+                            child: Text(
+                              "Forgot Password?",
+                              style:
+                                  TextStyle(fontSize: 20 * heightFactor, color: C.secondaryColor),
+                            ),
+                            onTap: () {
+                              //TODO: Forgot Password Route
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  //LoginButton
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(right: D.horizontalPadding),
+                      alignment: Alignment.topRight,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: C.authButtonColor.withOpacity(0.2),
+                              blurRadius: 10,
+                              spreadRadius: 3,
+                              offset: Offset(0, 12),
+                            )
+                          ],
+                        ),
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                          ),
+                          color: C.authButtonColor,
+                          onPressed: () => _login(context),
+                          child: Container(
+                            height: 60,
+                            width: 120,
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Log In",
+                              style: TextStyle(
+                                  color: C.primaryUnHighlightedColor, fontSize: 20 * heightFactor),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  //New here Text
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                        alignment: Alignment.centerRight,
+                        padding: EdgeInsets.only(right: (width / 10), top: 5),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text('New here? ',
+                                style: TextStyle(
+                                    fontSize: 20 * heightFactor, color: C.secondaryColor)),
+                            GestureDetector(
+                                child: Text(
+                                  'Sign Up',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: C.primaryHighlightedColor,
+                                      fontSize: 20 * heightFactor),
+                                ),
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => BlocProvider(
+                                                create: (_) => SignupCubit(APISignupRepository()),
+                                                child: SignupScreen(),
+                                              )));
+                                }),
+                          ],
+                        )),
+                  ),
+                  //To flex background
+                  Expanded(flex: 3, child: Container()),
+                ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(20.0),
-              child: RaisedButton(
-                onPressed: () {
-                  print("BUTTON PRESS");
-                },
-                child: Text("SignUp"),
-              ),
-            ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
@@ -80,21 +247,6 @@ class LoginScreen extends StatelessWidget {
   Widget _buildLoading() {
     return Center(
       child: CircularProgressIndicator(),
-    );
-  }
-
-  Widget _buildSuccess() {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Icon(Icons.check_circle_outline),
-          Text(
-            "User Login Successful!",
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
     );
   }
 
