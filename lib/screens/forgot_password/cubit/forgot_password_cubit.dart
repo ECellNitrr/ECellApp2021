@@ -12,17 +12,17 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
 
   ForgotPasswordCubit(this._forgotPasswordRepository) : super(ForgotEmailInitial());
 
-  void sendOTP(String email) async {
+  void sendOTP(String email, ForgotPasswordState state) async {
     try {
       emit(ForgotLoading());
       await _forgotPasswordRepository.sendOTP(email);
       emit(ForgotOTPInitial());
     } on NetworkException {
-      emit(ForgotNetworkError(S.networkException));
+      emit(ForgotNetworkError(S.networkException, state));
     }
   }
 
-  Future<void> verifyOTP(String a) async {
+  Future<void> verifyOTP(String a, ForgotPasswordState state) async {
     emit(ForgotLoading());
     try {
       bool b = await _forgotPasswordRepository.verifyOTP(a);
@@ -32,17 +32,18 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
         emit(ForgotOTPFailure());
       }
     } on NetworkException {
-      emit(ForgotNetworkError(S.networkException));
+      emit(ForgotNetworkError(S.networkException, state));
     }
   }
 
-  Future<void> changePassword(String email, String otp, String password) async {
+  Future<void> changePassword(
+      String email, String otp, String password, ForgotPasswordState state) async {
     emit(ForgotLoading());
     try {
       await _forgotPasswordRepository.changePassword(email, otp, password);
       emit(ForgotResetSuccess());
     } on NetworkException {
-      emit(ForgotNetworkError(S.networkException));
+      emit(ForgotNetworkError(S.networkException, state));
     }
   }
 }

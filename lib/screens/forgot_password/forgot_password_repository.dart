@@ -34,9 +34,9 @@ class FakeForgotPasswordRepository extends ForgotPasswordRepository {
 // this is to simulate the process of change in email
   @override
   Future<void> changePassword(String email, String otp, String password) async {
-    print(email);
-    print(otp);
-    print(password);
     await Future.delayed(Duration(seconds: 2));
+    if (Random().nextBool()) {
+      throw NetworkException();
+    }
   }
 }

@@ -25,42 +25,46 @@ class ForgotPasswordScreen extends StatelessWidget {
             Scaffold.of(context).showSnackBar(
               SnackBar(content: Text("Wrong OTP")),
             );
-          } else if (state is ForgotEmailFailure) {
-            Scaffold.of(context).showSnackBar(
-              SnackBar(content: Text("Please check email")),
-            );
-          } else if (state is ForgotResetFailure) {
-            Scaffold.of(context).showSnackBar(
-              SnackBar(content: Text("Failed to reset password")),
-            );
           }
         },
         builder: (context, state) {
           if (state is ForgotEmailInitial) {
-            return _initialForgotPassword(context);
+            return _initialForgotPassword(context, state);
           } else if (state is ForgotLoading) {
             return _buildLoading();
-          } else if (state is ForgotEmailFailure) {
-            return _initialForgotPassword(context);
           } else if (state is ForgotOTPInitial) {
-            return _enterOTP(context);
+            return _enterOTP(context, state);
           } else if (state is ForgotOTPFailure) {
-            return _enterOTP(context);
+            return _enterOTP(context, state);
           } else if (state is ForgotResetInitial) {
-            return _resetPassword(context);
-          } else if (state is ForgotResetFailure) {
-            return _resetPassword(context);
+            return _resetPassword(context, state);
           } else if (state is ForgotResetSuccess) {
             return _passwordResetSuccess();
+          } else if (state is ForgotNetworkError) {
+            return _uiUpdateForNetworkError(context, state.state);
           } else {
-            return _initialForgotPassword(context);
+            return _initialForgotPassword(context, state);
           }
         },
       ),
     );
   }
 
-  Widget _initialForgotPassword(BuildContext context) {
+  Widget _uiUpdateForNetworkError(BuildContext context, ForgotPasswordState state) {
+    if (state is ForgotEmailInitial) {
+      return _initialForgotPassword(context, state);
+    } else if (state is ForgotOTPInitial) {
+      return _enterOTP(context, state);
+    } else if (state is ForgotOTPFailure) {
+      return _enterOTP(context, state);
+    } else if (state is ForgotResetInitial) {
+      return _resetPassword(context, state);
+    } else {
+      return _initialForgotPassword(context, state);
+    }
+  }
+
+  Widget _initialForgotPassword(BuildContext context, ForgotPasswordState state) {
     return Padding(
       padding: const EdgeInsets.all(40.0),
       child: Column(
@@ -69,7 +73,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           EmailField(emailController),
           FlatButton(
               onPressed: () {
-                _sendOTP(context);
+                _sendOTP(context, state);
               },
               child: Text("Press me")),
         ],
@@ -83,7 +87,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     );
   }
 
-  Widget _enterOTP(BuildContext context) {
+  Widget _enterOTP(BuildContext context, ForgotPasswordState state) {
     return Padding(
       padding: const EdgeInsets.all(40.0),
       child: Column(
@@ -92,7 +96,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           OTPField(otpController),
           FlatButton(
               onPressed: () {
-                _verifyOtp(context);
+                _verifyOtp(context, state);
               },
               child: Text("Press me")),
         ],
@@ -107,7 +111,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     );
   }
 
-  Widget _resetPassword(BuildContext context) {
+  Widget _resetPassword(BuildContext context, ForgotPasswordState state) {
     return Padding(
       padding: const EdgeInsets.all(40.0),
       child: Column(
@@ -117,7 +121,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           FlatButton(
               onPressed: () {
                 if (passwordController.text == confirmPasswordController.text) {
-                  _changePassword(context);
+                  _changePassword(context, state);
                 } else {
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text("Missmatch in passwords")));
@@ -129,18 +133,18 @@ class ForgotPasswordScreen extends StatelessWidget {
     );
   }
 
-  void _sendOTP(BuildContext context) {
+  void _sendOTP(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
-    cubit.sendOTP(emailController.text);
+    cubit.sendOTP(emailController.text, state);
   }
 
-  void _verifyOtp(BuildContext context) {
+  void _verifyOtp(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
-    cubit.verifyOTP(otpController.text);
+    cubit.verifyOTP(otpController.text, state);
   }
 
-  void _changePassword(BuildContext context) {
+  void _changePassword(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
-    cubit.changePassword(emailController.text, otpController.text, passwordController.text);
+    cubit.changePassword(emailController.text, otpController.text, passwordController.text, state);
   }
 }
