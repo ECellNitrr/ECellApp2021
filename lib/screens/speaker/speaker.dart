@@ -1,5 +1,6 @@
 import 'package:ecellapp/models/speaker.dart';
 import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
+import 'package:ecellapp/widgets/card_speaker.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,6 +42,17 @@ class SpeakerScreen extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          //! Most Important component
+          ClipPath(
+            child: Container(
+              child: SizedBox(
+                width: 300,
+                height: 360,
+              ),
+              color: Colors.blue,
+            ),
+            clipper: ClipperConic(),
+          ),
           Text(speakerList[0].name, textAlign: TextAlign.center),
         ],
       ),
