@@ -16,7 +16,7 @@ class SponsorsLoading extends SponsorsState {
 }
 
 class SponsorsSuccess extends SponsorsState {
-  final List<Sponsor> sponsorsList;
+  final List<SponsorCategory> sponsorsList;
   const SponsorsSuccess(this.sponsorsList);
   @override
   List<Object> get props => [sponsorsList];

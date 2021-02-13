@@ -3,6 +3,7 @@ import 'package:ecellapp/core/res/errors.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/sponsor.dart';
+import 'package:ecellapp/models/sponsor_category.dart';
 import 'package:ecellapp/screens/sponsors/sponsors_repository.dart';
 import 'package:equatable/equatable.dart';
 
@@ -14,7 +15,7 @@ class SponsorsCubit extends Cubit<SponsorsState> {
   Future<void> getSponsorsList() async {
     try {
       emit(SponsorsLoading());
-      List<Sponsor> speakerList = await _sponsorsRepository.getAllSponsors();
+      List<SponsorCategory> speakerList = await _sponsorsRepository.getAllSponsors();
       emit(SponsorsSuccess(speakerList));
     } on NetworkException {
       emit(SponsorsError(S.networkException));

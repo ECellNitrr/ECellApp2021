@@ -1,20 +1,21 @@
 import 'dart:math';
-import 'package:ecellapp/core/res/errors.dart';
+
+import 'package:ecellapp/models/sponsor_category.dart';
 import 'package:ecellapp/models/sponsors_data.dart';
-import 'package:ecellapp/models/sponsor.dart';
-import 'package:ecellapp/models/spons_category.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import 'package:ecellapp/core/res/errors.dart';
 
 @immutable
 abstract class SponsorsRepository {
   /// All subfunctions are final No arguments required returns json
-  Future<List<Sponsor>> getAllSponsors();
+  Future<List<SponsorCategory>> getAllSponsors();
 }
 
 class FakeSponsorsRepository extends SponsorsRepository {
   @override
-  Future<List<Sponsor>> getAllSponsors() async {
+  Future<List<SponsorCategory>> getAllSponsors() async {
     //Network delay here
     await Future.delayed(Duration(seconds: 1));
 
@@ -62,11 +63,17 @@ class FakeSponsorsRepository extends SponsorsRepository {
         "message": "fetched successfully",
         "spons_categories": ["Title", "Partner"]
       };
-      List<Sponsor> sponsorList = List();
+
       List<String> category = List();
-      category = SponsCategoryList.fromJson(response).sponsCategories;
-      sponsorList = SponsorData.fromJsonWithList(response, category).categoryList;
-      return sponsorList;
+      List<SponsorCategory> sponsList = List();
+      (response["spons_categories"] as List).forEach((element) => category.add(element.toString()));
+
+      for (var item in category) {
+        sponsList
+            .add(SponsorCategory.fromClass(SponsorData.fromJsonWithList(response, item), item));
+      }
+
+      return sponsList;
     }
   }
 }

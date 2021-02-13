@@ -1,11 +1,9 @@
 import 'package:ecellapp/core/res/strings.dart';
 
-/// Model to get All Info about Sponsor it's Capsuled by SponsorData
+/// Model to get All Info about Sponsor
 class Sponsor {
   //int data
   int id;
-  int importance;
-  int categoryImportance;
   int year;
   //string data
   String name;
@@ -25,8 +23,6 @@ class Sponsor {
     this.contact,
     this.website,
     this.sponsType,
-    this.importance,
-    this.categoryImportance,
     this.year,
   });
 
@@ -39,8 +35,6 @@ class Sponsor {
     contact = json[S.sponsorContact];
     website = json[S.sponsorWebsite];
     sponsType = json[S.sponsorSponsType];
-    importance = json[S.sponsorImportance];
-    categoryImportance = json[S.sponsorCategoryImportance];
     year = json[S.sponsorYear];
   }
 }

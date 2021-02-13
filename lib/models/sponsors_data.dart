@@ -1,18 +1,16 @@
 import 'package:ecellapp/models/sponsor.dart';
 
-/// Use this to process response with list from SponsCategoryList encapsules Sponsor Model
+/// Takes in json response, String category returns SponsData ( List< Sponsor > )
 class SponsorData {
   List<Sponsor> categoryList;
 
   SponsorData({this.categoryList});
 
-  factory SponsorData.fromJsonWithList(Map<String, dynamic> json, List<String> category) {
+  factory SponsorData.fromJsonWithList(Map<String, dynamic> json, String category) {
     var sponsorList = new List<Sponsor>();
-    for (var item in category) {
-      json['data'][item].forEach((v) {
-        sponsorList.add(Sponsor.fromJson(v));
-      });
-    }
+    json['data'][category].forEach((v) {
+      sponsorList.add(Sponsor.fromJson(v));
+    });
     return SponsorData(categoryList: sponsorList);
   }
 }
