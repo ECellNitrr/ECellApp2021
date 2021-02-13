@@ -30,9 +30,16 @@ class _MenuScreenState extends State<MenuScreen> {
         backgroundColor: Colors.transparent,
         leading: Container(
           padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
-          child: IconButton(
-            icon: Icon(Icons.power_settings_new_rounded, color: Colors.white, size: 40),
-            onPressed: () => _logout(context),
+          child: PopupMenuButton<String>(
+            onSelected: _handleClick,
+            itemBuilder: (BuildContext context) {
+              return {'Logout'}.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
           ),
         ),
       ),
@@ -230,18 +237,21 @@ class _MenuScreenState extends State<MenuScreen> {
       ),
     );
   }
-}
 
-Future<void> _logout(BuildContext context) async {
-  await sl.get<SharedPreferences>().remove(S.tokenKeySharedPreferences);
-  Scaffold.of(context).showSnackBar(SnackBar(content: Text("Logged Out Successfuly")));
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(
-      builder: (_) => BlocProvider(
-        create: (_) => LoginCubit(APILoginRepository()),
-        child: LoginScreen(),
-      ),
-    ),
-  );
+  Future<void> _handleClick(String value) async {
+    switch (value) {
+      case 'Logout':
+        await sl.get<SharedPreferences>().remove(S.tokenKeySharedPreferences);
+        Scaffold.of(context).showSnackBar(SnackBar(content: Text("Logged Out Successfuly")));
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => BlocProvider(
+              create: (_) => LoginCubit(APILoginRepository()),
+              child: LoginScreen(),
+            ),
+          ),
+        );
+    }
+  }
 }
