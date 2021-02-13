@@ -57,7 +57,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     constraints: BoxConstraints.tightFor(width: 60, height: 60),
                     child: GestureDetector(
                       child: Image.asset(
-                        S.assetEsummitLogoWhite,
+                        S.assetEsummitLogoWhiteFilled,
                         width: 30,
                         height: 30,
                       ),
@@ -132,8 +132,11 @@ class _MenuScreenState extends State<MenuScreen> {
                     ),
                     constraints: BoxConstraints.tightFor(width: 60, height: 60),
                     child: GestureDetector(
-                      child: Icon(Icons.search_rounded,
-                          size: 30, color: C.primaryUnHighlightedColor), //TODO
+                      child: Image.asset(
+                        S.assetEventsLogoWhite,
+                        width: 30,
+                        height: 30,
+                      ),
                       onTap: () {}, //TODO
                     ),
                   ),
@@ -166,8 +169,11 @@ class _MenuScreenState extends State<MenuScreen> {
                     ),
                     constraints: BoxConstraints.tightFor(width: 60, height: 60),
                     child: GestureDetector(
-                      child: Icon(Icons.search_rounded,
-                          size: 30, color: C.primaryUnHighlightedColor), //TODO
+                      child: Image.asset(
+                        S.assetSponsorsLogoWhite,
+                        width: 30,
+                        height: 30,
+                      ),
                       onTap: () {}, //TODO
                     ),
                   ),
