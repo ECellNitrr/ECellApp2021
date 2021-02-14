@@ -1,6 +1,6 @@
 import 'package:ecellapp/models/speaker.dart';
 import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
-import 'package:ecellapp/widgets/card_speaker.dart';
+import 'package:ecellapp/core/res/card_speaker.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
