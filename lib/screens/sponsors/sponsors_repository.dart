@@ -90,7 +90,7 @@ class FakeSponsorsRepository extends SponsorsRepository {
 }
 
 class APISponsorsRepository extends SponsorsRepository {
-  final String classTag = "APIgetSponsorrRepository";
+  final String classTag = "APISponsorsRepository";
 
   @override
   Future<List<SponsorCategory>> getAllSponsors() async {
