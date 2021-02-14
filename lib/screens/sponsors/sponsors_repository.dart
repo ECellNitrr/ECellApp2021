@@ -94,20 +94,16 @@ class APISponsorsRepository extends SponsorsRepository {
   @override
   Future<List<SponsorCategory>> getAllSponsors() async {
     final String tag = classTag + "getAllSponsors()";
-
     http.Response response;
-
     try {
       response = await sl.get<http.Client>().get(S.getSponsorsUrl);
     } catch (e) {
       throw NetworkException();
     }
-
     if (response.statusCode == 200) {
       //Process response here
       Map<String, dynamic> sponsorResponse = jsonDecode(response.body);
       List<SponsorCategory> sponsorData = List();
-
       sponsorResponse["spons_categories"].forEach((e) {
         List<Sponsor> sponsors = List();
         sponsorResponse["data"][e].forEach((e) => sponsors.add(Sponsor.fromJson(e)));
