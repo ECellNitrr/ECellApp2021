@@ -22,11 +22,6 @@ class FakeForgotPasswordRepository extends ForgotPasswordRepository {
         throw NetworkException();
       } else {
         throw ResponseException("Error from sendOTP");
-        if (Random().nextBool()) {
-          return "400";
-        } else {
-          return "404";
-        }
       }
     }
   }
