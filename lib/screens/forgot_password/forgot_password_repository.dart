@@ -16,7 +16,7 @@ class FakeForgotPasswordRepository extends ForgotPasswordRepository {
   Future<void> sendOTP(String email) async {
     await Future.delayed(Duration(seconds: 2));
     if (Random().nextBool()) {
-      return "200";
+      return;
     } else {
       if (Random().nextBool()) {
         throw NetworkException();
