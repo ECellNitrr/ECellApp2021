@@ -1,7 +1,12 @@
+import 'dart:convert';
 import 'dart:math';
 
+import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/core/utils/injection.dart';
+import 'package:ecellapp/core/utils/logger.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import '../../core/res/errors.dart';
 import '../../models/sponsor.dart';
@@ -69,7 +74,7 @@ class FakeSponsorsRepository extends SponsorsRepository {
       // iterating through a list of sponsor category names
       response["spons_categories"].forEach((e) {
         // for each category name, creating a list of sponsors belonging to that category
-        List<Sponsor> sponsors;
+        List<Sponsor> sponsors = List();
         // iterating through the list of sponsor data that belong to that category
         // and for each one of them, converting them from map into Sponsor model
         // and adding to the sponsors list.
@@ -79,6 +84,43 @@ class FakeSponsorsRepository extends SponsorsRepository {
       });
 
       return sponsorData;
+    }
+  }
+}
+
+class APISponsorsRepository extends SponsorsRepository {
+  final String classTag = "APIgetSponsorrRepository";
+
+  @override
+  Future<List<SponsorCategory>> getAllSponsors() async {
+    final String tag = classTag + "getAllSponsors()";
+
+    http.Response response;
+
+    try {
+      response = await sl.get<http.Client>().get(S.getSponsorsUrl);
+    } catch (e) {
+      throw NetworkException();
+    }
+
+    if (response.statusCode == 200) {
+      //Process response here
+      Map<String, dynamic> sponsorResponse = jsonDecode(response.body);
+      List<SponsorCategory> sponsorData = List();
+
+      sponsorResponse["spons_categories"].forEach((e) {
+        List<Sponsor> sponsors = List();
+        sponsorResponse["data"][e].forEach((e) => sponsors.add(Sponsor.fromJson(e)));
+        sponsorData.add(SponsorCategory(e, sponsors));
+      });
+      return sponsorData;
+    } else if (response.statusCode == 404) {
+      throw ValidationException(response.body);
+    } else {
+      Log.s(
+          tag: tag,
+          message: "Unknown response code -> ${response.statusCode}, message ->" + response.body);
+      throw UnknownException();
     }
   }
 }
