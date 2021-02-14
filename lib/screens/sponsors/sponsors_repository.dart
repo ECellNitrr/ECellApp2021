@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:ecellapp/models/sponsor.dart';
-import 'package:ecellapp/models/sponsor_category.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:ecellapp/core/res/errors.dart';
+import '../../core/res/errors.dart';
+import '../../models/sponsor.dart';
+import '../../models/sponsor_category.dart';
 
 @immutable
 abstract class SponsorsRepository {
@@ -64,20 +64,21 @@ class FakeSponsorsRepository extends SponsorsRepository {
         "spons_categories": ["Title", "Partner"]
       };
 
-      List<String> category = List();
-      List<SponsorCategory> sponsList = List();
-      List<Sponsor> sponsorList = List();
+      List<SponsorCategory> sponsorData = List();
 
-      (response["spons_categories"] as List).forEach((element) => category.add(element.toString()));
-      for (var item in category) {
-        response['data'][item].forEach((v) {
-          sponsorList.add(Sponsor.fromJson(v));
-        });
-        sponsList.add(SponsorCategory.fromClass(sponsorList, item));
-        sponsorList.clear();
-      }
+      // iterating through a list of sponsor category names
+      response["spons_categories"].forEach((e) {
+        // for each category name, creating a list of sponsors belonging to that category
+        List<Sponsor> sponsors;
+        // iterating through the list of sponsor data that belong to that category
+        // and for each one of them, converting them from map into Sponsor model
+        // and adding to the sponsors list.
+        response["data"][e].forEach((e) => sponsors.add(Sponsor.fromJson(e)));
+        // creating a SponsorCategory, and adding it to the sponsorData
+        sponsorData.add(SponsorCategory(e, sponsors));
+      });
 
-      return sponsList;
+      return sponsorData;
     }
   }
 }
