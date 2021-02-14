@@ -1,0 +1,84 @@
+import 'dart:math';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+import '../../core/res/errors.dart';
+import '../../models/sponsor.dart';
+import '../../models/sponsor_category.dart';
+
+@immutable
+abstract class SponsorsRepository {
+  /// All subfunctions are final No arguments required returns json
+  Future<List<SponsorCategory>> getAllSponsors();
+}
+
+class FakeSponsorsRepository extends SponsorsRepository {
+  @override
+  Future<List<SponsorCategory>> getAllSponsors() async {
+    //Network delay here
+    await Future.delayed(Duration(seconds: 1));
+
+    //Fake Response and Network Delay
+    if (Random().nextBool()) {
+      throw NetworkException();
+    } else {
+      Map<String, dynamic> response = {
+        "data": {
+          "Title": [
+            {
+              "id": 3,
+              "name": "Anopchand Tilokchand Jewellers",
+              "details": "Title Sponsors",
+              "pic": "/media/static/uploads/sponsors/download.jpeg",
+              "pic_url": "\"*\"/media/static/uploads/sponsors/download.jpeg",
+              "contact": "",
+              "website": "https://atjewel.com/",
+              "spons_type": "Title",
+              "importance": 200,
+              "category_importance": 10,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
+            }
+          ],
+          "Partner": [
+            {
+              "id": 2,
+              "name": "Happy Chases",
+              "details": "Digital Media Partner",
+              "pic": "/media/static/uploads/sponsors/happychases.png",
+              "pic_url": "\"*\"/media/static/uploads/sponsors/happychases.png",
+              "contact": "",
+              "website": "https://www.happychases.com/",
+              "spons_type": "Partner",
+              "importance": 83,
+              "category_importance": 6,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
+            }
+          ]
+        },
+        "message": "fetched successfully",
+        "spons_categories": ["Title", "Partner"]
+      };
+
+      List<SponsorCategory> sponsorData = List();
+
+      // iterating through a list of sponsor category names
+      response["spons_categories"].forEach((e) {
+        // for each category name, creating a list of sponsors belonging to that category
+        List<Sponsor> sponsors;
+        // iterating through the list of sponsor data that belong to that category
+        // and for each one of them, converting them from map into Sponsor model
+        // and adding to the sponsors list.
+        response["data"][e].forEach((e) => sponsors.add(Sponsor.fromJson(e)));
+        // creating a SponsorCategory, and adding it to the sponsorData
+        sponsorData.add(SponsorCategory(e, sponsors));
+      });
+
+      return sponsorData;
+    }
+  }
+}
