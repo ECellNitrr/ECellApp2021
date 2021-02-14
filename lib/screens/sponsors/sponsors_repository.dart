@@ -1,25 +1,21 @@
-import 'dart:convert';
 import 'dart:math';
-import 'package:ecellapp/core/res/errors.dart';
-import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/core/utils/injection.dart';
-import 'package:ecellapp/core/utils/logger.dart';
-import 'package:ecellapp/models/sponsors_data.dart';
-import 'package:ecellapp/models/sponsor.dart';
-import 'package:ecellapp/models/spons_category.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+
+import '../../core/res/errors.dart';
+import '../../models/sponsor.dart';
+import '../../models/sponsor_category.dart';
 
 @immutable
 abstract class SponsorsRepository {
   /// All subfunctions are final No arguments required returns json
-  Future<List<Sponsor>> getAllSponsors();
+  Future<List<SponsorCategory>> getAllSponsors();
 }
 
 class FakeSponsorsRepository extends SponsorsRepository {
   @override
-  Future<List<Sponsor>> getAllSponsors() async {
+  Future<List<SponsorCategory>> getAllSponsors() async {
     //Network delay here
     await Future.delayed(Duration(seconds: 1));
 
@@ -27,7 +23,7 @@ class FakeSponsorsRepository extends SponsorsRepository {
     if (Random().nextBool()) {
       throw NetworkException();
     } else {
-      var response = {
+      Map<String, dynamic> response = {
         "data": {
           "Title": [
             {
@@ -67,41 +63,22 @@ class FakeSponsorsRepository extends SponsorsRepository {
         "message": "fetched successfully",
         "spons_categories": ["Title", "Partner"]
       };
-      List<Sponsor> sponsorList = List();
-      List<String> category = List();
-      category = SponsCategoryList.fromJson(response).sponsCategories;
-      sponsorList = SponsorData.fromJsonWithList(response, category).categoryList;
-      return sponsorList;
-    }
-  }
-}
 
-class APISponsorRepository extends SponsorsRepository {
-  final String classTag = "APISponsorRepository";
-  @override
-  Future<List<Sponsor>> getAllSponsors() async {
-    final String tag = classTag + "getAllSponsors()";
-    http.Response response;
-    try {
-      response = await sl.get<http.Client>().get(S.getSponsorsUrl);
-    } catch (e) {
-      throw NetworkException();
-    }
+      List<SponsorCategory> sponsorData = List();
 
-    if (response.statusCode == 200) {
-      var sponsorResponse = jsonDecode(response.body);
-      List<Sponsor> sponsorList = List();
-      List<String> category = List();
-      category = SponsCategoryList.fromJson(sponsorResponse).sponsCategories;
-      sponsorList = SponsorData.fromJsonWithList(sponsorResponse, category).categoryList;
-      return sponsorList;
-    } else if (response.statusCode == 404) {
-      throw ValidationException(response.body);
-    } else {
-      Log.s(
-          tag: tag,
-          message: "Unknown response code -> ${response.statusCode}, message ->" + response.body);
-      throw UnknownException();
+      // iterating through a list of sponsor category names
+      response["spons_categories"].forEach((e) {
+        // for each category name, creating a list of sponsors belonging to that category
+        List<Sponsor> sponsors;
+        // iterating through the list of sponsor data that belong to that category
+        // and for each one of them, converting them from map into Sponsor model
+        // and adding to the sponsors list.
+        response["data"][e].forEach((e) => sponsors.add(Sponsor.fromJson(e)));
+        // creating a SponsorCategory, and adding it to the sponsorData
+        sponsorData.add(SponsorCategory(e, sponsors));
+      });
+
+      return sponsorData;
     }
   }
 }

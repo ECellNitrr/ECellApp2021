@@ -1,9 +1,9 @@
+import 'package:ecellapp/models/sponsor_category.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cubit/sponsors_cubit.dart';
-import '../../models/sponsor.dart';
 
 class SponsorsScreen extends StatelessWidget {
   const SponsorsScreen({Key key}) : super(key: key);
@@ -36,11 +36,11 @@ class SponsorsScreen extends StatelessWidget {
     return Container();
   }
 
-  Widget _buildSuccess(BuildContext context, List<Sponsor> sponsorsList) {
+  Widget _buildSuccess(BuildContext context, List<SponsorCategory> sponsorsList) {
     //TODO: UI
     List<Widget> sL = [];
     for (var item in sponsorsList) {
-      sL.add(Text(item.name, textAlign: TextAlign.center));
+      sL.add(Text(item.category, textAlign: TextAlign.center));
     }
     return Center(
       child: Column(

@@ -1,11 +1,9 @@
-import 'package:ecellapp/core/res/strings.dart';
+import '../core/res/strings.dart';
 
-/// Model to get All Info about Sponsor it's Capsuled by SponsorData
+/// Model to get All Info about Sponsor
 class Sponsor {
   //int data
   int id;
-  int importance;
-  int categoryImportance;
   int year;
   //string data
   String name;
@@ -25,22 +23,20 @@ class Sponsor {
     this.contact,
     this.website,
     this.sponsType,
-    this.importance,
-    this.categoryImportance,
     this.year,
   });
 
-  Sponsor.fromJson(Map<String, dynamic> json) {
-    id = json[S.sponsorId];
-    name = json[S.sponsorName];
-    details = json[S.sponsorDetails];
-    pic = json[S.sponsorPic];
-    picUrl = json[S.sponsorPicUrl];
-    contact = json[S.sponsorContact];
-    website = json[S.sponsorWebsite];
-    sponsType = json[S.sponsorSponsType];
-    importance = json[S.sponsorImportance];
-    categoryImportance = json[S.sponsorCategoryImportance];
-    year = json[S.sponsorYear];
+  factory Sponsor.fromJson(Map<String, dynamic> json) {
+    return Sponsor(
+      id: json[S.sponsorId],
+      name: json[S.sponsorName],
+      details: json[S.sponsorDetails],
+      pic: json[S.sponsorPic],
+      picUrl: json[S.sponsorPicUrl],
+      contact: json[S.sponsorContact],
+      website: json[S.sponsorWebsite],
+      sponsType: json[S.sponsorSponsType],
+      year: json[S.sponsorYear],
+    );
   }
 }
