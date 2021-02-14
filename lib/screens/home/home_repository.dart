@@ -14,6 +14,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class HomeRepository {
   /// Fetches `Token` from Shared Preferences , gives the user details and throws a suitable exception if something goes wrong.
   Future<User> getProfile();
+
+  /// Posts the feedback as submitted by the user and throws a suitable exception if something goes wrong.
   Future<void> postFeedback(String feedback);
 }
 
