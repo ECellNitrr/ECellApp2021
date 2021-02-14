@@ -3,17 +3,17 @@ import 'dart:math';
 import 'package:ecellapp/core/res/errors.dart';
 
 abstract class ForgotPasswordRepository {
-  Future<String> sendOTP(String email);
+  Future<void> sendOTP(String email);
 
-  Future<String> verifyOTP(String otp);
+  Future<void> verifyOTP(String otp);
 
-  Future<String> changePassword(String email, String otp, String password);
+  Future<void> changePassword(String email, String otp, String password);
 }
 
 class FakeForgotPasswordRepository extends ForgotPasswordRepository {
   @override
   // this is to simulate a delay for getting otp
-  Future<String> sendOTP(String email) async {
+  Future<void> sendOTP(String email) async {
     await Future.delayed(Duration(seconds: 2));
     if (Random().nextBool()) {
       return "200";
@@ -21,6 +21,7 @@ class FakeForgotPasswordRepository extends ForgotPasswordRepository {
       if (Random().nextBool()) {
         throw NetworkException();
       } else {
+        throw ResponseException("Error from sendOTP");
         if (Random().nextBool()) {
           return "400";
         } else {
@@ -32,13 +33,13 @@ class FakeForgotPasswordRepository extends ForgotPasswordRepository {
 
 // this to simulate the process of otp verification
   @override
-  Future<String> verifyOTP(String otp) async {
+  Future<void> verifyOTP(String otp) async {
     await Future.delayed(Duration(seconds: 2));
     if (Random().nextBool()) {
       if (otp == "1234") {
-        return "200";
+        return;
       } else {
-        return "400";
+        throw ResponseException("Wrong otp");
       }
     } else {
       throw NetworkException();
@@ -47,15 +48,15 @@ class FakeForgotPasswordRepository extends ForgotPasswordRepository {
 
 // this is to simulate the process of change in email
   @override
-  Future<String> changePassword(String email, String otp, String password) async {
+  Future<void> changePassword(String email, String otp, String password) async {
     await Future.delayed(Duration(seconds: 2));
     if (Random().nextBool()) {
-      return "200";
+      return;
     } else {
       if (Random().nextBool()) {
         throw NetworkException();
       } else {
-        return "400";
+        throw ResponseException("Error from changePassword");
       }
     }
   }

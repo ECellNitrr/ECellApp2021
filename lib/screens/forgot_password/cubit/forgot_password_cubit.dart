@@ -15,28 +15,24 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   void sendOTP(String email, ForgotPasswordState state) async {
     try {
       emit(ForgotLoading());
-      String response = await _forgotPasswordRepository.sendOTP(email);
-      if (response == "200") {
-        emit(ForgotOTPInitial());
-      } else {
-        emit(ForgotOTPFailure(response, state));
-      }
+      await _forgotPasswordRepository.sendOTP(email);
+      emit(ForgotOTPInitial());
     } on NetworkException {
       emit(ForgotNetworkError(S.networkException, state));
+    } on ResponseException catch (e) {
+      emit(ForgotOTPFailure(e.message, state));
     }
   }
 
   Future<void> verifyOTP(String a, ForgotPasswordState state) async {
     emit(ForgotLoading());
     try {
-      String response = await _forgotPasswordRepository.verifyOTP(a);
-      if (response == "200") {
-        emit(ForgotResetInitial());
-      } else {
-        emit(ForgotOTPFailure(response, state));
-      }
+      await _forgotPasswordRepository.verifyOTP(a);
+      emit(ForgotResetInitial());
     } on NetworkException {
       emit(ForgotNetworkError(S.networkException, state));
+    } on ResponseException catch (e) {
+      emit(ForgotOTPFailure(e.message, state));
     }
   }
 
@@ -44,14 +40,12 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       String email, String otp, String password, ForgotPasswordState state) async {
     emit(ForgotLoading());
     try {
-      String response = await _forgotPasswordRepository.changePassword(email, otp, password);
-      if (response == "200") {
-        emit(ForgotResetSuccess());
-      } else {
-        emit(ForgotOTPFailure(response, state));
-      }
+      await _forgotPasswordRepository.changePassword(email, otp, password);
+      emit(ForgotResetSuccess());
     } on NetworkException {
       emit(ForgotNetworkError(S.networkException, state));
+    } on ResponseException catch (e) {
+      emit(ForgotOTPFailure(e.message, state));
     }
   }
 }
