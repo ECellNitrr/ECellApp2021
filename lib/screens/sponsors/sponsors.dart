@@ -40,7 +40,7 @@ class SponsorsScreen extends StatelessWidget {
     //TODO: UI
     List<Widget> sL = [];
     for (var item in sponsorsList) {
-      sL.add(Text(item.spons.categoryList[0].name, textAlign: TextAlign.center));
+      sL.add(Text(item.category, textAlign: TextAlign.center));
     }
     return Center(
       child: Column(

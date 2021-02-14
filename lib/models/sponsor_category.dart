@@ -1,13 +1,13 @@
-import 'sponsors_data.dart';
+import 'package:ecellapp/models/sponsor.dart';
 
 /// Contains a  List < Sponsor > and String category
 class SponsorCategory {
   final String category;
-  SponsorData spons;
+  List<Sponsor> spons;
 
   SponsorCategory({this.category, this.spons});
 
-  factory SponsorCategory.fromClass(SponsorData sponsList, String categorySpons) {
+  factory SponsorCategory.fromClass(List<Sponsor> sponsList, String categorySpons) {
     return SponsorCategory(spons: sponsList, category: categorySpons);
   }
 }

@@ -1,7 +1,7 @@
 import 'dart:math';
 
+import 'package:ecellapp/models/sponsor.dart';
 import 'package:ecellapp/models/sponsor_category.dart';
-import 'package:ecellapp/models/sponsors_data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class FakeSponsorsRepository extends SponsorsRepository {
     if (Random().nextBool()) {
       throw NetworkException();
     } else {
-      var response = {
+      Map<String, dynamic> response = {
         "data": {
           "Title": [
             {
@@ -66,11 +66,14 @@ class FakeSponsorsRepository extends SponsorsRepository {
 
       List<String> category = List();
       List<SponsorCategory> sponsList = List();
-      (response["spons_categories"] as List).forEach((element) => category.add(element.toString()));
+      List<Sponsor> sponsorList = List();
 
+      (response["spons_categories"] as List).forEach((element) => category.add(element.toString()));
       for (var item in category) {
-        sponsList
-            .add(SponsorCategory.fromClass(SponsorData.fromJsonWithList(response, item), item));
+        response['data'][item].forEach((v) {
+          sponsorList.add(Sponsor.fromJson(v));
+        });
+        sponsList.add(SponsorCategory.fromClass(sponsorList, item));
       }
 
       return sponsList;
