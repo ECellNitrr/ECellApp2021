@@ -74,6 +74,7 @@ class FakeSponsorsRepository extends SponsorsRepository {
           sponsorList.add(Sponsor.fromJson(v));
         });
         sponsList.add(SponsorCategory.fromClass(sponsorList, item));
+        sponsorList.clear();
       }
 
       return sponsList;
