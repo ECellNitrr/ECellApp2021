@@ -64,20 +64,15 @@ class FakeSponsorsRepository extends SponsorsRepository {
         "spons_categories": ["Title", "Partner"]
       };
 
-      List<String> category = List();
-      List<SponsorCategory> sponsList = List();
-      List<Sponsor> sponsorList = List();
+      List<SponsorCategory> sponsorData = List();
 
-      (response["spons_categories"] as List).forEach((element) => category.add(element.toString()));
-      for (var item in category) {
-        response['data'][item].forEach((v) {
-          sponsorList.add(Sponsor.fromJson(v));
-        });
-        sponsList.add(SponsorCategory.fromClass(sponsorList, item));
-        sponsorList.clear();
-      }
+      response["spons_categories"].forEach((e) {
+        List<Sponsor> sponsors;
+        sponsors = sponsorData.map((e) => Sponsor.fromJson(response["data"][e])).toList();
+        sponsorData.add(SponsorCategory(e, sponsors));
+      });
 
-      return sponsList;
+      return sponsorData;
     }
   }
 }
