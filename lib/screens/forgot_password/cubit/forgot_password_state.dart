@@ -14,11 +14,11 @@ class ForgotEmailInitial extends ForgotPasswordState {}
 
 class ForgotOTPInitial extends ForgotPasswordState {}
 
-class ForgotPasswordFailure extends ForgotPasswordState {
+class ForgotPasswordError extends ForgotPasswordState {
   final String message;
   final ForgotPasswordState state;
 
-  ForgotPasswordFailure(this.message, this.state);
+  ForgotPasswordError(this.message, this.state);
 }
 
 class ForgotResetInitial extends ForgotPasswordState {}

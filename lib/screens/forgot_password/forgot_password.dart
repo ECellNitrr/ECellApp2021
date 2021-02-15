@@ -21,7 +21,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             Scaffold.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
             );
-          } else if (state is ForgotPasswordFailure) {
+          } else if (state is ForgotPasswordError) {
             Scaffold.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
             );
@@ -34,7 +34,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             return _buildLoading();
           } else if (state is ForgotOTPInitial) {
             return _enterOTP(context, state);
-          } else if (state is ForgotPasswordFailure) {
+          } else if (state is ForgotPasswordError) {
             return _uiUpdateForNetworkError(context, state.state);
           } else if (state is ForgotResetInitial) {
             return _resetPassword(context, state);
@@ -55,7 +55,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       return _initialForgotPassword(context, state);
     } else if (state is ForgotOTPInitial) {
       return _enterOTP(context, state);
-    } else if (state is ForgotPasswordFailure) {
+    } else if (state is ForgotPasswordError) {
       return _enterOTP(context, state);
     } else if (state is ForgotResetInitial) {
       return _resetPassword(context, state);

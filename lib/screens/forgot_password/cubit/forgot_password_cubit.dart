@@ -21,7 +21,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     } on NetworkException {
       emit(ForgotNetworkError(S.networkException, state));
     } on ResponseException catch (e) {
-      emit(ForgotPasswordFailure(e.message, state));
+      emit(ForgotPasswordError(e.message, state));
     } catch (e) {
       Log.s(tag: "Weird exception", message: "Weird response message ->" + e);
     }
@@ -35,7 +35,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     } on NetworkException {
       emit(ForgotNetworkError(S.networkException, state));
     } on ResponseException catch (e) {
-      emit(ForgotPasswordFailure(e.message, state));
+      emit(ForgotPasswordError(e.message, state));
     } catch (e) {
       Log.s(tag: "Weird exception", message: "Weird response message ->" + e);
     }
@@ -45,7 +45,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       ForgotPasswordState state) async {
     emit(ForgotLoading());
     if (confirmPassword != password) {
-      emit(ForgotPasswordFailure("Entered passwords do not match", state));
+      emit(ForgotPasswordError("Entered passwords do not match", state));
       return;
     }
     try {
@@ -54,7 +54,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     } on NetworkException {
       emit(ForgotNetworkError(S.networkException, state));
     } on ResponseException catch (e) {
-      emit(ForgotPasswordFailure(e.message, state));
+      emit(ForgotPasswordError(e.message, state));
     } catch (e) {
       Log.s(tag: "Weird exception", message: "Weird response message ->" + e);
     }
