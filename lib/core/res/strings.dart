@@ -22,7 +22,7 @@ class S {
   static const String lastnameKey = "last_name";
   static const String phoneKey = "contact";
   //postfeedback
-  static const String nameKey = "name";
+  static const String feedbackNameKey = "name";
   static const String feedbackMessageKey = "message";
   //event
   static const String eventnameKey = "name";

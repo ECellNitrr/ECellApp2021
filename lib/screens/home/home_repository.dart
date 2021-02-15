@@ -86,8 +86,6 @@ class APIHomeRepository extends HomeRepository {
 
   @override
   Future<void> postFeedback(String feedback) async {
-    sharedPreferences.setString(S.nameKeySharedPreferences, "Siddharth");
-    sharedPreferences.setString(S.emailKeySharedPreferences, "smishra1605@gmail.com");
     String name = sharedPreferences.getString(S.nameKeySharedPreferences);
     String email = sharedPreferences.getString(S.emailKeySharedPreferences);
     final String tag = classTag + "postFeedback";
@@ -95,7 +93,11 @@ class APIHomeRepository extends HomeRepository {
     try {
       response = await sl.get<http.Client>().post(
         S.postFeedbackUrl,
-        body: <String, dynamic>{S.nameKey: name, S.emailKey: email, S.feedbackMessageKey: feedback},
+        body: <String, dynamic>{
+          S.feedbackNameKey: name,
+          S.emailKey: email,
+          S.feedbackMessageKey: feedback
+        },
       );
     } catch (e) {
       Log.e(tag: tag, message: "NetworkError:" + e.toString());
