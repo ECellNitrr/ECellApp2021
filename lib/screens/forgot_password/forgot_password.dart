@@ -21,7 +21,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             Scaffold.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
             );
-          } else if (state is ForgotOTPFailure) {
+          } else if (state is ForgotPasswordFailure) {
             Scaffold.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
             );
@@ -34,7 +34,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             return _buildLoading();
           } else if (state is ForgotOTPInitial) {
             return _enterOTP(context, state);
-          } else if (state is ForgotOTPFailure) {
+          } else if (state is ForgotPasswordFailure) {
             return _uiUpdateForNetworkError(context, state.state);
           } else if (state is ForgotResetInitial) {
             return _resetPassword(context, state);
@@ -55,7 +55,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       return _initialForgotPassword(context, state);
     } else if (state is ForgotOTPInitial) {
       return _enterOTP(context, state);
-    } else if (state is ForgotOTPFailure) {
+    } else if (state is ForgotPasswordFailure) {
       return _enterOTP(context, state);
     } else if (state is ForgotResetInitial) {
       return _resetPassword(context, state);
@@ -120,12 +120,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           PasswordField(confirmPasswordController),
           FlatButton(
               onPressed: () {
-                if (passwordController.text == confirmPasswordController.text) {
-                  _changePassword(context, state);
-                } else {
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text("Missmatch in passwords")));
-                }
+                _changePassword(context, state);
               },
               child: Text("change password")),
         ],
@@ -140,11 +135,12 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   void _verifyOtp(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
-    cubit.verifyOTP(otpController.text, state);
+    cubit.checkOTP(otpController.text, state, emailController.text);
   }
 
   void _changePassword(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
-    cubit.changePassword(emailController.text, otpController.text, passwordController.text, state);
+    cubit.changePassword(emailController.text, otpController.text, passwordController.text,
+        confirmPasswordController.text, state);
   }
 }
