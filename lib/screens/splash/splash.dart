@@ -47,11 +47,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
         children: [
           ScreenBackground(elementId: 0),
-          Center(child: ECellLogoAnimation()),
+          Center(
+              child: ECellLogoAnimation(
+            size: width / 2,
+          )),
         ],
       ),
     );
