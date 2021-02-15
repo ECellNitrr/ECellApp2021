@@ -1,9 +1,12 @@
+import 'package:ecellapp/core/res/colors.dart';
+import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/models/speaker.dart';
+import 'package:ecellapp/screens/speaker/speakerCard.dart';
 import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
-import 'package:ecellapp/core/res/card_speaker.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SpeakerScreen extends StatelessWidget {
   const SpeakerScreen({Key key}) : super(key: key);
@@ -37,26 +40,64 @@ class SpeakerScreen extends StatelessWidget {
   }
 
   Widget _buildSuccess(BuildContext context, List<Speaker> speakerList) {
-    //TODO: UI
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          //! Most Important component
-          ClipPath(
-            child: Container(
-              child: SizedBox(
-                width: 300,
-                height: 360,
-              ),
-              color: Colors.blue,
-            ),
-            clipper: ClipperConic(),
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    double top = MediaQuery.of(context).viewPadding.top;
+    double heightFactor = height / 1000;
+
+    List<Widget> sL = [];
+    speakerList.forEach((element) {
+      sL.add(_cardsLoader(element));
+    });
+
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: Container(
+          padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+            onPressed: () => Navigator.of(context).pop(),
           ),
-          Text(speakerList[0].name, textAlign: TextAlign.center),
-        ],
+        ),
+      ),
+      body: DefaultTextStyle.merge(
+        style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [C.backgroundTop1, C.backgroundBottom1],
+            ),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                //Heading
+                Text(
+                  "Speakers",
+                  style: TextStyle(
+                      fontSize: heightFactor * 50,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1.00),
+                ),
+                Column(
+                  children: sL,
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
+  }
+
+  Widget _cardsLoader(Speaker speaker) {
+    return InkWell(onTap: () {}, child: SpeakerCard(speaker: speaker));
   }
 
   Widget _buildLoading() {

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/core/utils/injection.dart';
 import 'package:ecellapp/core/utils/logger.dart';
@@ -22,7 +21,8 @@ class FakeSpeakerRepository extends SpeakerRepository {
     await Future.delayed(Duration(seconds: 1));
 
     //Fake Response and Network Delay
-    if (Random().nextBool()) {
+    if (false) {
+      //Random().nextBool()) {
       throw NetworkException();
     } else {
       var response = {
@@ -38,7 +38,8 @@ class FakeSpeakerRepository extends SpeakerRepository {
             "id": 1,
             "modified_at": "2021-01-13T11:43:16.131751Z",
             "name": "absan",
-            "profile_pic": "/media/static/uploads/speakers/Ansh.jpg",
+            "profile_pic":
+                "https://ichef.bbci.co.uk/news/976/cpsprodpb/7727/production/_103330503_musk3.jpg",
             "social_media": "blank",
             "year": 2019
           }
