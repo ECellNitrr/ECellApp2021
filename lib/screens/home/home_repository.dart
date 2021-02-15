@@ -58,9 +58,10 @@ class FakeHomeRepository extends HomeRepository {
 
 class APIHomeRepository extends HomeRepository {
   final String classTag = "APIHomeRepository";
+  final SharedPreferences sharedPreferences = sl.get<SharedPreferences>();
   @override
   Future<User> getProfile() async {
-    String token = sl.get<SharedPreferences>().getString(S.tokenKeySharedPreferences);
+    String token = sharedPreferences.getString(S.tokenKeySharedPreferences);
     final String tag = classTag + "getUserDetails";
     http.Response response;
     try {
@@ -85,6 +86,34 @@ class APIHomeRepository extends HomeRepository {
 
   @override
   Future<void> postFeedback(String feedback) async {
-    return;
+    String name = sharedPreferences.getString(S.nameKeySharedPreferences);
+    String email = sharedPreferences.getString(S.emailKeySharedPreferences);
+    final String tag = classTag + "postFeedback";
+    http.Response response;
+    try {
+      response = await sl.get<http.Client>().post(
+        S.postFeedbackUrl,
+        body: <String, dynamic>{
+          S.feedbackNameKey: name,
+          S.emailKey: email,
+          S.feedbackMessageKey: feedback
+        },
+      );
+    } catch (e) {
+      Log.e(tag: tag, message: "NetworkError:" + e.toString());
+      throw NetworkException();
+    }
+
+    if (response.statusCode == 201) {
+      Log.i(tag: tag, message: "Feedback Posted Successfully");
+      return true;
+    } else if (response.statusCode == 400) {
+      throw ValidationException(response.body);
+    } else {
+      Log.s(
+          tag: tag,
+          message: "Unknown response code -> ${response.statusCode}, message ->" + response.body);
+      throw UnknownException();
+    }
   }
 }
