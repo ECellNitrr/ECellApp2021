@@ -14,6 +14,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class HomeRepository {
   /// Fetches `Token` from Shared Preferences , gives the user details and throws a suitable exception if something goes wrong.
   Future<User> getProfile();
+
+  /// Posts the feedback as submitted by the user and throws a suitable exception if something goes wrong.
+  Future<void> postFeedback(String feedback);
 }
 
 class FakeHomeRepository extends HomeRepository {
@@ -35,6 +38,20 @@ class FakeHomeRepository extends HomeRepository {
 
       // fake successful response (the data entered here same as in the API Doc example)
       return User.fromJson(response);
+    }
+  }
+
+  @override
+  Future<void> postFeedback(String feedback) async {
+    // Simulate network delay
+    await Future.delayed(Duration(seconds: 1));
+
+    if (Random().nextBool()) {
+      // random network error
+      throw NetworkException();
+    } else {
+      // fake successfull operation
+      return;
     }
   }
 }
@@ -64,5 +81,10 @@ class APIHomeRepository extends HomeRepository {
           message: "Unknown response code -> ${response.statusCode}, message ->" + response.body);
       throw UnknownException();
     }
+  }
+
+  @override
+  Future<void> postFeedback(String feedback) async {
+    return;
   }
 }
