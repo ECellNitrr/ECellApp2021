@@ -2,11 +2,9 @@ import 'package:ecellapp/screens/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'core/themes/app_theme.dart';
-import 'core/utils/injection.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await init();
   runApp(ECellApp());
 }
 
