@@ -6,11 +6,14 @@ class S {
   static const String loginUrl = baseUrl + "users/login/";
   static const String registerUrl = baseUrl + "users/register/";
   static const String getUserDetailsUrl = baseUrl + "users/get_user_details/";
-  static const String getEventsUrl = baseUrl + "events/list/2019/";
+  static const String getEventsUrl = baseUrl + "events/list/2021/";
   static const String getSponsorsUrl = baseUrl + "sponsors/sorted_list/$sponsorApiYear/";
   static const String getSpeakerUrl = baseUrl + "speakers/full_list/";
+  static const String postFeedbackUrl = baseUrl + "feedback/post/";
   // shared preferences keys
   static const String tokenKeySharedPreferences = "token";
+  static const String nameKeySharedPreferences = "name";
+  static const String emailKeySharedPreferences = "email";
   // api keys
   static const String tokenKey = "token";
   static const String passwordKey = "password";
@@ -18,6 +21,9 @@ class S {
   static const String firstnameKey = "first_name";
   static const String lastnameKey = "last_name";
   static const String phoneKey = "contact";
+  //postfeedback
+  static const String feedbackNameKey = "name";
+  static const String feedbackMessageKey = "message";
   //event
   static const String eventnameKey = "name";
   static const String eventdateKey = "date";
@@ -68,6 +74,9 @@ class S {
   static const String assetIconFb = "assets/fb-icon.png";
   static const String assetIconTwitter = "assets/twitter-icon.png";
   static const String assetIconLinkdin = "assets/linkdin-icon.png";
+  static const String assetEsummitLogoWhiteFilled = "assets/esummit-filled-logo.png";
+  static const String assetSponsorsLogoWhite = "assets/sponsors-logo.png";
+  static const String assetEventsLogoWhite = "assets/events-logo.png";
 
   // paragraphs
   static const String esummitPara =

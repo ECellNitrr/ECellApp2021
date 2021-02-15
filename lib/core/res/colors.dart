@@ -13,6 +13,18 @@ class C {
   static final Color ring3 = HexColor("#F8F010");
   static final Color ring4 = HexColor("#AE82FF");
 
+  /// home screen buttons
+  static final Color eSummitButton1 = HexColor("#B67FFE");
+  static final Color eSummitButton2 = HexColor("#FB28E6");
+  static final Color eventsButton1 = HexColor("#BFF70E");
+  static final Color eventsButton2 = HexColor("#3CCD72");
+  static final Color sponsorsButton1 = HexColor("#2DEBFF");
+  static final Color sponsorsButton2 = HexColor("#02A0F9");
+  static final Color bQuizButton1 = HexColor("#EFEA79");
+  static final Color bQuizButton2 = HexColor("#FB8329");
+  static final Color aboutUsButton1 = HexColor("#AE82FF");
+  static final Color aboutUsButton2 = HexColor("#4671FE");
+
   /// esummit + speakers background color gradient
   static final Color backgroundTop1 = HexColor("#B67EFE");
   static final Color backgroundBottom1 = HexColor("#FB28E6");
