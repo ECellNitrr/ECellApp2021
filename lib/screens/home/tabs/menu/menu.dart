@@ -24,7 +24,6 @@ class _MenuScreenState extends State<MenuScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double heightFactor = height / 1000;
-    Log.i(tag: "Screen width: ", message: width.toString());
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
