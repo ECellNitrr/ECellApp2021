@@ -40,9 +40,7 @@ class SpeakerScreen extends StatelessWidget {
   }
 
   Widget _buildSuccess(BuildContext context, List<Speaker> speakerList) {
-    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    double top = MediaQuery.of(context).viewPadding.top;
     double heightFactor = height / 1000;
 
     List<Widget> sL = [];
