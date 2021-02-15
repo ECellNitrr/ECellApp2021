@@ -2,6 +2,7 @@ import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/core/utils/injection.dart';
+import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/screens/esummit/esummit.dart';
 import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
 import 'package:ecellapp/screens/login/login.dart';
@@ -23,6 +24,7 @@ class _MenuScreenState extends State<MenuScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double heightFactor = height / 1000;
+    Log.i(tag: "Screen width: ", message: width.toString());
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -60,8 +62,15 @@ class _MenuScreenState extends State<MenuScreen> {
                         end: Alignment.bottomRight,
                         colors: [C.eSummitButton1, C.eSummitButton2],
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 15,
+                          color: C.eSummitButton1.withOpacity(0.1),
+                          offset: Offset(0, 5),
+                        )
+                      ],
                     ),
-                    constraints: BoxConstraints.tightFor(width: 60, height: 60),
+                    constraints: BoxConstraints.tightFor(width: 70, height: 70),
                     child: GestureDetector(
                       child: Image.asset(
                         S.assetEsummitLogoWhiteFilled,
@@ -102,11 +111,18 @@ class _MenuScreenState extends State<MenuScreen> {
                         end: Alignment.bottomRight,
                         colors: [C.bQuizButton1, C.bQuizButton2],
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 15,
+                          color: C.bQuizButton1.withOpacity(0.1),
+                          offset: Offset(0, 5),
+                        )
+                      ],
                     ),
-                    constraints: BoxConstraints.tightFor(width: 60, height: 60),
+                    constraints: BoxConstraints.tightFor(width: 70, height: 70),
                     child: GestureDetector(
                       child:
-                          Icon(Icons.search_rounded, size: 30, color: C.primaryUnHighlightedColor),
+                          Icon(Icons.search_rounded, size: 35, color: C.primaryUnHighlightedColor),
                       onTap: () {}, //TODO
                     ),
                   ),
@@ -136,13 +152,20 @@ class _MenuScreenState extends State<MenuScreen> {
                         end: Alignment.bottomRight,
                         colors: [C.eventsButton1, C.eventsButton2],
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 15,
+                          color: C.eventsButton2.withOpacity(0.1),
+                          offset: Offset(0, 5),
+                        ),
+                      ],
                     ),
-                    constraints: BoxConstraints.tightFor(width: 60, height: 60),
+                    constraints: BoxConstraints.tightFor(width: 70, height: 70),
                     child: GestureDetector(
                       child: Image.asset(
                         S.assetEventsLogoWhite,
-                        width: 30,
-                        height: 30,
+                        width: 20,
+                        height: 20,
                       ),
                       onTap: () {}, //TODO
                     ),
@@ -173,13 +196,20 @@ class _MenuScreenState extends State<MenuScreen> {
                         end: Alignment.bottomRight,
                         colors: [C.sponsorsButton1, C.sponsorsButton2],
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 15,
+                          color: C.sponsorsButton2.withOpacity(0.1),
+                          offset: Offset(0, 5),
+                        )
+                      ],
                     ),
-                    constraints: BoxConstraints.tightFor(width: 60, height: 60),
+                    constraints: BoxConstraints.tightFor(width: 70, height: 70),
                     child: GestureDetector(
                       child: Image.asset(
                         S.assetSponsorsLogoWhite,
-                        width: 30,
-                        height: 30,
+                        width: 25,
+                        height: 25,
                       ),
                       onTap: () {}, //TODO
                     ),
@@ -204,16 +234,22 @@ class _MenuScreenState extends State<MenuScreen> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [C.aboutUsButton1, C.aboutUsButton2],
-                      ),
-                    ),
-                    constraints: BoxConstraints.tightFor(width: 60, height: 60),
+                        shape: BoxShape.circle,
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [C.aboutUsButton1, C.aboutUsButton2],
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 15,
+                            color: C.aboutUsButton2.withOpacity(0.1),
+                            offset: Offset(0, 5),
+                          )
+                        ]),
+                    constraints: BoxConstraints.tightFor(width: 70, height: 70),
                     child: GestureDetector(
-                      child: Icon(Icons.group, size: 30, color: C.primaryUnHighlightedColor),
+                      child: Icon(Icons.group, size: 35, color: C.primaryUnHighlightedColor),
                       onTap: () {}, //TODO
                     ),
                   ),
@@ -231,7 +267,9 @@ class _MenuScreenState extends State<MenuScreen> {
           ),
           Center(
               child: Container(
-            child: ECellLogoAnimation(),
+            child: ECellLogoAnimation(
+              size: width / 3,
+            ),
           )),
         ],
       ),
