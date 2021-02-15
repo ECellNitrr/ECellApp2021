@@ -1,6 +1,5 @@
 part of 'feedback_cubit.dart';
 
-@immutable
 abstract class FeedbackState extends Equatable {
   const FeedbackState();
   @override
