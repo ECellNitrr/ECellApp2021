@@ -24,10 +24,3 @@ class ForgotPasswordError extends ForgotPasswordState {
 class ForgotResetInitial extends ForgotPasswordState {}
 
 class ForgotResetSuccess extends ForgotPasswordState {}
-
-class ForgotNetworkError extends ForgotPasswordState {
-  final String message;
-  final ForgotPasswordState state;
-
-  ForgotNetworkError(this.message, this.state);
-}

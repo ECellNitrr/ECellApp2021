@@ -19,7 +19,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       await _forgotPasswordRepository.sendOTP(email);
       emit(ForgotOTPInitial());
     } on NetworkException {
-      emit(ForgotNetworkError(S.networkException, state));
+      emit(ForgotPasswordError(S.networkException, state));
     } on ResponseException catch (e) {
       emit(ForgotPasswordError(e.message, state));
     } catch (e) {
@@ -33,7 +33,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       await _forgotPasswordRepository.checkOTP(otp, email);
       emit(ForgotResetInitial());
     } on NetworkException {
-      emit(ForgotNetworkError(S.networkException, state));
+      emit(ForgotPasswordError(S.networkException, state));
     } on ResponseException catch (e) {
       emit(ForgotPasswordError(e.message, state));
     } catch (e) {
@@ -52,7 +52,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       await _forgotPasswordRepository.changePassword(email, otp, password);
       emit(ForgotResetSuccess());
     } on NetworkException {
-      emit(ForgotNetworkError(S.networkException, state));
+      emit(ForgotPasswordError(S.networkException, state));
     } on ResponseException catch (e) {
       emit(ForgotPasswordError(e.message, state));
     } catch (e) {
