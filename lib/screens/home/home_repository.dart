@@ -58,7 +58,7 @@ class FakeHomeRepository extends HomeRepository {
 
 class APIHomeRepository extends HomeRepository {
   final String classTag = "APIHomeRepository";
-  SharedPreferences sharedPreferences = sl.get<SharedPreferences>();
+  final SharedPreferences sharedPreferences = sl.get<SharedPreferences>();
   @override
   Future<User> getProfile() async {
     String token = sharedPreferences.getString(S.tokenKeySharedPreferences);
