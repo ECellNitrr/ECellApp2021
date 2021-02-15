@@ -4,7 +4,6 @@ import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/screens/home/home_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 part 'feedback_state.dart';
 
