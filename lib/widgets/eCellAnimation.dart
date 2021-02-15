@@ -34,6 +34,12 @@ class _ECellLogoAnimationState extends State<ECellLogoAnimation> with TickerProv
   }
 
   @override
+  dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
