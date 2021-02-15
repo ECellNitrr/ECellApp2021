@@ -2,7 +2,6 @@ import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/core/utils/injection.dart';
-import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/screens/esummit/esummit.dart';
 import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
 import 'package:ecellapp/screens/login/login.dart';
