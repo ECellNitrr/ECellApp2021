@@ -1,22 +1,24 @@
+import 'package:ecellapp/core/res/colors.dart';
+import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/event.dart';
 import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class EventsScreen extends StatefulWidget {
-  @override
-  _EventsScreenState createState() => _EventsScreenState();
-}
+import 'eventsCard.dart';
 
-class _EventsScreenState extends State<EventsScreen> {
+class EventsScreen extends StatelessWidget {
+  const EventsScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<EventsCubit, EventsState>(
         listener: (context, state) {
           if (state is EventsInitial) {
-            _getAllEvents();
+            _getAllEvents(context);
           } else if (state is EventsError) {
             Scaffold.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
@@ -45,21 +47,98 @@ class _EventsScreenState extends State<EventsScreen> {
     );
   }
 
-  Widget _buildSuccess(BuildContext context, List<Event> json) {
+  Widget _buildSuccess(BuildContext context, List<Event> eventsList) {
     //TODO On success UI
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[Icon(Icons.check_circle_outline), Text(json[0].name)],
+
+    double height = MediaQuery.of(context).size.height;
+    double heightFactor = height / 1000;
+    double bottom = MediaQuery.of(context).viewInsets.bottom;
+    final ScrollController _scrollController = ScrollController();
+    List<Widget> sL = [];
+    eventsList.forEach((element) {
+      sL.add(_cardsLoader(element));
+    });
+
+    if (_scrollController.hasClients) {
+      if (bottom > height * 0.25) {
+        _scrollController.animateTo(
+          bottom - height * 0.25,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.ease,
+        );
+      } else {
+        _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.ease);
+      }
+    }
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [C.backgroundTop1, C.backgroundBottom1],
+        ),
+      ),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBodyBehindAppBar: true,
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: Container(
+            padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
+            child: IconButton(
+              icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ),
+        ),
+        body: DefaultTextStyle.merge(
+          style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                SizedBox(
+                  height: heightFactor * 100,
+                ),
+                //Heading
+                SizedBox(
+                  height: heightFactor * 100,
+                  child: Text(
+                    "Events",
+                    style: TextStyle(
+                        fontSize: heightFactor * 50,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1.00),
+                  ),
+                ),
+                Flexible(
+                    child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  controller: _scrollController,
+                  child: Column(
+                    children: sL,
+                  ),
+                )),
+              ],
+            ),
+          ),
+        ),
       ),
     );
+  }
+
+  Widget _cardsLoader(Event event) {
+    return EventCard(event: event);
   }
 
   Widget _buildInitial() {
     return Container();
   }
 
-  void _getAllEvents() {
+  void _getAllEvents(BuildContext context) {
     final cubit = context.read<EventsCubit>();
     cubit.getAllEvents();
   }
