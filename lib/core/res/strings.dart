@@ -73,7 +73,11 @@ class S {
   static const String assetEsummitLogoWhiteFilled = "assets/esummit-filled-logo.png";
   static const String assetSponsorsLogoWhite = "assets/sponsors-logo.png";
   static const String assetEventsLogoWhite = "assets/events-logo.png";
-
+  // contact us info
+  static const String ecellAddress = "National Institute of Technology, GE Road, Raipur";
+  static const String ecellPhone = "+91 9406220952";
+  static const String ecellEmail = "ecell@nitrr.ac.in";
+  static const String feedbackLine = "We would love to know what you think";
   // paragraphs
   static const String esummitPara =
       "we aspire to create a melange of eminent speakers who have proved themselves in diverse fields and are at the zenith of glory. E-Summit'21 will not just be a conclave of innovative minds and epistemic elocutionists, but it will be the place where ideas not only thrive but become the greatest revelations of the century.";

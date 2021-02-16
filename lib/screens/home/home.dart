@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/themes/selected_icon_theme.dart';
+import 'cubit/feedback_cubit.dart';
+import 'cubit/profile_cubit.dart';
+import 'home_repository.dart';
 import 'tabs/contact_us/contact_us.dart';
 import 'tabs/menu/menu.dart';
 import 'tabs/profile/profile.dart';
@@ -12,7 +16,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 1;
-  final List<Widget> _children = [ProfileScreen(), MenuScreen(), ContactUsScreen()];
+  final List<Widget> _children = [
+    BlocProvider(
+      create: (_) => ProfileCubit(APIHomeRepository()),
+      child: ProfileScreen(),
+    ),
+    MenuScreen(),
+    BlocProvider(
+      create: (_) => FeedbackCubit(APIHomeRepository()),
+      child: ContactUsScreen(),
+    )
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
