@@ -1,12 +1,12 @@
 import 'package:ecellapp/core/res/colors.dart';
-import 'package:ecellapp/screens/about_us/text_about_us.dart';
+import 'package:ecellapp/screens/about_us/text_aim.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AboutUsScreen extends StatelessWidget {
+class AimScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +94,7 @@ class AboutUsScreen extends StatelessWidget {
             ),
           ),
           Text(
-            TextAboutUs.getAim(),
+            TextAim.getAim(),
             style: TextStyle(
               letterSpacing: 1.5 * heightFactor,
               wordSpacing: 2 * heightFactor,
@@ -123,7 +123,7 @@ class AboutUsScreen extends StatelessWidget {
             ),
           ),
           Text(
-            TextAboutUs.getVision(),
+            TextAim.getVision(),
             style: TextStyle(
               letterSpacing: 1.5 * heightFactor,
               wordSpacing: 2 * heightFactor,
