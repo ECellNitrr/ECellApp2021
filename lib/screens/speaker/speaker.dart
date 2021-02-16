@@ -9,14 +9,9 @@ import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
 import 'package:ecellapp/screens/speaker/speakerCard.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 
-class SpeakerScreen extends StatefulWidget {
-  const SpeakerScreen({Key key}) : super(key: key);
+class SpeakerScreen extends StatelessWidget {
+  SpeakerScreen({Key key}) : super(key: key);
 
-  @override
-  _SpeakerScreenState createState() => _SpeakerScreenState();
-}
-
-class _SpeakerScreenState extends State<SpeakerScreen> {
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -129,7 +124,7 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
   }
 
   Widget _cardsLoader(Speaker speaker) {
-    return InkWell(onTap: () {}, child: SpeakerCard(speaker: speaker));
+    return SpeakerCard(speaker: speaker);
   }
 
   Widget _buildLoading() {

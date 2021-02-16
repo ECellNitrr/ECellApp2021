@@ -1,8 +1,10 @@
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
+import 'package:ecellapp/core/res/errors.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/models/speaker.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SpeakerCard extends StatelessWidget {
   final Speaker speaker;
@@ -72,7 +74,10 @@ class SpeakerCard extends StatelessWidget {
                   //ADD SPEAKER_NAME
                   child: Text(
                     speaker.name,
-                    style: TextStyle(fontSize: heightFactor * 25, color: Colors.black),
+                    style: TextStyle(
+                        fontSize: heightFactor * 25,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600),
                   )),
               Positioned(
                   top: 80,
@@ -98,8 +103,13 @@ class SpeakerCard extends StatelessWidget {
                           height: heightFactor * 45,
                         ),
                         GestureDetector(
-                            onTap: () {
-                              //TODO: Handle speaker.socialMedia
+                            onTap: () async {
+                              //Handle speaker.socialMedia
+                              if (await canLaunch(speaker.socialMedia)) {
+                                await launch(speaker.socialMedia);
+                              } else {
+                                throw UnknownException();
+                              }
                             },
                             child: Image.asset(
                               S.assetIconLinkdin,
