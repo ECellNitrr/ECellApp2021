@@ -223,38 +223,40 @@ class ContactUsScreen extends StatelessWidget {
                     ),
                   ),
                   Container(
-                      padding: EdgeInsets.only(top: 20 * heightFactor, right: D.horizontalPadding),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              flex: 1,
-                              child: Icon(
-                                Icons.messenger_outline_rounded,
-                                color: C.primaryHighlightedColor,
-                                size: 30,
-                              )),
-                          Expanded(flex: 1, child: Container()),
-                          Expanded(
-                              flex: 10,
-                              child: Form(
-                                key: _formKey,
-                                child: TextFormField(
-                                  controller: feedbackController,
-                                  keyboardType: TextInputType.text,
-                                  style: TextStyle(
-                                    color: C.primaryUnHighlightedColor,
-                                    fontSize: D.inputFieldFontSize * heightFactor,
-                                  ),
-                                  validator: _validator,
-                                  textInputAction: TextInputAction.done,
-                                  decoration: InputDecoration(
-                                    errorStyle: TextStyle(fontSize: 0.1),
-                                    labelText: "Feedback",
-                                  ),
-                                ),
-                              ))
-                        ],
-                      )),
+                    padding: EdgeInsets.only(top: 20 * heightFactor, right: D.horizontalPadding),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            flex: 1,
+                            child: Icon(
+                              Icons.messenger_outline_rounded,
+                              color: C.primaryHighlightedColor,
+                              size: 30,
+                            )),
+                        Expanded(flex: 1, child: Container()),
+                        Expanded(
+                          flex: 10,
+                          child: Form(
+                            key: _formKey,
+                            child: TextFormField(
+                              controller: feedbackController,
+                              keyboardType: TextInputType.text,
+                              style: TextStyle(
+                                color: C.primaryUnHighlightedColor,
+                                fontSize: D.inputFieldFontSize * heightFactor,
+                              ),
+                              validator: _validator,
+                              textInputAction: TextInputAction.done,
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(fontSize: 0.1),
+                                labelText: "Feedback",
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Container(
                     padding: EdgeInsets.only(right: D.horizontalPadding, top: 40),
                     alignment: Alignment.topRight,
