@@ -18,7 +18,10 @@ class AboutUsScreen extends StatelessWidget {
           SingleChildScrollView(
             child: Column(
               children: [
-                screenBody(context),
+                DefaultTextStyle(
+                  style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+                  child: screenBody(context),
+                ),
               ],
             ),
           ),
@@ -47,7 +50,6 @@ class AboutUsScreen extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavBar(width, height, bottom, heightFactor),
       ],
     );
   }
@@ -129,39 +131,6 @@ class AboutUsScreen extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget bottomNavBar(double width, double height, double bottom, double heightFactor) {
-    return Container(
-      alignment: Alignment.center,
-      margin: EdgeInsets.only(top: heightFactor * 45),
-      padding: EdgeInsets.only(left: width / 50, top: heightFactor * 10, bottom: heightFactor * 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          IconButton(
-            iconSize: heightFactor * 30,
-            icon: Icon(
-              Icons.adjust_rounded,
-              color: Colors.grey,
-            ),
-            onPressed: () {},
-          ),
-          IconButton(
-            iconSize: heightFactor * 30,
-            icon: Icon(
-              Icons.people,
-              color: Colors.grey,
-            ),
-            onPressed: () {},
-          )
         ],
       ),
     );
