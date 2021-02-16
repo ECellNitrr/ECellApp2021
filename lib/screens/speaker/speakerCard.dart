@@ -99,7 +99,7 @@ class SpeakerCard extends StatelessWidget {
                         ),
                         GestureDetector(
                             onTap: () {
-                              //TODO:
+                              //TODO: Handle speaker.socialMedia
                             },
                             child: Image.asset(
                               S.assetIconLinkdin,
