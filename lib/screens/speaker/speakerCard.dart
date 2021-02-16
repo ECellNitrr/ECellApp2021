@@ -95,36 +95,14 @@ class SpeakerCard extends StatelessWidget {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: heightFactor * 25,
+                          height: heightFactor * 45,
                         ),
                         GestureDetector(
                             onTap: () {
                               //TODO:
                             },
                             child: Image.asset(
-                              S.assetIconFb,
-                              height: heightFactor * 20,
-                              color: Color.alphaBlend(
-                                  C.blendSocialIconColorOne, C.blendSocialIconColorTwo),
-                            )),
-                        SizedBox(height: heightFactor * 10),
-                        GestureDetector(
-                            onTap: () {
-                              //TODO:
-                            },
-                            child: Image.asset(
                               S.assetIconLinkdin,
-                              height: heightFactor * 20,
-                              color: Color.alphaBlend(
-                                  C.blendSocialIconColorOne, C.blendSocialIconColorTwo),
-                            )),
-                        SizedBox(height: heightFactor * 10),
-                        GestureDetector(
-                            onTap: () {
-                              //TODO:
-                            },
-                            child: Image.asset(
-                              S.assetIconTwitter,
                               height: heightFactor * 20,
                               color: Color.alphaBlend(
                                   C.blendSocialIconColorOne, C.blendSocialIconColorTwo),
