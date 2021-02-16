@@ -40,7 +40,7 @@ class SpeakerCard extends StatelessWidget {
                     ),
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(20.0),
                         child: Text(
                           speaker.description,
                           style: TextStyle(color: Colors.black),
@@ -59,18 +59,18 @@ class SpeakerCard extends StatelessWidget {
                     height: heightFactor * 250,
                   )),
               Positioned(
-                  top: 50,
-                  left: 35,
+                  top: heightFactor * 70,
+                  left: heightFactor * 55,
                   child: CircleAvatar(
                     backgroundColor: Colors.blue,
                     //ADD NETWORK_IMAGE
 
                     backgroundImage: NetworkImage(speaker.profilePic),
-                    radius: 35,
+                    radius: heightFactor * 45,
                   )),
               Positioned(
-                  top: 50,
-                  left: 150,
+                  top: heightFactor * 60,
+                  left: heightFactor * 200,
                   //ADD SPEAKER_NAME
                   child: Text(
                     speaker.name,
@@ -80,8 +80,8 @@ class SpeakerCard extends StatelessWidget {
                         fontWeight: FontWeight.w600),
                   )),
               Positioned(
-                  top: 80,
-                  left: 150,
+                  top: heightFactor * 100,
+                  left: heightFactor * 200,
                   child: Container(
                     width: 150,
                     //ADD SPEAKER_DETAILS
@@ -92,8 +92,8 @@ class SpeakerCard extends StatelessWidget {
                     ),
                   )),
               Positioned(
-                  top: 40,
-                  left: 300,
+                  top: heightFactor * 40,
+                  left: heightFactor * 368,
                   bottom: 30,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
