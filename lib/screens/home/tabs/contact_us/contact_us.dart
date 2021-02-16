@@ -162,8 +162,8 @@ class ContactUsScreen extends StatelessWidget {
                             onTap: () => _launchURL(S.linkedinURL),
                             child: Image.asset(
                               S.assetLinkedinIcon,
-                              width: 30,
-                              height: 30,
+                              width: 60,
+                              height: 60,
                             ),
                           ),
                         ),
@@ -173,8 +173,8 @@ class ContactUsScreen extends StatelessWidget {
                             onTap: () => _launchURL(S.twitterURL),
                             child: Image.asset(
                               S.assetTwitterIcon,
-                              width: 30,
-                              height: 30,
+                              width: 60,
+                              height: 60,
                             ),
                           ),
                         ),
@@ -184,8 +184,8 @@ class ContactUsScreen extends StatelessWidget {
                             onTap: () => _launchURL(S.facebookURL),
                             child: Image.asset(
                               S.assetFacebookIcon,
-                              width: 30,
-                              height: 30,
+                              width: 60,
+                              height: 60,
                             ),
                           ),
                         ),
@@ -195,8 +195,8 @@ class ContactUsScreen extends StatelessWidget {
                             onTap: () => _launchURL(S.instagramURL),
                             child: Image.asset(
                               S.assetInstagramIcon,
-                              width: 30,
-                              height: 30,
+                              width: 60,
+                              height: 60,
                             ),
                           ),
                         ),
