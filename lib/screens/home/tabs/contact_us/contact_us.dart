@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:ecellapp/screens/home/cubit/feedback_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactUsScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -63,10 +64,10 @@ class ContactUsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(
-                          Icons.location_pin,
-                          color: C.primaryHighlightedColor,
-                          size: 30,
+                        Image.asset(
+                          S.assetLocationIcon,
+                          width: 30,
+                          height: 30,
                         ),
                         SizedBox(
                           width: width / 20,
@@ -104,10 +105,10 @@ class ContactUsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(
-                          Icons.phone,
-                          color: C.primaryHighlightedColor,
-                          size: 30,
+                        Image.asset(
+                          S.assetPhoneIcon,
+                          width: 30,
+                          height: 30,
                         ),
                         SizedBox(
                           width: width / 20,
@@ -130,10 +131,10 @@ class ContactUsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(
-                          Icons.mail,
-                          color: C.primaryHighlightedColor,
-                          size: 30,
+                        Image.asset(
+                          S.assetGmailIcon,
+                          width: 30,
+                          height: 30,
                         ),
                         SizedBox(
                           width: width / 20,
@@ -157,34 +158,46 @@ class ContactUsScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           flex: 1,
-                          child: Icon(
-                            Icons.person,
-                            color: C.primaryHighlightedColor,
-                            size: 30,
+                          child: GestureDetector(
+                            onTap: () => _launchURL(S.linkedinURL),
+                            child: Image.asset(
+                              S.assetLinkedinIcon,
+                              width: 30,
+                              height: 30,
+                            ),
                           ),
                         ),
                         Expanded(
                           flex: 1,
-                          child: Icon(
-                            Icons.person,
-                            color: C.primaryHighlightedColor,
-                            size: 30,
+                          child: GestureDetector(
+                            onTap: () => _launchURL(S.twitterURL),
+                            child: Image.asset(
+                              S.assetTwitterIcon,
+                              width: 30,
+                              height: 30,
+                            ),
                           ),
                         ),
                         Expanded(
                           flex: 1,
-                          child: Icon(
-                            Icons.person,
-                            color: C.primaryHighlightedColor,
-                            size: 30,
+                          child: GestureDetector(
+                            onTap: () => _launchURL(S.facebookURL),
+                            child: Image.asset(
+                              S.assetFacebookIcon,
+                              width: 30,
+                              height: 30,
+                            ),
                           ),
                         ),
                         Expanded(
                           flex: 1,
-                          child: Icon(
-                            Icons.person,
-                            color: C.primaryHighlightedColor,
-                            size: 30,
+                          child: GestureDetector(
+                            onTap: () => _launchURL(S.instagramURL),
+                            child: Image.asset(
+                              S.assetInstagramIcon,
+                              width: 30,
+                              height: 30,
+                            ),
                           ),
                         ),
                       ],
@@ -214,10 +227,10 @@ class ContactUsScreen extends StatelessWidget {
                                 wordSpacing: 4),
                           ),
                         ),
-                        Icon(
-                          Icons.person,
-                          color: C.primaryHighlightedColor,
-                          size: 30,
+                        Image.asset(
+                          S.assetHeartIcon,
+                          width: 30,
+                          height: 30,
                         ),
                       ],
                     ),
@@ -228,10 +241,10 @@ class ContactUsScreen extends StatelessWidget {
                       children: [
                         Expanded(
                             flex: 1,
-                            child: Icon(
-                              Icons.messenger_outline_rounded,
-                              color: C.primaryHighlightedColor,
-                              size: 30,
+                            child: Image.asset(
+                              S.assetFeedbackIcon,
+                              width: 30,
+                              height: 30,
                             )),
                         Expanded(flex: 1, child: Container()),
                         Expanded(
@@ -315,6 +328,14 @@ class ContactUsScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   String _validator(String email) => email.isEmpty ? "" : null;
