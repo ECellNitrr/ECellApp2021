@@ -1,5 +1,5 @@
 import 'package:ecellapp/core/res/colors.dart';
-import 'package:ecellapp/screens/about_us/text_aim.dart';
+import 'package:ecellapp/screens/aim/text_aim.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
