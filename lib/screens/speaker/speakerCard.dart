@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
@@ -25,10 +23,28 @@ class SpeakerCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(40, 30, 0, 50),
                 child: Container(
-                  height: heightFactor * 160,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(22),
+                  ),
+                  // color: Colors.white,
+                  child: ExpansionTile(
+                    title: Container(
+                      height: heightFactor * 160,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(22),
+                      ),
+                    ),
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          speaker.description,
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -65,31 +81,19 @@ class SpeakerCard extends StatelessWidget {
                     width: 150,
                     //ADD SPEAKER_DETAILS
                     child: Text(
-                      speaker.description,
+                      speaker.company,
                       style: TextStyle(fontSize: heightFactor * 20, color: Colors.black),
                       // softWrap: true,
                     ),
                   )),
               Positioned(
-                  top: 15,
-                  left: 310,
+                  top: 40,
+                  left: 300,
                   bottom: 30,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        GestureDetector(
-                            onTap: () {
-                              //TODO:
-                            },
-                            child: Transform.rotate(
-                              angle: 270 * pi / 180,
-                              child: Icon(
-                                Icons.arrow_back_ios,
-                                size: 15,
-                                color: C.downArrowColor,
-                              ),
-                            )),
                         SizedBox(
                           height: heightFactor * 25,
                         ),

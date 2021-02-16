@@ -1,15 +1,23 @@
-import 'package:ecellapp/core/res/colors.dart';
-import 'package:ecellapp/core/res/dimens.dart';
-import 'package:ecellapp/models/speaker.dart';
-import 'package:ecellapp/screens/speaker/speakerCard.dart';
-import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
-import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SpeakerScreen extends StatelessWidget {
+import 'package:ecellapp/core/res/colors.dart';
+import 'package:ecellapp/core/res/dimens.dart';
+import 'package:ecellapp/models/speaker.dart';
+import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
+import 'package:ecellapp/screens/speaker/speakerCard.dart';
+import 'package:ecellapp/widgets/stateful_wrapper.dart';
+
+class SpeakerScreen extends StatefulWidget {
   const SpeakerScreen({Key key}) : super(key: key);
+
+  @override
+  _SpeakerScreenState createState() => _SpeakerScreenState();
+}
+
+class _SpeakerScreenState extends State<SpeakerScreen> {
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,50 +50,76 @@ class SpeakerScreen extends StatelessWidget {
   Widget _buildSuccess(BuildContext context, List<Speaker> speakerList) {
     double height = MediaQuery.of(context).size.height;
     double heightFactor = height / 1000;
+    double bottom = MediaQuery.of(context).viewInsets.bottom;
 
     List<Widget> sL = [];
     speakerList.forEach((element) {
       sL.add(_cardsLoader(element));
     });
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: Container(
-          padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
-          child: IconButton(
-            icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
+    if (_scrollController.hasClients) {
+      if (bottom > height * 0.25) {
+        _scrollController.animateTo(
+          bottom - height * 0.25,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.ease,
+        );
+      } else {
+        _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.ease);
+      }
+    }
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [C.backgroundTop1, C.backgroundBottom1],
         ),
       ),
-      body: DefaultTextStyle.merge(
-        style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [C.backgroundTop1, C.backgroundBottom1],
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBodyBehindAppBar: true,
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: Container(
+            padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
+            child: IconButton(
+              icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+              onPressed: () => Navigator.of(context).pop(),
             ),
           ),
+        ),
+        body: DefaultTextStyle.merge(
+          style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                //Heading
-                Text(
-                  "Speakers",
-                  style: TextStyle(
-                      fontSize: heightFactor * 50,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1.00),
+                SizedBox(
+                  height: heightFactor * 100,
                 ),
-                Column(
-                  children: sL,
-                )
+                //Heading
+                SizedBox(
+                  height: heightFactor * 100,
+                  child: Text(
+                    "Speakers",
+                    style: TextStyle(
+                        fontSize: heightFactor * 50,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1.00),
+                  ),
+                ),
+                Flexible(
+                    child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  controller: _scrollController,
+                  child: Column(
+                    children: sL,
+                  ),
+                )),
               ],
             ),
           ),

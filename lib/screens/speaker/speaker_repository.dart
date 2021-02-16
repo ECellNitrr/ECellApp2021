@@ -44,6 +44,40 @@ class FakeSpeakerRepository extends SpeakerRepository {
                 "https://ichef.bbci.co.uk/news/976/cpsprodpb/7727/production/_103330503_musk3.jpg",
             "social_media": "blank",
             "year": 2019
+          },
+          {
+            "company": "The Logical Indian",
+            "contact": "",
+            "created_at": "2021-01-13T11:33:00.689210Z",
+            "description":
+                "The most difficult part of being a journalist is printing something which someone else doesn't want to be printed. In this day where all the media houses run for TRP, Shwetha Kothari is one of those few journalists who stand for nothing else but the absolute truth. Currently the Managing Editor at The Logical Indian, she's extremely vocal on her views on various issues like unsettled public issues, feminism, exploiting India's entrepreneurial potential. With tons of experience on her shoulder, her session can help you find the right direction in life.",
+            "email": "shwetakothari@in.com",
+            "experience": 2,
+            "flag": true,
+            "id": 16,
+            "modified_at": "2021-01-13T11:43:16.131751Z",
+            "name": "Shweta Kothari",
+            "profile_pic":
+                "https://ichef.bbci.co.uk/news/976/cpsprodpb/7727/production/_103330503_musk3.jpg",
+            "social_media": "https://www.linkedin.com/in/shweta-kothari-b57a8453",
+            "year": 2019
+          },
+          {
+            "company": "The Logical Indian",
+            "contact": "",
+            "created_at": "2021-01-13T11:33:00.689210Z",
+            "description":
+                "The most difficult part of being a journalist is printing something which someone else doesn't want to be printed. In this day where all the media houses run for TRP, Shwetha Kothari is one of those few journalists who stand for nothing else but the absolute truth. Currently the Managing Editor at The Logical Indian, she's extremely vocal on her views on various issues like unsettled public issues, feminism, exploiting India's entrepreneurial potential. With tons of experience on her shoulder, her session can help you find the right direction in life.",
+            "email": "shwetakothari@in.com",
+            "experience": 2,
+            "flag": true,
+            "id": 16,
+            "modified_at": "2021-01-13T11:43:16.131751Z",
+            "name": "Shweta Kothari",
+            "profile_pic":
+                "https://ichef.bbci.co.uk/news/976/cpsprodpb/7727/production/_103330503_musk3.jpg",
+            "social_media": "https://www.linkedin.com/in/shweta-kothari-b57a8453",
+            "year": 2019
           }
         ],
         "message": "Speakers Fetched Successfully"
