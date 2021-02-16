@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _loadWidget() async {
     await init();
-    return Timer(Duration(seconds: D.splashDelay), navigationPage);
+    Timer(Duration(seconds: D.splashDelay), navigationPage);
   }
 
   void navigationPage() {
