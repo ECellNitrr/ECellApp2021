@@ -91,7 +91,7 @@ class SpeakerCard extends StatelessWidget {
                   )),
               Positioned(
                   top: heightFactor * 40,
-                  left: heightFactor * 462,
+                  left: heightFactor * 383,
                   bottom: 30,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
