@@ -19,7 +19,7 @@ class SpeakerCard extends StatelessWidget {
         child: Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.all(D.horizontalPaddingFrame),
+          padding: const EdgeInsets.symmetric(horizontal: D.horizontalPaddingFrame),
           child: Stack(
             children: [
               Padding(
@@ -91,7 +91,7 @@ class SpeakerCard extends StatelessWidget {
                   )),
               Positioned(
                   top: heightFactor * 40,
-                  left: heightFactor * 383,
+                  left: heightFactor * 462,
                   bottom: 30,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
