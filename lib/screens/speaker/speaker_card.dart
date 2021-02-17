@@ -1,10 +1,10 @@
-import 'package:ecellapp/core/res/colors.dart';
-import 'package:ecellapp/core/res/dimens.dart';
-import 'package:ecellapp/core/res/errors.dart';
-import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/models/speaker.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'package:ecellapp/core/res/colors.dart';
+import 'package:ecellapp/core/res/dimens.dart';
+import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/models/speaker.dart';
 
 class SpeakerCard extends StatelessWidget {
   final Speaker speaker;
@@ -19,11 +19,11 @@ class SpeakerCard extends StatelessWidget {
         child: Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.all(D.horizontalPadding),
+          padding: const EdgeInsets.all(D.horizontalPaddingFrame),
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(40, 30, 0, 50),
+                padding: const EdgeInsets.fromLTRB(20, 20, 0, 20),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -64,7 +64,6 @@ class SpeakerCard extends StatelessWidget {
                   child: CircleAvatar(
                     backgroundColor: Colors.blue,
                     //ADD NETWORK_IMAGE
-
                     backgroundImage: NetworkImage(speaker.profilePic),
                     radius: heightFactor * 45,
                   )),
@@ -88,27 +87,25 @@ class SpeakerCard extends StatelessWidget {
                     child: Text(
                       speaker.company,
                       style: TextStyle(fontSize: heightFactor * 20, color: Colors.black),
-                      // softWrap: true,
                     ),
                   )),
               Positioned(
                   top: heightFactor * 40,
-                  left: heightFactor * 368,
+                  left: heightFactor * 462,
                   bottom: 30,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        SizedBox(
-                          height: heightFactor * 45,
-                        ),
+                        SizedBox(height: heightFactor * 45),
                         GestureDetector(
                             onTap: () async {
                               //Handle speaker.socialMedia
                               if (await canLaunch(speaker.socialMedia)) {
                                 await launch(speaker.socialMedia);
                               } else {
-                                throw UnknownException();
+                                Scaffold.of(context)
+                                    .showSnackBar(SnackBar(content: Text(S.redirectIntentError)));
                               }
                             },
                             child: Image.asset(

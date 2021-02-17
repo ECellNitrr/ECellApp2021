@@ -60,6 +60,7 @@ class S {
   static const String networkException =
       "Request couldn't be completed. Make sure the device is online";
   static const String unknownException = "Something went wrong. Please try again later.";
+  static const String redirectIntentError = "Please try again unable to redirect!";
 
   // asset paths
   static const String assetTopRightBasic = "assets/basic/top-right.png";

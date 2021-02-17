@@ -6,7 +6,7 @@ import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/models/speaker.dart';
 import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
-import 'package:ecellapp/screens/speaker/speakerCard.dart';
+import 'package:ecellapp/screens/speaker/speaker_card.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 
 class SpeakerScreen extends StatelessWidget {
@@ -47,10 +47,8 @@ class SpeakerScreen extends StatelessWidget {
     double heightFactor = height / 1000;
     double bottom = MediaQuery.of(context).viewInsets.bottom;
 
-    List<Widget> sL = [];
-    speakerList.forEach((element) {
-      sL.add(_cardsLoader(element));
-    });
+    List<Widget> speakerContentList = [];
+    speakerList.forEach((element) => speakerContentList.add(SpeakerCard(speaker: element)));
 
     if (_scrollController.hasClients) {
       if (bottom > height * 0.25) {
@@ -90,41 +88,36 @@ class SpeakerScreen extends StatelessWidget {
         body: DefaultTextStyle.merge(
           style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
           child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                SizedBox(
-                  height: heightFactor * 100,
-                ),
-                //Heading
-                SizedBox(
-                  height: heightFactor * 100,
-                  child: Text(
-                    "Speakers",
-                    style: TextStyle(
-                        fontSize: heightFactor * 50,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1.00),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              controller: _scrollController,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  SizedBox(
+                    height: heightFactor * 100,
                   ),
-                ),
-                Flexible(
-                    child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  controller: _scrollController,
-                  child: Column(
-                    children: sL,
+                  //Heading
+                  SizedBox(
+                    height: heightFactor * 100,
+                    child: Text(
+                      "Speakers",
+                      style: TextStyle(
+                          fontSize: heightFactor * 50,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.00),
+                    ),
                   ),
-                )),
-              ],
+                  Flexible(
+                    child: Column(children: speakerContentList),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
-  }
-
-  Widget _cardsLoader(Speaker speaker) {
-    return SpeakerCard(speaker: speaker);
   }
 
   Widget _buildLoading() {

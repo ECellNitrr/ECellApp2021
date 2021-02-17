@@ -40,8 +40,8 @@ class C {
 
   /// FrameCardWidget colors
   static final Color downArrowColor = HexColor("#FD8020");
-  static final Color blendSocialIconColorOne = Colors.black12;
-  static final Color blendSocialIconColorTwo = Colors.black38;
+  static const Color blendSocialIconColorOne = Colors.black12;
+  static const Color blendSocialIconColorTwo = Colors.black38;
 }
 
 class HexColor extends Color {
