@@ -16,6 +16,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black12,
       body: tabs[_currentIndex],
       bottomNavigationBar: _buildBottomNavBar(context),
     );
@@ -28,6 +29,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
       child: Container(
           height: height / 10,
           child: BottomNavigationBar(
+            selectedItemColor: Colors.orange[900],
             unselectedFontSize: 50,
             currentIndex: _currentIndex,
             onTap: (int index) {
@@ -40,11 +42,17 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
             showUnselectedLabels: false,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.adjust_rounded),
+                icon: Icon(
+                  Icons.adjust_rounded,
+                  size: 35,
+                ),
                 label: "Aim",
               ),
               BottomNavigationBarItem(
-                icon: new Icon(Icons.people),
+                icon: new Icon(
+                  Icons.people,
+                  size: 35,
+                ),
                 label: 'Our Team',
               ),
             ],
