@@ -13,8 +13,7 @@ class SpeakerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double heightFactor = height / 1000;
+    double ratio = MediaQuery.of(context).size.aspectRatio;
     return Stack(
       children: [
         Padding(
@@ -28,13 +27,33 @@ class SpeakerCard extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(22),
                   ),
-                  // color: Colors.white,
                   child: ExpansionTile(
                     title: Container(
-                      height: heightFactor * 160,
+                      height: ratio > 0.5 ? 140 : 160,
+                      margin: EdgeInsets.only(left: 130),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(22),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            speaker.name,
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: C.cardFontColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            speaker.company,
+                            style: TextStyle(fontSize: 20, color: C.cardFontColor),
+                          ),
+                        ],
                       ),
                     ),
                     children: [
@@ -50,53 +69,14 @@ class SpeakerCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                  top: 0,
-                  left: -(heightFactor * 25),
-                  child: Image.asset(
-                    S.assetSpeakerCardFrame,
-                    fit: BoxFit.cover,
-                    height: heightFactor * 250,
-                  )),
-              Positioned(
-                  top: heightFactor * 70,
-                  left: heightFactor * 30,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    //ADD NETWORK_IMAGE
-                    backgroundImage: NetworkImage(speaker.profilePic),
-                    radius: heightFactor * 45,
-                  )),
-              Positioned(
-                  top: heightFactor * 60,
-                  left: heightFactor * 200,
-                  //ADD SPEAKER_NAME
-                  child: Text(
-                    speaker.name,
-                    style: TextStyle(
-                        fontSize: heightFactor * 25,
-                        color: C.cardFontColor,
-                        fontWeight: FontWeight.w600),
-                  )),
-              Positioned(
-                  top: heightFactor * 120,
-                  left: heightFactor * 200,
-                  child: Container(
-                    width: 150,
-                    //ADD SPEAKER_DETAILS
-                    child: Text(
-                      speaker.company,
-                      style: TextStyle(fontSize: heightFactor * 20, color: C.cardFontColor),
-                    ),
-                  )),
-              Positioned(
-                  top: heightFactor * 40,
+                  top: 40,
                   right: 0,
                   bottom: 30,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        SizedBox(height: heightFactor * 45),
+                        SizedBox(height: 45),
                         GestureDetector(
                             onTap: () async {
                               //Handle speaker.socialMedia
@@ -109,7 +89,7 @@ class SpeakerCard extends StatelessWidget {
                             },
                             child: Image.asset(
                               S.assetIconLinkdin,
-                              height: heightFactor * 20,
+                              height: 20,
                               color: Color.alphaBlend(
                                   C.blendSocialIconColorOne, C.blendSocialIconColorTwo),
                             )),
@@ -118,7 +98,29 @@ class SpeakerCard extends StatelessWidget {
                   )),
             ],
           ),
-        )
+        ),
+        Positioned(
+          height: ratio > 0.5 ? 200 : 220,
+          width: ratio > 0.5 ? 150 : 170,
+          child: Stack(
+            children: [
+              Image.asset(
+                S.assetSpeakerCardFrame,
+                fit: BoxFit.cover,
+                height: 220,
+              ),
+              Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(bottom: 10),
+                child: CircleAvatar(
+                  backgroundColor: Colors.blue,
+                  backgroundImage: NetworkImage(speaker.profilePic),
+                  radius: 45,
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
