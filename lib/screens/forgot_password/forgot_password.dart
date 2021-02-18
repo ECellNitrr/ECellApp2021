@@ -231,17 +231,127 @@ class ForgotPasswordScreen extends StatelessWidget {
   }
 
   Widget _enterOTP(BuildContext context, ForgotPasswordState state) {
-    return Padding(
-      padding: const EdgeInsets.all(40.0),
-      child: Column(
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    double bottom = MediaQuery.of(context).viewInsets.bottom;
+    double heightFactor = height / 1000;
+    if (_scrollController.hasClients) {
+      if (bottom > height * 0.25) {
+        _scrollController.animateTo(
+          bottom - height * 0.25,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.ease,
+        );
+      } else {
+        _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.ease);
+      }
+    }
+    return DefaultTextStyle(
+      style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+      child: Stack(
         children: [
-          Text("Enter otp"),
-          OTPField(otpController),
-          FlatButton(
-              onPressed: () {
-                _verifyOtp(context, state);
-              },
-              child: Text("Press me")),
+          //background
+          ScreenBackground(elementId: 0),
+          SingleChildScrollView(
+            physics: NeverScrollableScrollPhysics(),
+            controller: _scrollController,
+            child: Container(
+              height: height * 1.25,
+              child: Column(
+                children: [
+                  // The text part od the screen
+                  Flexible(
+                    flex: 1,
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(0, heightFactor * 100, 0, 0),
+                      alignment: Alignment.center,
+                      child: Column(
+                        children: [
+                          Text(
+                            "Step 2/3",
+                            style:
+                                TextStyle(fontSize: 40 * heightFactor, fontWeight: FontWeight.w600),
+                          ),
+                          SizedBox(height: 30 * heightFactor),
+                          Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Enter OTP",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w300,
+                                color: C.primaryHighlightedColor,
+                                fontSize: heightFactor * 30,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 30 * heightFactor),
+                          Container(
+                            padding:
+                                EdgeInsets.fromLTRB(heightFactor * 10, 0, heightFactor * 10, 0),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "An otp has been sent to your email address.",
+                              //textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: heightFactor * 20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 2,
+                    child: Column(
+                      children: [
+                        OTPField(otpController),
+                        SizedBox(height: 30 * heightFactor),
+                        //Verify button
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.only(right: D.horizontalPadding),
+                            alignment: Alignment.topRight,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(30)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: C.authButtonColor.withOpacity(0.2),
+                                    blurRadius: 10,
+                                    spreadRadius: 3,
+                                    offset: Offset(0, 12),
+                                  )
+                                ],
+                              ),
+                              child: RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                                ),
+                                color: C.authButtonColor,
+                                onPressed: () => _verifyOtp(context, state),
+                                child: Container(
+                                  height: 60,
+                                  width: 120,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "Verify",
+                                    style: TextStyle(
+                                        color: C.primaryUnHighlightedColor,
+                                        fontSize: 20 * heightFactor),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
