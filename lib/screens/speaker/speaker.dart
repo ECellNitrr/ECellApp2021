@@ -18,22 +18,24 @@ class SpeakerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StatefulWrapper(
       onInit: () => _getAllSpeakers(context),
-      child: Scaffold(
-        body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) {
-          if (state is SpeakerError) {
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-          }
-        }, builder: (context, state) {
-          if (state is SpeakerInitial) {
-            return _buildLoading();
-          } else if (state is SpeakerSuccess) {
-            return _buildSuccess(context, state.speakerList);
-          } else if (state is SpeakerLoading) {
-            return _buildLoading();
-          } else {
-            return _buildAskReload();
-          }
-        }),
+      child: SafeArea(
+        child: Scaffold(
+          body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) {
+            if (state is SpeakerError) {
+              Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+            }
+          }, builder: (context, state) {
+            if (state is SpeakerInitial) {
+              return _buildLoading();
+            } else if (state is SpeakerSuccess) {
+              return _buildSuccess(context, state.speakerList);
+            } else if (state is SpeakerLoading) {
+              return _buildLoading();
+            } else {
+              return _buildAskReload();
+            }
+          }),
+        ),
       ),
     );
   }
