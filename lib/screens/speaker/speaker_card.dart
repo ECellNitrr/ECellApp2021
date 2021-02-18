@@ -39,7 +39,7 @@ class SpeakerCard extends StatelessWidget {
                     ),
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(25.0),
                         child: Text(
                           speaker.description,
                           style: TextStyle(color: C.cardFontColor),
