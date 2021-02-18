@@ -255,7 +255,6 @@ class ForgotPasswordScreen extends StatelessWidget {
   }
 
   Widget _resetPassword(BuildContext context, ForgotPasswordState state) {
-    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double bottom = MediaQuery.of(context).viewInsets.bottom;
     double heightFactor = height / 1000;
