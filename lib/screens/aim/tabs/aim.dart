@@ -1,10 +1,10 @@
 import 'package:ecellapp/core/res/colors.dart';
-import 'package:ecellapp/screens/aim/text_aim.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ecellapp/core/res/strings.dart';
 
 class AimScreen extends StatelessWidget {
   @override
@@ -12,13 +12,11 @@ class AimScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          ScreenBackground(
-            elementId: 0,
-          ),
+          ScreenBackground(elementId: 0),
           SingleChildScrollView(
             child: Column(
               children: [
-                DefaultTextStyle(
+                DefaultTextStyle.merge(
                   style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
                   child: screenBody(context),
                 ),
@@ -71,7 +69,7 @@ class AimScreen extends StatelessWidget {
         "About Us",
         style: TextStyle(
           fontSize: 50 * heightFactor,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w900,
           color: Colors.white,
         ),
       ),
@@ -89,17 +87,50 @@ class AimScreen extends StatelessWidget {
             "Aim",
             style: TextStyle(
               fontSize: 40 * heightFactor,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w900,
               color: C.primaryHighlightedColor,
             ),
           ),
-          Text(
-            TextAim.getAim(),
-            style: TextStyle(
-              letterSpacing: 1.5 * heightFactor,
-              wordSpacing: 2 * heightFactor,
-              fontSize: 20 * heightFactor,
-              color: Colors.white,
+          SizedBox(
+            height: heightFactor * 10,
+          ),
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: "At ",
+                  style: TextStyle(
+                    height: 1.5,
+                    letterSpacing: 0.5,
+                    wordSpacing: 1.5,
+                    fontSize: 20 * heightFactor,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+                TextSpan(
+                  text: "E-Summit ",
+                  style: TextStyle(
+                    height: 1.5,
+                    letterSpacing: 0.5,
+                    wordSpacing: 1.5,
+                    fontSize: 20 * heightFactor,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+                TextSpan(
+                  text: S.aimPara,
+                  style: TextStyle(
+                    height: 1.5,
+                    letterSpacing: 0.5,
+                    wordSpacing: 1.5,
+                    fontSize: 20 * heightFactor,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -118,17 +149,50 @@ class AimScreen extends StatelessWidget {
             "Vision",
             style: TextStyle(
               fontSize: 40 * heightFactor,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w900,
               color: C.primaryHighlightedColor,
             ),
           ),
-          Text(
-            TextAim.getVision(),
-            style: TextStyle(
-              letterSpacing: 1.5 * heightFactor,
-              wordSpacing: 2 * heightFactor,
-              fontSize: 20 * heightFactor,
-              color: Colors.white,
+          SizedBox(
+            height: heightFactor * 10,
+          ),
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: "At ",
+                  style: TextStyle(
+                    height: 1.5,
+                    letterSpacing: 0.5,
+                    wordSpacing: 1.5,
+                    fontSize: 20 * heightFactor,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+                TextSpan(
+                  text: "E-Summit ",
+                  style: TextStyle(
+                    height: 1.5,
+                    letterSpacing: 0.5,
+                    wordSpacing: 1.5,
+                    fontSize: 20 * heightFactor,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+                TextSpan(
+                  text: S.visionPara,
+                  style: TextStyle(
+                    height: 1.5,
+                    letterSpacing: 0.5,
+                    wordSpacing: 1.5,
+                    fontSize: 20 * heightFactor,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
           ),
         ],

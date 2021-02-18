@@ -10,10 +10,12 @@ class S {
   static const String getSponsorsUrl = baseUrl + "sponsors/sorted_list/$sponsorApiYear/";
   static const String getSpeakerUrl = baseUrl + "speakers/full_list/";
   static const String postFeedbackUrl = baseUrl + "feedback/post/";
+
   // shared preferences keys
   static const String tokenKeySharedPreferences = "token";
   static const String nameKeySharedPreferences = "name";
   static const String emailKeySharedPreferences = "email";
+
   // api keys
   static const String tokenKey = "token";
   static const String passwordKey = "password";
@@ -21,9 +23,11 @@ class S {
   static const String firstnameKey = "first_name";
   static const String lastnameKey = "last_name";
   static const String phoneKey = "contact";
+
   //postfeedback
   static const String feedbackNameKey = "name";
   static const String feedbackMessageKey = "message";
+
   //event
   static const String eventnameKey = "name";
   static const String eventdateKey = "date";
@@ -32,6 +36,7 @@ class S {
   static const String eventidKey = "id";
   static const String eventdetailsKey = "details";
   static const String eventiconurlKey = "icon";
+
   //sponsors
   static const int sponsorApiYear = 2021;
   static const String sponsorName = "name";
@@ -46,6 +51,7 @@ class S {
   static const String sponsorYear = "year";
   static const String sponsorId = "id";
   static const String sponsCategoryObj = "spons_categories";
+
   //speaker
   static const String speakerCompany = "company";
   static const String speakerDescription = "description";
@@ -76,5 +82,9 @@ class S {
 
   // paragraphs
   static const String esummitPara =
+      "we aspire to create a melange of eminent speakers who have proved themselves in diverse fields and are at the zenith of glory. E-Summit'21 will not just be a conclave of innovative minds and epistemic elocutionists, but it will be the place where ideas not only thrive but become the greatest revelations of the century.";
+  static const String aimPara =
+      "we aspire to create a melange of eminent speakers who have proved themselves in diverse fields and are at the zenith of glory. E-Summit'21 will not just be a conclave of innovative minds and epistemic elocutionists, but it will be the place where ideas not only thrive but become the greatest revelations of the century.";
+  static const String visionPara =
       "we aspire to create a melange of eminent speakers who have proved themselves in diverse fields and are at the zenith of glory. E-Summit'21 will not just be a conclave of innovative minds and epistemic elocutionists, but it will be the place where ideas not only thrive but become the greatest revelations of the century.";
 }
