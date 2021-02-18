@@ -9,4 +9,5 @@ class D {
   static const double ringSize = 180;
   // Splash screen timer
   static const int splashDelay = 3;
+  static const double horizontalPaddingFrame = 20.0;
 }

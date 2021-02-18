@@ -86,12 +86,11 @@ class EventCard extends StatelessWidget {
                     child: Text(
                       event.date,
                       style: TextStyle(fontSize: heightFactor * 20, color: Colors.black),
-                      // softWrap: true,
                     ),
                   )),
               Positioned(
                   top: heightFactor * 40,
-                  left: heightFactor * 368,
+                  right: 0,
                   bottom: 30,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),

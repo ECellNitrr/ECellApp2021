@@ -3,6 +3,7 @@ import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/event.dart';
 import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
+import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,29 +15,32 @@ class EventsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocConsumer<EventsCubit, EventsState>(
-        listener: (context, state) {
-          if (state is EventsInitial) {
-            _getAllEvents(context);
-          } else if (state is EventsError) {
-            Scaffold.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
-          }
-        },
-        builder: (context, state) {
-          if (state is EventsInitial) {
-            return _buildInitial();
-          } else if (state is EventsSuccess) {
-            return _buildSuccess(context, state.json);
-          } else if (state is EventsLoading) {
-            return _buildLoading();
-          } else {
-            Log.e(tag: "EventsState", message: "State now is EventsError reached");
-            return Container(); // TODO the user should be shown the error on screen instead of a snackbar, and a retry button.
-          }
-        },
+    return StatefulWrapper(
+      onInit: () => _getAllEvents(context),
+      child: Scaffold(
+        body: BlocConsumer<EventsCubit, EventsState>(
+          listener: (context, state) {
+            if (state is EventsInitial) {
+              _getAllEvents(context);
+            } else if (state is EventsError) {
+              Scaffold.of(context).showSnackBar(
+                SnackBar(content: Text(state.message)),
+              );
+            }
+          },
+          builder: (context, state) {
+            if (state is EventsInitial) {
+              return _buildInitial();
+            } else if (state is EventsSuccess) {
+              return _buildSuccess(context, state.json);
+            } else if (state is EventsLoading) {
+              return _buildLoading();
+            } else {
+              Log.e(tag: "EventsState", message: "State now is EventsError reached");
+              return Container(); // TODO the user should be shown the error on screen instead of a snackbar, and a retry button.
+            }
+          },
+        ),
       ),
     );
   }
@@ -54,9 +58,12 @@ class EventsScreen extends StatelessWidget {
     double heightFactor = height / 1000;
     double bottom = MediaQuery.of(context).viewInsets.bottom;
     final ScrollController _scrollController = ScrollController();
-    List<Widget> sL = [];
+
+    Log.d(tag: "EventsScreen:", message: "SizeEventsList:${eventsList.length}");
+
+    List<Widget> eventObjList = [];
     eventsList.forEach((element) {
-      sL.add(_cardsLoader(element));
+      eventObjList.add(EventCard(event: element));
     });
 
     if (_scrollController.hasClients) {
@@ -97,41 +104,37 @@ class EventsScreen extends StatelessWidget {
         body: DefaultTextStyle.merge(
           style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
           child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                SizedBox(
-                  height: heightFactor * 100,
-                ),
-                //Heading
-                SizedBox(
-                  height: heightFactor * 100,
-                  child: Text(
-                    "Events",
-                    style: TextStyle(
-                        fontSize: heightFactor * 50,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1.00),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              controller: _scrollController,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  SizedBox(
+                    height: heightFactor * 100,
                   ),
-                ),
-                Flexible(
-                    child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  controller: _scrollController,
-                  child: Column(
-                    children: sL,
+                  //Heading
+                  SizedBox(
+                    height: heightFactor * 100,
+                    child: Text(
+                      "Events",
+                      style: TextStyle(
+                          fontSize: heightFactor * 50,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.00),
+                    ),
                   ),
-                )),
-              ],
+                  Flexible(
+                      child: Column(
+                    children: eventObjList,
+                  )),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
-  }
-
-  Widget _cardsLoader(Event event) {
-    return EventCard(event: event);
   }
 
   Widget _buildInitial() {

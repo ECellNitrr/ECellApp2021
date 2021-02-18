@@ -2,6 +2,9 @@ import 'dart:async';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/core/utils/injection.dart';
+import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
+import 'package:ecellapp/screens/events/events.dart';
+import 'package:ecellapp/screens/events/events_repository.dart';
 import 'package:ecellapp/screens/home/home.dart';
 import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
 import 'package:ecellapp/screens/login/login.dart';
@@ -37,8 +40,8 @@ class _SplashScreenState extends State<SplashScreen> {
       MaterialPageRoute(
         builder: (_) => (token == null)
             ? BlocProvider(
-                create: (_) => LoginCubit(APILoginRepository()),
-                child: LoginScreen(),
+                create: (_) => EventsCubit(FakeEventsRepository()),
+                child: EventsScreen(),
               )
             : HomeScreen(),
       ),

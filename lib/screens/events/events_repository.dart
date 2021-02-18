@@ -21,7 +21,7 @@ class FakeEventsRepository implements EventsRepository {
     // Simulate network delay
     await Future.delayed(Duration(seconds: 1));
 
-    if (Random().nextBool()) {
+    if (false && Random().nextBool()) {
       // random network error
       throw NetworkException();
     } else {
@@ -47,9 +47,11 @@ class FakeEventsRepository implements EventsRepository {
           }
         ]
       };
-      List<Event> events;
+      List<Event> events = List();
       (json["data"] as List).map((e) => events.add(Event.fromJson(e)));
       // fake successful response (the data entered here is same as in the API Doc example)
+      Log.d(tag: "FakeRepo:", message: "SizeEventsList:${events.length}");
+
       return events;
     }
   }
