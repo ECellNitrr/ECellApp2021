@@ -20,9 +20,7 @@ class EventsScreen extends StatelessWidget {
       child: Scaffold(
         body: BlocConsumer<EventsCubit, EventsState>(
           listener: (context, state) {
-            if (state is EventsInitial) {
-              _getAllEvents(context);
-            } else if (state is EventsError) {
+            if (state is EventsError) {
               Scaffold.of(context).showSnackBar(
                 SnackBar(content: Text(state.message)),
               );

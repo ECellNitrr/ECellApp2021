@@ -48,7 +48,7 @@ class FakeEventsRepository implements EventsRepository {
         ]
       };
       List<Event> events = List();
-      (json["data"] as List).map((e) => events.add(Event.fromJson(e)));
+      (json["data"] as List).forEach((e) => events.add(Event.fromJson(e)));
       // fake successful response (the data entered here is same as in the API Doc example)
       Log.d(tag: "FakeRepo:", message: "SizeEventsList:${events.length}");
 
@@ -75,8 +75,8 @@ class APIEventsRepository implements EventsRepository {
     if (response.statusCode == 200) {
       Log.i(tag: tag, message: "Request Successful");
       var json = jsonDecode(response.body);
-      List<Event> events;
-      (json["data"] as List).map((e) => events.add(Event.fromJson(e)));
+      List<Event> events = List();
+      (json["data"] as List).forEach((e) => events.add(Event.fromJson(e)));
       return events;
     } else if (response.statusCode == 404) {
       throw ValidationException(response.body);
