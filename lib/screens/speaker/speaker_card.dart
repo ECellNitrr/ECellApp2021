@@ -15,15 +15,14 @@ class SpeakerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double heightFactor = height / 1000;
-    return Container(
-        child: Stack(
+    return Stack(
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: D.horizontalPaddingFrame),
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 0, 20),
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -43,7 +42,7 @@ class SpeakerCard extends StatelessWidget {
                         padding: const EdgeInsets.all(20.0),
                         child: Text(
                           speaker.description,
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(color: C.cardFontColor),
                         ),
                       )
                     ],
@@ -52,7 +51,7 @@ class SpeakerCard extends StatelessWidget {
               ),
               Positioned(
                   top: 0,
-                  left: 0,
+                  left: -(heightFactor * 25),
                   child: Image.asset(
                     S.assetSpeakerCardFrame,
                     fit: BoxFit.cover,
@@ -60,7 +59,7 @@ class SpeakerCard extends StatelessWidget {
                   )),
               Positioned(
                   top: heightFactor * 70,
-                  left: heightFactor * 55,
+                  left: heightFactor * 30,
                   child: CircleAvatar(
                     backgroundColor: Colors.blue,
                     //ADD NETWORK_IMAGE
@@ -75,18 +74,18 @@ class SpeakerCard extends StatelessWidget {
                     speaker.name,
                     style: TextStyle(
                         fontSize: heightFactor * 25,
-                        color: Colors.black,
+                        color: C.cardFontColor,
                         fontWeight: FontWeight.w600),
                   )),
               Positioned(
-                  top: heightFactor * 100,
+                  top: heightFactor * 120,
                   left: heightFactor * 200,
                   child: Container(
                     width: 150,
                     //ADD SPEAKER_DETAILS
                     child: Text(
                       speaker.company,
-                      style: TextStyle(fontSize: heightFactor * 20, color: Colors.black),
+                      style: TextStyle(fontSize: heightFactor * 20, color: C.cardFontColor),
                     ),
                   )),
               Positioned(
@@ -121,6 +120,6 @@ class SpeakerCard extends StatelessWidget {
           ),
         )
       ],
-    ));
+    );
   }
 }

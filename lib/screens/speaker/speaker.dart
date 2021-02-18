@@ -25,7 +25,7 @@ class SpeakerScreen extends StatelessWidget {
           }
         }, builder: (context, state) {
           if (state is SpeakerInitial) {
-            return _buildInitial();
+            return _buildLoading();
           } else if (state is SpeakerSuccess) {
             return _buildSuccess(context, state.speakerList);
           } else if (state is SpeakerLoading) {
@@ -36,10 +36,6 @@ class SpeakerScreen extends StatelessWidget {
         }),
       ),
     );
-  }
-
-  Widget _buildInitial() {
-    return Container();
   }
 
   Widget _buildSuccess(BuildContext context, List<Speaker> speakerList) {
@@ -94,12 +90,9 @@ class SpeakerScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  SizedBox(
-                    height: heightFactor * 100,
-                  ),
                   //Heading
                   SizedBox(
-                    height: heightFactor * 100,
+                    height: heightFactor * 60,
                     child: Text(
                       "Speakers",
                       style: TextStyle(

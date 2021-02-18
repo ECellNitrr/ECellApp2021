@@ -42,6 +42,9 @@ class C {
   static final Color downArrowColor = HexColor("#FD8020");
   static const Color blendSocialIconColorOne = Colors.black12;
   static const Color blendSocialIconColorTwo = Colors.black38;
+
+  //Speaker Card fonts
+  static final Color cardFontColor = HexColor("#838383");
 }
 
 class HexColor extends Color {
