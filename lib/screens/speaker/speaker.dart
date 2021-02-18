@@ -18,32 +18,31 @@ class SpeakerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StatefulWrapper(
       onInit: () => _getAllSpeakers(context),
-      child: SafeArea(
-        child: Scaffold(
-          body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) {
-            if (state is SpeakerError) {
-              Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-            }
-          }, builder: (context, state) {
-            if (state is SpeakerInitial) {
-              return _buildLoading();
-            } else if (state is SpeakerSuccess) {
-              return _buildSuccess(context, state.speakerList);
-            } else if (state is SpeakerLoading) {
-              return _buildLoading();
-            } else {
-              return _buildAskReload();
-            }
-          }),
-        ),
+      child: Scaffold(
+        body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) {
+          if (state is SpeakerError) {
+            Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+          }
+        }, builder: (context, state) {
+          if (state is SpeakerInitial) {
+            return _buildLoading();
+          } else if (state is SpeakerSuccess) {
+            return _buildSuccess(context, state.speakerList);
+          } else if (state is SpeakerLoading) {
+            return _buildLoading();
+          } else {
+            return _buildAskReload();
+          }
+        }),
       ),
     );
   }
 
   Widget _buildSuccess(BuildContext context, List<Speaker> speakerList) {
     double height = MediaQuery.of(context).size.height;
-    double heightFactor = height / 1000;
     double bottom = MediaQuery.of(context).viewInsets.bottom;
+    double top = MediaQuery.of(context).viewPadding.top;
+    double ratio = MediaQuery.of(context).size.aspectRatio;
 
     List<Widget> speakerContentList = [];
     speakerList.forEach((element) => speakerContentList.add(SpeakerCard(speaker: element)));
@@ -69,14 +68,13 @@ class SpeakerScreen extends StatelessWidget {
         ),
       ),
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
           leading: Container(
-            padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
+            padding: EdgeInsets.all(D.horizontalPadding - 10),
             child: IconButton(
               icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
               onPressed: () => Navigator.of(context).pop(),
@@ -85,28 +83,29 @@ class SpeakerScreen extends StatelessWidget {
         ),
         body: DefaultTextStyle.merge(
           style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
-          child: Center(
+          child: NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (OverscrollIndicatorNotification overscroll) {
+              overscroll.disallowGlow();
+              return true;
+            },
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               controller: _scrollController,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  //Heading
-                  SizedBox(
-                    height: heightFactor * 60,
-                    child: Text(
+              child: Container(
+                margin: EdgeInsets.only(top: top + 56),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
                       "Speakers",
                       style: TextStyle(
-                          fontSize: heightFactor * 50,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1.00),
+                        fontSize: ratio > 0.5 ? 45 : 50,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  Flexible(
-                    child: Column(children: speakerContentList),
-                  ),
-                ],
+                    Column(children: speakerContentList),
+                  ],
+                ),
               ),
             ),
           ),
