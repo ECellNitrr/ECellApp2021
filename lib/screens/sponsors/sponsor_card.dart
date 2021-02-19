@@ -1,3 +1,4 @@
+import 'package:ecellapp/models/sponsor_category.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -7,7 +8,7 @@ import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/models/sponsor.dart';
 
 class SponsorCard extends StatelessWidget {
-  final Sponsor sponsor;
+  final SponsorCategory sponsor;
 
   const SponsorCard({Key key, this.sponsor}) : super(key: key);
 

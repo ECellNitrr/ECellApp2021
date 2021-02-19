@@ -26,7 +26,7 @@ class FakeSponsorsRepository extends SponsorsRepository {
     await Future.delayed(Duration(seconds: 1));
 
     //Fake Response and Network Delay
-    if (Random().nextBool()) {
+    if (false && Random().nextBool()) {
       throw NetworkException();
     } else {
       Map<String, dynamic> response = {

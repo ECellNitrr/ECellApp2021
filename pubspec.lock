@@ -419,17 +419,7 @@ packages:
       name: vector_math
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-<<<<<<< HEAD
     version: "2.1.0-nullsafety.5"
-sdks:
-  dart: ">=2.12.0-0.0 <3.0.0"
-  flutter: ">=1.16.0"
-=======
-    version: "2.1.0-nullsafety.3"
-=======
-    version: "2.1.0-nullsafety.5"
->>>>>>> 3c7c7f4335f933f3874419a91fb2c7a232973762
   win32:
     dependency: transitive
     description:
@@ -445,15 +435,5 @@ sdks:
     source: hosted
     version: "0.1.2"
 sdks:
-<<<<<<< HEAD
-  dart: ">=2.10.0-110 <2.11.0"
-<<<<<<< HEAD
-  flutter: ">=1.17.0 <2.0.0"
->>>>>>> 24cc943c75c8886ad1315291ca408d1b159130d6
-=======
-  flutter: ">=1.17.0 <2.0.0"
->>>>>>> 63a66ed70efb6c17625fca475468dc716766a8aa
-=======
   dart: ">=2.12.0-0.0 <3.0.0"
   flutter: ">=1.22.0 <2.0.0"
->>>>>>> 3c7c7f4335f933f3874419a91fb2c7a232973762

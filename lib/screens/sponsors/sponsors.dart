@@ -1,6 +1,7 @@
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/models/sponsor_category.dart';
+import 'package:ecellapp/screens/sponsors/sponsor_card.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class SponsorsScreen extends StatelessWidget {
     //TODO: UI
     List<Widget> sL = [];
     for (var item in sponsorsList) {
-      sL.add(Text(item.category, textAlign: TextAlign.center));
+      sL.add(SponsorCard(sponsor: item));
     }
 
     if (_scrollController.hasClients) {
@@ -83,9 +84,11 @@ class SponsorsScreen extends StatelessWidget {
         style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
         child: Stack(
           children: [
-            ScreenBackground(
-              elementId: 0,
+            Container(
+              width: 70,
+              color: Colors.white,
             ),
+            ScreenBackground(elementId: 0),
             Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
