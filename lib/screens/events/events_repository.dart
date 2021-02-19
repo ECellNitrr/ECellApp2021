@@ -21,7 +21,7 @@ class FakeEventsRepository implements EventsRepository {
     // Simulate network delay
     await Future.delayed(Duration(seconds: 1));
 
-    if (false && Random().nextBool()) {
+    if (Random().nextBool()) {
       // random network error
       throw NetworkException();
     } else {
