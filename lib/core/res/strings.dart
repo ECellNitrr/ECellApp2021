@@ -60,6 +60,7 @@ class S {
   static const String networkException =
       "Request couldn't be completed. Make sure the device is online";
   static const String unknownException = "Something went wrong. Please try again later.";
+  static const String redirectIntentError = "Please try again unable to redirect!";
 
   // asset paths
   static const String assetTopRightBasic = "assets/basic/top-right.png";
@@ -70,6 +71,8 @@ class S {
   static const String assetBottomLeftColorful = "assets/colorful/bottom-left.png";
   static const String assetEcellLogoWhite = "assets/ecell-logo.png";
   static const String assetEsummitLogoWhite = "assets/esummit-logo.png";
+  static const String assetSpeakerCardFrame = "assets/speaker-frame.png";
+  static const String assetIconLinkdin = "assets/linkdin-icon.png";
   static const String assetEsummitLogoWhiteFilled = "assets/esummit-filled-logo.png";
   static const String assetSponsorsLogoWhite = "assets/sponsors-logo.png";
   static const String assetEventsLogoWhite = "assets/events-logo.png";

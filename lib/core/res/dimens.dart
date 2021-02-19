@@ -9,4 +9,6 @@ class D {
   static const double ringSize = 180;
   // Splash screen timer
   static const int splashDelay = 3;
+  // WidgetCards padding from sides
+  static const double horizontalPaddingFrame = 20;
 }
