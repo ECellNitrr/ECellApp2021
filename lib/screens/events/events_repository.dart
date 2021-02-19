@@ -29,6 +29,46 @@ class FakeEventsRepository implements EventsRepository {
         "message": "Events Fetched successfully.",
         "data": [
           {
+            "id": 2,
+            "name": "E-Cell",
+            "venue": "Audi Hall",
+            "date": "2020-09-29T15:21:48.828+00:00",
+            "time": "test_time",
+            "details":
+                "A very detailed text which is very detailed so much that it cannot be more detailed",
+            "details_html": "test.html",
+            "cover_pic":
+                "https://static.businessworld.in/article/article_extra_large_image/1610638130_Zle1Cn_CES_2021.jpg",
+            "icon":
+                "https://static.businessworld.in/article/article_extra_large_image/1610638130_Zle1Cn_CES_2021.jpg",
+            "email": "test@email.com",
+            "flag": true,
+            "year": 2019,
+            "ecell_user": 4,
+            "created_at": "2020-09-29T15:21:48.828+00:00",
+            "modified_at": "2020-09-29T15:21:48.828+00:00"
+          },
+          {
+            "id": 3,
+            "name": "Aavartan",
+            "venue": "Amul Parlor",
+            "date": "2020-09-29T15:21:48.828+00:00",
+            "time": "test_time",
+            "details":
+                "A very detailed text which is very detailed so much that it cannot be more detailed",
+            "details_html": "test.html",
+            "cover_pic":
+                "https://static.businessworld.in/article/article_extra_large_image/1610638130_Zle1Cn_CES_2021.jpg",
+            "icon":
+                "https://static.businessworld.in/article/article_extra_large_image/1610638130_Zle1Cn_CES_2021.jpg",
+            "email": "test@email.com",
+            "flag": true,
+            "year": 2019,
+            "ecell_user": 4,
+            "created_at": "2020-09-29T15:21:48.828+00:00",
+            "modified_at": "2020-09-29T15:21:48.828+00:00"
+          },
+          {
             "id": 0,
             "name": "test",
             "venue": "test_venue",
@@ -36,8 +76,10 @@ class FakeEventsRepository implements EventsRepository {
             "time": "test_time",
             "details": "test_details",
             "details_html": "test.html",
-            "cover_pic": "test_cover.jpeg",
-            "icon": "test_icon.png",
+            "cover_pic":
+                "https://static.businessworld.in/article/article_extra_large_image/1610638130_Zle1Cn_CES_2021.jpg",
+            "icon":
+                "https://static.businessworld.in/article/article_extra_large_image/1610638130_Zle1Cn_CES_2021.jpg",
             "email": "test@email.com",
             "flag": true,
             "year": 2019,
@@ -50,8 +92,6 @@ class FakeEventsRepository implements EventsRepository {
       List<Event> events = List();
       (json["data"] as List).forEach((e) => events.add(Event.fromJson(e)));
       // fake successful response (the data entered here is same as in the API Doc example)
-      Log.d(tag: "FakeRepo:", message: "SizeEventsList:${events.length}");
-
       return events;
     }
   }

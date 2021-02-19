@@ -3,6 +3,7 @@ import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/event.dart';
 import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
+import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,16 +54,13 @@ class EventsScreen extends StatelessWidget {
     //TODO On success UI
 
     double height = MediaQuery.of(context).size.height;
-    double heightFactor = height / 1000;
     double bottom = MediaQuery.of(context).viewInsets.bottom;
     final ScrollController _scrollController = ScrollController();
-
-    Log.d(tag: "EventsScreen:", message: "SizeEventsList:${eventsList.length}");
+    double ratio = MediaQuery.of(context).size.aspectRatio;
+    double top = MediaQuery.of(context).viewPadding.top;
 
     List<Widget> eventObjList = [];
-    eventsList.forEach((element) {
-      eventObjList.add(EventCard(event: element));
-    });
+    eventsList.forEach((element) => eventObjList.add(EventCard(event: element)));
 
     if (_scrollController.hasClients) {
       if (bottom > height * 0.25) {
@@ -76,60 +74,52 @@ class EventsScreen extends StatelessWidget {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [C.backgroundTop1, C.backgroundBottom1],
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: Container(
+          padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
         ),
       ),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        extendBodyBehindAppBar: true,
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          leading: Container(
-            padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
-            child: IconButton(
-              icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ),
-        ),
-        body: DefaultTextStyle.merge(
-          style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
-          child: Center(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              controller: _scrollController,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  SizedBox(
-                    height: heightFactor * 100,
-                  ),
-                  //Heading
-                  SizedBox(
-                    height: heightFactor * 100,
-                    child: Text(
-                      "Events",
-                      style: TextStyle(
-                          fontSize: heightFactor * 50,
+      body: DefaultTextStyle.merge(
+        style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+        child: Stack(
+          children: [
+            ScreenBackground(elementId: 0),
+            NotificationListener<OverscrollIndicatorNotification>(
+              onNotification: (OverscrollIndicatorNotification overscroll) {
+                overscroll.disallowGlow();
+                return true;
+              },
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                controller: _scrollController,
+                child: Container(
+                  margin: EdgeInsets.only(top: top + 56),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(
+                        "Events",
+                        style: TextStyle(
+                          fontSize: ratio > 0.5 ? 45 : 50,
                           fontWeight: FontWeight.w600,
-                          letterSpacing: 1.00),
-                    ),
+                        ),
+                      ),
+                      Column(children: eventObjList),
+                    ],
                   ),
-                  Flexible(
-                      child: Column(
-                    children: eventObjList,
-                  )),
-                ],
+                ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );

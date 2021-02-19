@@ -1,6 +1,8 @@
+import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/models/event.dart';
+import 'package:ecellapp/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 
 class EventCard extends StatelessWidget {
@@ -10,17 +12,18 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double heightFactor = height / 1000;
+    double ratio = MediaQuery.of(context).size.aspectRatio;
+
+    var eventDateTime = event.date.split("T");
     return Container(
         child: Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.all(D.horizontalPadding),
+          padding: const EdgeInsets.all(D.horizontalPaddingFrame),
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(40, 30, 0, 50),
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -29,18 +32,48 @@ class EventCard extends StatelessWidget {
                   // color: Colors.white,
                   child: ExpansionTile(
                     title: Container(
-                      height: heightFactor * 160,
+                      height: ratio > 0.5 ? 160 : 180,
+                      margin: EdgeInsets.only(left: 130),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(22),
                       ),
+                      child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              event.name,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: C.cardFontColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              "Date:\t\t${eventDateTime[0]}",
+                              style: TextStyle(fontSize: 17, color: C.cardFontColor),
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              "Time:\t\t${eventDateTime[1].split("+")[0].substring(0, 8)}",
+                              style: TextStyle(fontSize: 17, color: C.cardFontColor),
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              "Venue:\t\t${event.venue}",
+                              style: TextStyle(fontSize: 17, color: C.cardFontColor),
+                            ),
+                          ]),
                     ),
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(25.0),
                         child: Text(
                           event.details,
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(color: C.cardFontColor),
                         ),
                       )
                     ],
@@ -48,60 +81,56 @@ class EventCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                  top: 0,
-                  left: 0,
-                  child: Image.asset(
-                    S.assetEventFrame,
-                    fit: BoxFit.cover,
-                    height: heightFactor * 250,
-                  )),
-              Positioned(
-                  top: heightFactor * 70,
-                  left: heightFactor * 55,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    //ADD NETWORK_IMAGE
-
-                    backgroundImage: NetworkImage(event.iconUrl),
-                    radius: heightFactor * 45,
-                  )),
-              Positioned(
-                  top: heightFactor * 60,
-                  left: heightFactor * 200,
-                  //ADD event_NAME
-                  child: Text(
-                    event.name,
-                    style: TextStyle(
-                        fontSize: heightFactor * 25,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600),
-                  )),
-              Positioned(
-                  top: heightFactor * 100,
-                  left: heightFactor * 200,
-                  child: Container(
-                    width: 150,
-                    //ADD event_DETAILS
-                    //TODO:REPLACE ALL BY Column date time venue
-                    child: Text(
-                      event.date,
-                      style: TextStyle(fontSize: heightFactor * 20, color: Colors.black),
-                    ),
-                  )),
-              Positioned(
-                  top: heightFactor * 40,
-                  right: 0,
-                  bottom: 30,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: heightFactor * 45,
-                        ),
-                        //TODO: ADD A GRADIENT BUTTON HERE
+                top: 115,
+                right: -30,
+                child: Padding(
+                  padding: EdgeInsets.all(40),
+                  child: GradientButton(
+                    width: 90,
+                    gradient: LinearGradient(
+                      colors: <Color>[
+                        C.eventsButtonGradientLeft,
+                        C.eventsButtonGradientMid,
+                        C.eventsButtonGradientMid,
+                        C.eventsButtonGradientRight,
+                        C.eventsButtonGradientRight,
                       ],
                     ),
+                    onPressed: () => {},
+                    child: Text(
+                      "Register",
+                      style: TextStyle(
+                        color: C.primaryUnHighlightedColor,
+                        fontSize: ratio > 0.5 ? 12 : 14,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                  top: 0,
+                  left: -10,
+                  height: ratio > 0.5 ? 220 : 240,
+                  width: ratio > 0.5 ? 150 : 170,
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        S.assetEventFrame,
+                        fit: BoxFit.cover,
+                        height: 300,
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: CircleAvatar(
+                          backgroundColor: Colors.teal,
+                          backgroundImage: NetworkImage(event.iconUrl),
+                          radius: 45,
+                        ),
+                      )
+                    ],
                   )),
             ],
           ),

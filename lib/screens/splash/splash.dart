@@ -40,8 +40,8 @@ class _SplashScreenState extends State<SplashScreen> {
       MaterialPageRoute(
         builder: (_) => (token == null)
             ? BlocProvider(
-                create: (_) => EventsCubit(FakeEventsRepository()),
-                child: EventsScreen(),
+                create: (_) => LoginCubit(APILoginRepository()),
+                child: LoginScreen(),
               )
             : HomeScreen(),
       ),
