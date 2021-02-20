@@ -23,7 +23,8 @@ class EventCard extends StatelessWidget {
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                //To decrease the top of card
+                padding: const EdgeInsets.fromLTRB(0, 25, 0, 20),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -31,14 +32,15 @@ class EventCard extends StatelessWidget {
                   ),
                   child: ExpansionTile(
                     title: Container(
-                      height: ratio > 0.5 ? 160 : 180,
+                      //To decrease bottom of card
+                      height: ratio > 0.5 ? 140 : 180,
                       margin: EdgeInsets.only(left: 130),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(22),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.fromLTRB(5, 0, 0, 20),
                         child: Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,8 +85,8 @@ class EventCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 115,
-                right: -30,
+                top: 100,
+                right: ratio > 0.5 ? -30 : -40,
                 child: Padding(
                     padding: EdgeInsets.all(40),
                     //Gradient Button
@@ -132,8 +134,8 @@ class EventCard extends StatelessWidget {
               ),
               Positioned(
                   top: 0,
-                  left: -10,
-                  height: ratio > 0.5 ? 220 : 245,
+                  left: ratio > 0.5 ? -15 : -20,
+                  height: ratio > 0.5 ? 210 : 235,
                   width: ratio > 0.5 ? 150 : 160,
                   child: Stack(
                     children: [
@@ -142,9 +144,7 @@ class EventCard extends StatelessWidget {
                         fit: BoxFit.cover,
                         height: 300,
                       ),
-                      Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.only(bottom: 10),
+                      Center(
                         child: Container(
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
