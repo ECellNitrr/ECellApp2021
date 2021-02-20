@@ -13,7 +13,8 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double ratio = MediaQuery.of(context).size.aspectRatio;
-
+    double heigh = MediaQuery.of(context).size.height;
+    double heighFactor = heigh / 1000;
     var eventDateTime = event.date.split("T");
     return Stack(
       children: [
@@ -40,7 +41,7 @@ class EventCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(22),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(5, 0, 0, 20),
+                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 20),
                         child: Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +50,7 @@ class EventCard extends StatelessWidget {
                               Text(
                                 event.name,
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: heighFactor * 30,
                                   color: C.cardFontColor,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -57,17 +58,22 @@ class EventCard extends StatelessWidget {
                               SizedBox(height: 5),
                               Text(
                                 "Date:\t\t${eventDateTime[0]}",
-                                style: TextStyle(fontSize: 17, color: C.cardFontColor),
+                                style: TextStyle(
+                                  fontSize: heighFactor * 25,
+                                  color: C.cardFontColor,
+                                ),
                               ),
                               SizedBox(height: 5),
                               Text(
                                 "Time:\t\t${eventDateTime[1].split("+")[0].substring(0, 5)}",
-                                style: TextStyle(fontSize: 17, color: C.cardFontColor),
+                                style:
+                                    TextStyle(fontSize: heighFactor * 25, color: C.cardFontColor),
                               ),
                               SizedBox(height: 5),
                               Text(
                                 "Venue:\t\t${event.venue}",
-                                style: TextStyle(fontSize: 17, color: C.cardFontColor),
+                                style:
+                                    TextStyle(fontSize: heighFactor * 25, color: C.cardFontColor),
                               ),
                             ]),
                       ),
