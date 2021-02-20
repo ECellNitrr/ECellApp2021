@@ -37,35 +37,38 @@ class EventCard extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(22),
                       ),
-                      child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              event.name,
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: C.cardFontColor,
-                                fontWeight: FontWeight.w600,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                event.name,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: C.cardFontColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              "Date:\t\t${eventDateTime[0]}",
-                              style: TextStyle(fontSize: 17, color: C.cardFontColor),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              "Time:\t\t${eventDateTime[1].split("+")[0].substring(0, 5)}",
-                              style: TextStyle(fontSize: 17, color: C.cardFontColor),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              "Venue:\t\t${event.venue}",
-                              style: TextStyle(fontSize: 17, color: C.cardFontColor),
-                            ),
-                          ]),
+                              SizedBox(height: 5),
+                              Text(
+                                "Date:\t\t${eventDateTime[0]}",
+                                style: TextStyle(fontSize: 17, color: C.cardFontColor),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                "Time:\t\t${eventDateTime[1].split("+")[0].substring(0, 5)}",
+                                style: TextStyle(fontSize: 17, color: C.cardFontColor),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                "Venue:\t\t${event.venue}",
+                                style: TextStyle(fontSize: 17, color: C.cardFontColor),
+                              ),
+                            ]),
+                      ),
                     ),
                     children: [
                       Padding(
@@ -90,21 +93,19 @@ class EventCard extends StatelessWidget {
                       height: 25.0,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
                           colors: <Color>[
                             C.eventsButtonGradientLeft,
                             C.eventsButtonGradientMid,
-                            C.eventsButtonGradientMid,
-                            C.eventsButtonGradientMid,
                             C.eventsButtonGradientRight,
-                            C.eventsButtonGradientRight,
-                            C.eventsButtonGradientRight
                           ],
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey[500],
-                            offset: Offset(0.0, 1.5),
-                            blurRadius: 1.5,
+                            color: Colors.black.withOpacity(0.16),
+                            offset: Offset(0.0, 5),
+                            blurRadius: 10,
                           ),
                         ],
                         borderRadius: BorderRadius.circular(22),
@@ -132,7 +133,7 @@ class EventCard extends StatelessWidget {
               Positioned(
                   top: 0,
                   left: -10,
-                  height: ratio > 0.5 ? 220 : 240,
+                  height: ratio > 0.5 ? 220 : 245,
                   width: ratio > 0.5 ? 150 : 160,
                   child: Stack(
                     children: [
@@ -144,10 +145,22 @@ class EventCard extends StatelessWidget {
                       Container(
                         alignment: Alignment.center,
                         padding: EdgeInsets.only(bottom: 10),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.teal,
-                          backgroundImage: NetworkImage(event.iconUrl),
-                          radius: 45,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.35),
+                                offset: Offset(0.0, 5),
+                                blurRadius: 15,
+                              ),
+                            ],
+                          ),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.teal,
+                            backgroundImage: NetworkImage(event.iconUrl),
+                            radius: 40,
+                          ),
                         ),
                       )
                     ],
