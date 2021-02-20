@@ -91,7 +91,7 @@ class EventCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 100,
+                top: ratio > 0.5 ? 100 : 110,
                 right: ratio > 0.5 ? -30 : -40,
                 child: Padding(
                     padding: EdgeInsets.all(40),
