@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'eventsCard.dart';
+import 'events_card.dart';
 
 class EventsScreen extends StatelessWidget {
   const EventsScreen({Key key}) : super(key: key);

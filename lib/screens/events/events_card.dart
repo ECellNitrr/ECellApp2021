@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
+
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/models/event.dart';
-import 'package:ecellapp/widgets/gradient_button.dart';
-import 'package:flutter/material.dart';
 
 class EventCard extends StatelessWidget {
   final Event event;
@@ -15,11 +15,11 @@ class EventCard extends StatelessWidget {
     double ratio = MediaQuery.of(context).size.aspectRatio;
 
     var eventDateTime = event.date.split("T");
-    return Container(
-        child: Stack(
+    return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.all(D.horizontalPaddingFrame),
+          padding:
+              const EdgeInsets.fromLTRB(D.horizontalPaddingFrame2, 0, D.horizontalPaddingFrame2, 0),
           child: Stack(
             children: [
               Padding(
@@ -29,7 +29,6 @@ class EventCard extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(22),
                   ),
-                  // color: Colors.white,
                   child: ExpansionTile(
                     title: Container(
                       height: ratio > 0.5 ? 160 : 180,
@@ -58,7 +57,7 @@ class EventCard extends StatelessWidget {
                             ),
                             SizedBox(height: 5),
                             Text(
-                              "Time:\t\t${eventDateTime[1].split("+")[0].substring(0, 8)}",
+                              "Time:\t\t${eventDateTime[1].split("+")[0].substring(0, 5)}",
                               style: TextStyle(fontSize: 17, color: C.cardFontColor),
                             ),
                             SizedBox(height: 5),
@@ -84,36 +83,57 @@ class EventCard extends StatelessWidget {
                 top: 115,
                 right: -30,
                 child: Padding(
-                  padding: EdgeInsets.all(40),
-                  child: GradientButton(
-                    width: 90,
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        C.eventsButtonGradientLeft,
-                        C.eventsButtonGradientMid,
-                        C.eventsButtonGradientMid,
-                        C.eventsButtonGradientRight,
-                        C.eventsButtonGradientRight,
-                      ],
-                    ),
-                    onPressed: () => {},
-                    child: Text(
-                      "Register",
-                      style: TextStyle(
-                        color: C.primaryUnHighlightedColor,
-                        fontSize: ratio > 0.5 ? 12 : 14,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.25,
+                    padding: EdgeInsets.all(40),
+                    //Gradient Button
+                    child: Container(
+                      width: 90,
+                      height: 25.0,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            C.eventsButtonGradientLeft,
+                            C.eventsButtonGradientMid,
+                            C.eventsButtonGradientMid,
+                            C.eventsButtonGradientMid,
+                            C.eventsButtonGradientRight,
+                            C.eventsButtonGradientRight,
+                            C.eventsButtonGradientRight
+                          ],
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey[500],
+                            offset: Offset(0.0, 1.5),
+                            blurRadius: 1.5,
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(22),
                       ),
-                    ),
-                  ),
-                ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                            onTap: () => {
+                                  //TODO: Add Register to event Intent
+                                },
+                            child: Center(
+                              child: Text(
+                                "Register",
+                                style: TextStyle(
+                                  color: C.primaryUnHighlightedColor,
+                                  fontSize: ratio > 0.5 ? 12 : 14,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 0.25,
+                                ),
+                              ),
+                            )),
+                      ),
+                    )),
               ),
               Positioned(
                   top: 0,
                   left: -10,
                   height: ratio > 0.5 ? 220 : 240,
-                  width: ratio > 0.5 ? 150 : 170,
+                  width: ratio > 0.5 ? 150 : 160,
                   child: Stack(
                     children: [
                       Image.asset(
@@ -136,6 +156,6 @@ class EventCard extends StatelessWidget {
           ),
         )
       ],
-    ));
+    );
   }
 }

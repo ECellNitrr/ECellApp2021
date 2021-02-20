@@ -37,7 +37,7 @@ class C {
   /// button colors
   static final Color authButtonColor = HexColor("#A955F7");
   static final Color speakerButtonColor = HexColor('#8E31D5');
-  static final Color eventsButtonGradientLeft = HexColor("#21d2fe");
+  static final Color eventsButtonGradientLeft = HexColor("##24cefe");
   static final Color eventsButtonGradientMid = HexColor("#5e83fd");
   static final Color eventsButtonGradientRight = HexColor("#9f38ff");
 
