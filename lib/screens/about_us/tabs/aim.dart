@@ -49,7 +49,7 @@ class AimScreen extends StatelessWidget {
   Widget aboutUsText(double width, double height, double bottom, double heightFactor) {
     return Container(
       alignment: Alignment.centerLeft,
-      padding: EdgeInsets.only(left: width / 50, top: heightFactor * 30),
+      padding: EdgeInsets.only(left: width / 50),
       child: Text(
         "About Us",
         style: TextStyle(
@@ -126,7 +126,8 @@ class AimScreen extends StatelessWidget {
   Widget visionTextSection(double width, double height, double bottom, double heightFactor) {
     return Container(
       alignment: Alignment.centerLeft,
-      padding: EdgeInsets.only(left: width / 50, top: heightFactor * 35),
+      padding:
+          EdgeInsets.only(left: width / 50, top: heightFactor * 35, bottom: heightFactor * 120),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

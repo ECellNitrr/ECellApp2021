@@ -27,16 +27,22 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
           ScreenBackground(elementId: 0),
           SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                backButton(width, height, bottom, heightFactor),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(width / 16, heightFactor * 50, 0, 0),
+                  child: backButton(width, height, bottom, heightFactor),
+                ),
                 tabs[_currentIndex],
               ],
-              //EdgeInsets.fromLTRB(20,20,0,0),
             ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: _buildBottomNavBar(context),
           ),
         ],
       ),
-      bottomNavigationBar: _buildBottomNavBar(context),
     );
   }
 
@@ -45,7 +51,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(height1 / 20)),
       child: Container(
-          height: height1 / 12,
+          height: height1 / 10,
           child: BottomNavigationBar(
             selectedItemColor: Colors.orange[900],
             unselectedFontSize: 50,
