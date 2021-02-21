@@ -47,7 +47,7 @@ class C {
   static const Color blendSocialIconColorTwo = Colors.black38;
 
   //Speaker Card fonts
-  static final Color cardFontColor = HexColor("#838383");
+  static final Color cardFontColor = HexColor("#A3A3A3");
 }
 
 class HexColor extends Color {

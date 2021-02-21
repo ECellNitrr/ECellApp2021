@@ -13,69 +13,66 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double ratio = MediaQuery.of(context).size.aspectRatio;
-    double heigh = MediaQuery.of(context).size.height;
-    double heighFactor = heigh / 1000;
     var eventDateTime = event.date.split("T");
+    String date = eventDateTime[0], time = eventDateTime[1].split("+")[0].substring(0, 5);
     return Stack(
       children: [
-        Padding(
-          padding:
-              const EdgeInsets.fromLTRB(D.horizontalPaddingFrame2, 0, D.horizontalPaddingFrame2, 0),
-          child: Stack(
-            children: [
-              Padding(
-                //To decrease the top of card
-                padding: const EdgeInsets.fromLTRB(0, 25, 0, 20),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(22),
-                  ),
-                  child: ExpansionTile(
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: D.horizontalPaddingFrame),
+          alignment: Alignment.center,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 22.5),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: Stack(
+                children: [
+                  ExpansionTile(
                     title: Container(
                       //To decrease bottom of card
-                      height: ratio > 0.5 ? 140 : 180,
-                      margin: EdgeInsets.only(left: 130),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(22),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 20),
-                        child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                event.name,
-                                style: TextStyle(
-                                  fontSize: heighFactor * 30,
-                                  color: C.cardFontColor,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              SizedBox(height: 5),
-                              Text(
-                                "Date:\t\t${eventDateTime[0]}",
-                                style: TextStyle(
-                                  fontSize: heighFactor * 25,
-                                  color: C.cardFontColor,
-                                ),
-                              ),
-                              SizedBox(height: 5),
-                              Text(
-                                "Time:\t\t${eventDateTime[1].split("+")[0].substring(0, 5)}",
-                                style:
-                                    TextStyle(fontSize: heighFactor * 25, color: C.cardFontColor),
-                              ),
-                              SizedBox(height: 5),
-                              Text(
-                                "Venue:\t\t${event.venue}",
-                                style:
-                                    TextStyle(fontSize: heighFactor * 25, color: C.cardFontColor),
-                              ),
-                            ]),
+                      height: ratio > 0.5 ? 150 : 170,
+                      margin: EdgeInsets.only(left: ratio > 0.5 ? 120 : 140),
+                      padding: EdgeInsets.only(bottom: 50, top: 10),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            event.name,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: C.cardFontColor,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Text(
+                            "Date:" + "\t" * 4 + "$date",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: C.cardFontColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            "Time:" + "\t" * 3 + "$time",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: C.cardFontColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            "Venue:" + "\t" + "${event.venue}",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: C.cardFontColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     children: [
@@ -88,24 +85,18 @@ class EventCard extends StatelessWidget {
                       )
                     ],
                   ),
-                ),
-              ),
-              Positioned(
-                top: ratio > 0.5 ? 100 : 110,
-                right: ratio > 0.5 ? -30 : -40,
-                child: Padding(
-                    padding: EdgeInsets.all(40),
-                    //Gradient Button
+                  Positioned(
+                    right: 25,
+                    top: ratio > 0.5 ? 115 : 135,
                     child: Container(
                       width: 90,
-                      height: 25.0,
+                      height: 30,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
                           colors: <Color>[
                             C.eventsButtonGradientLeft,
-                            C.eventsButtonGradientMid,
                             C.eventsButtonGradientRight,
                           ],
                         ),
@@ -121,59 +112,66 @@ class EventCard extends StatelessWidget {
                       child: Material(
                         color: Colors.transparent,
                         child: InkWell(
-                            onTap: () => {
-                                  //TODO: Add Register to event Intent
-                                },
-                            child: Center(
-                              child: Text(
-                                "Register",
-                                style: TextStyle(
-                                  color: C.primaryUnHighlightedColor,
-                                  fontSize: ratio > 0.5 ? 12 : 14,
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: 0.25,
-                                ),
+                          onTap: () {
+                            //TODO: Add Register to event Intent
+                          },
+                          child: Center(
+                            child: Text(
+                              "Register",
+                              style: TextStyle(
+                                color: C.primaryUnHighlightedColor,
+                                fontSize: ratio > 0.5 ? 12 : 14,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.25,
                               ),
-                            )),
-                      ),
-                    )),
-              ),
-              Positioned(
-                  top: 0,
-                  left: ratio > 0.5 ? -15 : -20,
-                  height: ratio > 0.5 ? 210 : 235,
-                  width: ratio > 0.5 ? 150 : 160,
-                  child: Stack(
-                    children: [
-                      Image.asset(
-                        S.assetEventFrame,
-                        fit: BoxFit.cover,
-                        height: 300,
-                      ),
-                      Center(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.35),
-                                offset: Offset(0.0, 5),
-                                blurRadius: 15,
-                              ),
-                            ],
-                          ),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.teal,
-                            backgroundImage: NetworkImage(event.iconUrl),
-                            radius: 40,
+                            ),
                           ),
                         ),
-                      )
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          left: -10,
+          height: ratio > 0.5 ? 220 : 240,
+          width: ratio > 0.5 ? 170 : 190,
+          child: Stack(
+            children: [
+              Image.asset(
+                S.assetEventFrame,
+                fit: BoxFit.cover,
+                height: 240,
+              ),
+              Center(
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.only(bottom: 5),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.25),
+                        offset: Offset(0.0, 5),
+                        blurRadius: 10,
+                      ),
                     ],
-                  )),
+                  ),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.blue,
+                    backgroundImage: NetworkImage(event.iconUrl),
+                    radius: 40,
+                  ),
+                ),
+              ),
             ],
           ),
-        )
+        ),
       ],
     );
   }
