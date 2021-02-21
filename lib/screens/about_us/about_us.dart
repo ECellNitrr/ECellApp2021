@@ -2,7 +2,9 @@ import 'package:ecellapp/screens/about_us/tabs/aim.dart';
 import 'package:ecellapp/screens/about_us/tabs/our_team.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../core/themes/selected_icon_theme.dart';
+import 'package:ecellapp/widgets/screen_background.dart';
 
 class AboutUsScreen extends StatefulWidget {
   @override
@@ -15,19 +17,35 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    double bottom = MediaQuery.of(context).viewInsets.bottom;
+    double heightFactor = height / 1000;
     return Scaffold(
-      backgroundColor: Colors.black12,
-      body: tabs[_currentIndex],
+      body: Stack(
+        children: [
+          ScreenBackground(elementId: 0),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                backButton(width, height, bottom, heightFactor),
+                tabs[_currentIndex],
+              ],
+              //EdgeInsets.fromLTRB(20,20,0,0),
+            ),
+          ),
+        ],
+      ),
       bottomNavigationBar: _buildBottomNavBar(context),
     );
   }
 
   Widget _buildBottomNavBar(context) {
-    double height = MediaQuery.of(context).size.height;
+    double height1 = MediaQuery.of(context).size.height;
     return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(height / 20)),
+      borderRadius: BorderRadius.all(Radius.circular(height1 / 20)),
       child: Container(
-          height: height / 10,
+          height: height1 / 12,
           child: BottomNavigationBar(
             selectedItemColor: Colors.orange[900],
             unselectedFontSize: 50,
@@ -57,6 +75,15 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               ),
             ],
           )),
+    );
+  }
+
+  Widget backButton(double width, double height, double bottom, double heightFactor) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+      onPressed: () {
+        // to be implemented during screen integration.
+      },
     );
   }
 }

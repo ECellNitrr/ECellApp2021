@@ -9,22 +9,16 @@ import 'package:google_fonts/google_fonts.dart';
 class AimScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO replace this widget with the screen AimScreen
-    return Scaffold(
-      body: Stack(
-        children: [
-          ScreenBackground(elementId: 0),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                DefaultTextStyle.merge(
-                  style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
-                  child: screenBody(context),
-                ),
-              ],
+    return Container(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            DefaultTextStyle.merge(
+              style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+              child: screenBody(context),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -42,7 +36,6 @@ class AimScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              backButton(width, height, bottom, heightFactor),
               aboutUsText(width, height, bottom, heightFactor),
               aimTextSection(width, height, bottom, heightFactor),
               visionTextSection(width, height, bottom, heightFactor),
@@ -50,15 +43,6 @@ class AimScreen extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget backButton(double width, double height, double bottom, double heightFactor) {
-    return IconButton(
-      icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
-      onPressed: () {
-        // to be implemented during screen integration.
-      },
     );
   }
 
