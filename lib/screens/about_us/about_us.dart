@@ -11,7 +11,7 @@ class AboutUsScreen extends StatefulWidget {
 
 class _AboutUsScreenState extends State<AboutUsScreen> {
   int _currentIndex = 0;
-  final tabs = [Aim(), OurTeam()];
+  final tabs = [AimScreen(), OurTeam()];
 
   @override
   Widget build(BuildContext context) {
