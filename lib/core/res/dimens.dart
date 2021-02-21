@@ -10,5 +10,7 @@ class D {
   // Splash screen timer
   static const int splashDelay = 3;
   // WidgetCards padding from sides
-  static const double horizontalPaddingFrame = 20;
+  static const double horizontalPaddingFrame = 20.0;
+  //On Events Card
+  static const double horizontalPaddingFrame2 = 10.0;
 }
