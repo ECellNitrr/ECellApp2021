@@ -60,6 +60,7 @@ class S {
   static const String networkException =
       "Request couldn't be completed. Make sure the device is online";
   static const String unknownException = "Something went wrong. Please try again later.";
+  static const String redirectIntentError = "Please try again unable to redirect!";
 
   // asset paths
   static const String assetTopRightBasic = "assets/basic/top-right.png";
@@ -70,10 +71,12 @@ class S {
   static const String assetBottomLeftColorful = "assets/colorful/bottom-left.png";
   static const String assetEcellLogoWhite = "assets/ecell-logo.png";
   static const String assetEsummitLogoWhite = "assets/esummit-logo.png";
+  static const String assetSpeakerCardFrame = "assets/speaker-frame.png";
+  static const String assetIconLinkdin = "assets/linkdin-icon.png";
   static const String assetEsummitLogoWhiteFilled = "assets/esummit-filled-logo.png";
   static const String assetSponsorsLogoWhite = "assets/sponsors-logo.png";
   static const String assetEventsLogoWhite = "assets/events-logo.png";
-
+  static const String assetEventFrame = "assets/event-frame.png";
   // paragraphs
   static const String esummitPara =
       "we aspire to create a melange of eminent speakers who have proved themselves in diverse fields and are at the zenith of glory. E-Summit'21 will not just be a conclave of innovative minds and epistemic elocutionists, but it will be the place where ideas not only thrive but become the greatest revelations of the century.";

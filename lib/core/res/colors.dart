@@ -37,6 +37,17 @@ class C {
   /// button colors
   static final Color authButtonColor = HexColor("#A955F7");
   static final Color speakerButtonColor = HexColor('#8E31D5');
+  static final Color eventsButtonGradientLeft = HexColor("##24cefe");
+  static final Color eventsButtonGradientMid = HexColor("#5e83fd");
+  static final Color eventsButtonGradientRight = HexColor("#9f38ff");
+
+  /// FrameCardWidget colors
+  static final Color downArrowColor = HexColor("#FD8020");
+  static const Color blendSocialIconColorOne = Colors.black12;
+  static const Color blendSocialIconColorTwo = Colors.black38;
+
+  //Speaker Card fonts
+  static final Color cardFontColor = HexColor("#A3A3A3");
 }
 
 class HexColor extends Color {

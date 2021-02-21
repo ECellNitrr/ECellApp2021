@@ -49,7 +49,7 @@ packages:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.15.0-nullsafety.3"
+    version: "1.15.0-nullsafety.5"
   convert:
     dependency: transitive
     description:
@@ -91,7 +91,7 @@ packages:
       name: fake_async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0-nullsafety.1"
+    version: "1.2.0-nullsafety.3"
   ffi:
     dependency: transitive
     description:
@@ -163,6 +163,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.3-nullsafety.3"
   logger:
     dependency: "direct main"
     description:
@@ -197,7 +204,7 @@ packages:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0-nullsafety.1"
+    version: "1.8.0-nullsafety.3"
   path_provider:
     dependency: transitive
     description:
@@ -364,6 +371,48 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0-nullsafety.5"
+  url_launcher:
+    dependency: "direct main"
+    description:
+      name: url_launcher
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.7.10"
+  url_launcher_linux:
+    dependency: transitive
+    description:
+      name: url_launcher_linux
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+4"
+  url_launcher_macos:
+    dependency: transitive
+    description:
+      name: url_launcher_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+9"
+  url_launcher_platform_interface:
+    dependency: transitive
+    description:
+      name: url_launcher_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.9"
+  url_launcher_web:
+    dependency: transitive
+    description:
+      name: url_launcher_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.5+3"
+  url_launcher_windows:
+    dependency: transitive
+    description:
+      name: url_launcher_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+3"
   vector_math:
     dependency: transitive
     description:
@@ -371,12 +420,16 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
 <<<<<<< HEAD
+<<<<<<< HEAD
     version: "2.1.0-nullsafety.5"
 sdks:
   dart: ">=2.12.0-0.0 <3.0.0"
   flutter: ">=1.16.0"
 =======
     version: "2.1.0-nullsafety.3"
+=======
+    version: "2.1.0-nullsafety.5"
+>>>>>>> 136b89a39df782d63a55f2fc5b127552381e16b4
   win32:
     dependency: transitive
     description:
@@ -392,6 +445,7 @@ sdks:
     source: hosted
     version: "0.1.2"
 sdks:
+<<<<<<< HEAD
   dart: ">=2.10.0-110 <2.11.0"
 <<<<<<< HEAD
   flutter: ">=1.17.0 <2.0.0"
@@ -399,3 +453,7 @@ sdks:
 =======
   flutter: ">=1.17.0 <2.0.0"
 >>>>>>> 63a66ed70efb6c17625fca475468dc716766a8aa
+=======
+  dart: ">=2.12.0-0.0 <3.0.0"
+  flutter: ">=1.22.0 <2.0.0"
+>>>>>>> 136b89a39df782d63a55f2fc5b127552381e16b4
