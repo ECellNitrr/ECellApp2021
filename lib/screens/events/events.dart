@@ -8,7 +8,7 @@ import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:ecellapp/widgets/loading_screen.dart';
 import 'events_card.dart';
 
 class EventsScreen extends StatelessWidget {
@@ -45,9 +45,7 @@ class EventsScreen extends StatelessWidget {
   }
 
   Widget _buildLoading() {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
+    return LoadingScreen();
   }
 
   Widget _buildSuccess(BuildContext context, List<Event> eventsList) {

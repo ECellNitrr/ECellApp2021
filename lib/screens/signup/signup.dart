@@ -5,7 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:ecellapp/widgets/loading_screen.dart';
 import '../../core/res/colors.dart';
 import '../../core/res/dimens.dart';
 import '../../core/res/strings.dart';
@@ -237,7 +237,7 @@ class SignupScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLoading() => Center(child: CircularProgressIndicator());
+  Widget _buildLoading() => LoadingScreen();
 
   void _signup(BuildContext context) {
     final cubit = context.read<SignupCubit>();

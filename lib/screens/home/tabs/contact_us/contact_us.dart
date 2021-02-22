@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ecellapp/screens/home/cubit/feedback_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ecellapp/widgets/loading_screen.dart';
 
 class ContactUsScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -44,7 +45,7 @@ class ContactUsScreen extends StatelessWidget {
         ));
   }
 
-  Widget _buildLoading() => Center(child: CircularProgressIndicator());
+  Widget _buildLoading() => LoadingScreen();
 
   void _postFeedback(BuildContext context) {
     final cubit = context.read<FeedbackCubit>();

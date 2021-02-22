@@ -5,6 +5,7 @@ import 'package:ecellapp/widgets/password_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ecellapp/widgets/loading_screen.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -76,9 +77,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   }
 
   Widget _buildLoading() {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
+    return LoadingScreen();
   }
 
   Widget _enterOTP(BuildContext context, ForgotPasswordState state) {

@@ -2,7 +2,7 @@ import 'package:ecellapp/models/sponsor_category.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:ecellapp/widgets/loading_screen.dart';
 import 'cubit/sponsors_cubit.dart';
 
 class SponsorsScreen extends StatelessWidget {
@@ -51,9 +51,7 @@ class SponsorsScreen extends StatelessWidget {
   }
 
   Widget _buildLoading() {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
+    return LoadingScreen();
   }
 
   Widget _buildAskReload() {
