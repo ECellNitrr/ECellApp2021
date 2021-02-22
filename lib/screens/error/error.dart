@@ -27,7 +27,10 @@ class ErrorScreen extends StatelessWidget {
       ),
       body: DefaultTextStyle.merge(
         style: GoogleFonts.roboto().copyWith(
-            color: C.primaryUnHighlightedColor, fontSize: 20, fontWeight: FontWeight.w900),
+            color: C.primaryUnHighlightedColor,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 0.5),
         child: Stack(
           children: [
             ScreenBackground(elementId: 0),
@@ -58,10 +61,9 @@ class ErrorScreen extends StatelessWidget {
                               borderRadius: BorderRadius.all(Radius.circular(30)),
                               boxShadow: [
                                 BoxShadow(
-                                  color: C.authButtonColor.withOpacity(0.2),
-                                  blurRadius: 10,
-                                  spreadRadius: 3,
-                                  offset: Offset(0, 12),
+                                  color: C.authButtonColor.withOpacity(0.16),
+                                  blurRadius: 20,
+                                  offset: Offset(0, 5),
                                 )
                               ],
                             ),
@@ -95,6 +97,5 @@ class ErrorScreen extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
