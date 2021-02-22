@@ -24,8 +24,15 @@ dependencies:
   url_launcher: ^5.7.10
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.7.0"
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/app-icon/app-icon.png"
+  image_path_android: "assets/app-icon/app-icon.png"
 
 flutter:
   assets:
