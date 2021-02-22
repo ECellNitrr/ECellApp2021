@@ -37,6 +37,11 @@ class C {
   /// button colors
   static final Color authButtonColor = HexColor("#A955F7");
   static final Color speakerButtonColor = HexColor('#8E31D5');
+
+  /// selected icon theme
+  static final Color selectedIconThemeGrad1 = HexColor("#FD8020");
+  static final Color selectedIconThemeGrad2 = HexColor("#FF3838");
+  static final Color selectedIconThemeGrad3 = HexColor("#FF1F88");
 }
 
 class HexColor extends Color {

@@ -52,11 +52,9 @@ class ContactUsScreen extends StatelessWidget {
                   Container(
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.only(top: top + 20 * heightFactor),
-                    child: RichText(
-                      text: TextSpan(
-                        text: "Contact Us",
-                        style: TextStyle(fontSize: 45 * heightFactor, fontWeight: FontWeight.w900),
-                      ),
+                    child: Text(
+                      "Contact Us",
+                      style: TextStyle(fontSize: 45 * heightFactor, fontWeight: FontWeight.w900),
                     ),
                   ),
                   Container(
@@ -64,10 +62,13 @@ class ContactUsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Image.asset(
-                          S.assetLocationIcon,
-                          width: 30,
-                          height: 30,
+                        GestureDetector(
+                          onTap: () => _launchURL(S.addressURL),
+                          child: Image.asset(
+                            S.assetLocationIcon,
+                            width: 30,
+                            height: 30,
+                          ),
                         ),
                         SizedBox(
                           width: width / 20,
@@ -75,26 +76,22 @@ class ContactUsScreen extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            RichText(
-                              text: TextSpan(
-                                text: "National Institute of Technology",
-                                style: TextStyle(
-                                    fontSize: 20 * heightFactor,
-                                    fontWeight: FontWeight.w300,
-                                    height: 1.2,
-                                    wordSpacing: 4),
-                              ),
+                            Text(
+                              "National Institute of Technology",
+                              style: TextStyle(
+                                  fontSize: 20 * heightFactor,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.2,
+                                  wordSpacing: 4),
                             ),
-                            RichText(
-                              text: TextSpan(
-                                text: "GE Road, Raipur",
-                                style: TextStyle(
-                                    fontSize: 20 * heightFactor,
-                                    fontWeight: FontWeight.w300,
-                                    height: 1.2,
-                                    wordSpacing: 4),
-                              ),
-                            )
+                            Text(
+                              "GE Road, Raipur",
+                              style: TextStyle(
+                                  fontSize: 20 * heightFactor,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.2,
+                                  wordSpacing: 4),
+                            ),
                           ],
                         )
                       ],
@@ -105,24 +102,25 @@ class ContactUsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Image.asset(
-                          S.assetPhoneIcon,
-                          width: 30,
-                          height: 30,
+                        GestureDetector(
+                          onTap: () => _launchURL(S.phoneURL),
+                          child: Image.asset(
+                            S.assetPhoneIcon,
+                            width: 30,
+                            height: 30,
+                          ),
                         ),
                         SizedBox(
                           width: width / 20,
                         ),
-                        RichText(
-                          text: TextSpan(
-                            text: S.ecellPhone,
-                            style: TextStyle(
-                                fontSize: 20 * heightFactor,
-                                fontWeight: FontWeight.w300,
-                                height: 1.2,
-                                wordSpacing: 4),
-                          ),
-                        )
+                        Text(
+                          S.ecellPhone,
+                          style: TextStyle(
+                              fontSize: 20 * heightFactor,
+                              fontWeight: FontWeight.bold,
+                              height: 1.2,
+                              wordSpacing: 4),
+                        ),
                       ],
                     ),
                   ),
@@ -131,24 +129,25 @@ class ContactUsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Image.asset(
-                          S.assetGmailIcon,
-                          width: 30,
-                          height: 30,
+                        GestureDetector(
+                          onTap: () => _launchURL(S.emailURL),
+                          child: Image.asset(
+                            S.assetGmailIcon,
+                            width: 30,
+                            height: 30,
+                          ),
                         ),
                         SizedBox(
                           width: width / 20,
                         ),
-                        RichText(
-                          text: TextSpan(
-                            text: S.ecellEmail,
-                            style: TextStyle(
-                                fontSize: 20 * heightFactor,
-                                fontWeight: FontWeight.w300,
-                                height: 1.2,
-                                wordSpacing: 4),
-                          ),
-                        )
+                        Text(
+                          S.ecellEmail,
+                          style: TextStyle(
+                              fontSize: 20 * heightFactor,
+                              fontWeight: FontWeight.bold,
+                              height: 1.2,
+                              wordSpacing: 4),
+                        ),
                       ],
                     ),
                   ),
@@ -162,8 +161,8 @@ class ContactUsScreen extends StatelessWidget {
                             onTap: () => _launchURL(S.linkedinURL),
                             child: Image.asset(
                               S.assetLinkedinIcon,
-                              width: 60,
-                              height: 60,
+                              width: 80,
+                              height: 80,
                             ),
                           ),
                         ),
@@ -173,8 +172,8 @@ class ContactUsScreen extends StatelessWidget {
                             onTap: () => _launchURL(S.twitterURL),
                             child: Image.asset(
                               S.assetTwitterIcon,
-                              width: 60,
-                              height: 60,
+                              width: 80,
+                              height: 80,
                             ),
                           ),
                         ),
@@ -184,8 +183,8 @@ class ContactUsScreen extends StatelessWidget {
                             onTap: () => _launchURL(S.facebookURL),
                             child: Image.asset(
                               S.assetFacebookIcon,
-                              width: 60,
-                              height: 60,
+                              width: 80,
+                              height: 80,
                             ),
                           ),
                         ),
@@ -195,8 +194,8 @@ class ContactUsScreen extends StatelessWidget {
                             onTap: () => _launchURL(S.instagramURL),
                             child: Image.asset(
                               S.assetInstagramIcon,
-                              width: 60,
-                              height: 60,
+                              width: 80,
+                              height: 80,
                             ),
                           ),
                         ),
@@ -206,26 +205,22 @@ class ContactUsScreen extends StatelessWidget {
                   Container(
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.only(top: 50 * heightFactor),
-                    child: RichText(
-                      text: TextSpan(
-                        text: "Feedback",
-                        style: TextStyle(fontSize: 45 * heightFactor, fontWeight: FontWeight.w900),
-                      ),
+                    child: Text(
+                      "Feedback",
+                      style: TextStyle(fontSize: 40 * heightFactor, fontWeight: FontWeight.w900),
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.only(top: 20 * heightFactor),
                     child: Row(
                       children: [
-                        RichText(
-                          text: TextSpan(
-                            text: S.feedbackLine,
-                            style: TextStyle(
-                                fontSize: 20 * heightFactor,
-                                fontWeight: FontWeight.w300,
-                                height: 1.2,
-                                wordSpacing: 4),
-                          ),
+                        Text(
+                          S.feedbackLine,
+                          style: TextStyle(
+                              fontSize: 20 * heightFactor,
+                              fontWeight: FontWeight.w300,
+                              height: 1.2,
+                              wordSpacing: 4),
                         ),
                         Image.asset(
                           S.assetHeartIcon,
@@ -240,13 +235,16 @@ class ContactUsScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                            flex: 1,
-                            child: Image.asset(
-                              S.assetFeedbackIcon,
-                              width: 30,
-                              height: 30,
-                            )),
-                        Expanded(flex: 1, child: Container()),
+                          flex: 1,
+                          child: Image.asset(
+                            S.assetFeedbackIcon,
+                            width: 30,
+                            height: 30,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
                         Expanded(
                           flex: 10,
                           child: Form(
@@ -262,7 +260,7 @@ class ContactUsScreen extends StatelessWidget {
                               textInputAction: TextInputAction.done,
                               decoration: InputDecoration(
                                 errorStyle: TextStyle(fontSize: 0.1),
-                                labelText: "Feedback",
+                                labelText: "message",
                               ),
                             ),
                           ),
@@ -305,7 +303,7 @@ class ContactUsScreen extends StatelessWidget {
                                 style: TextStyle(
                                   color: C.primaryUnHighlightedColor,
                                   fontSize: 20 * heightFactor,
-                                  fontWeight: FontWeight.w300,
+                                  fontWeight: FontWeight.bold,
                                   shadows: [
                                     Shadow(
                                       color: Colors.black,
@@ -338,7 +336,7 @@ class ContactUsScreen extends StatelessWidget {
     }
   }
 
-  String _validator(String email) => email.isEmpty ? "" : null;
+  String _validator(String text) => text.isEmpty ? "" : null;
   Widget _buildLoading() => Center(child: CircularProgressIndicator());
 
   void _postFeedback(BuildContext context) {

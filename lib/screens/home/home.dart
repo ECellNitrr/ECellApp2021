@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:ecellapp/core/res/colors.dart';
 import '../../core/themes/selected_icon_theme.dart';
 import 'cubit/feedback_cubit.dart';
 import 'cubit/profile_cubit.dart';
@@ -60,12 +60,71 @@ class _HomeScreenState extends State<HomeScreen> {
             showSelectedLabels: false,
             showUnselectedLabels: false,
             items: [
-              BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
               BottomNavigationBarItem(
+                  activeIcon: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          C.selectedIconThemeGrad1,
+                          C.selectedIconThemeGrad2,
+                          C.selectedIconThemeGrad3,
+                        ],
+                      ),
+                    ),
+                    constraints: BoxConstraints.tightFor(width: 50, height: 50),
+                    child: Icon(
+                      Icons.person_outline,
+                      color: C.primaryUnHighlightedColor,
+                    ),
+                  ),
+                  icon: Icon(Icons.person_outline),
+                  label: 'Profile'),
+              BottomNavigationBarItem(
+                activeIcon: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        C.selectedIconThemeGrad1,
+                        C.selectedIconThemeGrad2,
+                        C.selectedIconThemeGrad3,
+                      ],
+                    ),
+                  ),
+                  constraints: BoxConstraints.tightFor(width: 50, height: 50),
+                  child: Icon(
+                    Icons.home_outlined,
+                    color: C.primaryUnHighlightedColor,
+                  ),
+                ),
                 icon: new Icon(Icons.home_outlined),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
+                activeIcon: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        C.selectedIconThemeGrad1,
+                        C.selectedIconThemeGrad2,
+                        C.selectedIconThemeGrad3,
+                      ],
+                    ),
+                  ),
+                  constraints: BoxConstraints.tightFor(width: 50, height: 50),
+                  child: Icon(
+                    Icons.phone_outlined,
+                    color: C.primaryUnHighlightedColor,
+                  ),
+                ),
                 icon: new Icon(Icons.phone_outlined),
                 label: 'Contact Us',
               ),

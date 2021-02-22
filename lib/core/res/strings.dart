@@ -91,7 +91,10 @@ class S {
       "https://www.linkedin.com/company/entrepreneurship-cell-nit-raipur/";
   static const String instagramURL = "https://www.instagram.com/ecell.nitraipur/";
   static const String facebookURL = "https://www.facebook.com/ecellnitrr/";
-  static const String twitterURL = "https://twitter.com/ecellnitrr";
+  static const String twitterURL = "https://twitter.com/ecell_nitrr";
+  static const String addressURL = "https://goo.gl/maps/YcXz5AM7spYMW16F7";
+  static const String phoneURL = "tel:+919406220952";
+  static const String emailURL = "mailto:ecell@nitrr.ac.in";
   // paragraphs
   static const String esummitPara =
       "we aspire to create a melange of eminent speakers who have proved themselves in diverse fields and are at the zenith of glory. E-Summit'21 will not just be a conclave of innovative minds and epistemic elocutionists, but it will be the place where ideas not only thrive but become the greatest revelations of the century.";
