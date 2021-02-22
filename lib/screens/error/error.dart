@@ -89,11 +89,6 @@ class ErrorScreen extends StatelessWidget {
                         ],
                       ),
                     )),
-                // Flexible(
-                //   fit: FlexFit.loose,
-                //   flex: 1,
-                //   child:
-                // )
               ],
             )
           ],
