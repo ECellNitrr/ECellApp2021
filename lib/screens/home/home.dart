@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecellapp/core/res/colors.dart';
-import '../../core/themes/selected_icon_theme.dart';
 import 'cubit/feedback_cubit.dart';
 import 'cubit/profile_cubit.dart';
 import 'home_repository.dart';
@@ -56,7 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 _currentIndex = index;
               });
             },
-            selectedIconTheme: selectedIconTheme(),
             showSelectedLabels: false,
             showUnselectedLabels: false,
             items: [
