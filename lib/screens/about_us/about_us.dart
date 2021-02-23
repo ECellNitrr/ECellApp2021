@@ -22,21 +22,16 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
     double bottom = MediaQuery.of(context).viewInsets.bottom;
     double heightFactor = height / 1000;
     return Scaffold(
+      appBar: AppBar(
+        leading: backButton(width, height, bottom, heightFactor),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+      ),
+      extendBodyBehindAppBar: true,
       body: Stack(
         children: [
           ScreenBackground(elementId: 0),
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(width / 16, heightFactor * 50, 0, 0),
-                  child: backButton(width, height, bottom, heightFactor),
-                ),
-                tabs[_currentIndex],
-              ],
-            ),
-          ),
+          SafeArea(child: tabs[_currentIndex]),
           Align(
             alignment: Alignment.bottomCenter,
             child: _buildBottomNavBar(context),
@@ -85,11 +80,14 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
   }
 
   Widget backButton(double width, double height, double bottom, double heightFactor) {
-    return IconButton(
-      icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
-      onPressed: () {
-        // to be implemented during screen integration.
-      },
+    return Padding(
+      padding: EdgeInsets.fromLTRB(width / 15, 0, 0, 0),
+      child: IconButton(
+        icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+        onPressed: () {
+          // to be implemented during screen integration.
+        },
+      ),
     );
   }
 }

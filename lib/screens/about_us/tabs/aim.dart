@@ -8,17 +8,9 @@ import 'package:google_fonts/google_fonts.dart';
 class AimScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            DefaultTextStyle.merge(
-              style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
-              child: screenBody(context),
-            ),
-          ],
-        ),
-      ),
+    return DefaultTextStyle.merge(
+      style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+      child: screenBody(context),
     );
   }
 
@@ -31,7 +23,7 @@ class AimScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(D.horizontalPadding, 30, D.horizontalPadding, 0),
+          padding: const EdgeInsets.fromLTRB(D.horizontalPadding, 0, D.horizontalPadding, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -87,7 +79,7 @@ class AimScreen extends StatelessWidget {
                     height: 1.5,
                     letterSpacing: 0.5,
                     wordSpacing: 1.5,
-                    fontSize: 20 * heightFactor,
+                    fontSize: 18 * heightFactor,
                     fontWeight: FontWeight.w500,
                     color: Colors.white,
                   ),
@@ -98,7 +90,7 @@ class AimScreen extends StatelessWidget {
                     height: 1.5,
                     letterSpacing: 0.5,
                     wordSpacing: 1.5,
-                    fontSize: 20 * heightFactor,
+                    fontSize: 18 * heightFactor,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
                   ),
@@ -109,7 +101,7 @@ class AimScreen extends StatelessWidget {
                     height: 1.5,
                     letterSpacing: 0.5,
                     wordSpacing: 1.5,
-                    fontSize: 20 * heightFactor,
+                    fontSize: 18 * heightFactor,
                     fontWeight: FontWeight.w500,
                     color: Colors.white,
                   ),
@@ -150,7 +142,7 @@ class AimScreen extends StatelessWidget {
                     height: 1.5,
                     letterSpacing: 0.5,
                     wordSpacing: 1.5,
-                    fontSize: 20 * heightFactor,
+                    fontSize: 18 * heightFactor,
                     fontWeight: FontWeight.w500,
                     color: Colors.white,
                   ),
@@ -161,7 +153,7 @@ class AimScreen extends StatelessWidget {
                     height: 1.5,
                     letterSpacing: 0.5,
                     wordSpacing: 1.5,
-                    fontSize: 20 * heightFactor,
+                    fontSize: 18 * heightFactor,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
                   ),
@@ -172,7 +164,7 @@ class AimScreen extends StatelessWidget {
                     height: 1.5,
                     letterSpacing: 0.5,
                     wordSpacing: 1.5,
-                    fontSize: 20 * heightFactor,
+                    fontSize: 18 * heightFactor,
                     fontWeight: FontWeight.w500,
                     color: Colors.white,
                   ),
