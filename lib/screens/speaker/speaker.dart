@@ -1,3 +1,4 @@
+import 'package:ecellapp/widgets/reload_on_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,32 +9,68 @@ import 'package:ecellapp/models/speaker.dart';
 import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
 import 'package:ecellapp/screens/speaker/speaker_card.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
+import 'package:ecellapp/screens/speaker/speaker_repository.dart';
 
 class SpeakerScreen extends StatelessWidget {
   SpeakerScreen({Key key}) : super(key: key);
 
   final ScrollController _scrollController = ScrollController();
 
+  _doReaload(BuildContext context) {
+    Navigator.pop(context);
+    _getAllSpeakers(context);
+
+    // Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (_) => BlocProvider(
+    //               create: (_) => SpeakerCubit(APISpeakerRepository()),
+    //               child: SpeakerScreen(),
+    //             )));
+  }
+
   @override
   Widget build(BuildContext context) {
     return StatefulWrapper(
       onInit: () => _getAllSpeakers(context),
-      child: Scaffold(
-        body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) {
-          if (state is SpeakerError) {
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-          }
-        }, builder: (context, state) {
-          if (state is SpeakerInitial) {
-            return _buildLoading();
-          } else if (state is SpeakerSuccess) {
-            return _buildSuccess(context, state.speakerList);
-          } else if (state is SpeakerLoading) {
-            return _buildLoading();
-          } else {
-            return _buildAskReload();
-          }
-        }),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [C.backgroundTop1, C.backgroundBottom1],
+          ),
+        ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            leading: Container(
+              padding: EdgeInsets.all(D.horizontalPadding - 10),
+              child: IconButton(
+                icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ),
+          ),
+          body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) {
+            if (state is SpeakerError) {
+              ReloadOnErrorScreen(doOnPress: () => _doReaload(context));
+              Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+            }
+          }, builder: (context, state) {
+            if (state is SpeakerInitial) {
+              return _buildLoading();
+            } else if (state is SpeakerSuccess) {
+              return _buildSuccess(context, state.speakerList);
+            } else if (state is SpeakerLoading) {
+              return _buildLoading();
+            } else {
+              return ReloadOnErrorScreen(doOnPress: () => _doReaload(context));
+            }
+          }),
+        ),
       ),
     );
   }
@@ -59,54 +96,30 @@ class SpeakerScreen extends StatelessWidget {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [C.backgroundTop1, C.backgroundBottom1],
-        ),
-      ),
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          leading: Container(
-            padding: EdgeInsets.all(D.horizontalPadding - 10),
-            child: IconButton(
-              icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ),
-        ),
-        body: DefaultTextStyle.merge(
-          style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
-          child: NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (OverscrollIndicatorNotification overscroll) {
-              overscroll.disallowGlow();
-              return true;
-            },
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              controller: _scrollController,
-              child: Container(
-                margin: EdgeInsets.only(top: top + 56),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text(
-                      "Speakers",
-                      style: TextStyle(
-                        fontSize: ratio > 0.5 ? 45 : 50,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    Column(children: speakerContentList),
-                  ],
+    return DefaultTextStyle.merge(
+      style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+      child: NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: (OverscrollIndicatorNotification overscroll) {
+          overscroll.disallowGlow();
+          return true;
+        },
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          controller: _scrollController,
+          child: Container(
+            margin: EdgeInsets.only(top: top + 56),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  "Speakers",
+                  style: TextStyle(
+                    fontSize: ratio > 0.5 ? 45 : 50,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
+                Column(children: speakerContentList),
+              ],
             ),
           ),
         ),
@@ -118,12 +131,6 @@ class SpeakerScreen extends StatelessWidget {
     return Center(
       child: CircularProgressIndicator(),
     );
-  }
-
-  Widget _buildAskReload() {
-    //Ask to reload screen
-    //TODO: Implement a Screen to reload
-    return Container();
   }
 
   void _getAllSpeakers(BuildContext context) {
