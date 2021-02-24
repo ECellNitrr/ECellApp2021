@@ -11,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ContactUsScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController feedbackController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +37,27 @@ class ContactUsScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double top = MediaQuery.of(context).viewPadding.top;
+    double bottom = MediaQuery.of(context).viewInsets.bottom;
     double heightFactor = height / 1000;
-
+    if (_scrollController.hasClients) {
+      if (bottom > height * 0.25) {
+        _scrollController.animateTo(
+          bottom - height * 0.25,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.ease,
+        );
+      } else {
+        _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.ease);
+      }
+    }
     return DefaultTextStyle.merge(
       style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
       child: Stack(
         children: [
           ScreenBackground(elementId: 0),
           SingleChildScrollView(
+            physics: NeverScrollableScrollPhysics(),
+            controller: _scrollController,
             child: Container(
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(top: 20 * heightFactor, left: D.horizontalPadding),
@@ -62,38 +76,38 @@ class ContactUsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        Image.asset(
+                          S.assetLocationIcon,
+                          width: 30,
+                          height: 30,
+                        ),
+                        SizedBox(
+                          width: width / 20,
+                        ),
                         GestureDetector(
                           onTap: () => _launchURL(S.addressURL),
-                          child: Image.asset(
-                            S.assetLocationIcon,
-                            width: 30,
-                            height: 30,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "National Institute of Technology",
+                                style: TextStyle(
+                                    fontSize: 20 * heightFactor,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1.2,
+                                    wordSpacing: 4),
+                              ),
+                              Text(
+                                "GE Road, Raipur",
+                                style: TextStyle(
+                                    fontSize: 20 * heightFactor,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1.2,
+                                    wordSpacing: 4),
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(
-                          width: width / 20,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "National Institute of Technology",
-                              style: TextStyle(
-                                  fontSize: 20 * heightFactor,
-                                  fontWeight: FontWeight.bold,
-                                  height: 1.2,
-                                  wordSpacing: 4),
-                            ),
-                            Text(
-                              "GE Road, Raipur",
-                              style: TextStyle(
-                                  fontSize: 20 * heightFactor,
-                                  fontWeight: FontWeight.bold,
-                                  height: 1.2,
-                                  wordSpacing: 4),
-                            ),
-                          ],
-                        )
                       ],
                     ),
                   ),
@@ -102,24 +116,24 @@ class ContactUsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        Image.asset(
+                          S.assetPhoneIcon,
+                          width: 30,
+                          height: 30,
+                        ),
+                        SizedBox(
+                          width: width / 20,
+                        ),
                         GestureDetector(
                           onTap: () => _launchURL(S.phoneURL),
-                          child: Image.asset(
-                            S.assetPhoneIcon,
-                            width: 30,
-                            height: 30,
+                          child: Text(
+                            S.ecellPhone,
+                            style: TextStyle(
+                                fontSize: 20 * heightFactor,
+                                fontWeight: FontWeight.bold,
+                                height: 1.2,
+                                wordSpacing: 4),
                           ),
-                        ),
-                        SizedBox(
-                          width: width / 20,
-                        ),
-                        Text(
-                          S.ecellPhone,
-                          style: TextStyle(
-                              fontSize: 20 * heightFactor,
-                              fontWeight: FontWeight.bold,
-                              height: 1.2,
-                              wordSpacing: 4),
                         ),
                       ],
                     ),
@@ -129,24 +143,24 @@ class ContactUsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        GestureDetector(
-                          onTap: () => _launchURL(S.emailURL),
-                          child: Image.asset(
-                            S.assetGmailIcon,
-                            width: 30,
-                            height: 30,
-                          ),
+                        Image.asset(
+                          S.assetGmailIcon,
+                          width: 30,
+                          height: 30,
                         ),
                         SizedBox(
                           width: width / 20,
                         ),
-                        Text(
-                          S.ecellEmail,
-                          style: TextStyle(
-                              fontSize: 20 * heightFactor,
-                              fontWeight: FontWeight.bold,
-                              height: 1.2,
-                              wordSpacing: 4),
+                        GestureDetector(
+                          onTap: () => _launchURL(S.emailURL),
+                          child: Text(
+                            S.ecellEmail,
+                            style: TextStyle(
+                                fontSize: 20 * heightFactor,
+                                fontWeight: FontWeight.bold,
+                                height: 1.2,
+                                wordSpacing: 4),
+                          ),
                         ),
                       ],
                     ),
