@@ -24,7 +24,9 @@ class ContactUsScreen extends StatelessWidget {
         builder: (context, state) {
           return Stack(
             children: [
-              ScreenBackground(elementId: 0,),
+              ScreenBackground(
+                elementId: 0,
+              ),
               if (state is FeedbackLoading) _buildLoading(context) else _buildInitial(context)
             ],
           );
