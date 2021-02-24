@@ -1,7 +1,7 @@
+import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ecellapp/widgets/loading_screen.dart';
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/models/speaker.dart';
@@ -19,21 +19,36 @@ class SpeakerScreen extends StatelessWidget {
     return StatefulWrapper(
       onInit: () => _getAllSpeakers(context),
       child: Scaffold(
-        body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) {
-          if (state is SpeakerError) {
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-          }
-        }, builder: (context, state) {
-          if (state is SpeakerInitial) {
-            return _buildLoading();
-          } else if (state is SpeakerSuccess) {
-            return _buildSuccess(context, state.speakerList);
-          } else if (state is SpeakerLoading) {
-            return _buildLoading();
-          } else {
-            return _buildAskReload();
-          }
-        }),
+        body: BlocConsumer<SpeakerCubit, SpeakerState>(
+          listener: (context, state) {
+            if (state is SpeakerError) {
+              Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+            }
+          },
+          builder: (context, state) {
+            return Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [C.backgroundTop1, C.backgroundBottom1],
+                ),
+              ),
+              child: Stack(
+                children: [
+                  if (state is SpeakerInitial)
+                    _buildLoading(context)
+                  else if (state is SpeakerSuccess)
+                    _buildSuccess(context, state.speakerList)
+                  else if (state is SpeakerLoading)
+                    _buildLoading(context)
+                  else
+                    _buildAskReload(),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -59,53 +74,44 @@ class SpeakerScreen extends StatelessWidget {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [C.backgroundTop1, C.backgroundBottom1],
-        ),
-      ),
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          leading: Container(
-            padding: EdgeInsets.all(D.horizontalPadding - 10),
-            child: IconButton(
-              icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
+        leading: Container(
+          padding: EdgeInsets.all(D.horizontalPadding - 10),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+            onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        body: DefaultTextStyle.merge(
-          style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
-          child: NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (OverscrollIndicatorNotification overscroll) {
-              overscroll.disallowGlow();
-              return true;
-            },
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              controller: _scrollController,
-              child: Container(
-                margin: EdgeInsets.only(top: top + 56),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text(
-                      "Speakers",
-                      style: TextStyle(
-                        fontSize: ratio > 0.5 ? 45 : 50,
-                        fontWeight: FontWeight.w600,
-                      ),
+      ),
+      body: DefaultTextStyle.merge(
+        style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+        child: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (OverscrollIndicatorNotification overscroll) {
+            overscroll.disallowGlow();
+            return true;
+          },
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            controller: _scrollController,
+            child: Container(
+              margin: EdgeInsets.only(top: top + 56),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    "Speakers",
+                    style: TextStyle(
+                      fontSize: ratio > 0.5 ? 45 : 50,
+                      fontWeight: FontWeight.w600,
                     ),
-                    Column(children: speakerContentList),
-                  ],
-                ),
+                  ),
+                  Column(children: speakerContentList),
+                ],
               ),
             ),
           ),
@@ -114,12 +120,12 @@ class SpeakerScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLoading() {
-    return LoadingScreen();
+  Widget _buildLoading(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Center(child: ECellLogoAnimation(size: width / 2));
   }
 
   Widget _buildAskReload() {
-    //Ask to reload screen
     //TODO: Implement a Screen to reload
     return Container();
   }

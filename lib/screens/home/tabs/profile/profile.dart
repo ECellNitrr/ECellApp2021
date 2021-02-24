@@ -3,11 +3,11 @@ import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/models/user.dart';
 import 'package:ecellapp/screens/home/cubit/profile_cubit.dart';
+import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ecellapp/widgets/loading_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -32,17 +32,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
             return _buildSuccess(context);
           } else if (state is ProfileLoading) {
             _profile();
-            return _buildLoading();
+            return _buildLoading(context);
           } else {
-            return Container(); // TODO the user should be shown the error on screen instead of a snackbar, and a retry button.
+            return _buildAskReload();
           }
         },
       ),
     );
   }
 
-  Widget _buildLoading() {
-    return LoadingScreen();
+  Widget _buildAskReload() {
+    //Ask to reload screen
+    //TODO: Implement a Screen to reload
+    return Container();
+  }
+
+  Widget _buildLoading(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Stack(
+      children: [
+        ScreenBackground(elementId: 0),
+        Center(child: ECellLogoAnimation(size: width / 2)),
+      ],
+    );
   }
 
   Widget _buildSuccess(BuildContext context) {

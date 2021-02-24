@@ -1,7 +1,8 @@
+import 'package:ecellapp/widgets/ecell_animation.dart';
+import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/material.dart';
 import 'package:ecellapp/screens/home/cubit/feedback_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ecellapp/widgets/loading_screen.dart';
 
 class ContactUsScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -10,21 +11,26 @@ class ContactUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: BlocConsumer<FeedbackCubit, FeedbackState>(listener: (context, state) {
+      resizeToAvoidBottomInset: false,
+      body: BlocConsumer<FeedbackCubit, FeedbackState>(
+        listener: (context, state) {
           if (state is FeedbackError) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           } else if (state is FeedbackSuccess) {
             Scaffold.of(context)
                 .showSnackBar(SnackBar(content: Text("Feedback Posted Successful")));
           }
-        }, builder: (context, state) {
-          if (state is FeedbackLoading) {
-            return _buildLoading();
-          } else {
-            return _buildInitial(context);
-          }
-        }));
+        },
+        builder: (context, state) {
+          return Stack(
+            children: [
+              ScreenBackground(elementId: 0,),
+              if (state is FeedbackLoading) _buildLoading(context) else _buildInitial(context)
+            ],
+          );
+        },
+      ),
+    );
   }
 
   Widget _buildInitial(BuildContext context) {
@@ -45,7 +51,16 @@ class ContactUsScreen extends StatelessWidget {
         ));
   }
 
-  Widget _buildLoading() => LoadingScreen();
+  Widget _buildLoading(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Scaffold(
+      body: Stack(
+        children: [
+          Center(child: ECellLogoAnimation(size: width / 2)),
+        ],
+      ),
+    );
+  }
 
   void _postFeedback(BuildContext context) {
     final cubit = context.read<FeedbackCubit>();

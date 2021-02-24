@@ -3,6 +3,9 @@ import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/core/utils/injection.dart';
 import 'package:ecellapp/screens/esummit/esummit.dart';
+import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
+import 'package:ecellapp/screens/events/events.dart';
+import 'package:ecellapp/screens/events/events_repository.dart';
 import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
 import 'package:ecellapp/screens/login/login.dart';
 import 'package:ecellapp/screens/login/login_repository.dart';
@@ -165,7 +168,17 @@ class _MenuScreenState extends State<MenuScreen> {
                         width: 20,
                         height: 20,
                       ),
-                      onTap: () {}, //TODO
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => BlocProvider(
+                              create: (_) => EventsCubit(APIEventsRepository()),
+                              child: EventsScreen(),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                   SizedBox(height: 10),

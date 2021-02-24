@@ -7,6 +7,7 @@ import 'package:ecellapp/screens/home/home_repository.dart';
 import 'package:ecellapp/screens/signup/cubit/signup_cubit.dart';
 import 'package:ecellapp/screens/signup/signup.dart';
 import 'package:ecellapp/screens/signup/signup_repository.dart';
+import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:ecellapp/widgets/email_field.dart';
 import 'package:ecellapp/widgets/password_field.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
@@ -14,7 +15,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ecellapp/widgets/loading_screen.dart';
 import 'cubit/login_cubit.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -43,13 +43,12 @@ class LoginScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          if (state is LoginInitial) {
-            return _buildInitial(context);
-          } else if (state is LoginLoading) {
-            return _buildLoading();
-          } else {
-            return _buildInitial(context);
-          }
+          return Stack(
+            children: [
+              ScreenBackground(elementId: 1),
+              if (state is LoginLoading) _buildLoading(context) else _buildInitial(context),
+            ],
+          );
         },
       ),
     );
@@ -75,8 +74,6 @@ class LoginScreen extends StatelessWidget {
       style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
       child: Stack(
         children: [
-          //Handles background elements
-          ScreenBackground(elementId: 1),
           SingleChildScrollView(
             physics: NeverScrollableScrollPhysics(),
             controller: _scrollController,
@@ -244,8 +241,13 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLoading() {
-    return LoadingScreen();
+  Widget _buildLoading(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Stack(
+      children: [
+        Center(child: ECellLogoAnimation(size: width / 2)),
+      ],
+    );
   }
 
   void _login(BuildContext context) {

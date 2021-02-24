@@ -1,11 +1,11 @@
 import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
 import 'package:ecellapp/screens/login/login.dart';
 import 'package:ecellapp/screens/login/login_repository.dart';
+import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ecellapp/widgets/loading_screen.dart';
 import '../../core/res/colors.dart';
 import '../../core/res/dimens.dart';
 import '../../core/res/strings.dart';
@@ -47,13 +47,12 @@ class SignupScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          if (state is SignupInitial) {
-            return _buildInitial(context);
-          } else if (state is SignupLoading) {
-            return _buildLoading();
-          } else {
-            return _buildInitial(context);
-          }
+          return Stack(
+            children: [
+              ScreenBackground(elementId: 1),
+              if (state is LoginLoading) _buildLoading(context) else _buildInitial(context),
+            ],
+          );
         },
       ),
     );
@@ -77,167 +76,165 @@ class SignupScreen extends StatelessWidget {
     }
     return DefaultTextStyle(
       style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
-      child: Stack(
-        children: [
-          ScreenBackground(elementId: 1),
-          SingleChildScrollView(
-            physics: NeverScrollableScrollPhysics(),
-            controller: _scrollController,
-            child: Container(
-              height: height * 1.25,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(flex: 2, child: Container()),
-                  Flexible(
-                    flex: 7,
-                    child: Column(
-                      children: [
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.only(left: D.horizontalPadding + 1),
-                          child: Image.asset(
-                            S.assetEcellLogoWhite,
-                            width: width * 0.25 * heightFactor,
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.only(left: D.horizontalPadding, top: 20),
-                          child: Text(
-                            "Hello!",
-                            style:
-                                TextStyle(fontSize: 35 * heightFactor, fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.only(left: D.horizontalPadding, top: 5),
-                          child: RichText(
-                            text: TextSpan(
-                              text: "Let's create your ",
-                              children: [
-                                TextSpan(
-                                    text: "Account",
-                                    style: TextStyle(color: C.primaryHighlightedColor))
-                              ],
-                              style: TextStyle(fontSize: 25 * heightFactor),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Form(
-                          key: _formKey,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: D.horizontalPadding),
-                            child: Column(
-                              children: <Widget>[
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(child: NameField(firstnameController, "First Name")),
-                                    SizedBox(width: 15),
-                                    Expanded(child: NameField(lastnameController, "Last Name")),
-                                  ],
-                                ),
-                                SizedBox(height: 20 * heightFactor),
-                                EmailField(emailController),
-                                SizedBox(height: 20 * heightFactor),
-                                PasswordField(passwordController),
-                                SizedBox(height: 20 * heightFactor),
-                                MobileNumberField(mobileController),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+      child: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: _scrollController,
+        child: Container(
+          height: height * 1.25,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Expanded(flex: 2, child: Container()),
+              Flexible(
+                flex: 7,
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.only(left: D.horizontalPadding + 1),
+                      child: Image.asset(
+                        S.assetEcellLogoWhite,
+                        width: width * 0.25 * heightFactor,
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.only(right: D.horizontalPadding),
-                      alignment: Alignment.topRight,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(30)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: C.authButtonColor.withOpacity(0.2),
-                              blurRadius: 10,
-                              spreadRadius: 3,
-                              offset: Offset(0, 12),
-                            )
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.only(left: D.horizontalPadding, top: 20),
+                      child: Text(
+                        "Hello!",
+                        style: TextStyle(fontSize: 35 * heightFactor, fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.only(left: D.horizontalPadding, top: 5),
+                      child: RichText(
+                        text: TextSpan(
+                          text: "Let's create your ",
+                          children: [
+                            TextSpan(
+                                text: "Account", style: TextStyle(color: C.primaryHighlightedColor))
+                          ],
+                          style: TextStyle(fontSize: 25 * heightFactor),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Form(
+                      key: _formKey,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: D.horizontalPadding),
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(child: NameField(firstnameController, "First Name")),
+                                SizedBox(width: 15),
+                                Expanded(child: NameField(lastnameController, "Last Name")),
+                              ],
+                            ),
+                            SizedBox(height: 20 * heightFactor),
+                            EmailField(emailController),
+                            SizedBox(height: 20 * heightFactor),
+                            PasswordField(passwordController),
+                            SizedBox(height: 20 * heightFactor),
+                            MobileNumberField(mobileController),
                           ],
                         ),
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                          ),
-                          color: C.authButtonColor,
-                          onPressed: () => _signup(context),
-                          child: Container(
-                            height: 60,
-                            width: 120,
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Sign Up!",
-                              style: TextStyle(
-                                color: C.primaryUnHighlightedColor,
-                                fontSize: 20 * heightFactor,
-                              ),
-                            ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(right: D.horizontalPadding),
+                  alignment: Alignment.topRight,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: C.authButtonColor.withOpacity(0.2),
+                          blurRadius: 10,
+                          spreadRadius: 3,
+                          offset: Offset(0, 12),
+                        )
+                      ],
+                    ),
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
+                      color: C.authButtonColor,
+                      onPressed: () => _signup(context),
+                      child: Container(
+                        height: 60,
+                        width: 120,
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Sign Up!",
+                          style: TextStyle(
+                            color: C.primaryUnHighlightedColor,
+                            fontSize: 20 * heightFactor,
                           ),
                         ),
                       ),
                     ),
                   ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      padding: EdgeInsets.only(right: width / 8, top: 5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "have an account?",
-                            style: TextStyle(fontSize: 18 * heightFactor, color: C.secondaryColor),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  padding: EdgeInsets.only(right: width / 8, top: 5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "have an account?",
+                        style: TextStyle(fontSize: 18 * heightFactor, color: C.secondaryColor),
+                      ),
+                      SizedBox(height: 10),
+                      GestureDetector(
+                        child: Text(
+                          "Login now",
+                          style: TextStyle(
+                            fontSize: 20 * heightFactor,
+                            color: C.primaryHighlightedColor,
                           ),
-                          SizedBox(height: 10),
-                          GestureDetector(
-                            child: Text(
-                              "Login now",
-                              style: TextStyle(
-                                fontSize: 20 * heightFactor,
-                                color: C.primaryHighlightedColor,
+                        ),
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => BlocProvider(
+                                create: (_) => LoginCubit(APILoginRepository()),
+                                child: LoginScreen(),
                               ),
                             ),
-                            onTap: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => BlocProvider(
-                                            create: (_) => LoginCubit(APILoginRepository()),
-                                            child: LoginScreen(),
-                                          )));
-                            },
-                          ),
-                        ],
+                          );
+                        },
                       ),
-                    ),
+                    ],
                   ),
-                  Expanded(flex: 3, child: Container()),
-                ],
+                ),
               ),
-            ),
+              Expanded(flex: 3, child: Container()),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 
-  Widget _buildLoading() => LoadingScreen();
+  Widget _buildLoading(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Center(child: ECellLogoAnimation(size: width / 2));
+  }
 
   void _signup(BuildContext context) {
     final cubit = context.read<SignupCubit>();
