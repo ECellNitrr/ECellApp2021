@@ -106,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Container(
                             alignment: Alignment.topRight,
                             child: GestureDetector(
-                              onTap: () {}, //TODO
+                              onTap: () {}, //TODO change password
                               child: Text(
                                 "Change Password?",
                                 style: TextStyle(
