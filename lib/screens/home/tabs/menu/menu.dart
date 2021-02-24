@@ -1,16 +1,13 @@
-import 'package:ecellapp/core/res/colors.dart';
-import 'package:ecellapp/core/res/dimens.dart';
-import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/core/utils/injection.dart';
-import 'package:ecellapp/screens/esummit/esummit.dart';
-import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
-import 'package:ecellapp/screens/login/login.dart';
-import 'package:ecellapp/screens/login/login_repository.dart';
-import 'package:ecellapp/widgets/ecell_animation.dart';
-import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../../core/res/colors.dart';
+import '../../../../core/res/dimens.dart';
+import '../../../../core/res/strings.dart';
+import '../../../../core/utils/injection.dart';
+import '../../../../widgets/ecell_animation.dart';
+import '../../../../widgets/screen_background.dart';
+import '../../../esummit/esummit.dart';
 
 class MenuScreen extends StatefulWidget {
   @override
@@ -279,15 +276,7 @@ class _MenuScreenState extends State<MenuScreen> {
       case 'Logout':
         await sl.get<SharedPreferences>().remove(S.tokenKeySharedPreferences);
         Scaffold.of(context).showSnackBar(SnackBar(content: Text("Logged Out Successfuly")));
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (_) => BlocProvider(
-              create: (_) => LoginCubit(APILoginRepository()),
-              child: LoginScreen(),
-            ),
-          ),
-        );
+        Navigator.pushReplacementNamed(context, "login");
     }
   }
 }

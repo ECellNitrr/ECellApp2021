@@ -35,15 +35,7 @@ class SignupScreen extends StatelessWidget {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           } else if (state is SignupSuccess) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text("SignUp Successful")));
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (_) => BlocProvider(
-                  create: (_) => LoginCubit(APILoginRepository()),
-                  child: LoginScreen(),
-                ),
-              ),
-            );
+            Navigator.pushReplacementNamed(context, "login");
           }
         },
         builder: (context, state) {
@@ -213,15 +205,7 @@ class SignupScreen extends StatelessWidget {
                                 color: C.primaryHighlightedColor,
                               ),
                             ),
-                            onTap: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => BlocProvider(
-                                            create: (_) => LoginCubit(APILoginRepository()),
-                                            child: LoginScreen(),
-                                          )));
-                            },
+                            onTap: () => Navigator.pushReplacementNamed(context, "login"),
                           ),
                         ],
                       ),

@@ -1,12 +1,13 @@
-import 'package:ecellapp/core/res/colors.dart';
-import 'package:ecellapp/core/res/dimens.dart';
-import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/models/user.dart';
-import 'package:ecellapp/screens/home/cubit/profile_cubit.dart';
-import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../../core/res/colors.dart';
+import '../../../../core/res/dimens.dart';
+import '../../../../core/res/strings.dart';
+import '../../../../models/global_state.dart';
+import '../../../../models/user.dart';
+import '../../../../widgets/screen_background.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -14,115 +15,78 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  User user;
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocConsumer<ProfileCubit, ProfileState>(
-        listener: (context, state) {
-          if (state is ProfileError) {
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-          }
-        },
-        builder: (context, state) {
-          if (state is ProfileSuccess) {
-            user = state.user;
-            return _buildSuccess(context);
-          } else if (state is ProfileLoading) {
-            _profile();
-            return _buildLoading();
-          } else {
-            return Container(); // TODO the user should be shown the error on screen instead of a snackbar, and a retry button.
-          }
-        },
-      ),
-    );
-  }
-
-  Widget _buildLoading() {
-    return Center(child: CircularProgressIndicator());
-  }
-
-  Widget _buildSuccess(BuildContext context) {
+    User user = context.read<GlobalState>().user;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double top = MediaQuery.of(context).viewPadding.top;
     double heightFactor = height / 1000;
-    return DefaultTextStyle(
-      style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
-      child: Stack(
-        children: [
-          ScreenBackground(elementId: 0),
-          Container(
-            padding: EdgeInsets.only(top: 56 + top + 20 * heightFactor),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  child: Image.asset(
-                    S.assetEcellLogoWhite,
-                    width: width * 0.3 * heightFactor,
+    return Scaffold(
+      body: DefaultTextStyle(
+        style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+        child: Stack(
+          children: [
+            ScreenBackground(elementId: 0),
+            Container(
+              padding: EdgeInsets.only(top: 56 + top + 20 * heightFactor),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    child: Image.asset(
+                      S.assetEcellLogoWhite,
+                      width: width * 0.3 * heightFactor,
+                    ),
                   ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(),
-                ),
-                Expanded(
-                  flex: 10,
-                  child: Form(
-                    child: Padding(
-                      padding:
-                          EdgeInsets.only(left: D.horizontalPadding, right: D.horizontalPadding),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          _label("First Name", heightFactor),
-                          _labelValue(width, height, user.firstName),
-                          Expanded(flex: 1, child: Container()),
-                          _label("Last Name", heightFactor),
-                          _labelValue(width, height, user.lastName),
-                          Expanded(flex: 1, child: Container()),
-                          _label("Email Address", heightFactor),
-                          _labelValue(width, height, user.email),
-                          Expanded(flex: 1, child: Container()),
-                          _label("Phone Number", heightFactor),
-                          _labelValue(width, height, user.phoneNumber),
-                          Expanded(flex: 1, child: Container()),
-                          Container(
-                            alignment: Alignment.topRight,
-                            child: GestureDetector(
-                              onTap: () {}, //TODO
-                              child: Text(
-                                "Change Password?",
-                                style: TextStyle(
-                                  color: C.primaryHighlightedColor,
-                                  fontSize: 20 * heightFactor,
+                  Expanded(flex: 1, child: Container()),
+                  Expanded(
+                    flex: 10,
+                    child: Form(
+                      child: Padding(
+                        padding:
+                            EdgeInsets.only(left: D.horizontalPadding, right: D.horizontalPadding),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            _label("First Name", heightFactor),
+                            _labelValue(width, height, user.firstName),
+                            Expanded(flex: 1, child: Container()),
+                            _label("Last Name", heightFactor),
+                            _labelValue(width, height, user.lastName),
+                            Expanded(flex: 1, child: Container()),
+                            _label("Email Address", heightFactor),
+                            _labelValue(width, height, user.email),
+                            Expanded(flex: 1, child: Container()),
+                            _label("Phone Number", heightFactor),
+                            _labelValue(width, height, user.phoneNumber),
+                            Expanded(flex: 1, child: Container()),
+                            Container(
+                              alignment: Alignment.topRight,
+                              child: GestureDetector(
+                                onTap: () {}, //TODO
+                                child: Text(
+                                  "Change Password?",
+                                  style: TextStyle(
+                                    color: C.primaryHighlightedColor,
+                                    fontSize: 20 * heightFactor,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  flex: 5,
-                  child: Container(),
-                )
-              ],
+                  Expanded(flex: 5, child: Container())
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
-  }
-
-  void _profile() {
-    final cubit = context.read<ProfileCubit>();
-    cubit.getProfile();
   }
 
   Widget _label(String label, double fontSize) {

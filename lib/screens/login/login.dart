@@ -1,20 +1,14 @@
-import 'package:ecellapp/core/res/colors.dart';
-import 'package:ecellapp/core/res/dimens.dart';
-import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/screens/home/cubit/profile_cubit.dart';
-import 'package:ecellapp/screens/home/home.dart';
-import 'package:ecellapp/screens/home/home_repository.dart';
-import 'package:ecellapp/screens/signup/cubit/signup_cubit.dart';
-import 'package:ecellapp/screens/signup/signup.dart';
-import 'package:ecellapp/screens/signup/signup_repository.dart';
-import 'package:ecellapp/widgets/email_field.dart';
-import 'package:ecellapp/widgets/password_field.dart';
-import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/res/colors.dart';
+import '../../core/res/dimens.dart';
+import '../../core/res/strings.dart';
+import '../../widgets/email_field.dart';
+import '../../widgets/password_field.dart';
+import '../../widgets/screen_background.dart';
 import 'cubit/login_cubit.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -31,26 +25,13 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) async {
           if (state is LoginSuccess) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text("Login Successful")));
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (_) => BlocProvider(
-                          create: (_) => ProfileCubit(APIHomeRepository()),
-                          child: HomeScreen(),
-                        )));
+            Navigator.pushReplacementNamed(context, "splash");
           } else if (state is LoginError) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
-        builder: (context, state) {
-          if (state is LoginInitial) {
-            return _buildInitial(context);
-          } else if (state is LoginLoading) {
-            return _buildLoading();
-          } else {
-            return _buildInitial(context);
-          }
-        },
+        builder: (context, state) =>
+            state is LoginLoading ? _buildLoading() : _buildInitial(context),
       ),
     );
   }
@@ -204,34 +185,28 @@ class LoginScreen extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Container(
-                        alignment: Alignment.centerRight,
-                        padding: EdgeInsets.only(right: (width / 10), top: 5),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text('New here? ',
-                                style: TextStyle(
-                                    fontSize: 20 * heightFactor, color: C.secondaryColor)),
-                            GestureDetector(
-                                child: Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      color: C.primaryHighlightedColor,
-                                      fontSize: 20 * heightFactor),
-                                ),
-                                onTap: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => BlocProvider(
-                                                create: (_) => SignupCubit(APISignupRepository()),
-                                                child: SignupScreen(),
-                                              )));
-                                }),
-                          ],
-                        )),
+                      alignment: Alignment.centerRight,
+                      padding: EdgeInsets.only(right: (width / 10), top: 5),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('New here? ',
+                              style:
+                                  TextStyle(fontSize: 20 * heightFactor, color: C.secondaryColor)),
+                          GestureDetector(
+                            child: Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: C.primaryHighlightedColor,
+                                  fontSize: 20 * heightFactor),
+                            ),
+                            onTap: () => Navigator.pushReplacementNamed(context, "signup"),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   //To flex background
                   Expanded(flex: 3, child: Container()),
