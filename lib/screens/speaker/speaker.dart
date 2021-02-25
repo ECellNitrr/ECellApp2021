@@ -10,7 +10,6 @@ import 'package:ecellapp/models/speaker.dart';
 import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
 import 'package:ecellapp/screens/speaker/speaker_card.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
-import 'package:ecellapp/screens/speaker/speaker_repository.dart';
 
 class SpeakerScreen extends StatelessWidget {
   SpeakerScreen({Key key}) : super(key: key);
@@ -18,15 +17,7 @@ class SpeakerScreen extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
 
   _doReaload(BuildContext context) {
-    // Navigator.pop(context);
-    // _getAllSpeakers(context);
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (_) => SpeakerCubit(APISpeakerRepository()),
-                  child: SpeakerScreen(),
-                )));
+    //TODO: Resolve _getAllSpeakers(context); not working
   }
 
   @override

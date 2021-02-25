@@ -1,4 +1,5 @@
 import 'package:ecellapp/models/sponsor_category.dart';
+import 'package:ecellapp/widgets/reload_on_error.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,10 @@ import 'cubit/sponsors_cubit.dart';
 class SponsorsScreen extends StatelessWidget {
   const SponsorsScreen({Key key}) : super(key: key);
 
+  _doReaload(BuildContext context) {
+    //TODO:
+  }
+
   @override
   Widget build(BuildContext context) {
     return StatefulWrapper(
@@ -15,6 +20,8 @@ class SponsorsScreen extends StatelessWidget {
       child: Scaffold(
         body: BlocConsumer<SponsorsCubit, SponsorsState>(listener: (context, state) {
           if (state is SponsorsError) {
+            ReloadOnErrorScreen(doOnPress: () => _doReaload(context));
+
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
         }, builder: (context, state) {
@@ -25,7 +32,7 @@ class SponsorsScreen extends StatelessWidget {
           } else if (state is SponsorsLoading) {
             return _buildLoading();
           } else {
-            return _buildAskReload();
+            return ReloadOnErrorScreen(doOnPress: () => _doReaload(context));
           }
         }),
       ),
