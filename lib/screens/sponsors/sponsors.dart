@@ -1,5 +1,6 @@
 import 'package:ecellapp/models/sponsor_category.dart';
 import 'package:ecellapp/widgets/ecell_animation.dart';
+import 'package:ecellapp/widgets/reload_on_error.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +21,6 @@ class SponsorsScreen extends StatelessWidget {
       child: Scaffold(
         body: BlocConsumer<SponsorsCubit, SponsorsState>(listener: (context, state) {
           if (state is SponsorsError) {
-            ReloadOnErrorScreen(doOnPress: () => _doReaload(context));
-
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
         }, builder: (context, state) {
@@ -35,7 +34,7 @@ class SponsorsScreen extends StatelessWidget {
               else if (state is SponsorsLoading)
                 _buildLoading(context)
               else
-                _buildAskReload(),
+                ReloadOnErrorScreen(doOnPress: () => _doReaload(context)),
             ],
           );
         }),
@@ -60,12 +59,6 @@ class SponsorsScreen extends StatelessWidget {
   Widget _buildLoading(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Center(child: ECellLogoAnimation(size: width / 2));
-  }
-
-  Widget _buildAskReload() {
-    //Ask to reload screen
-    //TODO: Implement a Screen to reload
-    return Container();
   }
 
   void _getAllSponsorss(BuildContext context) {

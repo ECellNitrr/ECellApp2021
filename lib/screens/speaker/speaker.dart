@@ -1,4 +1,5 @@
 import 'package:ecellapp/widgets/ecell_animation.dart';
+import 'package:ecellapp/widgets/reload_on_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,7 +61,7 @@ class SpeakerScreen extends StatelessWidget {
                     else if (state is SpeakerLoading)
                       return _buildLoading(context);
                     else
-                      return _buildAskReload();
+                      return ReloadOnErrorScreen(doOnPress: () => _doReaload(context));
                   }(),
                 ));
           },
@@ -124,11 +125,6 @@ class SpeakerScreen extends StatelessWidget {
   Widget _buildLoading(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Center(child: ECellLogoAnimation(size: width / 2));
-  }
-
-  Widget _buildAskReload() {
-    //TODO: Implement a Screen to reload
-    return Container();
   }
 
   void _getAllSpeakers(BuildContext context) {

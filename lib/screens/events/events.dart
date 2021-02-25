@@ -3,6 +3,7 @@ import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/models/event.dart';
 import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
 import 'package:ecellapp/widgets/ecell_animation.dart';
+import 'package:ecellapp/widgets/reload_on_error.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,9 @@ import 'events_card.dart';
 class EventsScreen extends StatelessWidget {
   const EventsScreen({Key key}) : super(key: key);
 
+  _doReaload(BuildContext context) {
+    //TODO:
+  }
   @override
   Widget build(BuildContext context) {
     return StatefulWrapper(
@@ -21,9 +25,7 @@ class EventsScreen extends StatelessWidget {
         body: BlocConsumer<EventsCubit, EventsState>(
           listener: (context, state) {
             if (state is EventsError) {
-              Scaffold.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)),
-              );
+              Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
             }
           },
           builder: (context, state) {
@@ -51,7 +53,7 @@ class EventsScreen extends StatelessWidget {
                   else if (state is EventsLoading)
                     _buildLoading(context)
                   else
-                    _buildAskReload()
+                    ReloadOnErrorScreen(doOnPress: () => _doReaload(context)),
                 ],
               ),
             );
@@ -59,11 +61,6 @@ class EventsScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget _buildAskReload() {
-    //TODO: Implement a Screen to reload
-    return Container();
   }
 
   Widget _buildLoading(BuildContext context) {
