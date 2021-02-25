@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../core/themes/selected_icon_theme.dart';
-import 'tabs/contact_us/contact_us.dart';
-import 'tabs/menu/menu.dart';
-import 'tabs/profile/profile.dart';
+import 'tabs/contact_us.dart';
+import 'tabs/menu.dart';
+import 'tabs/profile.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

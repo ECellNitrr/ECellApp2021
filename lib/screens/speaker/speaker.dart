@@ -1,9 +1,7 @@
-import 'package:ecellapp/core/utils/logger.dart';
-import 'package:ecellapp/widgets/reload_on_error.dart';
+import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/models/speaker.dart';
@@ -24,46 +22,48 @@ class SpeakerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StatefulWrapper(
       onInit: () => _getAllSpeakers(context),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [C.backgroundTop1, C.backgroundBottom1],
-          ),
-        ),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            leading: Container(
-              padding: EdgeInsets.all(D.horizontalPadding - 10),
-              child: IconButton(
-                icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ),
-          ),
-          body: BlocConsumer<SpeakerCubit, SpeakerState>(listener: (context, state) {
+      child: Scaffold(
+        body: BlocConsumer<SpeakerCubit, SpeakerState>(
+          listener: (context, state) {
             if (state is SpeakerError) {
-              ReloadOnErrorScreen(doOnPress: () => _doReaload(context));
               Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
             }
-          }, builder: (context, state) {
-            if (state is SpeakerInitial) {
-              Log.d(tag: "reloaded", message: "Yos");
-              return _buildLoading();
-            } else if (state is SpeakerSuccess) {
-              return _buildSuccess(context, state.speakerList);
-            } else if (state is SpeakerLoading) {
-              Log.d(tag: "reloaded", message: "Yos");
-
-              return _buildLoading();
-            } else {
-              return ReloadOnErrorScreen(doOnPress: () => _doReaload(context));
-            }
-          }),
+          },
+          builder: (context, state) {
+            return Scaffold(
+                extendBodyBehindAppBar: true,
+                backgroundColor: Colors.transparent,
+                appBar: AppBar(
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                  leading: Container(
+                    padding: EdgeInsets.all(D.horizontalPadding - 10),
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ),
+                ),
+                body: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [C.backgroundTop1, C.backgroundBottom1],
+                    ),
+                  ),
+                  child: () {
+                    if (state is SpeakerInitial)
+                      return _buildLoading(context);
+                    else if (state is SpeakerSuccess)
+                      return _buildSuccess(context, state.speakerList);
+                    else if (state is SpeakerLoading)
+                      return _buildLoading(context);
+                    else
+                      return _buildAskReload();
+                  }(),
+                ));
+          },
         ),
       ),
     );
@@ -121,10 +121,14 @@ class SpeakerScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLoading() {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
+  Widget _buildLoading(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Center(child: ECellLogoAnimation(size: width / 2));
+  }
+
+  Widget _buildAskReload() {
+    //TODO: Implement a Screen to reload
+    return Container();
   }
 
   void _getAllSpeakers(BuildContext context) {

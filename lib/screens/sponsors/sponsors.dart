@@ -1,9 +1,9 @@
 import 'package:ecellapp/models/sponsor_category.dart';
-import 'package:ecellapp/widgets/reload_on_error.dart';
+import 'package:ecellapp/widgets/ecell_animation.dart';
+import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'cubit/sponsors_cubit.dart';
 
 class SponsorsScreen extends StatelessWidget {
@@ -25,22 +25,22 @@ class SponsorsScreen extends StatelessWidget {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
         }, builder: (context, state) {
-          if (state is SponsorsInitial) {
-            return _buildInitial();
-          } else if (state is SponsorsSuccess) {
-            return _buildSuccess(context, state.sponsorsList);
-          } else if (state is SponsorsLoading) {
-            return _buildLoading();
-          } else {
-            return ReloadOnErrorScreen(doOnPress: () => _doReaload(context));
-          }
+          return Stack(
+            children: [
+              ScreenBackground(elementId: 0),
+              if (state is SponsorsInitial)
+                _buildLoading(context)
+              else if (state is SponsorsSuccess)
+                _buildSuccess(context, state.sponsorsList)
+              else if (state is SponsorsLoading)
+                _buildLoading(context)
+              else
+                _buildAskReload(),
+            ],
+          );
         }),
       ),
     );
-  }
-
-  Widget _buildInitial() {
-    return Container();
   }
 
   Widget _buildSuccess(BuildContext context, List<SponsorCategory> sponsorsList) {
@@ -57,10 +57,9 @@ class SponsorsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLoading() {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
+  Widget _buildLoading(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Center(child: ECellLogoAnimation(size: width / 2));
   }
 
   Widget _buildAskReload() {
