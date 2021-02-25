@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../core/res/colors.dart';
-import '../../../../core/res/dimens.dart';
-import '../../../../core/res/strings.dart';
-import '../../../../models/global_state.dart';
-import '../../../../models/user.dart';
-import '../../../../widgets/screen_background.dart';
+import '../../../core/res/colors.dart';
+import '../../../core/res/dimens.dart';
+import '../../../core/res/strings.dart';
+import '../../../models/global_state.dart';
+import '../../../models/user.dart';
+import '../../../widgets/screen_background.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+import 'core/res/strings.dart';
 import 'core/themes/app_theme.dart';
 import 'core/utils/injection.dart';
 import 'models/global_state.dart';
@@ -33,16 +34,16 @@ class ECellApp extends StatelessWidget {
       create: (_) => GlobalState(),
       child: MaterialApp(
         routes: {
-          "login": (_) =>
+          S.routeLogin: (_) =>
               BlocProvider(create: (_) => LoginCubit(APILoginRepository()), child: LoginScreen()),
-          "splash": (_) => BlocProvider(
+          S.routeSplash: (_) => BlocProvider(
               create: (_) => SplashCubit(APISplashRepository()), child: SplashScreen()),
-          "home": (_) =>
+          S.routeHome: (_) =>
               BlocProvider(create: (_) => FeedbackCubit(APIHomeRepository()), child: HomeScreen()),
-          "signup": (_) =>
+          S.routeSignup: (_) =>
               BlocProvider(create: (_) => SignupCubit(APISignupRepository()), child: SignupScreen())
         },
-        initialRoute: "splash",
+        initialRoute: S.routeSplash,
         title: "ECellApp",
         theme: AppTheme.themeData(context),
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../cubit/feedback_cubit.dart';
+import '../cubit/feedback_cubit.dart';
 
 class ContactUsScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();

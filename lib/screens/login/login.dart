@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) async {
           if (state is LoginSuccess) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text("Login Successful")));
-            Navigator.pushReplacementNamed(context, "splash");
+            Navigator.pushReplacementNamed(context, S.routeSplash);
           } else if (state is LoginError) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
@@ -202,7 +202,7 @@ class LoginScreen extends StatelessWidget {
                                   color: C.primaryHighlightedColor,
                                   fontSize: 20 * heightFactor),
                             ),
-                            onTap: () => Navigator.pushReplacementNamed(context, "signup"),
+                            onTap: () => Navigator.pushReplacementNamed(context, S.routeSignup),
                           ),
                         ],
                       ),

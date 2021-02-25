@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../core/res/colors.dart';
-import '../../../../core/res/dimens.dart';
-import '../../../../core/res/strings.dart';
-import '../../../../core/utils/injection.dart';
-import '../../../../widgets/ecell_animation.dart';
-import '../../../../widgets/screen_background.dart';
-import '../../../esummit/esummit.dart';
+import '../../../core/res/colors.dart';
+import '../../../core/res/dimens.dart';
+import '../../../core/res/strings.dart';
+import '../../../core/utils/injection.dart';
+import '../../../models/global_state.dart';
+import '../../../widgets/ecell_animation.dart';
+import '../../../widgets/screen_background.dart';
+import '../../esummit/esummit.dart';
 
 class MenuScreen extends StatefulWidget {
   @override
@@ -274,9 +276,10 @@ class _MenuScreenState extends State<MenuScreen> {
   Future<void> _handleClick(String value) async {
     switch (value) {
       case 'Logout':
+        Provider.of<GlobalState>(context, listen: false).user = null;
         await sl.get<SharedPreferences>().remove(S.tokenKeySharedPreferences);
         Scaffold.of(context).showSnackBar(SnackBar(content: Text("Logged Out Successfuly")));
-        Navigator.pushReplacementNamed(context, "login");
+        Navigator.pushReplacementNamed(context, S.routeLogin);
     }
   }
 }
