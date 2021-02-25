@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,6 +11,12 @@ import '../../../models/global_state.dart';
 import '../../../widgets/ecell_animation.dart';
 import '../../../widgets/screen_background.dart';
 import '../../esummit/esummit.dart';
+import '../../events/cubit/events_cubit.dart';
+import '../../events/events.dart';
+import '../../events/events_repository.dart';
+import '../../sponsors/cubit/sponsors_cubit.dart';
+import '../../sponsors/sponsors.dart';
+import '../../sponsors/sponsors_repository.dart';
 
 class MenuScreen extends StatefulWidget {
   @override
@@ -164,7 +171,17 @@ class _MenuScreenState extends State<MenuScreen> {
                         width: 20,
                         height: 20,
                       ),
-                      onTap: () {}, //TODO
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => BlocProvider(
+                              create: (_) => EventsCubit(APIEventsRepository()),
+                              child: EventsScreen(),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                   SizedBox(height: 10),
@@ -208,7 +225,17 @@ class _MenuScreenState extends State<MenuScreen> {
                         width: 25,
                         height: 25,
                       ),
-                      onTap: () {}, //TODO
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => BlocProvider(
+                              create: (_) => SponsorsCubit(APISponsorsRepository()),
+                              child: SponsorsScreen(),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                   SizedBox(height: 10),

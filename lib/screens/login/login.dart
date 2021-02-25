@@ -1,14 +1,14 @@
+import 'package:ecellapp/core/res/colors.dart';
+import 'package:ecellapp/core/res/dimens.dart';
+import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/widgets/ecell_animation.dart';
+import 'package:ecellapp/widgets/email_field.dart';
+import 'package:ecellapp/widgets/password_field.dart';
+import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../core/res/colors.dart';
-import '../../core/res/dimens.dart';
-import '../../core/res/strings.dart';
-import '../../widgets/email_field.dart';
-import '../../widgets/password_field.dart';
-import '../../widgets/screen_background.dart';
 import 'cubit/login_cubit.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -30,8 +30,14 @@ class LoginScreen extends StatelessWidget {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
-        builder: (context, state) =>
-            state is LoginLoading ? _buildLoading() : _buildInitial(context),
+        builder: (context, state) {
+          return Stack(
+            children: [
+              ScreenBackground(elementId: 1),
+              if (state is LoginLoading) _buildLoading(context) else _buildInitial(context),
+            ],
+          );
+        },
       ),
     );
   }
@@ -56,8 +62,6 @@ class LoginScreen extends StatelessWidget {
       style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
       child: Stack(
         children: [
-          //Handles background elements
-          ScreenBackground(elementId: 1),
           SingleChildScrollView(
             physics: NeverScrollableScrollPhysics(),
             controller: _scrollController,
@@ -219,10 +223,9 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLoading() {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
+  Widget _buildLoading(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Center(child: ECellLogoAnimation(size: width / 2));
   }
 
   void _login(BuildContext context) {
