@@ -48,7 +48,7 @@ class SpeakerScreen extends StatelessWidget {
                       colors: [C.backgroundTop1, C.backgroundBottom1],
                     ),
                   ),
-                  child: ((() {
+                  child: () {
                     if (state is SpeakerInitial)
                       return _buildLoading(context);
                     else if (state is SpeakerSuccess)
@@ -57,7 +57,7 @@ class SpeakerScreen extends StatelessWidget {
                       return _buildLoading(context);
                     else
                       return _buildAskReload();
-                  }())),
+                  }(),
                 ));
           },
         ),
