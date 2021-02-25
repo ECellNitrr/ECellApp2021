@@ -15,56 +15,44 @@ class SpeakerScreen extends StatelessWidget {
 
   final ScrollController _scrollController = ScrollController();
 
-  _doReaload(BuildContext context) {
-    //TODO: Resolve _getAllSpeakers(context); not working
-  }
-
   @override
   Widget build(BuildContext context) {
     return StatefulWrapper(
       onInit: () => _getAllSpeakers(context),
       child: Scaffold(
-        body: BlocConsumer<SpeakerCubit, SpeakerState>(
-          listener: (context, state) {
-            if (state is SpeakerError) {
-              Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-            }
-          },
-          builder: (context, state) {
-            return Scaffold(
-                extendBodyBehindAppBar: true,
-                backgroundColor: Colors.transparent,
-                appBar: AppBar(
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  leading: Container(
-                    padding: EdgeInsets.all(D.horizontalPadding - 10),
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                  ),
-                ),
-                body: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [C.backgroundTop1, C.backgroundBottom1],
-                    ),
-                  ),
-                  child: () {
-                    if (state is SpeakerInitial)
-                      return _buildLoading(context);
-                    else if (state is SpeakerSuccess)
-                      return _buildSuccess(context, state.speakerList);
-                    else if (state is SpeakerLoading)
-                      return _buildLoading(context);
-                    else
-                      return ReloadOnErrorScreen(doOnPress: () => _doReaload(context));
-                  }(),
-                ));
-          },
+        extendBodyBehindAppBar: true,
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: Container(
+            padding: EdgeInsets.only(left: D.horizontalPadding - 10),
+            child: IconButton(
+              icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ),
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [C.backgroundTop1, C.backgroundBottom1],
+            ),
+          ),
+          child: BlocBuilder<SpeakerCubit, SpeakerState>(
+            builder: (context, state) {
+              if (state is SpeakerInitial)
+                return _buildLoading(context);
+              else if (state is SpeakerSuccess)
+                return _buildSuccess(context, state.speakerList);
+              else if (state is SpeakerLoading)
+                return _buildLoading(context);
+              else
+                return ReloadOnErrorWidget(() => _getAllSpeakers(context));
+            },
+          ),
         ),
       ),
     );
@@ -73,13 +61,14 @@ class SpeakerScreen extends StatelessWidget {
   Widget _buildSuccess(BuildContext context, List<Speaker> speakerList) {
     double height = MediaQuery.of(context).size.height;
     double bottom = MediaQuery.of(context).viewInsets.bottom;
-    double top = MediaQuery.of(context).viewPadding.top;
+    double top = MediaQuery.of(context).viewInsets.top;
     double ratio = MediaQuery.of(context).size.aspectRatio;
 
     List<Widget> speakerContentList = [];
     speakerList.forEach((element) => speakerContentList.add(SpeakerCard(speaker: element)));
 
     if (_scrollController.hasClients) {
+      // TODO verify the use of this controller
       if (bottom > height * 0.25) {
         _scrollController.animateTo(
           bottom - height * 0.25,
@@ -101,10 +90,9 @@ class SpeakerScreen extends StatelessWidget {
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           controller: _scrollController,
-          child: Container(
-            margin: EdgeInsets.only(top: top + 56),
+          child: Padding(
+            padding: EdgeInsets.only(top: top + 56),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
                   "Speakers",

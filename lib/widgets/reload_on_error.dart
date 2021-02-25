@@ -4,13 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/strings.dart';
 
-class ReloadOnErrorScreen extends StatelessWidget {
-  final Function doOnPress;
+class ReloadOnErrorWidget extends StatelessWidget {
+  final Function onReload;
 
-  const ReloadOnErrorScreen({
-    Key key,
-    this.doOnPress,
-  }) : super(key: key);
+  const ReloadOnErrorWidget(this.onReload);
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +57,7 @@ class ReloadOnErrorScreen extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(30)),
                         ),
                         color: C.authButtonColor,
-                        onPressed: () => {doOnPress},
+                        onPressed: onReload,
                         child: Container(
                           height: ratio > 0.5 ? 40 : 60,
                           width: ratio > 0.5 ? 80 : 100,

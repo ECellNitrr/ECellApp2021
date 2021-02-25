@@ -14,50 +14,40 @@ import 'events_card.dart';
 class EventsScreen extends StatelessWidget {
   const EventsScreen({Key key}) : super(key: key);
 
-  _doReaload(BuildContext context) {
-    //TODO:
-  }
   @override
   Widget build(BuildContext context) {
     return StatefulWrapper(
       onInit: () => _getAllEvents(context),
       child: Scaffold(
-        body: BlocConsumer<EventsCubit, EventsState>(
-          listener: (context, state) {
-            if (state is EventsError) {
-              Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-            }
-          },
-          builder: (context, state) {
-            return Scaffold(
-              resizeToAvoidBottomInset: false,
-              extendBodyBehindAppBar: true,
-              appBar: AppBar(
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                leading: Container(
-                  padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                ),
-              ),
-              body: Stack(
-                children: [
-                  ScreenBackground(elementId: 0),
-                  if (state is EventsInitial)
-                    _buildLoading(context)
-                  else if (state is EventsSuccess)
-                    _buildSuccess(context, state.json)
-                  else if (state is EventsLoading)
-                    _buildLoading(context)
-                  else
-                    ReloadOnErrorScreen(doOnPress: () => _doReaload(context)),
-                ],
-              ),
-            );
-          },
+        resizeToAvoidBottomInset: false,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: Container(
+            padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
+            child: IconButton(
+              icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ),
+        ),
+        body: Stack(
+          children: [
+            ScreenBackground(elementId: 0),
+            BlocBuilder<EventsCubit, EventsState>(
+              builder: (context, state) {
+                if (state is EventsInitial)
+                  return _buildLoading(context);
+                else if (state is EventsSuccess)
+                  return _buildSuccess(context, state.json);
+                else if (state is EventsLoading)
+                  return _buildLoading(context);
+                else
+                  return ReloadOnErrorWidget(() => _getAllEvents(context));
+              },
+            ),
+          ],
         ),
       ),
     );
