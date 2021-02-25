@@ -243,11 +243,7 @@ class LoginScreen extends StatelessWidget {
 
   Widget _buildLoading(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return Stack(
-      children: [
-        Center(child: ECellLogoAnimation(size: width / 2)),
-      ],
-    );
+    return Center(child: ECellLogoAnimation(size: width / 2));
   }
 
   void _login(BuildContext context) {

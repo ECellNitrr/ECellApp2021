@@ -26,27 +26,39 @@ class SpeakerScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            return Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [C.backgroundTop1, C.backgroundBottom1],
+            return Scaffold(
+                extendBodyBehindAppBar: true,
+                backgroundColor: Colors.transparent,
+                appBar: AppBar(
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                  leading: Container(
+                    padding: EdgeInsets.all(D.horizontalPadding - 10),
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ),
                 ),
-              ),
-              child: Stack(
-                children: [
-                  if (state is SpeakerInitial)
-                    _buildLoading(context)
-                  else if (state is SpeakerSuccess)
-                    _buildSuccess(context, state.speakerList)
-                  else if (state is SpeakerLoading)
-                    _buildLoading(context)
-                  else
-                    _buildAskReload(),
-                ],
-              ),
-            );
+                body: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [C.backgroundTop1, C.backgroundBottom1],
+                    ),
+                  ),
+                  child: ((() {
+                    if (state is SpeakerInitial)
+                      return _buildLoading(context);
+                    else if (state is SpeakerSuccess)
+                      return _buildSuccess(context, state.speakerList);
+                    else if (state is SpeakerLoading)
+                      return _buildLoading(context);
+                    else
+                      return _buildAskReload();
+                  }())),
+                ));
           },
         ),
       ),
@@ -74,45 +86,30 @@ class SpeakerScreen extends StatelessWidget {
       }
     }
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: Container(
-          padding: EdgeInsets.all(D.horizontalPadding - 10),
-          child: IconButton(
-            icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ),
-      ),
-      body: DefaultTextStyle.merge(
-        style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
-        child: NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (OverscrollIndicatorNotification overscroll) {
-            overscroll.disallowGlow();
-            return true;
-          },
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            controller: _scrollController,
-            child: Container(
-              margin: EdgeInsets.only(top: top + 56),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(
-                    "Speakers",
-                    style: TextStyle(
-                      fontSize: ratio > 0.5 ? 45 : 50,
-                      fontWeight: FontWeight.w600,
-                    ),
+    return DefaultTextStyle.merge(
+      style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+      child: NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: (OverscrollIndicatorNotification overscroll) {
+          overscroll.disallowGlow();
+          return true;
+        },
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          controller: _scrollController,
+          child: Container(
+            margin: EdgeInsets.only(top: top + 56),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  "Speakers",
+                  style: TextStyle(
+                    fontSize: ratio > 0.5 ? 45 : 50,
+                    fontWeight: FontWeight.w600,
                   ),
-                  Column(children: speakerContentList),
-                ],
-              ),
+                ),
+                Column(children: speakerContentList),
+              ],
             ),
           ),
         ),

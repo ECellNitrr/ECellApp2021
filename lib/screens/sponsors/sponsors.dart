@@ -1,5 +1,6 @@
 import 'package:ecellapp/models/sponsor_category.dart';
 import 'package:ecellapp/widgets/ecell_animation.dart';
+import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,10 +21,15 @@ class SponsorsScreen extends StatelessWidget {
         }, builder: (context, state) {
           return Stack(
             children: [
-              if (state is SponsorsInitial) _buildLoading(context),
-              if (state is SponsorsSuccess) _buildSuccess(context, state.sponsorsList),
-              if (state is SponsorsLoading) _buildLoading(context),
-              if (state is SponsorsError) _buildAskReload(),
+              ScreenBackground(elementId: 0),
+              if (state is SponsorsInitial)
+                _buildLoading(context)
+              else if (state is SponsorsSuccess)
+                _buildSuccess(context, state.sponsorsList)
+              else if (state is SponsorsLoading)
+                _buildLoading(context)
+              else
+                _buildAskReload(),
             ],
           );
         }),
@@ -47,13 +53,7 @@ class SponsorsScreen extends StatelessWidget {
 
   Widget _buildLoading(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: Stack(
-        children: [
-          Center(child: ECellLogoAnimation(size: width / 2)),
-        ],
-      ),
-    );
+    return Center(child: ECellLogoAnimation(size: width / 2));
   }
 
   Widget _buildAskReload() {

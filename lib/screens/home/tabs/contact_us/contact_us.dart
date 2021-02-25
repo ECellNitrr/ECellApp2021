@@ -55,13 +55,7 @@ class ContactUsScreen extends StatelessWidget {
 
   Widget _buildLoading(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: Stack(
-        children: [
-          Center(child: ECellLogoAnimation(size: width / 2)),
-        ],
-      ),
-    );
+    return Center(child: ECellLogoAnimation(size: width / 2));
   }
 
   void _postFeedback(BuildContext context) {
