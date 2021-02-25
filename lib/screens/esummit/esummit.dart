@@ -1,12 +1,9 @@
-import 'package:ecellapp/core/res/dimens.dart';
-import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
-import 'package:ecellapp/screens/speaker/speaker.dart';
-import 'package:ecellapp/screens/speaker/speaker_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../core/res/colors.dart';
+import '../../core/res/dimens.dart';
+import '../../core/res/strings.dart';
 
 class ESummitScreen extends StatelessWidget {
   @override
@@ -115,15 +112,7 @@ class ESummitScreen extends StatelessWidget {
                         ),
                       ),
                       color: C.speakerButtonColor,
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => BlocProvider(
-                                      create: (_) => SpeakerCubit(APISpeakerRepository()),
-                                      child: SpeakerScreen(),
-                                    )));
-                      },
+                      onPressed: () => Navigator.pushReplacementNamed(context, S.routeSpeaker),
                       child: Container(
                         height: 50,
                         width: 120,

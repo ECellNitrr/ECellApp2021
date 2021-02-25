@@ -86,4 +86,8 @@ class S {
   static const routeHome = '/home';
   static const routeLogin = '/login';
   static const routeSignup = '/signup';
+  static const routeSpeaker = "/speaker";
+  static const routeEvents = "/events";
+  static const routeSponsors = "/sponsors";
+  static const routeEsummit = "/esummit";
 }

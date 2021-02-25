@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,13 +9,6 @@ import '../../../core/utils/injection.dart';
 import '../../../models/global_state.dart';
 import '../../../widgets/ecell_animation.dart';
 import '../../../widgets/screen_background.dart';
-import '../../esummit/esummit.dart';
-import '../../events/cubit/events_cubit.dart';
-import '../../events/events.dart';
-import '../../events/events_repository.dart';
-import '../../sponsors/cubit/sponsors_cubit.dart';
-import '../../sponsors/sponsors.dart';
-import '../../sponsors/sponsors_repository.dart';
 
 class MenuScreen extends StatefulWidget {
   @override
@@ -81,12 +73,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         width: 30,
                         height: 30,
                       ),
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => ESummitScreen(),
-                        ),
-                      ),
+                      onTap: () => Navigator.pushNamed(context, S.routeEsummit),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -172,15 +159,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         height: 20,
                       ),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => BlocProvider(
-                              create: (_) => EventsCubit(APIEventsRepository()),
-                              child: EventsScreen(),
-                            ),
-                          ),
-                        );
+                        Navigator.pushNamed(context, S.routeEvents);
                       },
                     ),
                   ),
@@ -226,15 +205,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         height: 25,
                       ),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => BlocProvider(
-                              create: (_) => SponsorsCubit(APISponsorsRepository()),
-                              child: SponsorsScreen(),
-                            ),
-                          ),
-                        );
+                        Navigator.pushNamed(context, S.routeSponsors);
                       },
                     ),
                   ),
