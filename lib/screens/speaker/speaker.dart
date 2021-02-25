@@ -1,3 +1,4 @@
+import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/widgets/reload_on_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,16 +18,15 @@ class SpeakerScreen extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
 
   _doReaload(BuildContext context) {
-    Navigator.pop(context);
-    _getAllSpeakers(context);
-
-    // Navigator.pushReplacement(
-    //     context,
-    //     MaterialPageRoute(
-    //         builder: (_) => BlocProvider(
-    //               create: (_) => SpeakerCubit(APISpeakerRepository()),
-    //               child: SpeakerScreen(),
-    //             )));
+    // Navigator.pop(context);
+    // _getAllSpeakers(context);
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (_) => SpeakerCubit(APISpeakerRepository()),
+                  child: SpeakerScreen(),
+                )));
   }
 
   @override
@@ -61,10 +61,13 @@ class SpeakerScreen extends StatelessWidget {
             }
           }, builder: (context, state) {
             if (state is SpeakerInitial) {
+              Log.d(tag: "reloaded", message: "Yos");
               return _buildLoading();
             } else if (state is SpeakerSuccess) {
               return _buildSuccess(context, state.speakerList);
             } else if (state is SpeakerLoading) {
+              Log.d(tag: "reloaded", message: "Yos");
+
               return _buildLoading();
             } else {
               return ReloadOnErrorScreen(doOnPress: () => _doReaload(context));

@@ -7,6 +7,9 @@ import 'package:ecellapp/screens/home/home.dart';
 import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
 import 'package:ecellapp/screens/login/login.dart';
 import 'package:ecellapp/screens/login/login_repository.dart';
+import 'package:ecellapp/screens/speaker/cubit/speaker_cubit.dart';
+import 'package:ecellapp/screens/speaker/speaker.dart';
+import 'package:ecellapp/screens/speaker/speaker_repository.dart';
 import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/material.dart';
@@ -38,8 +41,8 @@ class _SplashScreenState extends State<SplashScreen> {
       MaterialPageRoute(
         builder: (_) => (token == null)
             ? BlocProvider(
-                create: (_) => LoginCubit(APILoginRepository()),
-                child: LoginScreen(),
+                create: (_) => SpeakerCubit(FakeSpeakerRepository()),
+                child: SpeakerScreen(),
               )
             : HomeScreen(),
       ),
