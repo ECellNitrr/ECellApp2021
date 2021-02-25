@@ -3,48 +3,57 @@ import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/models/user.dart';
 import 'package:ecellapp/screens/home/cubit/profile_cubit.dart';
+import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
+import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProfileScreen extends StatefulWidget {
-  @override
-  _ProfileScreenState createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  User user;
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocConsumer<ProfileCubit, ProfileState>(
-        listener: (context, state) {
-          if (state is ProfileError) {
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-          }
-        },
-        builder: (context, state) {
-          if (state is ProfileSuccess) {
-            user = state.user;
-            return _buildSuccess(context);
-          } else if (state is ProfileLoading) {
-            _profile();
-            return _buildLoading();
-          } else {
-            return Container(); // TODO the user should be shown the error on screen instead of a snackbar, and a retry button.
-          }
-        },
-      ),
-    );
+    return StatefulWrapper(
+        onInit: () => _profile(context),
+        child: Scaffold(
+          body: BlocConsumer<ProfileCubit, ProfileState>(
+            listener: (context, state) {
+              if (state is ProfileError) {
+                Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+              }
+            },
+            builder: (context, state) {
+              return Stack(
+                children: [
+                  ScreenBackground(elementId: 0),
+                  if (state is ProfileSuccess)
+                    _buildSuccess(context, state)
+                  else if (state is ProfileLoading)
+                    _buildLoading(context)
+                  else
+                    _buildAskReload()
+                ],
+              );
+            },
+          ),
+        ));
   }
 
-  Widget _buildLoading() {
-    return Center(child: CircularProgressIndicator());
+  Widget _buildAskReload() {
+    //Ask to reload screen
+    //TODO: Implement a Screen to reload
+    return Container();
   }
 
-  Widget _buildSuccess(BuildContext context) {
+  Widget _buildLoading(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Center(child: ECellLogoAnimation(size: width / 2));
+  }
+
+  Widget _buildSuccess(BuildContext context, ProfileSuccess state) {
+    User user = state.user;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double top = MediaQuery.of(context).viewPadding.top;
@@ -93,7 +102,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Container(
                             alignment: Alignment.topRight,
                             child: GestureDetector(
-                              onTap: () {}, //TODO
+                              onTap: () {}, //TODO change password
                               child: Text(
                                 "Change Password?",
                                 style: TextStyle(
@@ -120,7 +129,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  void _profile() {
+  void _profile(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
     cubit.getProfile();
   }

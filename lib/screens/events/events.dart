@@ -1,14 +1,13 @@
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
-import 'package:ecellapp/core/utils/logger.dart';
 import 'package:ecellapp/models/event.dart';
 import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
+import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'events_card.dart';
 
 class EventsScreen extends StatelessWidget {
@@ -28,31 +27,51 @@ class EventsScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            if (state is EventsInitial) {
-              return _buildInitial();
-            } else if (state is EventsSuccess) {
-              return _buildSuccess(context, state.json);
-            } else if (state is EventsLoading) {
-              return _buildLoading();
-            } else {
-              Log.e(tag: "EventsState", message: "State now is EventsError reached");
-              return Container(); // TODO the user should be shown the error on screen instead of a snackbar, and a retry button.
-            }
+            return Scaffold(
+              resizeToAvoidBottomInset: false,
+              extendBodyBehindAppBar: true,
+              appBar: AppBar(
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+                leading: Container(
+                  padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ),
+              ),
+              body: Stack(
+                children: [
+                  ScreenBackground(elementId: 0),
+                  if (state is EventsInitial)
+                    _buildLoading(context)
+                  else if (state is EventsSuccess)
+                    _buildSuccess(context, state.json)
+                  else if (state is EventsLoading)
+                    _buildLoading(context)
+                  else
+                    _buildAskReload()
+                ],
+              ),
+            );
           },
         ),
       ),
     );
   }
 
-  Widget _buildLoading() {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
+  Widget _buildAskReload() {
+    //TODO: Implement a Screen to reload
+    return Container();
+  }
+
+  Widget _buildLoading(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Center(child: ECellLogoAnimation(size: width / 2));
   }
 
   Widget _buildSuccess(BuildContext context, List<Event> eventsList) {
-    //TODO On success UI
-
     double height = MediaQuery.of(context).size.height;
     double bottom = MediaQuery.of(context).viewInsets.bottom;
     final ScrollController _scrollController = ScrollController();
@@ -74,59 +93,39 @@ class EventsScreen extends StatelessWidget {
       }
     }
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: Container(
-          padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
-          child: IconButton(
-            icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ),
-      ),
-      body: DefaultTextStyle.merge(
-        style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
-        child: Stack(
-          children: [
-            ScreenBackground(elementId: 0),
-            NotificationListener<OverscrollIndicatorNotification>(
-              onNotification: (OverscrollIndicatorNotification overscroll) {
-                overscroll.disallowGlow();
-                return true;
-              },
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                controller: _scrollController,
-                child: Container(
-                  margin: EdgeInsets.only(top: top + 56),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        "Events",
-                        style: TextStyle(
-                          fontSize: ratio > 0.5 ? 45 : 50,
-                          fontWeight: FontWeight.w600,
-                        ),
+    return DefaultTextStyle.merge(
+      style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+      child: Stack(
+        children: [
+          NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (OverscrollIndicatorNotification overscroll) {
+              overscroll.disallowGlow();
+              return true;
+            },
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              controller: _scrollController,
+              child: Container(
+                margin: EdgeInsets.only(top: top + 56),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      "Events",
+                      style: TextStyle(
+                        fontSize: ratio > 0.5 ? 45 : 50,
+                        fontWeight: FontWeight.w600,
                       ),
-                      Column(children: eventObjList),
-                    ],
-                  ),
+                    ),
+                    Column(children: eventObjList),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
-  }
-
-  Widget _buildInitial() {
-    return Container();
   }
 
   void _getAllEvents(BuildContext context) {

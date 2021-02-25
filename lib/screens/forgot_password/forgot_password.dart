@@ -1,5 +1,6 @@
 import 'package:ecellapp/screens/forgot_password/cubit/forgot_password_cubit.dart';
 import 'package:ecellapp/screens/forgot_password/widgets/otp_field.dart';
+import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:ecellapp/widgets/email_field.dart';
 import 'package:ecellapp/widgets/password_field.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,21 +25,24 @@ class ForgotPasswordScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          if (state is ForgotEmailInitial) {
-            return _initialForgotPassword(context, state);
-          } else if (state is ForgotLoading) {
-            return _buildLoading();
-          } else if (state is ForgotOTPInitial) {
-            return _enterOTP(context, state);
-          } else if (state is ForgotPasswordError) {
-            return _uiUpdateForNetworkError(context, state.state);
-          } else if (state is ForgotResetInitial) {
-            return _resetPassword(context, state);
-          } else if (state is ForgotResetSuccess) {
-            return _passwordResetSuccess();
-          } else {
-            return _initialForgotPassword(context, state);
-          }
+          return Stack(
+            children: [
+              if (state is ForgotEmailInitial)
+                _initialForgotPassword(context, state)
+              else if (state is ForgotLoading)
+                _buildLoading(context)
+              else if (state is ForgotOTPInitial)
+                _enterOTP(context, state)
+              else if (state is ForgotPasswordError)
+                _uiUpdateForNetworkError(context, state.state)
+              else if (state is ForgotResetInitial)
+                _resetPassword(context, state)
+              else if (state is ForgotResetSuccess)
+                _passwordResetSuccess()
+              else
+                _initialForgotPassword(context, state)
+            ],
+          );
         },
       ),
     );
@@ -75,10 +79,9 @@ class ForgotPasswordScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLoading() {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
+  Widget _buildLoading(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Center(child: ECellLogoAnimation(size: width / 2));
   }
 
   Widget _enterOTP(BuildContext context, ForgotPasswordState state) {
