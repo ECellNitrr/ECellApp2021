@@ -54,7 +54,6 @@ class APISignupRepository implements SignupRepository {
     }
 
     if (response.statusCode == 201) {
-      Log.i(tag: tag, message: "Signup Successful ");
       return true;
     } else if (response.statusCode == 400) {
       throw ValidationException(response.body);

@@ -1,17 +1,16 @@
-import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
-import 'package:ecellapp/screens/login/login.dart';
-import 'package:ecellapp/screens/login/login_repository.dart';
-import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../core/res/colors.dart';
 import '../../core/res/dimens.dart';
 import '../../core/res/strings.dart';
+import '../../widgets/ecell_animation.dart';
 import '../../widgets/email_field.dart';
 import '../../widgets/password_field.dart';
 import '../../widgets/screen_background.dart';
+import '../login/cubit/login_cubit.dart';
 import 'cubit/signup_cubit.dart';
 import 'widgets/mobile_number_field.dart';
 import 'widgets/name_field.dart';
@@ -35,15 +34,7 @@ class SignupScreen extends StatelessWidget {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           } else if (state is SignupSuccess) {
             Scaffold.of(context).showSnackBar(SnackBar(content: Text("SignUp Successful")));
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (_) => BlocProvider(
-                  create: (_) => LoginCubit(APILoginRepository()),
-                  child: LoginScreen(),
-                ),
-              ),
-            );
+            Navigator.pushReplacementNamed(context, S.routeLogin);
           }
         },
         builder: (context, state) {
@@ -207,17 +198,7 @@ class SignupScreen extends StatelessWidget {
                             color: C.primaryHighlightedColor,
                           ),
                         ),
-                        onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => BlocProvider(
-                                create: (_) => LoginCubit(APILoginRepository()),
-                                child: LoginScreen(),
-                              ),
-                            ),
-                          );
-                        },
+                        onTap: () => Navigator.pushReplacementNamed(context, S.routeLogin),
                       ),
                     ],
                   ),

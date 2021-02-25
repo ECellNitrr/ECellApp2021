@@ -1,22 +1,14 @@
-import 'package:ecellapp/core/res/colors.dart';
-import 'package:ecellapp/core/res/dimens.dart';
-import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/core/utils/injection.dart';
-import 'package:ecellapp/screens/esummit/esummit.dart';
-import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
-import 'package:ecellapp/screens/events/events.dart';
-import 'package:ecellapp/screens/events/events_repository.dart';
-import 'package:ecellapp/screens/login/cubit/login_cubit.dart';
-import 'package:ecellapp/screens/login/login.dart';
-import 'package:ecellapp/screens/login/login_repository.dart';
-import 'package:ecellapp/screens/sponsors/cubit/sponsors_cubit.dart';
-import 'package:ecellapp/screens/sponsors/sponsors.dart';
-import 'package:ecellapp/screens/sponsors/sponsors_repository.dart';
-import 'package:ecellapp/widgets/ecell_animation.dart';
-import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../core/res/colors.dart';
+import '../../../core/res/dimens.dart';
+import '../../../core/res/strings.dart';
+import '../../../core/utils/injection.dart';
+import '../../../models/global_state.dart';
+import '../../../widgets/ecell_animation.dart';
+import '../../../widgets/screen_background.dart';
 
 class MenuScreen extends StatefulWidget {
   @override
@@ -81,12 +73,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         width: 30,
                         height: 30,
                       ),
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => ESummitScreen(),
-                        ),
-                      ),
+                      onTap: () => Navigator.pushNamed(context, S.routeEsummit),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -172,15 +159,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         height: 20,
                       ),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => BlocProvider(
-                              create: (_) => EventsCubit(APIEventsRepository()),
-                              child: EventsScreen(),
-                            ),
-                          ),
-                        );
+                        Navigator.pushNamed(context, S.routeEvents);
                       },
                     ),
                   ),
@@ -226,15 +205,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         height: 25,
                       ),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => BlocProvider(
-                              create: (_) => SponsorsCubit(APISponsorsRepository()),
-                              child: SponsorsScreen(),
-                            ),
-                          ),
-                        );
+                        Navigator.pushNamed(context, S.routeSponsors);
                       },
                     ),
                   ),
@@ -303,17 +274,10 @@ class _MenuScreenState extends State<MenuScreen> {
   Future<void> _handleClick(String value) async {
     switch (value) {
       case 'Logout':
+        Provider.of<GlobalState>(context, listen: false).user = null;
         await sl.get<SharedPreferences>().remove(S.tokenKeySharedPreferences);
         Scaffold.of(context).showSnackBar(SnackBar(content: Text("Logged Out Successfuly")));
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (_) => BlocProvider(
-              create: (_) => LoginCubit(APILoginRepository()),
-              child: LoginScreen(),
-            ),
-          ),
-        );
+        Navigator.pushReplacementNamed(context, S.routeLogin);
     }
   }
 }
