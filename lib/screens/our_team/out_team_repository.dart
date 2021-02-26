@@ -50,6 +50,7 @@ class OurTeamRepositoryFake implements OurTeamRepository {
   @override
   Future<List<Member>> getAllMembers() async {
     // network delay
+    await Future.delayed(Duration(seconds: 1));
     if (Random().nextBool()) {
       throw NetworkException();
     } else {
