@@ -23,10 +23,17 @@ dependencies:
   provider: ^4.3.3
   shared_preferences: ^0.5.12+4
   url_launcher: ^5.7.10
+  flutter_launcher_icons: ^0.8.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/app-icon/app-icon.png"
+  image_path_android: "assets/app-icon/app-icon.png"
 
 flutter:
   assets:
