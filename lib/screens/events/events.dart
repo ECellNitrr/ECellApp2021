@@ -59,26 +59,11 @@ class EventsScreen extends StatelessWidget {
   }
 
   Widget _buildSuccess(BuildContext context, List<Event> eventsList) {
-    double height = MediaQuery.of(context).size.height;
-    double bottom = MediaQuery.of(context).viewInsets.bottom;
-    final ScrollController _scrollController = ScrollController();
     double ratio = MediaQuery.of(context).size.aspectRatio;
     double top = MediaQuery.of(context).viewPadding.top;
 
     List<Widget> eventObjList = [];
     eventsList.forEach((element) => eventObjList.add(EventCard(event: element)));
-
-    if (_scrollController.hasClients) {
-      if (bottom > height * 0.25) {
-        _scrollController.animateTo(
-          bottom - height * 0.25,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.ease,
-        );
-      } else {
-        _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.ease);
-      }
-    }
 
     return DefaultTextStyle.merge(
       style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
@@ -91,7 +76,6 @@ class EventsScreen extends StatelessWidget {
             },
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              controller: _scrollController,
               child: Container(
                 margin: EdgeInsets.only(top: top + 56),
                 child: Column(

@@ -13,8 +13,6 @@ import 'package:ecellapp/widgets/stateful_wrapper.dart';
 class SpeakerScreen extends StatelessWidget {
   SpeakerScreen({Key key}) : super(key: key);
 
-  final ScrollController _scrollController = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     return StatefulWrapper(
@@ -59,26 +57,11 @@ class SpeakerScreen extends StatelessWidget {
   }
 
   Widget _buildSuccess(BuildContext context, List<Speaker> speakerList) {
-    double height = MediaQuery.of(context).size.height;
-    double bottom = MediaQuery.of(context).viewInsets.bottom;
     double top = MediaQuery.of(context).viewInsets.top;
     double ratio = MediaQuery.of(context).size.aspectRatio;
 
     List<Widget> speakerContentList = [];
     speakerList.forEach((element) => speakerContentList.add(SpeakerCard(speaker: element)));
-
-    if (_scrollController.hasClients) {
-      // TODO verify the use of this controller
-      if (bottom > height * 0.25) {
-        _scrollController.animateTo(
-          bottom - height * 0.25,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.ease,
-        );
-      } else {
-        _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.ease);
-      }
-    }
 
     return DefaultTextStyle.merge(
       style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
@@ -89,7 +72,6 @@ class SpeakerScreen extends StatelessWidget {
         },
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          controller: _scrollController,
           child: Padding(
             padding: EdgeInsets.only(top: top + 56),
             child: Column(
