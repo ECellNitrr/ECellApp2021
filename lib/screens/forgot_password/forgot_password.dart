@@ -1,8 +1,10 @@
+import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/screens/forgot_password/cubit/forgot_password_cubit.dart';
-import 'package:ecellapp/screens/forgot_password/widgets/otp_field.dart';
+import 'package:numeric_keyboard/numeric_keyboard.dart';
 import 'package:ecellapp/widgets/email_field.dart';
 import 'package:ecellapp/widgets/password_field.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,12 +14,21 @@ import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/screens/forgot_password/widgets/confirm_password_field.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
+class ForgotPasswordScreen extends StatefulWidget {
+  @override
+  _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
+}
+
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  String otp1 = "", otp2 = "", otp3 = "", otp4 = "", otpEntered = "";
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController otpController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
   final TextEditingController confirmPasswordController = TextEditingController();
+
   final ScrollController _scrollController = ScrollController();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -260,7 +271,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 children: [
                   // The text part od the screen
                   Flexible(
-                    flex: 1,
+                    flex: 3,
                     child: Container(
                       padding: EdgeInsets.fromLTRB(0, heightFactor * 100, 0, 0),
                       alignment: Alignment.center,
@@ -302,13 +313,82 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ),
                   Flexible(
                     flex: 2,
-                    child: Column(
-                      children: [
-                        OTPField(otpController),
-                        SizedBox(height: 30 * heightFactor),
-                        //Verify button
-                        Expanded(
-                          child: Container(
+                    child: Container(
+                      child: Column(
+                        children: [
+                          //OTP number fields
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    otp1,
+                                    style: TextStyle(fontSize: 23),
+                                  ),
+                                ),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: C.firstRing,
+                                    width: 2.5,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    otp2,
+                                    style: TextStyle(fontSize: 23),
+                                  ),
+                                ),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: C.secondRing,
+                                    width: 2.5,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    otp3,
+                                    style: TextStyle(fontSize: 23),
+                                  ),
+                                ),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: C.thirdRing,
+                                    width: 2.5,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    otp4,
+                                    style: TextStyle(fontSize: 23),
+                                  ),
+                                ),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: C.fourthRing,
+                                    width: 2.5,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 30 * heightFactor),
+                          //Verify button
+                          Container(
                             padding: EdgeInsets.only(right: D.horizontalPadding),
                             alignment: Alignment.topRight,
                             child: Container(
@@ -343,8 +423,30 @@ class ForgotPasswordScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 7,
+                    child: NumericKeyboard(
+                      onKeyboardTap: (String otp) {
+                        otpEntered = otpEntered + otp;
+                        setState(() {
+                          updateOTPBlocks();
+                        });
+                      },
+                      textColor: Colors.white,
+                      rightIcon: Icon(
+                        Icons.backspace,
+                        color: Colors.white,
+                      ),
+                      rightButtonFn: () {
+                        setState(() {
+                          otpEntered = otpEntered.substring(0, otpEntered.length - 1);
+                          updateOTPBlocks();
+                        });
+                      },
                     ),
                   ),
                 ],
@@ -500,12 +602,43 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   void _verifyOtp(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
-    cubit.checkOTP(otpController.text, state, emailController.text);
+    cubit.checkOTP(otpEntered.substring(0, 4), state, emailController.text);
   }
 
   void _changePassword(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
-    cubit.changePassword(emailController.text, otpController.text, passwordController.text,
+    cubit.changePassword(emailController.text, otpEntered.substring(0, 4), passwordController.text,
         confirmPasswordController.text, state);
+  }
+
+  void updateOTPBlocks() {
+    int length = otpEntered.length;
+    if (length == 0) {
+      otp1 = "";
+      otp2 = "";
+      otp3 = "";
+      otp4 = "";
+    } else if (length == 1) {
+      otp1 = otpEntered[0];
+      otp2 = "";
+      otp3 = "";
+      otp4 = "";
+    } else if (length == 2) {
+      otp1 = otpEntered[0];
+      otp2 = otpEntered[1];
+      otp3 = "";
+      otp4 = "";
+    } else if (length == 3) {
+      otp1 = otpEntered[0];
+      otp2 = otpEntered[1];
+      otp3 = otpEntered[2];
+      otp4 = "";
+    } else {
+      otp1 = otpEntered[0];
+      otp2 = otpEntered[1];
+      otp3 = otpEntered[2];
+      otp4 = otpEntered[3];
+      otpEntered = otpEntered.substring(0, 4);
+    }
   }
 }

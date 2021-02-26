@@ -37,6 +37,12 @@ class C {
   /// button colors
   static final Color authButtonColor = HexColor("#A955F7");
   static final Color speakerButtonColor = HexColor('#8E31D5');
+
+  ///Otp ring colors
+  static final Color firstRing = HexColor("#2DEBFF");
+  static final Color secondRing = HexColor("#FB28E6");
+  static final Color thirdRing = HexColor("#EFEA79");
+  static final Color fourthRing = HexColor("#AE82FF");
 }
 
 class HexColor extends Color {
