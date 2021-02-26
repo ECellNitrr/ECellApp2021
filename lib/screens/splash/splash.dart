@@ -50,10 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
               }
             },
             builder: (context, state) {
-              if (state is SplashSuccess) {
-                context.read<GlobalState>().user = state.user;
-                return Container();
-              } else if (state is SplashLoading) {
+              if (state is SplashSuccess || state is SplashLoading) {
                 return Center(child: ECellLogoAnimation(size: width / 2));
               } else {
                 return Center(
