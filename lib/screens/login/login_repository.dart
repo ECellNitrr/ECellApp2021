@@ -48,7 +48,6 @@ class APILoginRepository implements LoginRepository {
     if (response.statusCode == 202) {
       try {
         String token = json.decode(response.body)[S.tokenKey];
-        Log.i(tag: tag, message: "Login Successful with token: " + token);
         return token;
       } catch (e) {
         Log.e(tag: tag, message: "Error while decoding response json to get token: $e");

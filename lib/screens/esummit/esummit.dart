@@ -1,8 +1,9 @@
-import 'package:ecellapp/core/res/dimens.dart';
-import 'package:ecellapp/core/res/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../core/res/colors.dart';
+import '../../core/res/dimens.dart';
+import '../../core/res/strings.dart';
 
 class ESummitScreen extends StatelessWidget {
   @override
@@ -111,9 +112,7 @@ class ESummitScreen extends StatelessWidget {
                         ),
                       ),
                       color: C.speakerButtonColor,
-                      onPressed: () {
-                        //TODO
-                      },
+                      onPressed: () => Navigator.pushReplacementNamed(context, S.routeSpeaker),
                       child: Container(
                         height: 50,
                         width: 120,
