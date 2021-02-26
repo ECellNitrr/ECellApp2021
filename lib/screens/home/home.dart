@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecellapp/core/res/colors.dart';
 import 'cubit/feedback_cubit.dart';
@@ -7,6 +8,13 @@ import 'home_repository.dart';
 import 'tabs/contact_us/contact_us.dart';
 import 'tabs/menu/menu.dart';
 import 'tabs/profile/profile.dart';
+=======
+
+import '../../core/themes/selected_icon_theme.dart';
+import 'tabs/contact_us.dart';
+import 'tabs/menu.dart';
+import 'tabs/profile.dart';
+>>>>>>> b768d67d02091965b12f700783228f641611e265
 
 class HomeScreen extends StatefulWidget {
   @override

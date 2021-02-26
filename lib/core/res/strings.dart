@@ -102,4 +102,14 @@ class S {
   // paragraphs
   static const String esummitPara =
       "we aspire to create a melange of eminent speakers who have proved themselves in diverse fields and are at the zenith of glory. E-Summit'21 will not just be a conclave of innovative minds and epistemic elocutionists, but it will be the place where ideas not only thrive but become the greatest revelations of the century.";
+
+  // Routes
+  static const routeSplash = '/splash';
+  static const routeHome = '/home';
+  static const routeLogin = '/login';
+  static const routeSignup = '/signup';
+  static const routeSpeaker = "/speaker";
+  static const routeEvents = "/events";
+  static const routeSponsors = "/sponsors";
+  static const routeEsummit = "/esummit";
 }
