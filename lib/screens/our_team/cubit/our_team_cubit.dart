@@ -24,7 +24,7 @@ class OurTeamCubit extends Cubit<OurTeamState> {
       emit(OurTeamError(S.networkException));
     } on ValidationException catch (e) {
       emit(OurTeamError(e.description));
-    } on UnknownException catch (e) {
+    } on UnknownException {
       emit(OurTeamError(S.unknownException));
     } catch (e) {
       Log.s(tag: "Member Cubit", message: "Unknown Error message:" + e.toString());
