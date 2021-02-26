@@ -8,46 +8,6 @@ abstract class OurTeamRepository {
 
 class OurTeamRepositoryFake implements OurTeamRepository {
   @override
-  Future<void> getFaculties() async {
-    await Future.delayed(Duration(seconds: 2));
-    if (Random().nextBool()) {
-      throw NetworkException();
-    }
-  }
-
-  @override
-  Future<void> getOverallCoordinators() async {
-    await Future.delayed(Duration(seconds: 2));
-    if (Random().nextBool()) {
-      throw NetworkException();
-    }
-  }
-
-  @override
-  Future<void> getHeadCoordinators() async {
-    await Future.delayed(Duration(seconds: 2));
-    if (Random().nextBool()) {
-      throw NetworkException();
-    }
-  }
-
-  @override
-  Future<void> getManagers() async {
-    await Future.delayed(Duration(seconds: 2));
-    if (Random().nextBool()) {
-      throw NetworkException();
-    }
-  }
-
-  @override
-  Future<void> getExecutives() async {
-    await Future.delayed(Duration(seconds: 2));
-    if (Random().nextBool()) {
-      throw NetworkException();
-    }
-  }
-
-  @override
   Future<List<Member>> getAllMembers() async {
     // network delay
     await Future.delayed(Duration(seconds: 1));
