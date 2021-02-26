@@ -23,7 +23,7 @@ class FakeSpeakerRepository extends SpeakerRepository {
     await Future.delayed(Duration(seconds: 1));
 
     //Fake Response and Network Delay
-    if (true || Random().nextBool()) {
+    if (Random().nextBool()) {
       throw NetworkException();
     } else {
       var response = {
@@ -167,11 +167,7 @@ class FakeSpeakerRepository extends SpeakerRepository {
         "message": "Speakers Fetched Successfully"
       };
 
-      List<Speaker> speakerList = List();
-
-      (response["data"] as List).map((e) => speakerList.add(Speaker.fromJson(e))).toList();
-
-      return speakerList;
+      return (response["data"] as List).map((e) => Speaker.fromJson(e)).toList();
     }
   }
 }
@@ -190,9 +186,7 @@ class APISpeakerRepository extends SpeakerRepository {
 
     if (response.statusCode == 200) {
       var speakerResponse = jsonDecode(response.body);
-      List<Speaker> speakerList;
-      (speakerResponse["data"] as List).forEach((e) => speakerList.add(Speaker.fromJson(e)));
-      return speakerList;
+      return (speakerResponse["data"] as List).map((e) => Speaker.fromJson(e)).toList();
     } else if (response.statusCode == 404) {
       throw ValidationException(response.body);
     } else {
