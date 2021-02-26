@@ -8,61 +8,27 @@ abstract class OurTeamState extends Equatable {
   List<Object> get props => [];
 }
 
-//this state is for Faculties
-class OurTeamFaculties extends OurTeamState {}
-
-class OurFacultiesError extends OurTeamState {
-  final String message;
-
-  const OurFacultiesError(this.message);
-
-  @override
-  List<Object> get props => [message];
+class OurTeamInitial extends OurTeamState {
+  const OurTeamInitial();
 }
 
-//this state is for OCs
-class OurTeamOC extends OurTeamState {}
-
-class OurOCError extends OurTeamState {
-  final String message;
-
-  const OurOCError(this.message);
-
-  @override
-  List<Object> get props => [message];
+class OurTeamLoading extends OurTeamState {
+  const OurTeamLoading();
 }
 
-//this state is for HC
-class OurTeamHC extends OurTeamState {}
+class OurTeamSuccess extends OurTeamState {
+  final List<Member> memberList;
 
-class OurHCError extends OurTeamState {
-  final String message;
-
-  const OurHCError(this.message);
+  const OurTeamSuccess(this.memberList);
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [memberList];
 }
 
-//this state is for Manager
-class OurTeamManager extends OurTeamState {}
-
-class OurManagerError extends OurTeamState {
+class OurTeamError extends OurTeamState {
   final String message;
 
-  const OurManagerError(this.message);
-
-  @override
-  List<Object> get props => [message];
-}
-
-//this is for executives
-class OurTeamExecutives extends OurTeamState {}
-
-class OurExecutivesError extends OurTeamState {
-  final String message;
-
-  const OurExecutivesError(this.message);
+  const OurTeamError(this.message);
 
   @override
   List<Object> get props => [message];
