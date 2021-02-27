@@ -9,7 +9,6 @@ import 'core/utils/injection.dart';
 import 'models/global_state.dart';
 import 'screens/about_us/about_us.dart';
 import 'screens/about_us/tabs/team/cubit/team_cubit.dart';
-import 'screens/about_us/tabs/team/team.dart';
 import 'screens/about_us/tabs/team/team_repository.dart';
 import 'screens/esummit/esummit.dart';
 import 'screens/events/cubit/events_cubit.dart';
