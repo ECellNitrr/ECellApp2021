@@ -1,12 +1,13 @@
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/models/team_category.dart';
-import 'package:ecellapp/screens/team/cubit/team_cubit.dart';
 import 'package:ecellapp/widgets/reload_on_error.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
+
+import 'cubit/team_cubit.dart';
 
 class TeamScreen extends StatelessWidget {
   const TeamScreen({Key key}) : super(key: key);

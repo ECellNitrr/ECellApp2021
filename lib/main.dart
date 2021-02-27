@@ -7,6 +7,9 @@ import 'core/res/strings.dart';
 import 'core/themes/app_theme.dart';
 import 'core/utils/injection.dart';
 import 'models/global_state.dart';
+import 'screens/about_us/tabs/team/cubit/team_cubit.dart';
+import 'screens/about_us/tabs/team/team.dart';
+import 'screens/about_us/tabs/team/team_repository.dart';
 import 'screens/esummit/esummit.dart';
 import 'screens/events/cubit/events_cubit.dart';
 import 'screens/events/events.dart';
@@ -29,9 +32,6 @@ import 'screens/splash/splash_repository.dart';
 import 'screens/sponsors/cubit/sponsors_cubit.dart';
 import 'screens/sponsors/sponsors.dart';
 import 'screens/sponsors/sponsors_repository.dart';
-import 'screens/team/cubit/team_cubit.dart';
-import 'screens/team/team.dart';
-import 'screens/team/team_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,11 +58,11 @@ class ECellApp extends StatelessWidget {
           S.routeSpeaker: (_) => BlocProvider(
               create: (_) => SpeakerCubit(APISpeakerRepository()), child: SpeakerScreen()),
           S.routeEvents: (_) => BlocProvider(
-              create: (_) => EventsCubit(FakeEventsRepository()), child: EventsScreen()),
+              create: (_) => EventsCubit(APIEventsRepository()), child: EventsScreen()),
           S.routeSponsors: (_) => BlocProvider(
               create: (_) => SponsorsCubit(APISponsorsRepository()), child: SponsorsScreen()),
           S.routeEsummit: (_) => ESummitScreen(),
-          S.routeTeam: (_) =>
+          S.routeAboutUs: (_) =>
               BlocProvider(create: (_) => TeamCubit(FakeTeamRepository()), child: TeamScreen()),
         },
         initialRoute: S.routeSplash,
