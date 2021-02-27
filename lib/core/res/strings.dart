@@ -76,6 +76,28 @@ class S {
   static const String assetEsummitLogoWhiteFilled = "assets/esummit-filled-logo.png";
   static const String assetSponsorsLogoWhite = "assets/sponsors-logo.png";
   static const String assetEventsLogoWhite = "assets/events-logo.png";
+  static const String assetFacebookIcon = "assets/icons/facebook-icon.png";
+  static const String assetFeedbackIcon = "assets/icons/feedback-icon.png";
+  static const String assetGmailIcon = "assets/icons/gmail-icon.png";
+  static const String assetHeartIcon = "assets/icons/heart-icon.png";
+  static const String assetInstagramIcon = "assets/icons/instagram-icon.png";
+  static const String assetLinkedinIcon = "assets/icons/linkedin-icon.png";
+  static const String assetLocationIcon = "assets/icons/location-icon.png";
+  static const String assetTwitterIcon = "assets/icons/twitter-icon.png";
+  static const String assetPhoneIcon = "assets/icons/phone-icon.png";
+  // contact us info
+  static const String ecellAddress = "National Institute of Technology, GE Road, Raipur";
+  static const String ecellPhone = "+91 9406220952";
+  static const String ecellEmail = "ecell@nitrr.ac.in";
+  static const String feedbackLine = "We would love to know what you think  ";
+  static const String linkedinURL =
+      "https://www.linkedin.com/company/entrepreneurship-cell-nit-raipur/";
+  static const String instagramURL = "https://www.instagram.com/ecell.nitraipur/";
+  static const String facebookURL = "https://www.facebook.com/ecellnitrr/";
+  static const String twitterURL = "https://twitter.com/ecell_nitrr";
+  static const String addressURL = "https://goo.gl/maps/YcXz5AM7spYMW16F7";
+  static const String phoneURL = "tel:+919406220952";
+  static const String emailURL = "mailto:ecell@nitrr.ac.in";
   static const String assetEventFrame = "assets/event-frame.png";
   // paragraphs
   static const String esummitPara =
