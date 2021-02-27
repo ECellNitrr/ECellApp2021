@@ -4,6 +4,9 @@ import 'package:ecellapp/models/team.dart';
 import 'package:ecellapp/models/team_category.dart';
 
 abstract class TeamRepository {
+  /// fetches all team members data and returns the list of [TeamCategory]
+  ///
+  /// Make sure that the category that has no members should not be shown in the UI.
   Future<List<TeamCategory>> getAllTeamMembers();
 }
 
@@ -29,19 +32,52 @@ class FakeTeamRepository implements TeamRepository {
             "domain": "tech",
             "linkedin": "http://linkdin.com/IamBttowski",
             "facebook": "http://facebook.com/IamBttowski"
+          },
+          {
+            "id": 2,
+            "name": "Elon Musk",
+            "profile_url":
+                "https://upload.wikimedia.org/wikipedia/commons/8/85/Elon_Musk_Royal_Society_%28crop1%29.jpg",
+            "image": null,
+            "member_type": "HCD",
+            "year": 2021,
+            "domain": "tech",
+            "linkedin": null,
+            "facebook": null
           }
         ]
       };
 
-      List<TeamCategory> teamData = List();
+      List<TeamCategory> categories = [
+        TeamCategory("Director", List()),
+        TeamCategory("Head of CDC", List()),
+        TeamCategory("Faculty Incharge", List()),
+        TeamCategory("Overall Co-ordinators", List()),
+        TeamCategory("Head Co-ordinators", List()),
+        TeamCategory("Managers", List()),
+        TeamCategory("Executives", List()),
+        TeamCategory("Other", List()),
+      ];
+
+      Map<String, int> typeToIndex = {
+        "DIR": 0,
+        "HCD": 1,
+        "FCT": 2,
+        "OCO": 3,
+        "HCO": 4,
+        "MNG": 5,
+        "EXC": 6,
+      };
 
       (response["data"] as List).forEach((e) {
-        List<Team> teamMember = List();
-        (response["data"] as List).forEach((t) => teamMember.add(Team.fromJson(t)));
-        teamData.add(TeamCategory(teamMember.last.position, teamMember));
+        // converting json to dart TeamMember object.
+        TeamMember member = TeamMember.fromJson(e);
+        // adding the team member to the specific category.
+        // If that category doesnot exist in our directory, add it to the others list.
+        categories[typeToIndex[member.type] ?? 7].members.add(member);
       });
 
-      return teamData;
+      return categories;
     }
   }
 }

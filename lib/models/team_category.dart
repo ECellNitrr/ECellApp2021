@@ -2,8 +2,8 @@ import 'package:ecellapp/models/team.dart';
 
 /// Contains a list of <Team > and String position
 class TeamCategory {
-  final String position;
-  List<Team> teams;
+  final String category;
+  List<TeamMember> members;
 
-  TeamCategory(this.position, this.teams);
+  TeamCategory(this.category, this.members);
 }
