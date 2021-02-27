@@ -30,9 +30,7 @@ class OurTeamRepositoryFake implements OurTeamRepository {
         ],
         "message": "Member Fetched Successfully"
       };
-      List<Member> memberList = List();
-      (response["data"] as List).map((e) => memberList.add(Member.fromJson(e))).toList();
-      return memberList;
+      return (response["data"] as List).map((e) => Member.fromJson(e)).toList();
     }
   }
 }

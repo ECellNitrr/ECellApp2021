@@ -36,13 +36,13 @@ class OurTeamScreen extends StatelessWidget {
     return Container();
   }
 
-  Widget _buildSuccess(BuildContext context, List<Member> speakerList) {
+  Widget _buildSuccess(BuildContext context, List<Member> teamList) {
     //TODO: UI
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(speakerList[0].name, textAlign: TextAlign.center),
+          Text(teamList[0].name, textAlign: TextAlign.center),
         ],
       ),
     );
