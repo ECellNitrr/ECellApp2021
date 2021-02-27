@@ -55,6 +55,11 @@ class S {
   static const String speakerProfilePic = "profile_pic";
   static const String speakerSocialMedia = "social_media";
   static const String speakerYear = "year";
+  //teams
+  static const String teamId = "id";
+  static const String teamName = "name";
+  static const String teamMemberType = "member_type";
+  static const String teamProfilePic = "profile_pic";
 
   // error strings
   static const String networkException =
@@ -114,4 +119,6 @@ class S {
   static const routeEvents = "/events";
   static const routeSponsors = "/sponsors";
   static const routeEsummit = "/esummit";
+  static const routeTeam = "/team";
+  static const routeAboutUs = "/about_us";
 }
