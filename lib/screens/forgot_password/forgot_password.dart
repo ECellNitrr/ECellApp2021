@@ -8,7 +8,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
@@ -266,12 +265,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             physics: NeverScrollableScrollPhysics(),
             controller: _scrollController,
             child: Container(
-              height: height * 1.25,
+              height: height * 1.00,
               child: Column(
                 children: [
                   // The text part od the screen
                   Flexible(
-                    flex: 3,
+                    flex: 4,
                     child: Container(
                       padding: EdgeInsets.fromLTRB(0, heightFactor * 100, 0, 0),
                       alignment: Alignment.center,
@@ -312,7 +311,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                   ),
                   Flexible(
-                    flex: 2,
+                    flex: 3,
                     child: Container(
                       child: Column(
                         children: [
@@ -443,7 +442,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       ),
                       rightButtonFn: () {
                         setState(() {
-                          otpEntered = otpEntered.substring(0, otpEntered.length - 1);
+                          if (otpEntered.length > 0) {
+                            otpEntered = otpEntered.substring(0, otpEntered.length - 1);
+                          } else
+                            otpEntered = "";
                           updateOTPBlocks();
                         });
                       },
@@ -470,9 +472,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     double bottom = MediaQuery.of(context).viewInsets.bottom;
     double heightFactor = height / 1000;
     if (_scrollController.hasClients) {
-      if (bottom > height * 0.25) {
+      if (bottom > height * 0.5) {
         _scrollController.animateTo(
-          bottom - height * 0.25,
+          bottom - height * 0.5,
           duration: Duration(milliseconds: 300),
           curve: Curves.ease,
         );
