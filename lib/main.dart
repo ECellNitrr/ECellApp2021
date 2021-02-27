@@ -7,6 +7,7 @@ import 'core/res/strings.dart';
 import 'core/themes/app_theme.dart';
 import 'core/utils/injection.dart';
 import 'models/global_state.dart';
+import 'screens/about_us/about_us.dart';
 import 'screens/about_us/tabs/team/cubit/team_cubit.dart';
 import 'screens/about_us/tabs/team/team.dart';
 import 'screens/about_us/tabs/team/team_repository.dart';
@@ -62,6 +63,7 @@ class ECellApp extends StatelessWidget {
           S.routeSponsors: (_) => BlocProvider(
               create: (_) => SponsorsCubit(APISponsorsRepository()), child: SponsorsScreen()),
           S.routeEsummit: (_) => ESummitScreen(),
+          S.routeAboutUs: (_) => AboutUsScreen(),
           S.routeTeam: (_) =>
               BlocProvider(create: (_) => TeamCubit(FakeTeamRepository()), child: TeamScreen()),
         },
