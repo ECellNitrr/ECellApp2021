@@ -1,5 +1,6 @@
 import 'package:ecellapp/models/sponsor_category.dart';
 import 'package:ecellapp/widgets/ecell_animation.dart';
+import 'package:ecellapp/widgets/reload_on_error.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
@@ -12,34 +13,32 @@ class SponsorsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StatefulWrapper(
-      onInit: () => _getAllSponsorss(context),
+      onInit: () => _getAllSponsors(context),
       child: Scaffold(
-        body: BlocConsumer<SponsorsCubit, SponsorsState>(listener: (context, state) {
-          if (state is SponsorsError) {
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-          }
-        }, builder: (context, state) {
-          return Stack(
-            children: [
-              ScreenBackground(elementId: 0),
-              if (state is SponsorsInitial)
-                _buildLoading(context)
-              else if (state is SponsorsSuccess)
-                _buildSuccess(context, state.sponsorsList)
-              else if (state is SponsorsLoading)
-                _buildLoading(context)
-              else
-                _buildAskReload(),
-            ],
-          );
-        }),
+        body: Stack(
+          children: [
+            ScreenBackground(elementId: 0),
+            BlocBuilder<SponsorsCubit, SponsorsState>(
+              builder: (context, state) {
+                if (state is SponsorsInitial)
+                  return _buildLoading(context);
+                else if (state is SponsorsSuccess)
+                  return _buildSuccess(context, state.sponsorsList);
+                else if (state is SponsorsLoading)
+                  return _buildLoading(context);
+                else
+                  return ReloadOnErrorWidget(() => _getAllSponsors(context));
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildSuccess(BuildContext context, List<SponsorCategory> sponsorsList) {
     //TODO: UI
-    List<Widget> sL = [];
+    List<Widget> sL = [Text("Sponsors")];
     for (var item in sponsorsList) {
       sL.add(Text(item.category, textAlign: TextAlign.center));
     }
@@ -56,13 +55,7 @@ class SponsorsScreen extends StatelessWidget {
     return Center(child: ECellLogoAnimation(size: width / 2));
   }
 
-  Widget _buildAskReload() {
-    //Ask to reload screen
-    //TODO: Implement a Screen to reload
-    return Container();
-  }
-
-  void _getAllSponsorss(BuildContext context) {
+  void _getAllSponsors(BuildContext context) {
     final cubit = context.read<SponsorsCubit>();
     cubit.getSponsorsList();
   }

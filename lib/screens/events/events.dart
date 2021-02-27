@@ -3,6 +3,7 @@ import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/models/event.dart';
 import 'package:ecellapp/screens/events/cubit/events_cubit.dart';
 import 'package:ecellapp/widgets/ecell_animation.dart';
+import 'package:ecellapp/widgets/reload_on_error.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:flutter/material.dart';
@@ -18,52 +19,38 @@ class EventsScreen extends StatelessWidget {
     return StatefulWrapper(
       onInit: () => _getAllEvents(context),
       child: Scaffold(
-        body: BlocConsumer<EventsCubit, EventsState>(
-          listener: (context, state) {
-            if (state is EventsError) {
-              Scaffold.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)),
-              );
-            }
-          },
-          builder: (context, state) {
-            return Scaffold(
-              resizeToAvoidBottomInset: false,
-              extendBodyBehindAppBar: true,
-              appBar: AppBar(
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                leading: Container(
-                  padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                ),
-              ),
-              body: Stack(
-                children: [
-                  ScreenBackground(elementId: 0),
-                  if (state is EventsInitial)
-                    _buildLoading(context)
-                  else if (state is EventsSuccess)
-                    _buildSuccess(context, state.json)
-                  else if (state is EventsLoading)
-                    _buildLoading(context)
-                  else
-                    _buildAskReload()
-                ],
-              ),
-            );
-          },
+        resizeToAvoidBottomInset: false,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: Container(
+            padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
+            child: IconButton(
+              icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ),
+        ),
+        body: Stack(
+          children: [
+            ScreenBackground(elementId: 0),
+            BlocBuilder<EventsCubit, EventsState>(
+              builder: (context, state) {
+                if (state is EventsInitial)
+                  return _buildLoading(context);
+                else if (state is EventsSuccess)
+                  return _buildSuccess(context, state.json);
+                else if (state is EventsLoading)
+                  return _buildLoading(context);
+                else
+                  return ReloadOnErrorWidget(() => _getAllEvents(context));
+              },
+            ),
+          ],
         ),
       ),
     );
-  }
-
-  Widget _buildAskReload() {
-    //TODO: Implement a Screen to reload
-    return Container();
   }
 
   Widget _buildLoading(BuildContext context) {
@@ -72,26 +59,11 @@ class EventsScreen extends StatelessWidget {
   }
 
   Widget _buildSuccess(BuildContext context, List<Event> eventsList) {
-    double height = MediaQuery.of(context).size.height;
-    double bottom = MediaQuery.of(context).viewInsets.bottom;
-    final ScrollController _scrollController = ScrollController();
     double ratio = MediaQuery.of(context).size.aspectRatio;
     double top = MediaQuery.of(context).viewPadding.top;
 
     List<Widget> eventObjList = [];
     eventsList.forEach((element) => eventObjList.add(EventCard(event: element)));
-
-    if (_scrollController.hasClients) {
-      if (bottom > height * 0.25) {
-        _scrollController.animateTo(
-          bottom - height * 0.25,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.ease,
-        );
-      } else {
-        _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.ease);
-      }
-    }
 
     return DefaultTextStyle.merge(
       style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
@@ -104,7 +76,6 @@ class EventsScreen extends StatelessWidget {
             },
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              controller: _scrollController,
               child: Container(
                 margin: EdgeInsets.only(top: top + 56),
                 child: Column(

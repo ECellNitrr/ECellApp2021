@@ -99,6 +99,8 @@ class S {
   static const String phoneURL = "tel:+919406220952";
   static const String emailURL = "mailto:ecell@nitrr.ac.in";
   static const String assetEventFrame = "assets/event-frame.png";
+  static const String asset404Image = "assets/404.png";
+
   // paragraphs
   static const String esummitPara =
       "we aspire to create a melange of eminent speakers who have proved themselves in diverse fields and are at the zenith of glory. E-Summit'21 will not just be a conclave of innovative minds and epistemic elocutionists, but it will be the place where ideas not only thrive but become the greatest revelations of the century.";
