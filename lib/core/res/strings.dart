@@ -58,9 +58,8 @@ class S {
   //teams
   static const String teamId = "id";
   static const String teamName = "name";
-  static const String teamPosition = "member_type";
+  static const String teamMemberType = "member_type";
   static const String teamProfilePic = "profile_pic";
-  static const String teamDomain = "domain";
 
   // error strings
   static const String networkException =
