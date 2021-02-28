@@ -11,13 +11,13 @@ class VerticalText extends StatelessWidget {
     return RotatedBox(
       quarterTurns: 3,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+        padding: const EdgeInsets.all(8.0),
         child: Text(
           name,
           maxLines: 1,
           style: TextStyle(
             color: checked ? Colors.purple : Colors.black,
-            fontSize: 12,
+            fontSize: 20,
           ),
         ),
       ),

@@ -89,13 +89,27 @@ class SponsorCard extends StatelessWidget {
                 fit: BoxFit.cover,
                 height: 220,
               ),
-              Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.only(bottom: 10),
-                child: CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  backgroundImage: NetworkImage(sponsor.picUrl),
-                  radius: 45,
+              Center(
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.only(bottom: 5),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.25),
+                        offset: Offset(0.0, 5),
+                        blurRadius: 10,
+                      ),
+                    ],
+                  ),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.blue,
+                    backgroundImage: NetworkImage(sponsor.picUrl),
+                    radius: 40,
+                  ),
                 ),
               ),
             ],
