@@ -77,6 +77,7 @@ class S {
   static const String assetSponsorsLogoWhite = "assets/sponsors-logo.png";
   static const String assetEventsLogoWhite = "assets/events-logo.png";
   static const String assetSponsorFrame = "assets/sponsor-frame.png";
+  static const String assetSponsorGlobeIcon = "assets/globe.png";
 
   // paragraphs
   static const String esummitPara =
