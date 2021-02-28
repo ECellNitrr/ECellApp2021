@@ -60,7 +60,7 @@ class ScreenBackground extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.bottomRight,
-            child: Image.asset(S.assetTopRightColorful, width: width / 2),
+            child: Image.asset(S.assetBottomRightColorful, width: width / 2),
           ),
         ],
       );
