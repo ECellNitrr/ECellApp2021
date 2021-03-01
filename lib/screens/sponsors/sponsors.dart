@@ -81,13 +81,14 @@ class SponsorsScreen extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
                       children: data.map((spon) {
                         String tab = spon.category;
-                        return GestureDetector(
-                          child: VerticalText(checked: tab == data[i].category, name: tab),
+                        return RotatedCurvedTile(
+                          checked: tab == data[i].category,
+                          name: tab,
                           onTap: () => subject.add(data.indexWhere((e) => e.category == tab)),
                         );
                       }).toList(),
@@ -95,27 +96,32 @@ class SponsorsScreen extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 15,
-                    child: Container(
-                      padding: EdgeInsets.only(top: top + 56),
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurpleAccent,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(40),
-                          topLeft: Radius.circular(40),
-                        ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(40),
+                        topLeft: Radius.circular(40),
                       ),
-                      child: Column(children: [
-                        Text(
-                          "Sponsors",
-                          style: TextStyle(
-                            fontSize: 40,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w800,
-                            letterSpacing: 0.5,
+                      child: Stack(
+                        children: [
+                          ScreenBackground(elementId: 0),
+                          Container(
+                            padding: EdgeInsets.only(top: top + 56),
+                            color: Colors.transparent,
+                            child: Column(children: [
+                              Text(
+                                "Sponsors",
+                                style: TextStyle(
+                                  fontSize: 40,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                              ...data[i].spons.map((e) => SponsorCard(sponsor: e)),
+                            ], mainAxisSize: MainAxisSize.max),
                           ),
-                        ),
-                        ...data[i].spons.map((e) => SponsorCard(sponsor: e)),
-                      ], mainAxisSize: MainAxisSize.max),
+                        ],
+                      ),
                     ),
                   )
                 ],
