@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/models/sponsor_category.dart';
 import 'package:ecellapp/screens/sponsors/sponsor_card.dart';
@@ -9,6 +11,7 @@ import 'package:ecellapp/widgets/vertical_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rxdart/rxdart.dart';
 import 'cubit/sponsors_cubit.dart';
 
 class SponsorsScreen extends StatelessWidget {
@@ -53,38 +56,11 @@ class SponsorsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSuccess(BuildContext context, List<SponsorCategory> sponsorsList) {
+  Widget _buildSuccess(BuildContext context, List<SponsorCategory> data) {
     double top = MediaQuery.of(context).viewPadding.top;
-    List<Widget> sL = [];
-    sL.add(Column(
-      children: [
-        SizedBox(height: 20),
-        Center(
-            child: Text("Sponsors",
-                style: TextStyle(
-                  fontSize: 40,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 0.5,
-                )))
-      ],
-    ));
-    for (var item in sponsorsList) {
-      if (item.category.contains('T')) {
-        item.spons.forEach((element) {
-          sL.add(Expanded(flex: 1, child: SponsorCard(sponsor: element)));
-        });
-      }
-    }
 
-    List<String> tabs = ["Title", "Associates", "Platinum", "Gold", "Partner"];
-    List<Widget> tabNames = [SizedBox(height: 150)];
-
-    tabs.forEach((element) {
-      tabNames.add(
-        Flexible(flex: 1, fit: FlexFit.loose, child: VerticalText(checked: false, name: element)),
-      );
-    });
+    // ignore: close_sinks
+    BehaviorSubject<int> subject = BehaviorSubject.seeded(0);
 
     return DefaultTextStyle.merge(
       style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
@@ -95,29 +71,56 @@ class SponsorsScreen extends StatelessWidget {
         },
         child: Container(
           color: Colors.white,
-          child: Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: tabNames,
-                ),
-              ),
-              Expanded(
-                  flex: 9,
-                  child: Container(
+          child: StreamBuilder<int>(
+            initialData: 0,
+            stream: subject.stream,
+            builder: (context, snapshot) {
+              int i = snapshot.data;
+              return Row(
+                children: [
+                  Expanded(
+                    flex: 2,
                     child: Column(
-                      children: sL,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
+                      children: data.map((spon) {
+                        String tab = spon.category;
+                        return GestureDetector(
+                          child: VerticalText(checked: tab == data[i].category, name: tab),
+                          onTap: () => subject.add(data.indexWhere((e) => e.category == tab)),
+                        );
+                      }).toList(),
                     ),
-                    decoration: BoxDecoration(
+                  ),
+                  Expanded(
+                    flex: 15,
+                    child: Container(
+                      padding: EdgeInsets.only(top: top + 56),
+                      decoration: BoxDecoration(
                         color: Colors.deepPurpleAccent,
                         borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(40), topLeft: Radius.circular(40))),
-                  ))
-            ],
+                          bottomLeft: Radius.circular(40),
+                          topLeft: Radius.circular(40),
+                        ),
+                      ),
+                      child: Column(children: [
+                        Text(
+                          "Sponsors",
+                          style: TextStyle(
+                            fontSize: 40,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                        ...data[i].spons.map((e) => SponsorCard(sponsor: e)),
+                      ], mainAxisSize: MainAxisSize.max),
+                    ),
+                  )
+                ],
+              );
+            },
           ),
         ),
       ),
