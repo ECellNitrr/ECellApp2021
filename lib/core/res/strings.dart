@@ -92,6 +92,9 @@ class S {
   static const String assetLocationIcon = "assets/icons/location-icon.png";
   static const String assetTwitterIcon = "assets/icons/twitter-icon.png";
   static const String assetPhoneIcon = "assets/icons/phone-icon.png";
+  static const String assetTeamIcon = "assets/group.png";
+  static const String assetAIMIcon = "assets/concentric-circles.png";
+
   // contact us info
   static const String ecellAddress = "National Institute of Technology, GE Road, Raipur";
   static const String ecellPhone = "+91 9406220952";

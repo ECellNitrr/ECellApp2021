@@ -1,3 +1,4 @@
+import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/screens/about_us/tabs/team/aim.dart';
 import 'package:ecellapp/screens/about_us/tabs/team/team.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,9 +55,9 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 label: "Aim",
               ),
               BottomNavigationBarItem(
-                icon: new Icon(
-                  Icons.people,
-                  size: 35,
+                icon: Image.asset(
+                  S.assetTeamIcon,
+                  height: 25,
                 ),
                 label: 'Team',
               ),
