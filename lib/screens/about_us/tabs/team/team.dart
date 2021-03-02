@@ -57,8 +57,10 @@ class TeamScreen extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(teamList[0].category, textAlign: TextAlign.center),
-          Text(teamList[0].members[0].name, textAlign: TextAlign.center),
+          Text(teamList[6].category, textAlign: TextAlign.center),
+          Text(teamList[6].members[0].name, textAlign: TextAlign.center),
+          Text(teamList[1].category, textAlign: TextAlign.center),
+          Text(teamList[1].members[0].name, textAlign: TextAlign.center),
         ],
       ),
     );
