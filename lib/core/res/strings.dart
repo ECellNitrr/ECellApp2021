@@ -10,6 +10,7 @@ class S {
   static const String getSponsorsUrl = baseUrl + "sponsors/sorted_list/$sponsorApiYear/";
   static const String getSpeakerUrl = baseUrl + "speakers/full_list/";
   static const String postFeedbackUrl = baseUrl + "feedback/post/";
+  static const String getTeamUrl = baseUrl + "team/list/$teamApiYear/";
   // shared preferences keys
   static const String tokenKeySharedPreferences = "token";
   static const String nameKeySharedPreferences = "name";
@@ -55,6 +56,12 @@ class S {
   static const String speakerProfilePic = "profile_pic";
   static const String speakerSocialMedia = "social_media";
   static const String speakerYear = "year";
+  //teams
+  static const int teamApiYear = 2021;
+  static const String teamId = "id";
+  static const String teamName = "name";
+  static const String teamMemberType = "member_type";
+  static const String teamProfilePic = "profile_pic";
 
   // error strings
   static const String networkException =
@@ -114,4 +121,6 @@ class S {
   static const routeEvents = "/events";
   static const routeSponsors = "/sponsors";
   static const routeEsummit = "/esummit";
+  static const routeTeam = "/team";
+  static const routeAboutUs = "/about_us";
 }
