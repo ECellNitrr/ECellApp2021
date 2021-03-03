@@ -34,10 +34,10 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(40)),
       child: Container(
-          height: height / 10,
+          height: height / 8,
           child: BottomNavigationBar(
             selectedItemColor: Colors.orange[900],
-            unselectedFontSize: 50,
+            unselectedFontSize: 40,
             currentIndex: _currentIndex,
             onTap: (int index) {
               setState(() {
@@ -48,15 +48,49 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
             showUnselectedLabels: false,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.adjust_rounded,
-                  size: 35,
+                activeIcon: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(colors: <Color>[
+                        Colors.orange[600],
+                        Colors.red[800],
+                        Colors.pink[300],
+                      ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(13.0),
+                    child: Image.asset(
+                      S.assetAIMIcon,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                icon: Image.asset(
+                  S.assetAIMIcon,
+                  height: 25,
+                  color: Colors.grey,
                 ),
                 label: "Aim",
               ),
               BottomNavigationBarItem(
+                activeIcon: Container(
+                  height: 55,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(colors: <Color>[
+                        Colors.orange[600],
+                        Colors.red[800],
+                        Colors.pink[300],
+                      ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+                  child: Image.asset(
+                    S.assetTeamIcon,
+                    height: 25,
+                    color: Colors.white,
+                  ),
+                ),
                 icon: Image.asset(
                   S.assetTeamIcon,
+                  color: Colors.grey,
                   height: 25,
                 ),
                 label: 'Team',
