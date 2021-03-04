@@ -123,4 +123,5 @@ class S {
   static const routeEsummit = "/esummit";
   static const routeTeam = "/team";
   static const routeAboutUs = "/about_us";
+  static const routeBQuiz = "/bquiz";
 }
