@@ -10,6 +10,19 @@ class S {
   static const String getSponsorsUrl = baseUrl + "sponsors/sorted_list/$sponsorApiYear/";
   static const String getSpeakerUrl = baseUrl + "speakers/full_list/";
   static const String postFeedbackUrl = baseUrl + "feedback/post/";
+
+  ///Change password API is where the email, otp and password is posted and password is changed
+  /// Accepts [Email] [Otp] and [Password] in API. Last Stage
+  static const String postChangePasswordUrl = baseUrl + "users/change_password/";
+
+  ///Forgot Password API where the email is posted and OTP is sent to the user.
+  ///Accept [Email] only as a parameter to the API. First Stage
+  static const String postForgotPasswordUrl = baseUrl + "users/forgot_password/";
+
+  ///After change mail, send request to this API to verify new email id.
+  ///Accepts [Email] and [Otp]. Second Stage
+  static const String postCheckOtpUrl = baseUrl + "users/check_otp/";
+
   // shared preferences keys
   static const String tokenKeySharedPreferences = "token";
   static const String nameKeySharedPreferences = "name";
@@ -21,6 +34,8 @@ class S {
   static const String firstnameKey = "first_name";
   static const String lastnameKey = "last_name";
   static const String phoneKey = "contact";
+  static const String otpKey = "otp";
+
   //postfeedback
   static const String feedbackNameKey = "name";
   static const String feedbackMessageKey = "message";
