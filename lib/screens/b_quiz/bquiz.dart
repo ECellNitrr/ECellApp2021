@@ -10,9 +10,7 @@ class BQuiz extends StatelessWidget {
   //0%-25%-50%-75%-100%  => centers
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    double bottom = MediaQuery.of(context).viewInsets.bottom;
     double heightFactor = height / 1000;
     return Scaffold(
       extendBodyBehindAppBar: true,
