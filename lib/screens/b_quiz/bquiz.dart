@@ -34,7 +34,6 @@ class BQuiz extends StatelessWidget {
               GradientText("BUSINESS",
                   gradient: LinearGradient(
                     colors: [
-                      //TODO:
                       C.bQuizGradient1,
                       C.bQuizGradient2,
                       C.bQuizGradient3,
@@ -47,7 +46,6 @@ class BQuiz extends StatelessWidget {
               GradientText("QUIZ",
                   gradient: LinearGradient(
                     colors: [
-                      //TODO:
                       C.bQuizGradient1,
                       C.bQuizGradient2,
                       C.bQuizGradient3,
@@ -59,7 +57,7 @@ class BQuiz extends StatelessWidget {
                   )),
               Text(
                 "Quicker Answers, More Points",
-                style: TextStyle(color: C.secondaryColor, fontSize: 20),
+                style: TextStyle(color: C.secondaryColor, fontSize: 25 * heightFactor),
               ),
               SizedBox(height: 30),
               Container(
@@ -69,7 +67,6 @@ class BQuiz extends StatelessWidget {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        //TODO:
                         C.bQuizGradient1,
                         C.bQuizGradient2,
                         C.bQuizGradient3,
@@ -104,11 +101,12 @@ class BQuiz extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: heightFactor * 320, top: heightFactor * 20),
+              Align(
+                alignment: Alignment(0.65, 2),
+                heightFactor: 1.75,
                 child: Text(
                   "Leaderboard",
-                  style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: 18),
+                  style: TextStyle(color: C.primaryUnHighlightedColor, fontSize: 20 * heightFactor),
                 ),
               )
             ],
