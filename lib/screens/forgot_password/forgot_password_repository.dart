@@ -64,7 +64,7 @@ class FakeForgotPasswordRepository extends ForgotPasswordRepository {
 class APIForgotPasswordRepository extends ForgotPasswordRepository {
   final String classTag = "APIForgotPasswordRepository";
 
-  ///Send [Email] [OTP] [Passoword]
+  ///Send [Email] [OTP] [Passoword]  Stage 3/3
   @override
   Future<void> changePassword(String email, String otp, String password) async {
     final String tag = classTag + "changePassword";
@@ -81,7 +81,6 @@ class APIForgotPasswordRepository extends ForgotPasswordRepository {
 
     if (response.statusCode == 202) {
       try {
-        String changePasswordResponse = json.decode(response.body)["detail"];
         return;
       } catch (e) {
         Log.e(tag: tag, message: "Error while decoding response json to get token: $e");
@@ -99,7 +98,7 @@ class APIForgotPasswordRepository extends ForgotPasswordRepository {
     }
   }
 
-  ///Send [Email] [OTP]
+  ///Send [Email] [OTP] Stage 2/3
   @override
   Future<void> checkOTP(String otp, String email) async {
     final String tag = classTag + "sendOTP";
@@ -116,9 +115,7 @@ class APIForgotPasswordRepository extends ForgotPasswordRepository {
 
     if (response.statusCode == 202) {
       try {
-        String otpResponse = json.decode(response.body)["verified"];
-        //TODO: Return type to bool
-        return otpResponse;
+        return;
       } catch (e) {
         Log.e(tag: tag, message: "Error while decoding response json to get token: $e");
         throw UnknownException();
@@ -135,7 +132,7 @@ class APIForgotPasswordRepository extends ForgotPasswordRepository {
     }
   }
 
-  /// Send [Email] to server get [OTP] to phone
+  /// Send [Email] to server get [OTP to phone]  Stage 1/3
   @override
   Future<void> sendOTP(String email) async {
     final String tag = classTag + "sendOTP";
@@ -152,7 +149,6 @@ class APIForgotPasswordRepository extends ForgotPasswordRepository {
 
     if (response.statusCode == 202) {
       try {
-        //String otp = json.decode(response.body)["detail"];
         return;
       } catch (e) {
         Log.e(tag: tag, message: "Error while decoding response json to get token: $e");
