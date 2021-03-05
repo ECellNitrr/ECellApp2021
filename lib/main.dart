@@ -1,3 +1,6 @@
+import 'package:ecellapp/screens/forgot_password/cubit/forgot_password_cubit.dart';
+import 'package:ecellapp/screens/forgot_password/forgot_password.dart';
+import 'package:ecellapp/screens/forgot_password/forgot_password_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,7 +61,11 @@ class ECellApp extends StatelessWidget {
               create: (_) => EventsCubit(FakeEventsRepository()), child: EventsScreen()),
           S.routeSponsors: (_) => BlocProvider(
               create: (_) => SponsorsCubit(APISponsorsRepository()), child: SponsorsScreen()),
-          S.routeEsummit: (_) => ESummitScreen()
+          S.routeEsummit: (_) => ESummitScreen(),
+          S.routeForgotPassword: (_) => BlocProvider(
+                create: (_) => ForgotPasswordCubit(FakeForgotPasswordRepository()),
+                child: ForgotPasswordScreen(),
+              )
         },
         initialRoute: S.routeSplash,
         title: "ECellApp",

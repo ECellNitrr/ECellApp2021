@@ -114,4 +114,5 @@ class S {
   static const routeEvents = "/events";
   static const routeSponsors = "/sponsors";
   static const routeEsummit = "/esummit";
+  static const routeForgotPassword = "/forgotPassword";
 }

@@ -53,6 +53,12 @@ class C {
 
   //Speaker Card fonts
   static final Color cardFontColor = HexColor("#A3A3A3");
+
+  ///Otp ring colors
+  static final Color firstRing = HexColor("#2DEBFF");
+  static final Color secondRing = HexColor("#FB28E6");
+  static final Color thirdRing = HexColor("#EFEA79");
+  static final Color fourthRing = HexColor("#AE82FF");
 }
 
 class HexColor extends Color {
