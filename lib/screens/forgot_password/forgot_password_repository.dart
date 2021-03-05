@@ -80,12 +80,8 @@ class APIForgotPasswordRepository extends ForgotPasswordRepository {
     }
 
     if (response.statusCode == 202) {
-      try {
-        return;
-      } catch (e) {
-        Log.e(tag: tag, message: "Error while decoding response json to get token: $e");
-        throw UnknownException();
-      }
+      // Since 202 denotes Accepted Response
+      return;
     } else if (response.statusCode == 400) {
       throw ValidationException(response.body);
     } else if (response.statusCode == 401 || response.statusCode == 404) {
@@ -114,12 +110,8 @@ class APIForgotPasswordRepository extends ForgotPasswordRepository {
     }
 
     if (response.statusCode == 202) {
-      try {
-        return;
-      } catch (e) {
-        Log.e(tag: tag, message: "Error while decoding response json to get token: $e");
-        throw UnknownException();
-      }
+      // 202 Implies sucess
+      return;
     } else if (response.statusCode == 400) {
       throw ValidationException(response.body);
     } else if (response.statusCode == 401 || response.statusCode == 404) {
@@ -148,12 +140,8 @@ class APIForgotPasswordRepository extends ForgotPasswordRepository {
     }
 
     if (response.statusCode == 202) {
-      try {
-        return;
-      } catch (e) {
-        Log.e(tag: tag, message: "Error while decoding response json to get token: $e");
-        throw UnknownException();
-      }
+      // 202 Implies sucess
+      return;
     } else if (response.statusCode == 400) {
       throw ValidationException(response.body);
     } else if (response.statusCode == 401 || response.statusCode == 404) {
