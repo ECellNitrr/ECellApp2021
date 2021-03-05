@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 
 class BQuiz extends StatelessWidget {
   const BQuiz({Key key}) : super(key: key);
-  //#ffc158 - #dd19ad - #5f00ff - #145fff - #00c3ff
-  //0%-25%-50%-75%-100%  => centers
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -82,14 +80,6 @@ class BQuiz extends StatelessWidget {
                       end: Alignment.centerRight,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(30)),
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //     color: C.authButtonColor.withOpacity(0.2),
-                    //     blurRadius: 10,
-                    //     spreadRadius: 3,
-                    //     offset: Offset(0, 12),
-                    //   )
-                    // ],
                   ),
                   child: FlatButton(
                     shape: RoundedRectangleBorder(

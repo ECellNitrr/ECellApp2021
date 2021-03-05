@@ -1,3 +1,4 @@
+import 'package:ecellapp/screens/b_quiz/bquiz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,6 +63,7 @@ class ECellApp extends StatelessWidget {
           S.routeSponsors: (_) => BlocProvider(
               create: (_) => SponsorsCubit(APISponsorsRepository()), child: SponsorsScreen()),
           S.routeEsummit: (_) => ESummitScreen(),
+          S.routeBQuiz: (_) => BQuiz(),
           S.routeAboutUs: (_) =>
               BlocProvider(create: (_) => TeamCubit(FakeTeamRepository()), child: AboutUsScreen()),
         },
