@@ -59,6 +59,12 @@ class C {
   static final Color secondRing = HexColor("#FB28E6");
   static final Color thirdRing = HexColor("#EFEA79");
   static final Color fourthRing = HexColor("#AE82FF");
+  //BQuiz Gradient Colors
+  static final Color bQuizGradient1 = HexColor("#ffc158");
+  static final Color bQuizGradient2 = HexColor("#dd19ad");
+  static final Color bQuizGradient3 = HexColor("#5f00ff");
+  static final Color bQuizGradient4 = HexColor("#145fff");
+  static final Color bQuizGradient5 = HexColor("#00c3ff");
 }
 
 class HexColor extends Color {
