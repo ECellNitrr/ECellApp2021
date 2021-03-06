@@ -69,7 +69,7 @@ class ECellApp extends StatelessWidget {
           S.routeForgotPassword: (_) => BlocProvider(
                 create: (_) => ForgotPasswordCubit(FakeForgotPasswordRepository()),
                 child: ForgotPasswordScreen(),
-              )
+              ),
           S.routeBQuiz: (_) => BQuiz(),
           S.routeAboutUs: (_) =>
               BlocProvider(create: (_) => TeamCubit(FakeTeamRepository()), child: AboutUsScreen()),
