@@ -1,5 +1,9 @@
+import 'dart:convert';
 import 'dart:math';
-
+import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/core/utils/injection.dart';
+import 'package:ecellapp/core/utils/logger.dart';
+import 'package:http/http.dart' as http;
 import 'package:ecellapp/core/res/errors.dart';
 
 abstract class ForgotPasswordRepository {
@@ -53,6 +57,100 @@ class FakeForgotPasswordRepository extends ForgotPasswordRepository {
       } else {
         throw ResponseException("Error from changePassword");
       }
+    }
+  }
+}
+
+class APIForgotPasswordRepository extends ForgotPasswordRepository {
+  final String classTag = "APIForgotPasswordRepository";
+
+  ///Send [Email] [OTP] [Passoword]  Stage 3/3
+  @override
+  Future<void> changePassword(String email, String otp, String password) async {
+    final String tag = classTag + "changePassword";
+    http.Response response;
+    try {
+      response = await sl.get<http.Client>().post(
+        S.postChangePasswordUrl,
+        body: <String, dynamic>{S.emailKey: email, S.otpKey: otp, S.passwordKey: password},
+      );
+    } catch (e) {
+      Log.e(tag: tag, message: "NetworkError:" + e.toString());
+      throw NetworkException();
+    }
+
+    if (response.statusCode == 202) {
+      // Since 202 denotes Accepted Response
+      return;
+    } else if (response.statusCode == 400) {
+      throw ValidationException(response.body);
+    } else if (response.statusCode == 401 || response.statusCode == 404) {
+      throw ResponseException(jsonDecode(response.body)['detail']);
+    } else {
+      Log.e(
+          tag: tag,
+          message: "Unknown response code -> ${response.statusCode}, message ->" + response.body);
+      throw UnknownException();
+    }
+  }
+
+  ///Send [Email] [OTP] Stage 2/3
+  @override
+  Future<void> checkOTP(String otp, String email) async {
+    final String tag = classTag + "sendOTP";
+    http.Response response;
+    try {
+      response = await sl.get<http.Client>().post(
+        S.postCheckOtpUrl,
+        body: <String, dynamic>{S.emailKey: email, S.otpKey: otp},
+      );
+    } catch (e) {
+      Log.e(tag: tag, message: "NetworkError:" + e.toString());
+      throw NetworkException();
+    }
+
+    if (response.statusCode == 202) {
+      // 202 Implies sucess
+      return;
+    } else if (response.statusCode == 400) {
+      throw ValidationException(response.body);
+    } else if (response.statusCode == 401 || response.statusCode == 404) {
+      throw ResponseException(jsonDecode(response.body)['detail']);
+    } else {
+      Log.e(
+          tag: tag,
+          message: "Unknown response code -> ${response.statusCode}, message ->" + response.body);
+      throw UnknownException();
+    }
+  }
+
+  /// Send [Email] to server get [OTP to phone]  Stage 1/3
+  @override
+  Future<void> sendOTP(String email) async {
+    final String tag = classTag + "sendOTP";
+    http.Response response;
+    try {
+      response = await sl.get<http.Client>().post(
+        S.postForgotPasswordUrl,
+        body: <String, dynamic>{S.emailKey: email},
+      );
+    } catch (e) {
+      Log.e(tag: tag, message: "NetworkError:" + e.toString());
+      throw NetworkException();
+    }
+
+    if (response.statusCode == 202) {
+      // 202 Implies sucess
+      return;
+    } else if (response.statusCode == 400) {
+      throw ValidationException(response.body);
+    } else if (response.statusCode == 401 || response.statusCode == 404) {
+      throw ResponseException(jsonDecode(response.body)['detail']);
+    } else {
+      Log.e(
+          tag: tag,
+          message: "Unknown response code -> ${response.statusCode}, message ->" + response.body);
+      throw UnknownException();
     }
   }
 }
