@@ -14,13 +14,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'widgets/confirm_password.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
-  String otp1 = "1", otp2 = "2", otp3 = "3", otp4 = "4", otpEntered = "1234";
   final TextEditingController emailController = TextEditingController();
   final TextEditingController otpController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   final _formKey = GlobalKey<FormState>();
+  
+  String otp1 = "", otp2 = "", otp3 = "", otp4 = "", otpEntered = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
