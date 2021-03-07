@@ -26,7 +26,7 @@ class FakeSponsorsRepository extends SponsorsRepository {
     await Future.delayed(Duration(seconds: 1));
 
     //Fake Response and Network Delay
-    if (false && Random().nextBool()) {
+    if (Random().nextBool()) {
       throw NetworkException();
     } else {
       Map<String, dynamic> response = {
@@ -50,7 +50,7 @@ class FakeSponsorsRepository extends SponsorsRepository {
           ],
           "Partner": [
             {
-              "id": 2,
+              "id": 5,
               "name": "Happy Chases",
               "details": "Digital Media Partner",
               "pic": "/media/static/uploads/sponsors/happychases.png",
@@ -67,7 +67,7 @@ class FakeSponsorsRepository extends SponsorsRepository {
           ],
           "XYZ": [
             {
-              "id": 2,
+              "id": 6,
               "name": "Happy Chases",
               "details": "Digital Media Partner",
               "pic": "/media/static/uploads/sponsors/happychases.png",
@@ -82,7 +82,7 @@ class FakeSponsorsRepository extends SponsorsRepository {
               "ecell_user": null
             },
             {
-              "id": 2,
+              "id": 7,
               "name": "Happy Chases",
               "details": "Digital Media Partner",
               "pic": "/media/static/uploads/sponsors/happychases.png",
@@ -97,7 +97,7 @@ class FakeSponsorsRepository extends SponsorsRepository {
               "ecell_user": null
             },
             {
-              "id": 2,
+              "id": 8,
               "name": "Happy Chases",
               "details": "Digital Media Partner",
               "pic": "/media/static/uploads/sponsors/happychases.png",
