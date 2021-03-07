@@ -68,7 +68,6 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 icon: Image.asset(
                   S.assetAIMIcon,
                   height: 25,
-                  color: Colors.grey,
                 ),
                 label: "Aim",
               ),
@@ -90,7 +89,6 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 ),
                 icon: Image.asset(
                   S.assetTeamIcon,
-                  color: Colors.grey,
                   height: 25,
                 ),
                 label: 'Team',
