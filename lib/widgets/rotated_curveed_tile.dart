@@ -11,7 +11,7 @@ class RotatedCurvedTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget child = Container(
-      color: checked ? HexColor("#4F3FA0") : Colors.white,
+      color: checked ? HexColor("#372981") : Colors.white,
       margin: EdgeInsets.zero,
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 40.0),

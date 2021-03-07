@@ -53,6 +53,7 @@ class C {
 
   //Speaker Card fonts
   static final Color cardFontColor = HexColor("#A3A3A3");
+  static final Color sponsorPageBackground = HexColor("#372981");
 }
 
 class HexColor extends Color {
