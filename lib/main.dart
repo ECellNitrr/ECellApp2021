@@ -60,7 +60,7 @@ class ECellApp extends StatelessWidget {
           S.routeEvents: (_) => BlocProvider(
               create: (_) => EventsCubit(FakeEventsRepository()), child: EventsScreen()),
           S.routeSponsors: (_) => BlocProvider(
-              create: (_) => SponsorsCubit(APISponsorsRepository()), child: SponsorsScreen()),
+              create: (_) => SponsorsCubit(FakeSponsorsRepository()), child: SponsorsScreen()),
           S.routeEsummit: (_) => ESummitScreen(),
           S.routeAboutUs: (_) =>
               BlocProvider(create: (_) => TeamCubit(FakeTeamRepository()), child: AboutUsScreen()),
