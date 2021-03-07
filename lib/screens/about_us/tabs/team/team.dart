@@ -1,11 +1,13 @@
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/models/team_category.dart';
+import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:ecellapp/widgets/reload_on_error.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'cubit/team_cubit.dart';
 
@@ -52,22 +54,83 @@ class TeamScreen extends StatelessWidget {
   }
 
   Widget _buildSuccess(BuildContext context, List<TeamCategory> teamList) {
-    //TODO: UI
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(teamList[0].category, textAlign: TextAlign.center),
-          Text(teamList[0].members[0].name, textAlign: TextAlign.center),
-        ],
+    double top = MediaQuery.of(context).viewPadding.top;
+
+    // ignore: close_sinks
+    BehaviorSubject<int> subject = BehaviorSubject.seeded(0);
+
+    return DefaultTextStyle.merge(
+      style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
+      child: NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: (OverscrollIndicatorNotification overscroll) {
+          overscroll.disallowGlow();
+          return true;
+        },
+        child: Container(
+          color: Colors.white,
+          child: StreamBuilder<int>(
+            initialData: 0,
+            stream: subject.stream,
+            builder: (context, snapshot) {
+              int i = snapshot.data;
+              return Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: data.map((spon) {
+                        String tab = spon.category;
+                        return RotatedCurvedTile(
+                          checked: tab == data[i].category,
+                          name: tab,
+                          onTap: () => subject.add(data.indexWhere((e) => e.category == tab)),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 15,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(40),
+                        topLeft: Radius.circular(40),
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.only(top: top + 56),
+                        color: C.sponsorPageBackground,
+                        width: double.infinity,
+                        child: Column(children: [
+                          Text(
+                            "Sponsors",
+                            style: TextStyle(
+                              fontSize: 40,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                          ...data[i].spons.map((e) => {
+                                //TODO: TEAM CARD
+                              }),
+                        ], mainAxisSize: MainAxisSize.max),
+                      ),
+                    ),
+                  )
+                ],
+              );
+            },
+          ),
+        ),
       ),
     );
   }
 
-  Widget _buildLoading() {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
+  Widget _buildLoading(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Center(child: ECellLogoAnimation(size: width / 2));
   }
 
   void _getAllTeamMembers(BuildContext context) {
