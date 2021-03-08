@@ -1,3 +1,4 @@
+import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/models/team_category.dart';
 import 'package:ecellapp/widgets/ecell_animation.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rxdart/rxdart.dart';
 
 import 'cubit/team_cubit.dart';
 
@@ -38,11 +40,11 @@ class TeamScreen extends StatelessWidget {
             BlocBuilder<TeamCubit, TeamState>(
               builder: (context, state) {
                 if (state is TeamInitial)
-                  return _buildLoading();
+                  return _buildLoading(context);
                 else if (state is TeamSuccess)
                   return _buildSuccess(context, state.teamList);
                 else if (state is TeamLoading)
-                  return _buildLoading();
+                  return _buildLoading(context);
                 else
                   return ReloadOnErrorWidget(() => _getAllTeamMembers(context));
               },
@@ -53,7 +55,7 @@ class TeamScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSuccess(BuildContext context, List<TeamCategory> teamList) {
+  Widget _buildSuccess(BuildContext context, List<TeamCategory> data) {
     double top = MediaQuery.of(context).viewPadding.top;
 
     // ignore: close_sinks
@@ -100,11 +102,11 @@ class TeamScreen extends StatelessWidget {
                       ),
                       child: Container(
                         padding: EdgeInsets.only(top: top + 56),
-                        color: C.sponsorPageBackground,
+                        color: C.teamsbackground,
                         width: double.infinity,
                         child: Column(children: [
                           Text(
-                            "Sponsors",
+                            "Our Team",
                             style: TextStyle(
                               fontSize: 40,
                               color: Colors.white,
@@ -112,7 +114,7 @@ class TeamScreen extends StatelessWidget {
                               letterSpacing: 0.5,
                             ),
                           ),
-                          ...data[i].spons.map((e) => {
+                          ...data[i].members.map((e) => {
                                 //TODO: TEAM CARD
                               }),
                         ], mainAxisSize: MainAxisSize.max),

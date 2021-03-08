@@ -16,14 +16,15 @@ dependencies:
   data_connection_checker: ^0.3.4
   equatable: ^1.2.5
   flutter_bloc: ^6.1.0
+  flutter_launcher_icons: ^0.8.1
   get_it: ^5.0.2
   google_fonts: ^1.1.1
   http: ^0.12.1
   logger: ^0.9.4
   provider: ^4.3.3
+  rxdart: ^0.26.0
   shared_preferences: ^0.5.12+4
   url_launcher: ^5.7.10
-  flutter_launcher_icons: ^0.8.1
 
 dev_dependencies:
   flutter_test:
