@@ -1,10 +1,10 @@
+import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/strings.dart';
-import 'package:ecellapp/screens/about_us/tabs/team/aim.dart';
+import 'package:ecellapp/screens/about_us/tabs/aim/aim.dart';
 import 'package:ecellapp/screens/about_us/tabs/team/team.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:ecellapp/widgets/screen_background.dart';
 
 class AboutUsScreen extends StatefulWidget {
   @override
@@ -19,8 +19,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        ScreenBackground(elementId: 0),
-        SafeArea(child: tabs[_currentIndex]),
+        tabs[_currentIndex],
         Align(
           alignment: Alignment.bottomCenter,
           child: _buildBottomNavBar(context),
@@ -53,9 +52,9 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: LinearGradient(colors: <Color>[
-                        Colors.orange[600],
-                        Colors.red[800],
-                        Colors.pink[300],
+                        C.selectedIconThemeGrad1,
+                        C.selectedIconThemeGrad2,
+                        C.selectedIconThemeGrad3,
                       ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
                   child: Padding(
                     padding: const EdgeInsets.all(13.0),
@@ -73,13 +72,13 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               ),
               BottomNavigationBarItem(
                 activeIcon: Container(
-                  height: 55,
+                  height: 50,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: LinearGradient(colors: <Color>[
-                        Colors.orange[600],
-                        Colors.red[800],
-                        Colors.pink[300],
+                        C.selectedIconThemeGrad1,
+                        C.selectedIconThemeGrad2,
+                        C.selectedIconThemeGrad3,
                       ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
                   child: Image.asset(
                     S.assetTeamIcon,
