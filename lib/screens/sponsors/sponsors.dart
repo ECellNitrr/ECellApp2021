@@ -27,9 +27,14 @@ class SponsorsScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           leading: Container(
             padding: EdgeInsets.only(left: 10),
-            child: IconButton(
-              icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 30),
-              onPressed: () => Navigator.of(context).pop(),
+            child: BlocBuilder<SponsorsCubit, SponsorsState>(
+              builder: (context, state) {
+                Color color = (state is SponsorsSuccess) ? Colors.black : Colors.white;
+                return IconButton(
+                  icon: Icon(Icons.arrow_back_ios, color: color, size: 30),
+                  onPressed: () => Navigator.of(context).pop(),
+                );
+              },
             ),
           ),
         ),
