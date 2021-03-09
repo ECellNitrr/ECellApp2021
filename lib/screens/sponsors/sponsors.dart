@@ -105,21 +105,27 @@ class SponsorsScreen extends StatelessWidget {
                         topLeft: Radius.circular(40),
                       ),
                       child: Container(
-                        padding: EdgeInsets.only(top: top + 56),
                         color: C.sponsorPageBackground,
                         width: double.infinity,
-                        child: Column(children: [
-                          Text(
-                            "Sponsors",
-                            style: TextStyle(
-                              fontSize: 40,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w800,
-                              letterSpacing: 0.5,
-                            ),
+                        height: double.infinity,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              SizedBox(height: top + 56),
+                              Text(
+                                "Sponsors",
+                                style: TextStyle(
+                                  fontSize: 40,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                              ...data[i].spons.map((e) => SponsorCard(sponsor: e)),
+                            ],
                           ),
-                          ...data[i].spons.map((e) => SponsorCard(sponsor: e)),
-                        ], mainAxisSize: MainAxisSize.max),
+                        ),
                       ),
                     ),
                   )
