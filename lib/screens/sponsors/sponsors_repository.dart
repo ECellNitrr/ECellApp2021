@@ -110,6 +110,36 @@ class FakeSponsorsRepository extends SponsorsRepository {
               "year": 2019,
               "flag": true,
               "ecell_user": null
+            },
+            {
+              "id": 9,
+              "name": "Happy Chases",
+              "details": "Digital Media Partner",
+              "pic": "/media/static/uploads/sponsors/happychases.png",
+              "pic_url": "https://via.placeholder.com/150",
+              "contact": "",
+              "website": "https://www.happychases.com/",
+              "spons_type": "Partner",
+              "importance": 83,
+              "category_importance": 6,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
+            },
+            {
+              "id": 10,
+              "name": "Happy Chases",
+              "details": "Digital Media Partner",
+              "pic": "/media/static/uploads/sponsors/happychases.png",
+              "pic_url": "https://via.placeholder.com/150",
+              "contact": "",
+              "website": "https://www.happychases.com/",
+              "spons_type": "Partner",
+              "importance": 83,
+              "category_importance": 6,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
             }
           ]
         },
