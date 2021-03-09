@@ -1,6 +1,7 @@
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/models/team_category.dart';
+import 'package:ecellapp/screens/about_us/tabs/team/widget/teams_card.dart';
 import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:ecellapp/widgets/reload_on_error.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
@@ -12,6 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'cubit/team_cubit.dart';
+import 'widget/rotated_curved_tile.dart';
 
 class TeamScreen extends StatelessWidget {
   const TeamScreen({Key key}) : super(key: key);
@@ -29,7 +31,7 @@ class TeamScreen extends StatelessWidget {
           leading: Container(
             padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
             child: IconButton(
-              icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+              icon: Icon(Icons.arrow_back_ios, color: C.teamsbackground, size: 30),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),
@@ -80,17 +82,30 @@ class TeamScreen extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: data.map((spon) {
-                        String tab = spon.category;
-                        return RotatedCurvedTile(
-                          checked: tab == data[i].category,
-                          name: tab,
-                          onTap: () => subject.add(data.indexWhere((e) => e.category == tab)),
-                        );
-                      }).toList(),
+                      children: [
+                        Expanded(flex: 1, child: Container()),
+                        Flexible(
+                          flex: 8,
+                          fit: FlexFit.loose,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: data.map((team) {
+                                String tab = team.category;
+                                return RotatedCurvedTile(
+                                  checked: tab == data[i].category,
+                                  name: tab,
+                                  onTap: () =>
+                                      subject.add(data.indexWhere((e) => e.category == tab)),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ),
+                        Expanded(flex: 1, child: Container()),
+                      ],
                     ),
                   ),
                   Expanded(
@@ -114,9 +129,7 @@ class TeamScreen extends StatelessWidget {
                               letterSpacing: 0.5,
                             ),
                           ),
-                          ...data[i].members.map((e) => {
-                                //TODO: TEAM CARD
-                              }),
+                          ...data[i].members.map((e) => TeamsCard(teamMember: e)),
                         ], mainAxisSize: MainAxisSize.max),
                       ),
                     ),

@@ -1,4 +1,4 @@
-import 'package:ecellapp/models/sponsor.dart';
+import 'package:ecellapp/models/team.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ecellapp/core/res/colors.dart';
@@ -6,9 +6,9 @@ import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
 
 class TeamsCard extends StatelessWidget {
-  final Sponsor sponsor;
+  final TeamMember teamMember;
 
-  const TeamsCard({Key key, this.sponsor}) : super(key: key);
+  const TeamsCard({Key key, this.teamMember}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +34,9 @@ class TeamsCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(22),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 30, 10, 0),
+                      padding: const EdgeInsets.symmetric(vertical: 50),
                       child: Text(
-                        sponsor.name,
+                        teamMember.name,
                         style: TextStyle(
                           fontSize: 20,
                           color: C.cardFontColor,
@@ -78,7 +78,9 @@ class TeamsCard extends StatelessWidget {
                   ),
                   child: CircleAvatar(
                     backgroundColor: Colors.blue,
-                    backgroundImage: NetworkImage(sponsor.picUrl),
+                    backgroundImage: (teamMember.profilePic == null)
+                        ? AssetImage(S.assetEcellLogoWhite)
+                        : NetworkImage(teamMember.profilePic),
                     radius: 40,
                   ),
                 ),
