@@ -11,9 +11,7 @@ part 'team_state.dart';
 
 class TeamCubit extends Cubit<TeamState> {
   final TeamRepository _teamRepository;
-
   TeamCubit(this._teamRepository) : super(TeamInitial());
-
   Future<void> getAllTeamMembers() async {
     try {
       emit(TeamLoading());
