@@ -1,3 +1,4 @@
+import 'package:ecellapp/screens/b_quiz/bquiz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,9 @@ import 'core/res/strings.dart';
 import 'core/themes/app_theme.dart';
 import 'core/utils/injection.dart';
 import 'models/global_state.dart';
+import 'screens/about_us/about_us.dart';
+import 'screens/about_us/tabs/team/cubit/team_cubit.dart';
+import 'screens/about_us/tabs/team/team_repository.dart';
 import 'screens/esummit/esummit.dart';
 import 'screens/events/cubit/events_cubit.dart';
 import 'screens/events/events.dart';
@@ -58,7 +62,10 @@ class ECellApp extends StatelessWidget {
               create: (_) => EventsCubit(FakeEventsRepository()), child: EventsScreen()),
           S.routeSponsors: (_) => BlocProvider(
               create: (_) => SponsorsCubit(APISponsorsRepository()), child: SponsorsScreen()),
-          S.routeEsummit: (_) => ESummitScreen()
+          S.routeEsummit: (_) => ESummitScreen(),
+          S.routeBQuiz: (_) => BQuiz(),
+          S.routeAboutUs: (_) =>
+              BlocProvider(create: (_) => TeamCubit(FakeTeamRepository()), child: AboutUsScreen()),
         },
         initialRoute: S.routeSplash,
         title: "ECellApp",

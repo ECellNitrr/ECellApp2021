@@ -114,7 +114,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     child: GestureDetector(
                       child:
                           Icon(Icons.search_rounded, size: 35, color: C.primaryUnHighlightedColor),
-                      onTap: () {}, //TODO
+                      onTap: () => Navigator.pushNamed(context, S.routeBQuiz),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -245,7 +245,9 @@ class _MenuScreenState extends State<MenuScreen> {
                     constraints: BoxConstraints.tightFor(width: 70, height: 70),
                     child: GestureDetector(
                       child: Icon(Icons.group, size: 35, color: C.primaryUnHighlightedColor),
-                      onTap: () {}, //TODO
+                      onTap: () {
+                        Navigator.pushNamed(context, S.routeAboutUs);
+                      },
                     ),
                   ),
                   SizedBox(height: 10),
