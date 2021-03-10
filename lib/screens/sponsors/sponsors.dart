@@ -84,17 +84,30 @@ class SponsorsScreen extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: data.map((spon) {
-                        String tab = spon.category;
-                        return RotatedCurvedTile(
-                          checked: tab == data[i].category,
-                          name: tab,
-                          onTap: () => subject.add(data.indexWhere((e) => e.category == tab)),
-                        );
-                      }).toList(),
+                      children: [
+                        Expanded(flex: 3, child: Container()),
+                        Flexible(
+                          flex: 8,
+                          fit: FlexFit.loose,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: data.map((spon) {
+                                String tab = spon.category;
+                                return RotatedCurvedTile(
+                                  checked: tab == data[i].category,
+                                  name: tab,
+                                  onTap: () =>
+                                      subject.add(data.indexWhere((e) => e.category == tab)),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ),
+                        Expanded(flex: 1, child: Container()),
+                      ],
                     ),
                   ),
                   Expanded(
