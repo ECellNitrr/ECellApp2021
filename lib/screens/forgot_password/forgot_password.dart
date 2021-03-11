@@ -22,7 +22,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
   final _formKey = GlobalKey<FormState>();
 
-  String otp1 = "", otp2 = "", otp3 = "", otp4 = "", otpEntered = "1234";
+  String otp1 = "", otp2 = "", otp3 = "", otp4 = "", otpEntered = "";
 
   @override
   Widget build(BuildContext context) {
@@ -755,6 +755,13 @@ class ForgotPasswordScreen extends StatelessWidget {
   }
 
   _onNumSelected(int p1) {
+    if (p1 == -1 && otpEntered.length > 0) {
+      otpEntered = otpEntered.substring(0, otpEntered.length - 1);
+    } else {
+      otpEntered = otpEntered + p1.toString();
+    }
+    updateOTPBlocks();
     print("$p1");
+    print("O: $otpEntered");
   }
 }
