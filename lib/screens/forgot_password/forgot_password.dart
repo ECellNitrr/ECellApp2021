@@ -2,6 +2,7 @@ import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/screens/forgot_password/cubit/forgot_password_cubit.dart';
+import 'package:ecellapp/screens/forgot_password/widgets/keyboard.dart';
 import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:ecellapp/widgets/email_field.dart';
 import 'package:ecellapp/widgets/password_field.dart';
@@ -20,7 +21,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   final TextEditingController confirmPasswordController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   final _formKey = GlobalKey<FormState>();
-  
+
   String otp1 = "", otp2 = "", otp3 = "", otp4 = "", otpEntered = "";
 
   @override
@@ -274,34 +275,54 @@ class ForgotPasswordScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Column(
                         children: [
-                          Text(
-                            "Step 2/3",
-                            style:
-                                TextStyle(fontSize: 40 * heightFactor, fontWeight: FontWeight.w600),
-                          ),
-                          SizedBox(height: 30 * heightFactor),
-                          Container(
-                            alignment: Alignment.center,
+                          Expanded(
+                            flex: 1,
                             child: Text(
-                              "Enter OTP",
+                              "Step 2/3",
                               style: TextStyle(
-                                fontWeight: FontWeight.w300,
-                                color: C.primaryHighlightedColor,
-                                fontSize: heightFactor * 30,
+                                  fontSize: 40 * heightFactor, fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Icon(Icons.verified_user,
+                                color: Colors.white, size: 65 * heightFactor),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Verify OTP",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  color: C.primaryHighlightedColor,
+                                  fontSize: heightFactor * 30,
+                                ),
                               ),
                             ),
                           ),
-                          SizedBox(height: 30 * heightFactor),
                           Container(
                             padding:
                                 EdgeInsets.fromLTRB(heightFactor * 10, 0, heightFactor * 10, 0),
                             alignment: Alignment.center,
-                            child: Text(
-                              "An otp has been sent to your email address.",
-                              //textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: heightFactor * 20,
-                              ),
+                            child: Column(
+                              children: [
+                                Text(
+                                  "An otp has been sent to the registered user",
+                                  style: TextStyle(
+                                    fontSize: heightFactor * 20,
+                                  ),
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.only(top: 10 * heightFactor),
+                                    child: Text(
+                                      "email",
+                                      style: TextStyle(
+                                        fontSize: heightFactor * 20,
+                                      ),
+                                    )),
+                              ],
                             ),
                           ),
                         ],
@@ -310,11 +331,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ),
                   Flexible(
                     flex: 3,
-                    child: Container(
-                      child: Column(
-                        children: [
-                          //OTP number fields
-                          Row(
+                    child: Column(
+                      children: [
+                        //!OTP number fields
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
@@ -383,12 +405,72 @@ class ForgotPasswordScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 30 * heightFactor),
-                          //Verify button
-                          Container(
-                            padding: EdgeInsets.only(right: D.horizontalPadding),
-                            alignment: Alignment.topRight,
-                            child: Container(
+                        ),
+                        Center(
+                          child: RichText(
+                            text: TextSpan(
+                              text: "You can request another OTP in ",
+                              children: [
+                                TextSpan(
+                                    text: "[Time]",
+                                    style: TextStyle(
+                                      color: C.primaryUnHighlightedColor,
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                                TextSpan(
+                                    text: "s",
+                                    style: TextStyle(
+                                      color: C.primaryUnHighlightedColor,
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              ],
+                              style: TextStyle(
+                                  fontSize: 15 * heightFactor, fontWeight: FontWeight.w300),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 30 * heightFactor),
+                        //!Verify button
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(30)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: C,
+                                    blurRadius: 10,
+                                    spreadRadius: 3,
+                                    offset: Offset(0, 12),
+                                  )
+                                ],
+                              ),
+                              child: RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                                ),
+                                color: C.authButtonColor,
+                                onPressed: () => _verifyOtp(context, state),
+                                child: Container(
+                                  height: 60,
+                                  width: 120,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "Resend",
+                                    style: TextStyle(
+                                        color: C.primaryUnHighlightedColor,
+                                        fontSize: 20 * heightFactor),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20 * heightFactor,
+                            ),
+                            Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(30)),
                                 boxShadow: [
@@ -411,7 +493,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                                   width: 120,
                                   alignment: Alignment.center,
                                   child: Text(
-                                    "Verify",
+                                    "Submit",
                                     style: TextStyle(
                                         color: C.primaryUnHighlightedColor,
                                         fontSize: 20 * heightFactor),
@@ -419,17 +501,14 @@ class ForgotPasswordScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                   Flexible(
-                    flex: 7,
-                    child: Container(
-                      //TODO: Keyboard Here
-                      color: Colors.teal,
-                    ),
+                    flex: 3,
+                    child: NumericPad(onNumberSelected: _onNumSelected),
                   ),
                 ],
               ),
@@ -622,5 +701,9 @@ class ForgotPasswordScreen extends StatelessWidget {
       otp4 = otpEntered[3];
       otpEntered = otpEntered.substring(0, 4);
     }
+  }
+
+  _onNumSelected(int p1) {
+    print("$p1");
   }
 }
