@@ -2,7 +2,7 @@ import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
 import 'package:ecellapp/core/res/strings.dart';
 import 'package:ecellapp/screens/forgot_password/cubit/forgot_password_cubit.dart';
-import 'package:ecellapp/screens/forgot_password/widgets/keyboard.dart';
+import 'package:ecellapp/screens/forgot_password/widgets/numeric_pad.dart';
 import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:ecellapp/widgets/email_field.dart';
 import 'package:ecellapp/widgets/password_field.dart';
@@ -22,11 +22,23 @@ class ForgotPasswordScreen extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
   final _formKey = GlobalKey<FormState>();
 
-  String otp1 = "", otp2 = "", otp3 = "", otp4 = "", otpEntered = "";
+  String otp1 = "", otp2 = "", otp3 = "", otp4 = "", otpEntered = "1234";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: Container(
+          padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
+      ),
       backgroundColor: Colors.transparent,
       body: BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
         listener: (context, state) {
@@ -239,6 +251,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     return Center(child: ECellLogoAnimation(size: width / 2));
   }
 
+  /// Screen for EnterOTP
   Widget _enterOTP(BuildContext context, ForgotPasswordState state) {
     double height = MediaQuery.of(context).size.height;
     double bottom = MediaQuery.of(context).viewInsets.bottom;
@@ -438,13 +451,17 @@ class ForgotPasswordScreen extends StatelessWidget {
                           children: [
                             Container(
                               decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 2.0,
+                                ),
                                 borderRadius: BorderRadius.all(Radius.circular(30)),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: C,
-                                    blurRadius: 10,
-                                    spreadRadius: 3,
-                                    offset: Offset(0, 12),
+                                    color: C.backgroundTop,
+                                    // blurRadius: 10,
+                                    //spreadRadius: 3,
+                                    //offset: Offset(0, 12),
                                   )
                                 ],
                               ),
@@ -452,10 +469,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(30)),
                                 ),
-                                color: C.authButtonColor,
+                                color: Colors.transparent,
                                 onPressed: () => _verifyOtp(context, state),
                                 child: Container(
-                                  height: 60,
+                                  height: 50,
                                   width: 120,
                                   alignment: Alignment.center,
                                   child: Text(
@@ -489,8 +506,8 @@ class ForgotPasswordScreen extends StatelessWidget {
                                 color: C.authButtonColor,
                                 onPressed: () => _verifyOtp(context, state),
                                 child: Container(
-                                  height: 60,
-                                  width: 120,
+                                  height: 54,
+                                  width: 124,
                                   alignment: Alignment.center,
                                   child: Text(
                                     "Submit",
@@ -507,9 +524,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                     ),
                   ),
                   Flexible(
-                    flex: 3,
+                    flex: 4,
                     child: NumericPad(onNumberSelected: _onNumSelected),
                   ),
+                  SizedBox(height: heightFactor * 40)
                 ],
               ),
             ),
@@ -520,9 +538,33 @@ class ForgotPasswordScreen extends StatelessWidget {
   }
 
   Widget _passwordResetSuccess() {
-    return Padding(
-      padding: const EdgeInsets.all(40.0),
-      child: Text("success"),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            S.assetEcellLogoWhite,
+            height: 170,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 120),
+            child: Row(
+              children: [
+                Text(
+                  "Sucess",
+                  style: TextStyle(
+                      fontSize: 40, fontWeight: FontWeight.w600, color: C.primaryHighlightedColor),
+                ),
+                Icon(
+                  Icons.check_circle,
+                  color: C.primaryUnHighlightedColor,
+                  size: 40,
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -553,7 +595,6 @@ class ForgotPasswordScreen extends StatelessWidget {
             child: Container(
               height: height * 1.25,
               child: Column(
-                mainAxisSize: MainAxisSize.min,
                 children: [
                   //3/3 text
                   Expanded(
@@ -563,29 +604,36 @@ class ForgotPasswordScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Column(
                         children: [
-                          Text(
-                            "Step 3/3",
-                            style:
-                                TextStyle(fontSize: 35 * heightFactor, fontWeight: FontWeight.w600),
-                          ),
-                          SizedBox(height: 23 * heightFactor),
-                          Container(
-                            alignment: Alignment.center,
+                          Expanded(
+                            flex: 1,
                             child: Text(
-                              "Reset Password",
+                              "Step 3/3",
                               style: TextStyle(
-                                color: C.primaryHighlightedColor,
-                                fontSize: heightFactor * 30,
+                                  fontSize: 35 * heightFactor, fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Reset Password",
+                                style: TextStyle(
+                                  color: C.primaryHighlightedColor,
+                                  fontSize: heightFactor * 30,
+                                ),
                               ),
                             ),
                           ),
-                          SizedBox(height: 23 * heightFactor),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Please enter new password",
-                              style: TextStyle(
-                                fontSize: heightFactor * 25,
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Please enter your new password",
+                                style: TextStyle(
+                                  fontSize: heightFactor * 25,
+                                ),
                               ),
                             ),
                           ),
@@ -594,57 +642,60 @@ class ForgotPasswordScreen extends StatelessWidget {
                     ),
                   ),
                   // password and confirm password fields
+                  SizedBox(
+                    height: 50,
+                  ),
                   Expanded(
                     flex: 3,
-                    child: Container(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: PasswordField(passwordController),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 40),
+                          child: Column(
+                            children: [
+                              PasswordField(passwordController),
+                              SizedBox(height: 20 * heightFactor),
+                              ConfirmPasswordField(confirmPasswordController),
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ConfirmPasswordField(confirmPasswordController),
-                          ),
-                          SizedBox(height: 20 * heightFactor),
-                          Container(
-                            padding: EdgeInsets.only(right: D.horizontalPadding),
-                            alignment: Alignment.topRight,
-                            child: Container(
-                              decoration: BoxDecoration(
+                        ),
+                        SizedBox(height: 20 * heightFactor),
+                        Container(
+                          padding: EdgeInsets.only(right: D.horizontalPadding),
+                          alignment: Alignment.topRight,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(30)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: C.authButtonColor.withOpacity(0.2),
+                                  blurRadius: 10,
+                                  spreadRadius: 3,
+                                  offset: Offset(0, 12),
+                                )
+                              ],
+                            ),
+                            child: RaisedButton(
+                              shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(30)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: C.authButtonColor.withOpacity(0.2),
-                                    blurRadius: 10,
-                                    spreadRadius: 3,
-                                    offset: Offset(0, 12),
-                                  )
-                                ],
                               ),
-                              child: RaisedButton(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                                ),
-                                color: C.authButtonColor,
-                                onPressed: () => _changePassword(context, state),
-                                child: Container(
-                                  height: 60,
-                                  width: 150,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "Reset Password",
-                                    style: TextStyle(
-                                        color: C.primaryUnHighlightedColor,
-                                        fontSize: 20 * heightFactor),
-                                  ),
+                              color: C.authButtonColor,
+                              onPressed: () => _changePassword(context, state),
+                              child: Container(
+                                height: 60,
+                                width: 100,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Reset",
+                                  style: TextStyle(
+                                      color: C.primaryUnHighlightedColor,
+                                      fontSize: 20 * heightFactor),
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
