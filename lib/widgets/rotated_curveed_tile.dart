@@ -14,7 +14,7 @@ class RotatedCurvedTile extends StatelessWidget {
       color: checked ? HexColor("#372981") : Colors.white,
       margin: EdgeInsets.zero,
       alignment: Alignment.center,
-      padding: const EdgeInsets.symmetric(horizontal: 40.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: Text(
         name,
         style: TextStyle(color: checked ? Colors.white : Colors.purple, fontSize: 20),
@@ -30,7 +30,7 @@ class RotatedCurvedTile extends StatelessWidget {
       );
     }
     return Container(
-      margin: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 5.0),
+      margin: const EdgeInsets.only(left: 5.0),
       child: GestureDetector(
         onTap: onTap,
         child: RotatedBox(quarterTurns: 3, child: child),
