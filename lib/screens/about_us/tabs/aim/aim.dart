@@ -48,21 +48,23 @@ class AimScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double bottom = MediaQuery.of(context).viewInsets.bottom;
     double heightFactor = height / 1000;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(D.horizontalPadding, 0, D.horizontalPadding, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              aboutUsText(width, height, bottom, heightFactor),
-              aimTextSection(width, height, bottom, heightFactor),
-              visionTextSection(width, height, bottom, heightFactor),
-            ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(D.horizontalPadding, 0, D.horizontalPadding, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                aboutUsText(width, height, bottom, heightFactor),
+                aimTextSection(width, height, bottom, heightFactor),
+                visionTextSection(width, height, bottom, heightFactor),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
