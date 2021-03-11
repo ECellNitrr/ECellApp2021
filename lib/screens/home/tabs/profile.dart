@@ -64,7 +64,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Container(
                               alignment: Alignment.topRight,
                               child: GestureDetector(
-                                onTap: () {}, //TODO
+                                onTap: () {
+                                  Navigator.pushReplacementNamed(context, S.routeForgotPassword);
+                                },
                                 child: Text(
                                   "Change Password?",
                                   style: TextStyle(

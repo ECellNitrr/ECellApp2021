@@ -141,7 +141,7 @@ class LoginScreen extends StatelessWidget {
                                   TextStyle(fontSize: 20 * heightFactor, color: C.secondaryColor),
                             ),
                             onTap: () {
-                              //TODO: Forgot Password Route
+                              Navigator.pushReplacementNamed(context, S.routeForgotPassword);
                             },
                           ),
                         )
