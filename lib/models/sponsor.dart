@@ -8,7 +8,6 @@ class Sponsor {
   //string data
   String name;
   String details;
-  String pic;
   String picUrl;
   String contact;
   String website;
@@ -18,7 +17,6 @@ class Sponsor {
     this.id,
     this.name,
     this.details,
-    this.pic,
     this.picUrl,
     this.contact,
     this.website,
@@ -31,7 +29,6 @@ class Sponsor {
       id: json[S.sponsorId],
       name: json[S.sponsorName],
       details: json[S.sponsorDetails],
-      pic: json[S.sponsorPic],
       picUrl: json[S.sponsorPicUrl],
       contact: json[S.sponsorContact],
       website: json[S.sponsorWebsite],

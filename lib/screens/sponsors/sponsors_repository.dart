@@ -37,7 +37,7 @@ class FakeSponsorsRepository extends SponsorsRepository {
               "name": "Anopchand Tilokchand Jewellers",
               "details": "Title Sponsors",
               "pic": "/media/static/uploads/sponsors/download.jpeg",
-              "pic_url": "\"*\"/media/static/uploads/sponsors/download.jpeg",
+              "pic_url": "https://via.placeholder.com/150",
               "contact": "",
               "website": "https://atjewel.com/",
               "spons_type": "Title",
@@ -50,11 +50,156 @@ class FakeSponsorsRepository extends SponsorsRepository {
           ],
           "Partner": [
             {
-              "id": 2,
+              "id": 5,
               "name": "Happy Chases",
               "details": "Digital Media Partner",
               "pic": "/media/static/uploads/sponsors/happychases.png",
-              "pic_url": "\"*\"/media/static/uploads/sponsors/happychases.png",
+              "pic_url": "https://via.placeholder.com/150",
+              "contact": "",
+              "website": "https://www.happychases.com/",
+              "spons_type": "Partner",
+              "importance": 83,
+              "category_importance": 6,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
+            }
+          ],
+          "XYZ": [
+            {
+              "id": 6,
+              "name": "Happy Chases",
+              "details": "Digital Media Partner",
+              "pic": "/media/static/uploads/sponsors/happychases.png",
+              "pic_url": "https://via.placeholder.com/150",
+              "contact": "",
+              "website": "https://www.happychases.com/",
+              "spons_type": "Partner",
+              "importance": 83,
+              "category_importance": 6,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
+            },
+            {
+              "id": 7,
+              "name": "Happy Chases",
+              "details": "Digital Media Partner",
+              "pic": "/media/static/uploads/sponsors/happychases.png",
+              "pic_url": "https://via.placeholder.com/150",
+              "contact": "",
+              "website": "https://www.happychases.com/",
+              "spons_type": "Partner",
+              "importance": 83,
+              "category_importance": 6,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
+            },
+            {
+              "id": 8,
+              "name": "Happy Chases",
+              "details": "Digital Media Partner",
+              "pic": "/media/static/uploads/sponsors/happychases.png",
+              "pic_url": "https://via.placeholder.com/150",
+              "contact": "",
+              "website": "https://www.happychases.com/",
+              "spons_type": "Partner",
+              "importance": 83,
+              "category_importance": 6,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
+            },
+            {
+              "id": 9,
+              "name": "Happy Chases",
+              "details": "Digital Media Partner",
+              "pic": "/media/static/uploads/sponsors/happychases.png",
+              "pic_url": "https://via.placeholder.com/150",
+              "contact": "",
+              "website": "https://www.happychases.com/",
+              "spons_type": "Partner",
+              "importance": 83,
+              "category_importance": 6,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
+            },
+            {
+              "id": 10,
+              "name": "Happy Chases",
+              "details": "Digital Media Partner",
+              "pic": "/media/static/uploads/sponsors/happychases.png",
+              "pic_url": "https://via.placeholder.com/150",
+              "contact": "",
+              "website": "https://www.happychases.com/",
+              "spons_type": "Partner",
+              "importance": 83,
+              "category_importance": 6,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
+            }
+          ],
+          "AAAA": [
+            {
+              "id": 5,
+              "name": "Happy Chases",
+              "details": "Digital Media Partner",
+              "pic": "/media/static/uploads/sponsors/happychases.png",
+              "pic_url": "https://via.placeholder.com/150",
+              "contact": "",
+              "website": "https://www.happychases.com/",
+              "spons_type": "Partner",
+              "importance": 83,
+              "category_importance": 6,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
+            }
+          ],
+          "BBBB": [
+            {
+              "id": 5,
+              "name": "Happy Chases",
+              "details": "Digital Media Partner",
+              "pic": "/media/static/uploads/sponsors/happychases.png",
+              "pic_url": "https://via.placeholder.com/150",
+              "contact": "",
+              "website": "https://www.happychases.com/",
+              "spons_type": "Partner",
+              "importance": 83,
+              "category_importance": 6,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
+            }
+          ],
+          "CCCC": [
+            {
+              "id": 5,
+              "name": "Happy Chases",
+              "details": "Digital Media Partner",
+              "pic": "/media/static/uploads/sponsors/happychases.png",
+              "pic_url": "https://via.placeholder.com/150",
+              "contact": "",
+              "website": "https://www.happychases.com/",
+              "spons_type": "Partner",
+              "importance": 83,
+              "category_importance": 6,
+              "year": 2019,
+              "flag": true,
+              "ecell_user": null
+            }
+          ],
+          "DDDD": [
+            {
+              "id": 5,
+              "name": "Happy Chases",
+              "details": "Digital Media Partner",
+              "pic": "/media/static/uploads/sponsors/happychases.png",
+              "pic_url": "https://via.placeholder.com/150",
               "contact": "",
               "website": "https://www.happychases.com/",
               "spons_type": "Partner",
@@ -67,7 +212,7 @@ class FakeSponsorsRepository extends SponsorsRepository {
           ]
         },
         "message": "fetched successfully",
-        "spons_categories": ["Title", "Partner"]
+        "spons_categories": ["Title", "Partner", "XYZ", "AAAA", "BBBB", "CCCC", "DDDD"]
       };
 
       List<SponsorCategory> sponsorData = List();

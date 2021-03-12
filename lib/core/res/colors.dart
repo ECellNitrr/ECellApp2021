@@ -55,6 +55,9 @@ class C {
   //Speaker Card fonts
   static final Color cardFontColor = HexColor("#A3A3A3");
 
+  //Sponsor Background
+  static final Color sponsorPageBackground = HexColor("#372981");
+
   //BQuiz Gradient Colors
   static final Color bQuizGradient1 = HexColor("#ffc158");
   static final Color bQuizGradient2 = HexColor("#dd19ad");

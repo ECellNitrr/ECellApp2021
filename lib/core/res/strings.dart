@@ -98,6 +98,8 @@ class S {
   static const String assetEsummitLogoWhiteFilled = "assets/esummit-filled-logo.png";
   static const String assetSponsorsLogoWhite = "assets/sponsors-logo.png";
   static const String assetEventsLogoWhite = "assets/events-logo.png";
+  static const String assetSponsorFrame = "assets/sponsor-frame.png";
+  static const String assetSponsorGlobeIcon = "assets/globe.png";
   static const String assetFacebookIcon = "assets/icons/facebook-icon.png";
   static const String assetFeedbackIcon = "assets/icons/feedback-icon.png";
   static const String assetGmailIcon = "assets/icons/gmail-icon.png";
