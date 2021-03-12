@@ -4,6 +4,7 @@ import 'package:ecellapp/models/team_category.dart';
 import 'package:ecellapp/screens/about_us/tabs/team/widget/teams_card.dart';
 import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:ecellapp/widgets/reload_on_error.dart';
+import 'package:ecellapp/widgets/rotated_curveed_tile.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'cubit/team_cubit.dart';
-import 'widget/rotated_curved_tile.dart';
 
 class TeamScreen extends StatelessWidget {
   const TeamScreen({Key key}) : super(key: key);
