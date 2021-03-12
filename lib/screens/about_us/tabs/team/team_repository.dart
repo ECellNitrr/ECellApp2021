@@ -145,7 +145,8 @@ class FakeTeamRepository implements TeamRepository {
             "domain": "tech",
             "linkedin": "http://linkdin.com/IamBttowski",
             "facebook": "http://facebook.com/IamBttowski"
-          },{
+          },
+          {
             "id": 1,
             "name": "Kazama",
             "profile_url":

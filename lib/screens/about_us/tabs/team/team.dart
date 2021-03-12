@@ -64,8 +64,6 @@ class TeamScreen extends StatelessWidget {
     // ignore: close_sinks
     BehaviorSubject<int> subject = BehaviorSubject.seeded(0);
 
-  
-
     return DefaultTextStyle.merge(
       style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
       child: NotificationListener<OverscrollIndicatorNotification>(
@@ -115,7 +113,6 @@ class TeamScreen extends StatelessWidget {
                         width: double.infinity,
                         height: double.infinity,
                         child: SingleChildScrollView(
-                          
                           controller: _scrollController,
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
