@@ -15,39 +15,29 @@ class TeamsCard extends StatelessWidget {
     double ratio = MediaQuery.of(context).size.aspectRatio;
     return Stack(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: D.horizontalPaddingFrame),
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(22),
-                  ),
-                  child: Container(
-                    height: ratio > 0.5 ? 140 : 160,
-                    margin: EdgeInsets.only(left: 130),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(22),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 50),
-                      child: Text(
-                        teamMember.name,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: C.cardFontColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: D.horizontalPaddingFrame, vertical: 20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(22),
+          ),
+          child: Container(
+            height: ratio > 0.5 ? 140 : 160,
+            margin: EdgeInsets.only(left: 130),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(22),
+            ),
+            child: Center(
+              child: Text(
+                teamMember.name,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: C.cardFontColor,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-            ],
+            ),
           ),
         ),
         Positioned(

@@ -59,9 +59,12 @@ class TeamScreen extends StatelessWidget {
 
   Widget _buildSuccess(BuildContext context, List<TeamCategory> data) {
     double top = MediaQuery.of(context).viewPadding.top;
+    ScrollController _scrollController = ScrollController();
 
     // ignore: close_sinks
     BehaviorSubject<int> subject = BehaviorSubject.seeded(0);
+
+  
 
     return DefaultTextStyle.merge(
       style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
@@ -81,31 +84,23 @@ class TeamScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     flex: 2,
-                    child: Column(
-                      children: [
-                        Expanded(flex: 1, child: Container()),
-                        Flexible(
-                          flex: 8,
-                          fit: FlexFit.loose,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: data.map((team) {
-                                String tab = team.category;
-                                return RotatedCurvedTile(
-                                  checked: tab == data[i].category,
-                                  name: tab,
-                                  onTap: () =>
-                                      subject.add(data.indexWhere((e) => e.category == tab)),
-                                );
-                              }).toList(),
-                            ),
-                          ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 40, top: 80),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: data.map((spon) {
+                            String tab = spon.category;
+                            return RotatedCurvedTile(
+                              checked: tab == data[i].category,
+                              name: tab,
+                              onTap: () => subject.add(data.indexWhere((e) => e.category == tab)),
+                            );
+                          }).toList(),
                         ),
-                        Expanded(flex: 1, child: Container()),
-                      ],
+                      ),
                     ),
                   ),
                   Expanded(
@@ -116,21 +111,29 @@ class TeamScreen extends StatelessWidget {
                         topLeft: Radius.circular(40),
                       ),
                       child: Container(
-                        padding: EdgeInsets.only(top: top + 56),
-                        color: C.teamsbackground,
+                        color: C.sponsorPageBackground,
                         width: double.infinity,
-                        child: Column(children: [
-                          Text(
-                            "Our Team",
-                            style: TextStyle(
-                              fontSize: 40,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w800,
-                              letterSpacing: 0.5,
-                            ),
+                        height: double.infinity,
+                        child: SingleChildScrollView(
+                          
+                          controller: _scrollController,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              SizedBox(height: top + 56),
+                              Text(
+                                "Our Team",
+                                style: TextStyle(
+                                  fontSize: 40,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                              ...data[i].members.map((e) => TeamsCard(teamMember: e)),
+                            ],
                           ),
-                          ...data[i].members.map((e) => TeamsCard(teamMember: e)),
-                        ], mainAxisSize: MainAxisSize.max),
+                        ),
                       ),
                     ),
                   )
