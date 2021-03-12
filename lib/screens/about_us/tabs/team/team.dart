@@ -128,6 +128,8 @@ class TeamScreen extends StatelessWidget {
                                 ),
                               ),
                               ...data[i].members.map((e) => TeamsCard(teamMember: e)),
+                              //! Fix to avoid non-scrollable state
+                              Container(height: 200)
                             ],
                           ),
                         ),

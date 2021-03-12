@@ -124,7 +124,19 @@ class FakeTeamRepository implements TeamRepository {
           },
           {
             "id": 10,
-            "name": "Korosuke",
+            "name": "Kiterestu",
+            "profile_url":
+                "https://i.pinimg.com/originals/83/f5/88/83f588b8414b1bacfd0ef3027b5aba7f.jpg",
+            "image": null,
+            "member_type": "MNG",
+            "year": 2021,
+            "domain": "tech",
+            "linkedin": "http://linkdin.com/IamBttowski",
+            "facebook": "http://facebook.com/IamBttowski"
+          },
+          {
+            "id": 15,
+            "name": "Kochikame",
             "profile_url":
                 "https://i.pinimg.com/originals/83/f5/88/83f588b8414b1bacfd0ef3027b5aba7f.jpg",
             "image": null,
