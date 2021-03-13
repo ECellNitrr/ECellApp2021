@@ -145,6 +145,7 @@ class S {
   static const routeEvents = "/events";
   static const routeSponsors = "/sponsors";
   static const routeEsummit = "/esummit";
+  static const routeForgotPassword = "/forgotPassword";
   static const routeTeam = "/team";
   static const routeAboutUs = "/about_us";
   static const routeBQuiz = "/bquiz";

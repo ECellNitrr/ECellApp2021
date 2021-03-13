@@ -18,7 +18,7 @@ class FakeForgotPasswordRepository extends ForgotPasswordRepository {
   @override
   // this is to simulate a delay for getting otp
   Future<void> sendOTP(String email) async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     if (Random().nextBool()) {
       return;
     } else {
@@ -33,7 +33,7 @@ class FakeForgotPasswordRepository extends ForgotPasswordRepository {
 // this to simulate the process of otp verification
   @override
   Future<void> checkOTP(String otp, String email) async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     if (Random().nextBool()) {
       if (otp == "1234") {
         return;
@@ -48,7 +48,7 @@ class FakeForgotPasswordRepository extends ForgotPasswordRepository {
 // this is to simulate the process of change in email
   @override
   Future<void> changePassword(String email, String otp, String password) async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     if (Random().nextBool()) {
       return;
     } else {

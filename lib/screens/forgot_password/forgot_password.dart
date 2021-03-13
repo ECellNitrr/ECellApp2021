@@ -1,82 +1,96 @@
+import 'package:ecellapp/core/res/colors.dart';
+import 'package:ecellapp/core/res/dimens.dart';
+import 'package:ecellapp/core/res/strings.dart';
+import 'package:ecellapp/screens/forgot_password/ask_email.dart';
 import 'package:ecellapp/screens/forgot_password/cubit/forgot_password_cubit.dart';
-import 'package:ecellapp/screens/forgot_password/widgets/otp_field.dart';
+import 'package:ecellapp/screens/forgot_password/enter_otp.dart';
 import 'package:ecellapp/widgets/ecell_animation.dart';
-import 'package:ecellapp/widgets/email_field.dart';
-import 'package:ecellapp/widgets/password_field.dart';
+import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController otpController = TextEditingController();
+import 'reset_password.dart';
+
+class ForgotPasswordScreen extends StatefulWidget {
+  @override
+  _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
+}
+
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController otpController = TextEditingController();
+
+  String otpEntered = " " * 4, finalOTP = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
-        listener: (context, state) {
-          if (state is ForgotPasswordError) {
-            Scaffold.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
-          }
-        },
-        builder: (context, state) {
-          return Stack(
-            children: [
-              if (state is ForgotEmailInitial)
-                _initialForgotPassword(context, state)
-              else if (state is ForgotLoading)
-                _buildLoading(context)
-              else if (state is ForgotOTPInitial)
-                _enterOTP(context, state)
-              else if (state is ForgotPasswordError)
-                _uiUpdateForNetworkError(context, state.state)
-              else if (state is ForgotResetInitial)
-                _resetPassword(context, state)
-              else if (state is ForgotResetSuccess)
-                _passwordResetSuccess()
-              else
-                _initialForgotPassword(context, state)
-            ],
-          );
-        },
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: Container(
+          padding: EdgeInsets.only(left: D.horizontalPadding - 10, top: 10),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
       ),
-    );
-  }
-
-  Widget _uiUpdateForNetworkError(BuildContext context, ForgotPasswordState state) {
-    if (state is ForgotEmailInitial) {
-      return _initialForgotPassword(context, state);
-    } else if (state is ForgotOTPInitial) {
-      return _enterOTP(context, state);
-    } else if (state is ForgotPasswordError) {
-      return _enterOTP(context, state);
-    } else if (state is ForgotResetInitial) {
-      return _resetPassword(context, state);
-    } else {
-      return _initialForgotPassword(context, state);
-    }
-  }
-
-  Widget _initialForgotPassword(BuildContext context, ForgotPasswordState state) {
-    return Padding(
-      padding: const EdgeInsets.all(40.0),
-      child: Column(
+      backgroundColor: Colors.transparent,
+      body: Stack(
         children: [
-          Text("Enter email"),
-          EmailField(emailController),
-          FlatButton(
-              onPressed: () {
-                _sendOTP(context, state);
-              },
-              child: Text("Press me")),
+          ScreenBackground(elementId: 0),
+          BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
+            listener: (context, state) {
+              if (state is ForgotPasswordError) {
+                Scaffold.of(context).showSnackBar(
+                  SnackBar(content: Text(state.message)),
+                );
+              }
+            },
+            builder: (context, state) {
+              if (state is ForgotLoading)
+                return _buildLoading(context);
+              else if (state is ForgotPasswordError)
+                return _stepScreen(context, state.state);
+              else if (state is ForgotResetSuccess)
+                return _passwordResetSuccess();
+              else
+                return _stepScreen(context, state);
+            },
+          ),
         ],
       ),
     );
+  }
+
+  Widget _stepScreen(BuildContext context, ForgotPasswordState state) {
+    if (state is ForgotEmailInitial)
+      return AskEmailScreen(
+        emailController: emailController,
+        onSubmit: () => _sendOTP(context, state),
+      );
+    else if (state is ForgotOTPInitial)
+      return EnterOTPScreen(
+        numSelected: _onNumSelected,
+        otp: otpEntered,
+        toVerify: () => _verifyOtp(context, state),
+      );
+    else if (state is ForgotResetInitial)
+      return ResetPassword(
+        onConfirm: () => _changePassword(context, state),
+        confirmPasswordController: confirmPasswordController,
+        passwordController: passwordController,
+      );
+    else
+      return AskEmailScreen(
+        emailController: emailController,
+        onSubmit: () => _sendOTP(context, state),
+      );
   }
 
   Widget _buildLoading(BuildContext context) {
@@ -84,42 +98,32 @@ class ForgotPasswordScreen extends StatelessWidget {
     return Center(child: ECellLogoAnimation(size: width / 2));
   }
 
-  Widget _enterOTP(BuildContext context, ForgotPasswordState state) {
-    return Padding(
-      padding: const EdgeInsets.all(40.0),
-      child: Column(
-        children: [
-          Text("Enter otp"),
-          OTPField(otpController),
-          FlatButton(
-              onPressed: () {
-                _verifyOtp(context, state);
-              },
-              child: Text("Press me")),
-        ],
-      ),
-    );
-  }
-
   Widget _passwordResetSuccess() {
-    return Padding(
-      padding: const EdgeInsets.all(40.0),
-      child: Text("success"),
-    );
-  }
-
-  Widget _resetPassword(BuildContext context, ForgotPasswordState state) {
-    return Padding(
-      padding: const EdgeInsets.all(40.0),
+    return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          PasswordField(passwordController),
-          PasswordField(confirmPasswordController),
-          FlatButton(
-              onPressed: () {
-                _changePassword(context, state);
-              },
-              child: Text("change password")),
+          Image.asset(
+            S.assetEcellLogoWhite,
+            height: 170,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 120),
+            child: Row(
+              children: [
+                Text(
+                  "Sucess",
+                  style: TextStyle(
+                      fontSize: 40, fontWeight: FontWeight.w600, color: C.primaryHighlightedColor),
+                ),
+                Icon(
+                  Icons.check_circle,
+                  color: C.primaryUnHighlightedColor,
+                  size: 40,
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -127,17 +131,40 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   void _sendOTP(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
-    cubit.sendOTP(emailController.text, state);
+    bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(emailController.text);
+    if (emailValid) {
+      cubit.sendOTP(emailController.text, state);
+    }
   }
 
   void _verifyOtp(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
-    cubit.checkOTP(otpController.text, state, emailController.text);
+
+    cubit.checkOTP(otpEntered.substring(0, 4), state, emailController.text);
   }
 
   void _changePassword(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
-    cubit.changePassword(emailController.text, otpController.text, passwordController.text,
+
+    cubit.changePassword(emailController.text, otpEntered.substring(0, 4), passwordController.text,
         confirmPasswordController.text, state);
+  }
+
+  _onNumSelected(int numEntered) {
+    int length = otpEntered.length;
+    setState(() {
+      if (numEntered == -1) {
+        if (length > 0) {
+          finalOTP = finalOTP.substring(0, finalOTP.length - 1);
+          otpEntered = finalOTP + " " * (4 - finalOTP.length);
+        }
+      } else if (length < 5) {
+        if (finalOTP.length < 4) {
+          finalOTP += numEntered.toString();
+        }
+        otpEntered = finalOTP + " " * (4 - finalOTP.length);
+      }
+    });
   }
 }
