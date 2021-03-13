@@ -23,7 +23,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController otpController = TextEditingController();
 
-  String otpEntered = "";
+  String otpEntered = " " * 4, finalOTP = "";
 
   @override
   Widget build(BuildContext context) {
@@ -41,81 +41,56 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
       ),
       backgroundColor: Colors.transparent,
-      body: BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
-        listener: (context, state) {
-          if (state is ForgotPasswordError) {
-            Scaffold.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
-          }
-        },
-        builder: (context, state) {
-          return Stack(
-            children: [
-              ScreenBackground(elementId: 0),
-              if (state is ForgotEmailInitial)
-                AskEmailScreen(
-                  emailController: emailController,
-                  onSubmit: _sendOTP(context, state),
-                )
-              else if (state is ForgotLoading)
-                _buildLoading(context)
-              else if (state is ForgotOTPInitial)
-                EnterOTPScreen(
-                  numSelected: _onNumSelected,
-                  otp: otpEntered,
-                  toVerify: _verifyOtp(context, state),
-                )
+      body: Stack(
+        children: [
+          ScreenBackground(elementId: 0),
+          BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
+            listener: (context, state) {
+              if (state is ForgotPasswordError) {
+                Scaffold.of(context).showSnackBar(
+                  SnackBar(content: Text(state.message)),
+                );
+              }
+            },
+            builder: (context, state) {
+              if (state is ForgotLoading)
+                return _buildLoading(context);
               else if (state is ForgotPasswordError)
-                _uiUpdateForNetworkError(context, state.state)
-              else if (state is ForgotResetInitial)
-                ResetPassword(
-                    onConfirm: _changePassword(context, state),
-                    confirmPasswordController: confirmPasswordController,
-                    passwordController: passwordController)
+                return _stepScreen(context, state.state);
               else if (state is ForgotResetSuccess)
-                _passwordResetSuccess()
+                return _passwordResetSuccess();
               else
-                AskEmailScreen(
-                  emailController: emailController,
-                  onSubmit: _sendOTP(context, state),
-                )
-            ],
-          );
-        },
+                return _stepScreen(context, state);
+            },
+          ),
+        ],
       ),
     );
   }
 
-  Widget _uiUpdateForNetworkError(BuildContext context, ForgotPasswordState state) {
-    if (state is ForgotEmailInitial) {
+  Widget _stepScreen(BuildContext context, ForgotPasswordState state) {
+    if (state is ForgotEmailInitial)
       return AskEmailScreen(
         emailController: emailController,
-        onSubmit: _sendOTP(context, state),
+        onSubmit: () => _sendOTP(context, state),
       );
-    } else if (state is ForgotOTPInitial) {
+    else if (state is ForgotOTPInitial)
       return EnterOTPScreen(
         numSelected: _onNumSelected,
         otp: otpEntered,
-        toVerify: _verifyOtp(context, state),
+        toVerify: () => _verifyOtp(context, state),
       );
-    } else if (state is ForgotPasswordError) {
-      return EnterOTPScreen(
-        numSelected: _onNumSelected,
-        otp: otpEntered,
-        toVerify: _verifyOtp(context, state),
-      );
-    } else if (state is ForgotResetInitial) {
+    else if (state is ForgotResetInitial)
       return ResetPassword(
-          onConfirm: _changePassword(context, state),
-          confirmPasswordController: confirmPasswordController,
-          passwordController: passwordController);
-    } else {
+        onConfirm: () => _changePassword(context, state),
+        confirmPasswordController: confirmPasswordController,
+        passwordController: passwordController,
+      );
+    else
       return AskEmailScreen(
         emailController: emailController,
-        onSubmit: _sendOTP(context, state),
+        onSubmit: () => _sendOTP(context, state),
       );
-    }
   }
 
   Widget _buildLoading(BuildContext context) {
@@ -154,31 +129,35 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     );
   }
 
-  _sendOTP(BuildContext context, ForgotPasswordState state) {
+  void _sendOTP(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
     cubit.sendOTP(emailController.text, state);
   }
 
-  _verifyOtp(BuildContext context, ForgotPasswordState state) {
+  void _verifyOtp(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
     cubit.checkOTP(otpEntered.substring(0, 4), state, emailController.text);
   }
 
-  _changePassword(BuildContext context, ForgotPasswordState state) {
+  void _changePassword(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
     cubit.changePassword(emailController.text, otpEntered.substring(0, 4), passwordController.text,
         confirmPasswordController.text, state);
   }
 
-  _onNumSelected(int p1) {
+  _onNumSelected(int numEntered) {
+    int length = otpEntered.length;
     setState(() {
-      otpEntered = otpEntered.substring(0, 4);
-      if (p1 == -1) {
-        if (otpEntered.length > 0) {
-          otpEntered = otpEntered.substring(0, otpEntered.length - 1);
+      if (numEntered == -1) {
+        if (length > 0) {
+          finalOTP = finalOTP.substring(0, finalOTP.length - 1);
+          otpEntered = finalOTP + " " * (4 - finalOTP.length);
         }
-      } else {
-        otpEntered = otpEntered + p1.toString();
+      } else if (length < 5) {
+        if (finalOTP.length < 4) {
+          finalOTP += numEntered.toString();
+        }
+        otpEntered = finalOTP + " " * (4 - finalOTP.length);
       }
     });
   }

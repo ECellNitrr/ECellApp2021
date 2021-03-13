@@ -1,5 +1,4 @@
 import 'package:ecellapp/core/res/colors.dart';
-import 'package:ecellapp/screens/forgot_password/cubit/forgot_password_cubit.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +8,7 @@ import 'widgets/numeric_pad.dart';
 class EnterOTPScreen extends StatelessWidget {
   const EnterOTPScreen({Key key, this.otp, this.toVerify, this.numSelected}) : super(key: key);
 
-  final Function(BuildContext context, ForgotPasswordState state) toVerify;
+  final Function toVerify;
   final Function(int) numSelected;
   final String otp;
 
@@ -31,6 +30,7 @@ class EnterOTPScreen extends StatelessWidget {
         scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.ease);
       }
     }
+    print("OTPSCREEN: $otp");
     return DefaultTextStyle(
       style: GoogleFonts.roboto().copyWith(color: C.primaryUnHighlightedColor),
       child: Stack(
@@ -120,7 +120,7 @@ class EnterOTPScreen extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Text(
-                                    otp[0] ?? "",
+                                    otp[0],
                                     style: TextStyle(fontSize: 23),
                                   ),
                                 ),
@@ -136,7 +136,7 @@ class EnterOTPScreen extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Text(
-                                    otp[1] ?? "",
+                                    otp[1],
                                     style: TextStyle(fontSize: 23),
                                   ),
                                 ),
@@ -152,7 +152,7 @@ class EnterOTPScreen extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Text(
-                                    otp[2] ?? "",
+                                    otp[2],
                                     style: TextStyle(fontSize: 23),
                                   ),
                                 ),
@@ -168,7 +168,7 @@ class EnterOTPScreen extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Text(
-                                    otp[3] ?? "",
+                                    otp[3],
                                     style: TextStyle(fontSize: 23),
                                   ),
                                 ),
@@ -228,7 +228,7 @@ class EnterOTPScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.all(Radius.circular(30)),
                                 ),
                                 color: Colors.transparent,
-                                onPressed: () => toVerify,
+                                onPressed: () => toVerify(),
                                 child: Container(
                                   height: 50,
                                   width: 120,
@@ -262,7 +262,7 @@ class EnterOTPScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.all(Radius.circular(30)),
                                 ),
                                 color: C.authButtonColor,
-                                onPressed: () => toVerify,
+                                onPressed: () => toVerify(),
                                 child: Container(
                                   height: 54,
                                   width: 124,

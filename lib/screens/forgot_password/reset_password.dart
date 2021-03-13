@@ -15,7 +15,7 @@ class ResetPassword extends StatelessWidget {
     this.passwordController,
     this.confirmPasswordController,
   }) : super(key: key);
-  final Function(BuildContext context, ForgotPasswordState state) onConfirm;
+  final Function onConfirm;
   final TextEditingController passwordController;
   final TextEditingController confirmPasswordController;
   @override
@@ -133,7 +133,7 @@ class ResetPassword extends StatelessWidget {
                                 borderRadius: BorderRadius.all(Radius.circular(30)),
                               ),
                               color: C.authButtonColor,
-                              onPressed: () => onConfirm,
+                              onPressed: () => onConfirm(),
                               child: Container(
                                 height: 60,
                                 width: 100,

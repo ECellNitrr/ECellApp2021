@@ -6,19 +6,15 @@ import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'cubit/forgot_password_cubit.dart';
-
 class AskEmailScreen extends StatelessWidget {
-  const AskEmailScreen({Key key, this.onSubmit, this.emailController}) : super(key: key);
+  AskEmailScreen({Key key, this.onSubmit, this.emailController}) : super(key: key);
 
-  final Function(BuildContext context, ForgotPasswordState state) onSubmit;
+  final Function onSubmit;
   final TextEditingController emailController;
+  ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController scrollController = ScrollController();
-    final formKey = GlobalKey<FormState>();
-
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double bottom = MediaQuery.of(context).viewInsets.bottom;
@@ -113,18 +109,15 @@ class AskEmailScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 23 * heightFactor),
-                        Form(
-                            key: formKey,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: D.horizontalPadding),
-                              child: Column(
-                                children: [
-                                  EmailField(emailController),
-                                  SizedBox(height: 20 * heightFactor),
-                                  SizedBox(height: 10 * heightFactor),
-                                ],
-                              ),
-                            )),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: D.horizontalPadding),
+                          child: Column(
+                            children: [
+                              EmailField(emailController),
+                              SizedBox(height: 30 * heightFactor),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -150,7 +143,7 @@ class AskEmailScreen extends StatelessWidget {
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                           ),
                           color: C.authButtonColor,
-                          onPressed: () => onSubmit,
+                          onPressed: () => onSubmit(),
                           child: Container(
                             height: 60,
                             width: 120,
