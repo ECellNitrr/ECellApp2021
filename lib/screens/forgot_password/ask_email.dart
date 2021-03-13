@@ -143,7 +143,9 @@ class AskEmailScreen extends StatelessWidget {
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                           ),
                           color: C.authButtonColor,
-                          onPressed: () => onSubmit(),
+                          onPressed: () {
+                            onSubmit();
+                          },
                           child: Container(
                             height: 60,
                             width: 120,

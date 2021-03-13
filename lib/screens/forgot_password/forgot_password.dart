@@ -131,16 +131,22 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   void _sendOTP(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
-    cubit.sendOTP(emailController.text, state);
+    bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(emailController.text);
+    if (emailValid) {
+      cubit.sendOTP(emailController.text, state);
+    }
   }
 
   void _verifyOtp(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
+
     cubit.checkOTP(otpEntered.substring(0, 4), state, emailController.text);
   }
 
   void _changePassword(BuildContext context, ForgotPasswordState state) {
     final cubit = context.read<ForgotPasswordCubit>();
+
     cubit.changePassword(emailController.text, otpEntered.substring(0, 4), passwordController.text,
         confirmPasswordController.text, state);
   }
