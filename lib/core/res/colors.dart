@@ -59,6 +59,9 @@ class C {
   static final Color secondRing = HexColor("#FB28E6");
   static final Color thirdRing = HexColor("#EFEA79");
   static final Color fourthRing = HexColor("#AE82FF");
+  //Sponsor Background
+  static final Color sponsorPageBackground = HexColor("#372981");
+
   //BQuiz Gradient Colors
   static final Color bQuizGradient1 = HexColor("#ffc158");
   static final Color bQuizGradient2 = HexColor("#dd19ad");
