@@ -1,6 +1,5 @@
 import 'package:ecellapp/core/res/colors.dart';
 import 'package:ecellapp/core/res/dimens.dart';
-import 'package:ecellapp/screens/forgot_password/cubit/forgot_password_cubit.dart';
 import 'package:ecellapp/widgets/password_field.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/material.dart';

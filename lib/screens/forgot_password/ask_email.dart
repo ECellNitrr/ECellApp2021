@@ -6,11 +6,17 @@ import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AskEmailScreen extends StatelessWidget {
+class AskEmailScreen extends StatefulWidget {
   AskEmailScreen({Key key, this.onSubmit, this.emailController}) : super(key: key);
 
   final Function onSubmit;
   final TextEditingController emailController;
+
+  @override
+  _AskEmailScreenState createState() => _AskEmailScreenState();
+}
+
+class _AskEmailScreenState extends State<AskEmailScreen> {
   ScrollController scrollController = ScrollController();
 
   @override
@@ -113,7 +119,7 @@ class AskEmailScreen extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: D.horizontalPadding),
                           child: Column(
                             children: [
-                              EmailField(emailController),
+                              EmailField(widget.emailController),
                               SizedBox(height: 30 * heightFactor),
                             ],
                           ),
@@ -144,7 +150,7 @@ class AskEmailScreen extends StatelessWidget {
                           ),
                           color: C.authButtonColor,
                           onPressed: () {
-                            onSubmit();
+                            widget.onSubmit();
                           },
                           child: Container(
                             height: 60,
