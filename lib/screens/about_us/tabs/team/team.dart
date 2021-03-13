@@ -4,7 +4,7 @@ import 'package:ecellapp/models/team_category.dart';
 import 'package:ecellapp/screens/about_us/tabs/team/widget/teams_card.dart';
 import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:ecellapp/widgets/reload_on_error.dart';
-import 'package:ecellapp/widgets/rotated_curveed_tile.dart';
+import 'package:ecellapp/widgets/rotated_curved_tile.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -83,20 +83,24 @@ class TeamScreen extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 40, top: 80),
+                      padding: const EdgeInsets.only(bottom: 80, top: 80),
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.max,
-                          children: data.map((spon) {
-                            String tab = spon.category;
-                            return RotatedCurvedTile(
-                              checked: tab == data[i].category,
-                              name: tab,
-                              onTap: () => subject.add(data.indexWhere((e) => e.category == tab)),
-                            );
-                          }).toList(),
+                          children: data
+                              .map((spon) {
+                                String tab = spon.category;
+                                return RotatedCurvedTile(
+                                  checked: tab == data[i].category,
+                                  name: tab,
+                                  onTap: () =>
+                                      subject.add(data.indexWhere((e) => e.category == tab)),
+                                );
+                              })
+                              .toList()
+                              .sublist(0, 7),
                         ),
                       ),
                     ),

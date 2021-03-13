@@ -5,7 +5,7 @@ import 'package:ecellapp/widgets/ecell_animation.dart';
 import 'package:ecellapp/widgets/reload_on_error.dart';
 import 'package:ecellapp/widgets/screen_background.dart';
 import 'package:ecellapp/widgets/stateful_wrapper.dart';
-import 'package:ecellapp/widgets/rotated_curveed_tile.dart';
+import 'package:ecellapp/widgets/rotated_curved_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
