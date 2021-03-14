@@ -22,7 +22,7 @@ class TeamsCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(22),
           ),
           child: Container(
-            height: ratio > 0.5 ? 140 : 160,
+            height: ratio > 0.5 ? 120 : 140,
             margin: EdgeInsets.only(left: 130),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -42,15 +42,16 @@ class TeamsCard extends StatelessWidget {
         ),
         Positioned(
           height: ratio > 0.5 ? 200 : 220,
-          width: ratio > 0.5 ? 150 : 170,
+          width: ratio > 0.5 ? 140 : 160,
           child: Stack(
             children: [
               Image.asset(
                 S.assetTeamsFrame,
                 fit: BoxFit.cover,
-                height: 220,
+                height: 180,
               ),
               Center(
+                heightFactor: 2.5,
                 child: Container(
                   height: 100,
                   width: 100,
@@ -71,7 +72,7 @@ class TeamsCard extends StatelessWidget {
                     backgroundImage: (teamMember.profilePic == null)
                         ? AssetImage(S.assetEcellLogoWhite)
                         : NetworkImage(teamMember.profilePic),
-                    radius: 40,
+                    radius: 35,
                   ),
                 ),
               ),

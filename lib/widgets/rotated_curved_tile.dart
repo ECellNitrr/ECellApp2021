@@ -21,7 +21,7 @@ class RotatedCurvedTile extends StatelessWidget {
         textAlign: TextAlign.center,
         maxLines: 2,
         style: TextStyle(
-            letterSpacing: -0.5, color: checked ? Colors.white : Colors.purple, fontSize: 20),
+            letterSpacing: -0.5, color: checked ? Colors.white : Colors.purple, fontSize: 14),
       ),
     );
     if (checked) {

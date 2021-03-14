@@ -83,7 +83,7 @@ class TeamScreen extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 80, top: 80),
+                      padding: const EdgeInsets.only(bottom: 80, top: 120),
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -118,23 +118,27 @@ class TeamScreen extends StatelessWidget {
                         height: double.infinity,
                         child: SingleChildScrollView(
                           controller: _scrollController,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              SizedBox(height: top + 56),
-                              Text(
-                                "Our Team",
-                                style: TextStyle(
-                                  fontSize: 40,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: 0.5,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                SizedBox(height: top + 56),
+                                Text(
+                                  "Our Team",
+                                  style: TextStyle(
+                                    fontSize: 40,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: 0.5,
+                                  ),
                                 ),
-                              ),
-                              ...data[i].members.map((e) => TeamsCard(teamMember: e)),
-                              //! Fix to avoid non-scrollable state
-                              Container(height: 200)
-                            ],
+                                SizedBox(height: 20),
+                                ...data[i].members.map((e) => TeamsCard(teamMember: e)),
+                                //! Fix to avoid non-scrollable state
+                                Container(height: 200)
+                              ],
+                            ),
                           ),
                         ),
                       ),
