@@ -51,7 +51,7 @@ class TeamsCard extends StatelessWidget {
                 height: 180,
               ),
               Center(
-                heightFactor: 2.5,
+                heightFactor: 1.75,
                 child: Container(
                   height: 100,
                   width: 100,
