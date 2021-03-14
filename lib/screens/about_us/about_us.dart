@@ -33,7 +33,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(40)),
       child: Container(
-          height: height / 8,
+          height: height / 10,
           child: BottomNavigationBar(
             selectedItemColor: Colors.orange[900],
             unselectedFontSize: 40,
@@ -48,7 +48,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
             items: [
               BottomNavigationBarItem(
                 activeIcon: Container(
-                  height: 50,
+                  height: 40,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: LinearGradient(colors: <Color>[
@@ -66,13 +66,13 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 ),
                 icon: Image.asset(
                   S.assetAIMIcon,
-                  height: 25,
+                  height: 20,
                 ),
                 label: "Aim",
               ),
               BottomNavigationBarItem(
                 activeIcon: Container(
-                  height: 50,
+                  height: 40,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: LinearGradient(colors: <Color>[
@@ -82,13 +82,13 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                       ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
                   child: Image.asset(
                     S.assetTeamIcon,
-                    height: 25,
+                    height: 20,
                     color: Colors.white,
                   ),
                 ),
                 icon: Image.asset(
                   S.assetTeamIcon,
-                  height: 25,
+                  height: 20,
                 ),
                 label: 'Team',
               ),

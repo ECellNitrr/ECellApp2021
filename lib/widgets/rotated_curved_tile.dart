@@ -14,10 +14,14 @@ class RotatedCurvedTile extends StatelessWidget {
       color: checked ? HexColor("#372981") : Colors.white,
       margin: EdgeInsets.zero,
       alignment: Alignment.center,
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      width: 140,
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Text(
         name,
-        style: TextStyle(color: checked ? Colors.white : Colors.purple, fontSize: 20),
+        textAlign: TextAlign.center,
+        maxLines: 2,
+        style: TextStyle(
+            letterSpacing: -0.5, color: checked ? Colors.white : Colors.purple, fontSize: 14),
       ),
     );
     if (checked) {
